@@ -1,10 +1,11 @@
 import { Global, Module } from '@nestjs/common';
 
-import { PrismaModule } from "./prisma/prisma.module";
+import { HealthModule } from './health/health.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Global()
 @Module({
-  imports: [PrismaModule],
+  imports: [HealthModule, PrismaModule],
   exports: [PrismaModule],
 })
 export class CoreModule {}
