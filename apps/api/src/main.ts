@@ -1,6 +1,7 @@
 import type { INestApplication } from '@nestjs/common';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { Logger as PinoLogger } from 'nestjs-pino';
 
 import { AppModule } from './app/app.module';
 
@@ -12,7 +13,9 @@ async function createApp(): Promise<INestApplication> {
     throw new Error(`Invalid timezone. Should be defined to ${DEFAULT_TIMEZONE}, got: ${process.env.TZ}`);
   }
 
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    bufferLogs: true,
+  });
 
   await setupApp(app);
 
@@ -21,6 +24,8 @@ async function createApp(): Promise<INestApplication> {
 
 export const setupApp = async (app: INestApplication): Promise<void> => {
   app.setGlobalPrefix(globalPrefix, { exclude: ['health'] });
+
+  setupLogger(app);
 };
 
 async function main(): Promise<void> {
@@ -33,5 +38,14 @@ async function main(): Promise<void> {
 
   Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
 }
+
+const setupLogger = (app: INestApplication): void => {
+  if (process.env.NODE_ENV === 'test') {
+    app.useLogger(false);
+    return;
+  }
+
+  app.useLogger(app.get(PinoLogger));
+};
 
 main();
