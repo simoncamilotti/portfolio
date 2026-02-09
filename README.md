@@ -9,6 +9,7 @@ Portfolio personnel et outil SaaS de gestion de CV — un monorepo Nx avec une A
 | **Monorepo** | Nx 22                              |
 | **Backend**  | NestJS 11, Prisma 7, PostgreSQL 17 |
 | **Frontend** | React 19, TailwindCSS              |
+| **Auth**     | Keycloak 23 (OIDC)                 |
 
 ## Architecture
 
@@ -20,7 +21,7 @@ apps/
   client-e2e/    → E2E Tests client (Playwright)
 
 libs/
-  core/          → Global NestJS module (Prisma, Health, Logger)
+  core/          → Global NestJS module (Prisma, Health, Logger, Auth)
 ```
 
 
@@ -104,6 +105,7 @@ npm run prisma:studio         # Interface graphique BDD
 
 ## Docker Infrastructure
 
-| Service | Port | Description |
-|---------|------|-------------|
-| PostgreSQL | 5432 | Base de données |
+| Service    | Port | Description          |
+|------------|------|----------------------|
+| PostgreSQL | 5432 | Base de données      |
+| Keycloak   | 8080 | Serveur OIDC/OAuth2  |
