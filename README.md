@@ -1,77 +1,109 @@
-# Portfolio
+# Simon Portfolio
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+Portfolio personnel et outil SaaS de gestion de CV — un monorepo Nx avec une API NestJS, un client Next.js, et des librairies partagées.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## Technical Stack
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+| Layer        | Technology                         |
+|:-------------|:-----------------------------------|
+| **Monorepo** | Nx 22                              |
+| **Backend**  | NestJS 11, Prisma 7, PostgreSQL 17 |
+| **Frontend** | React 19, TailwindCSS              |
 
-## Finish your CI setup
+## Architecture
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/Pj2CtDiABG)
+```
+apps/
+  api/           → NestJS API (port 3000, prefix /api)
+  client/        → React client (port 4200)
+  api-e2e/       → E2E Tests API (Jest)
+  client-e2e/    → E2E Tests client (Playwright)
 
-
-## Run tasks
-
-To run tasks with Nx use:
-
-```sh
-npx nx <target> <project-name>
+libs/
+  core/          → Global NestJS module (Prisma, Health, Logger)
 ```
 
-For example:
 
-```sh
-npx nx build myproject
+## Prerequisites
+
+- Node.js 20+
+- Docker & Docker Compose
+- npm
+
+## Quick Start
+
+```bash
+# 1. Clone and setup
+git clone <repo-url>
+cd portfolio
+npm install
+
+
+# 2. Environment
+cp .env.exemple .env
+# Edit .env file with your real environment values (database, etc.)
+
+# 3. Start infrastructure
+docker compose up -d
+
+# 4. Generate the Prisma client and deploy the migrations
+npm run prisma:generate
+npm run prisma:migrate:deploy
+
+# 5. Start applications
+npm run serve:api      # API: http://localhost:3000
+npm run serve:client   # Client: http://localhost:4200
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+## Main Commands
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### Development
 
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-To install a new plugin you can use the `nx add` command. Here's an example of adding the React plugin:
-```sh
-npx nx add @nx/react
+```bash
+npm run serve:api              # Start API
+npm run serve:client           # Start client
+docker compose up -d      # Start infrastructure (Postgres)
 ```
 
-Use the plugin's generator to create new projects. For example, to create a new React app or library:
+### Build
 
-```sh
-# Generate an app
-npx nx g @nx/react:app demo
-
-# Generate a library
-npx nx g @nx/react:lib some-lib
+```bash
+npm run build:api              # Build API
+npm run build:client           # Build client
+npm run build:all              # Build all (API + client + libs)
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+### Tests
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+```bash
+npm run test:api               # API unit tests
+npm run test:client            # Client unit tests
+npm run test:all               # All unit tests (API + client + libs) 
 
+npm run e2e:api                # E2E tests API
+npm run e2e:client             # E2E tests client (Playwright)
+```
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### Lint & Format
 
-## Install Nx Console
+```bash
+npm run lint:api               # Lint API
+npm run lint:client            # Lint client
+npm run lint:all               # Lint all (API + client + libs)
+npm run format                 # Format code
+```
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+### Database
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+```bash
+npm run prisma:generate       # Generate Prisma client
+npm run prisma:migrate:dev    # Create or apply migrations (dev)
+npm run prisma:migrate:deploy # Apply migrations (prod)
+npm run prisma:studio         # Interface graphique BDD
+```
 
-## Useful links
+## Docker Infrastructure
 
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+| Service | Port | Description |
+|---------|------|-------------|
+| PostgreSQL | 5432 | Base de données |
