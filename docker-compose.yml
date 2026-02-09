@@ -13,6 +13,20 @@ services:
     networks:
       - portfolio_network
 
+  keycloak:
+    image: quay.io/keycloak/keycloak:23.0
+    container_name: portfolio_keycloak
+    ports:
+      - "8080:8080"
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+    command: start-dev
+    volumes:
+      - ./config/keycloak/data:/opt/keycloak/data/h2
+    networks:
+      - portfolio_network
+
 volumes:
   postgres_data:
 

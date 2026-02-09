@@ -1,7 +1,10 @@
 import { Global, Module, RequestMethod } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { LoggerModule, Params } from 'nestjs-pino';
 import { Options } from 'pino-http';
 
+import { AuthModule } from './auth/auth.module';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { HealthModule } from './health/health.module';
 import { PrismaModule } from './prisma/prisma.module';
 
@@ -19,7 +22,8 @@ const pinoOptions: Params = {
 
 @Global()
 @Module({
-  imports: [HealthModule, PrismaModule, LoggerModule.forRoot(pinoOptions)],
-  exports: [PrismaModule, LoggerModule],
+  imports: [HealthModule, PrismaModule, AuthModule, LoggerModule.forRoot(pinoOptions)],
+  providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],
+  exports: [PrismaModule, AuthModule, LoggerModule],
 })
 export class CoreModule {}
