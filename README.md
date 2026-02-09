@@ -1,6 +1,6 @@
 # Simon Portfolio
 
-Portfolio personnel et outil SaaS de gestion de CV — un monorepo Nx avec une API NestJS, un client Next.js, et des librairies partagées.
+Personal portfolio and SaaS CV management tool — an Nx monorepo with a NestJS API, a React client, and shared libraries.
 
 ## Technical Stack
 
@@ -63,7 +63,7 @@ npm run serve:client   # Client: http://localhost:4200
 ```bash
 npm run serve:api              # Start API
 npm run serve:client           # Start client
-docker compose up -d      # Start infrastructure (Postgres)
+docker compose up -d           # Start infrastructure (Postgres, Keycloak)
 ```
 
 ### Build
