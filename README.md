@@ -22,6 +22,7 @@ apps/
 
 libs/
   core/          → Global NestJS module (Prisma, Health, Logger, Auth)
+  shared-models  → All models
 ```
 
 
