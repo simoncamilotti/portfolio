@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@portfolio/core": ["libs/api/core/src/index.ts"]
+      "@portfolio/core": ["libs/api/core/src/index.ts"],
+      "@portfolio/shared-models": ["libs/shared-models/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
