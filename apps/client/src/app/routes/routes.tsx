@@ -3,8 +3,8 @@ import { redirect } from 'react-router';
 
 import { isAuthenticated, login } from '../modules/auth/auth';
 import { Layout } from '../modules/layout/Layout';
+import { DashboardPage } from '../pages/DashboardPage';
 import { HomePage } from '../pages/HomePage';
-import { ResumePage } from '../pages/ResumePage';
 import { RoutePaths } from './paths.const';
 
 export const routes: RouteObject[] = [
@@ -26,8 +26,8 @@ export const routes: RouteObject[] = [
       },
       {
         index: true,
-        path: RoutePaths.RESUME,
-        element: <ResumePage />,
+        path: RoutePaths.DASHBOARD,
+        element: <DashboardPage />,
       },
     ],
   },

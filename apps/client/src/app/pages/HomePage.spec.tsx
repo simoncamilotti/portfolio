@@ -2,11 +2,44 @@ import { render, screen } from '@testing-library/react';
 
 import { HomePage } from './HomePage';
 
+vi.mock('../modules/home/components/HeroSection', () => ({
+  HeroSection: () => <div data-testid="hero-section" />,
+}));
+
+vi.mock('../modules/home/components/ProjectSection', () => ({
+  ProjectsSection: () => <div data-testid="projects-section" />,
+}));
+
+vi.mock('../modules/home/components/PublicResume', () => ({
+  PublicResume: () => <div data-testid="public-resume" />,
+}));
+
+vi.mock('../modules/layout/PageLayout', () => ({
+  PageLayout: ({ children }: { children: React.ReactNode }) => <div data-testid="page-layout">{children}</div>,
+}));
+
 describe('HomePage', () => {
-  it('should render the homepage heading', () => {
+  it('should render within a PageLayout', () => {
     render(<HomePage />);
 
-    const heading = screen.getByRole('heading', { level: 1 });
-    expect(heading.textContent).toBe('Homepage');
+    expect(screen.getByTestId('page-layout')).toBeDefined();
+  });
+
+  it('should render the HeroSection', () => {
+    render(<HomePage />);
+
+    expect(screen.getByTestId('hero-section')).toBeDefined();
+  });
+
+  it('should render the ProjectsSection', () => {
+    render(<HomePage />);
+
+    expect(screen.getByTestId('projects-section')).toBeDefined();
+  });
+
+  it('should render the PublicResume section', () => {
+    render(<HomePage />);
+
+    expect(screen.getByTestId('public-resume')).toBeDefined();
   });
 });

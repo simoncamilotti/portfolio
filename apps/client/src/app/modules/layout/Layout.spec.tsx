@@ -4,6 +4,16 @@ import { MemoryRouter } from 'react-router';
 import { Layout } from './Layout';
 
 describe('Layout', () => {
+  it('should render the navbar', () => {
+    render(
+      <MemoryRouter>
+        <Layout />
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByRole('navigation')).toBeDefined();
+  });
+
   it('should render navigation links', () => {
     render(
       <MemoryRouter>
@@ -11,10 +21,7 @@ describe('Layout', () => {
       </MemoryRouter>,
     );
 
-    const homeLink = screen.getByRole('link', { name: 'Home' });
-    const cvLink = screen.getByRole('link', { name: 'CV' });
-
-    expect(homeLink.getAttribute('href')).toBe('/');
-    expect(cvLink.getAttribute('href')).toBe('/resumes');
+    expect(screen.getByText('Dashboard').getAttribute('href')).toBe('/dashboard');
+    expect(screen.getByText('Projets').getAttribute('href')).toBe('#projects');
   });
 });
