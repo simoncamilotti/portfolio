@@ -44,6 +44,8 @@ npm install
 # 2. Environment
 cp .env.exemple .env
 # Edit .env file with your real environment values (database, etc.)
+cp config/client/config.exemple.js apps/client/public/config.js
+# Edit config.js to match keycloak real environment values
 
 # 3. Start infrastructure
 docker compose up -d

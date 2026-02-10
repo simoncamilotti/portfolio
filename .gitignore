@@ -24,8 +24,9 @@ node_modules
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# environment
+# environment & config
 .env
+/apps/client/public/config.js
 
 # misc
 /.sass-cache
