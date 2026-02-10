@@ -16,6 +16,7 @@
     "lint:all": "nx run-many -t lint",
     "e2e:api": "nx e2e api-e2e",
     "e2e:client": "nx e2e client-e2e",
+    "e2e:client-ui": "nx e2e client-e2e --ui",
     "format": "nx format",
     "format:check": "nx format:check",
     "prisma:generate": "prisma generate",
