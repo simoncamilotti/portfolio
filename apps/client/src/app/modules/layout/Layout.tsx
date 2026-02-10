@@ -1,21 +1,12 @@
 import type { FunctionComponent } from 'react';
-import { generatePath, Link, Outlet } from 'react-router';
+import { Outlet } from 'react-router';
 
-import { RoutePaths } from '../../routes/paths.const';
+import { Navbar } from './Navbar';
 
 export const Layout: FunctionComponent = () => {
   return (
-    <div>
-      <div>
-        <ul>
-          <li>
-            <Link to={generatePath(RoutePaths.HOME)}>Home</Link>
-          </li>
-          <li>
-            <Link to={generatePath(RoutePaths.RESUME)}>CV</Link>
-          </li>
-        </ul>
-      </div>
+    <div className="relative min-h-screen bg-background">
+      <Navbar />
       <Outlet />
     </div>
   );

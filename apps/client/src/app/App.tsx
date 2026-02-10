@@ -8,7 +8,9 @@ export const App: FunctionComponent<{
 }> = ({ router }) => {
   return (
     <React.StrictMode>
-      <RouterProvider router={router} />
+      <div className="dark">
+        <RouterProvider router={router} />
+      </div>
     </React.StrictMode>
   );
 };
