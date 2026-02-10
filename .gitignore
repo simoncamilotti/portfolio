@@ -28,6 +28,9 @@ node_modules
 .env
 /apps/client/public/config.js
 
+# playwright
+playwright/.auth/
+
 # misc
 /.sass-cache
 /connect.lock
