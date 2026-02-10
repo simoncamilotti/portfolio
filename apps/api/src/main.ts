@@ -2,6 +2,7 @@ import type { INestApplication } from '@nestjs/common';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { Logger as PinoLogger } from 'nestjs-pino';
+import { ZodValidationPipe } from 'nestjs-zod';
 
 import { AppModule } from './app/app.module';
 
@@ -24,6 +25,7 @@ async function createApp(): Promise<INestApplication> {
 
 export const setupApp = async (app: INestApplication): Promise<void> => {
   app.setGlobalPrefix(globalPrefix, { exclude: ['health'] });
+  app.useGlobalPipes(new ZodValidationPipe());
 
   setupLogger(app);
 };

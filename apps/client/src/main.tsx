@@ -1,15 +1,20 @@
-import { StrictMode } from 'react';
-import * as ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import ReactDOM from 'react-dom/client';
+import { createBrowserRouter } from 'react-router';
 
-import App from './app/app';
+import { App } from './app/App';
+import { initAuth } from './app/modules/auth/auth';
+import { routes } from './app/routes/routes';
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+initAuth({
+  realm: window.config.auth.realm,
+  clientId: window.config.auth.clientId,
+  url: window.config.auth.url,
+})
+  .then(() => {
+    const router = createBrowserRouter(routes);
 
-root.render(
-  <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </StrictMode>,
-);
+    ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(<App router={router} />);
+  })
+  .catch(error => {
+    console.error(error);
+  });
