@@ -1,0 +1,31 @@
+node_modules
+dist
+.nx
+.git
+.gitignore
+coverage
+tmp
+
+# Environment files
+.env
+.env.*
+
+# Documentation
+*.md
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Tests
+apps/*/playwright
+apps/*-e2e
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.yml
