@@ -2,7 +2,7 @@ import type { Page } from '@playwright/test';
 
 const KEYCLOAK_URL = 'http://localhost:8080';
 const REALM = 'portfolio';
-const CLIENT_ID = 'portfolio-client';
+const CLIENT_ID = 'portfolio-studio';
 const ISSUER = `${KEYCLOAK_URL}/realms/${REALM}`;
 
 function base64url(input: string): string {

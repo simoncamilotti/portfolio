@@ -199,9 +199,9 @@ describe('auth module', () => {
     it('should store and retrieve redirect URL', async () => {
       const { setRedirectUrl, getRedirectUrl } = await import('./auth');
 
-      setRedirectUrl('http://localhost/resumes');
+      setRedirectUrl('http://localhost/dashboard');
 
-      expect(getRedirectUrl()).toBe('http://localhost/resumes');
+      expect(getRedirectUrl()).toBe('http://localhost/dashboard');
     });
 
     it('should return null when no redirect URL is stored', async () => {
@@ -213,7 +213,7 @@ describe('auth module', () => {
     it('should remove redirect URL', async () => {
       const { setRedirectUrl, removeRedirectUrl, getRedirectUrl } = await import('./auth');
 
-      setRedirectUrl('http://localhost/resumes');
+      setRedirectUrl('http://localhost/dashboard');
       removeRedirectUrl();
 
       expect(getRedirectUrl()).toBeNull();

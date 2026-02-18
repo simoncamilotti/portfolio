@@ -1,6 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 
+vi.mock('../auth/auth', () => ({
+  logout: vi.fn(),
+}));
+
 import { Navbar } from './Navbar';
 
 describe('Navbar', () => {
@@ -11,7 +15,7 @@ describe('Navbar', () => {
       </MemoryRouter>,
     );
 
-  it('should render a link to home', () => {
+  it('should render a link to dashboard', () => {
     renderNavbar();
 
     const links = screen.getAllByRole('link');
@@ -19,10 +23,16 @@ describe('Navbar', () => {
     expect(homeLink).toBeDefined();
   });
 
-  it('should render navigation anchors', () => {
+  it('should render the logout button', () => {
     renderNavbar();
 
-    expect(screen.getByText('Projets').getAttribute('href')).toBe('#projects');
-    expect(screen.getByText('CV').getAttribute('href')).toBe('#resume');
+    expect(screen.getByRole('button', { name: 'Logout' })).toBeDefined();
+  });
+
+  it('should not render navigation anchors', () => {
+    renderNavbar();
+
+    expect(screen.queryByText('Projets')).toBeNull();
+    expect(screen.queryByText('CV')).toBeNull();
   });
 });

@@ -52,7 +52,7 @@ export const ResumeItemMenu: FunctionComponent<ResumeItemMenuProps> = ({ resume 
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
         <DropdownMenuItem asChild>
-          <Link to={`/dashboard/cv/${resume.id}`} className="flex items-center gap-2">
+          <Link to={`/cv/${resume.id}`} className="flex items-center gap-2">
             <ExternalLink className="w-3.5 h-3.5" /> Ouvrir
           </Link>
         </DropdownMenuItem>
