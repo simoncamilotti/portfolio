@@ -1,27 +1,29 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 
+vi.mock('../auth/auth', () => ({
+  logout: vi.fn(),
+}));
+
 import { Layout } from './Layout';
 
 describe('Layout', () => {
-  it('should render the navbar', () => {
+  const renderLayout = () =>
     render(
       <MemoryRouter>
         <Layout />
       </MemoryRouter>,
     );
+
+  it('should render the navbar', () => {
+    renderLayout();
 
     expect(screen.getByRole('navigation')).toBeDefined();
   });
 
-  it('should render navigation links', () => {
-    render(
-      <MemoryRouter>
-        <Layout />
-      </MemoryRouter>,
-    );
+  it('should render the logout button', () => {
+    renderLayout();
 
-    expect(screen.getByText('Projets').getAttribute('href')).toBe('#projects');
-    expect(screen.getByText('CV').getAttribute('href')).toBe('#resume');
+    expect(screen.getByRole('button', { name: 'Logout' })).toBeDefined();
   });
 });

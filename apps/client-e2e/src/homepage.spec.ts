@@ -1,11 +1,5 @@
 import { expect, test } from '@playwright/test';
 
-import { mockKeycloak } from './keycloak-mock';
-
-test.beforeEach(async ({ page, browserName }) => {
-  await mockKeycloak(page, browserName);
-});
-
 test.describe('Home Page', () => {
   test('should display the hero section', async ({ page }) => {
     await page.goto('/');
@@ -17,7 +11,8 @@ test.describe('Home Page', () => {
     await page.goto('/');
 
     await expect(page.getByRole('navigation')).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Dashboard' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Projets', exact: true })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'CV', exact: true })).toBeVisible();
   });
 
   test('should display the projects section', async ({ page }) => {
@@ -40,35 +35,15 @@ test.describe('Home Page', () => {
 });
 
 test.describe('Navigation', () => {
-  test('should navigate to dashboard', async ({ page }) => {
-    await page.goto('/');
-
-    await page.getByRole('link', { name: 'Dashboard' }).click();
-
-    await expect(page).toHaveURL('/dashboard');
-    await expect(page.getByRole('heading', { name: 'Mes CVs' })).toBeVisible();
-  });
-
   test('should redirect unknown routes to home', async ({ page }) => {
     await page.goto('/unknown-page');
 
     await expect(page).toHaveURL('/');
   });
-});
 
-test.describe('Dashboard', () => {
-  test('should display the dashboard header', async ({ page }) => {
-    await page.goto('/dashboard');
+  test('should not display a dashboard link', async ({ page }) => {
+    await page.goto('/');
 
-    await expect(page.getByRole('heading', { name: 'Mes CVs' })).toBeVisible();
-    await expect(page.getByText('Créez, modifiez et partagez vos CVs')).toBeVisible();
-  });
-
-  test('should open the create CV dialog', async ({ page }) => {
-    await page.goto('/dashboard');
-
-    await page.getByRole('button', { name: 'Nouveau CV' }).click();
-
-    await expect(page.getByPlaceholder('Titre du CV...')).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Dashboard' })).toBeHidden();
   });
 });

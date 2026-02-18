@@ -12,14 +12,17 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-RUN npx nx build client --configuration=production
+RUN npx nx build studio --configuration=production
 
 # ---------- Stage 3: Production ----------
 FROM nginxinc/nginx-unprivileged:alpine AS prod
 
-COPY ../../config/client/nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/dist/apps/client/ /usr/share/nginx/html/
+COPY ../../config/studio/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist/apps/studio/ /usr/share/nginx/html/
 
+# Empty config.js placeholder — will be mounted via k3s volume at runtime
+USER root
+RUN touch /usr/share/nginx/html/config.js && chown nginx:nginx /usr/share/nginx/html/config.js
 USER nginx
 
 EXPOSE 8080

@@ -1,7 +1,7 @@
 window.config = {
   auth: {
     realm: 'portfolio',
-    clientId: 'portfolio-client',
+    clientId: 'portfolio-studio',
     url: 'http://localhost:8080',
   },
 };
