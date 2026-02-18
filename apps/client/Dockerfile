@@ -21,7 +21,9 @@ COPY ../../config/client/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist/apps/client/ /usr/share/nginx/html/
 
 # Empty config.js placeholder — will be mounted via k3s volume at runtime
-RUN touch /usr/share/nginx/html/config.js
+USER root
+RUN touch /usr/share/nginx/html/config.js && chown nginx:nginx /usr/share/nginx/html/config.js
+USER nginx
 
 EXPOSE 8080
 
