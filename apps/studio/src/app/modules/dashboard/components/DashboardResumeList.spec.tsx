@@ -7,6 +7,41 @@ vi.mock('framer-motion', () => ({
   },
 }));
 
+vi.mock('@tanstack/react-query', () => ({
+  useQuery: vi.fn().mockReturnValue({
+    data: [
+      {
+        id: 'mon-super-id',
+        title: 'CV number 1',
+        isPublic: true,
+        shareEnabled: true,
+        views: 12,
+        downloads: 6,
+        updatedAt: '2026-01-01',
+      },
+    ],
+    isPending: false,
+  }),
+}));
+
+vi.mock('../hooks/use-delete-resume-by-id-mutation.hook', () => ({
+  useDeleteResumeById: () => ({
+    deleteResumeByIdMutation: { mutateAsync: vi.fn() },
+  }),
+}));
+
+vi.mock('../../ui/Dropdown-menu', () => ({
+  DropdownMenu: ({ children }: any) => <div>{children}</div>,
+  DropdownMenuTrigger: ({ children }: any) => <button>{children}</button>,
+  DropdownMenuContent: ({ children }: any) => <div>{children}</div>,
+  DropdownMenuItem: ({ children, onClick }: any) => (
+    <div role="menuitem" onClick={onClick}>
+      {children}
+    </div>
+  ),
+  DropdownMenuSeparator: () => <hr />,
+}));
+
 import { DashboardResumeList } from './DashboardResumeList';
 
 describe('DashboardResumeList', () => {

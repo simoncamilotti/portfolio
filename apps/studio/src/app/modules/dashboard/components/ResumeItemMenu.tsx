@@ -11,21 +11,23 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../../ui/Dropdown-menu';
+import { useDeleteResumeById } from '../hooks/use-delete-resume-by-id-mutation.hook';
 
 type ResumeItemMenuProps = {
   resume: ResumeDto;
 };
 
 export const ResumeItemMenu: FunctionComponent<ResumeItemMenuProps> = ({ resume }) => {
+  const { deleteResumeByIdMutation } = useDeleteResumeById(resume.id);
+
   const handleSetPublic = async (id: string) => {
     // await api.setPublicCV(id);
     // await loadCVs();
     toast.success('CV défini comme public');
   };
 
-  const handleDelete = async (id: string) => {
-    // await api.deleteCV(id);
-    // await loadCVs();
+  const handleDelete = async () => {
+    await deleteResumeByIdMutation.mutateAsync();
     toast.success('CV supprimé');
   };
 
@@ -65,7 +67,7 @@ export const ResumeItemMenu: FunctionComponent<ResumeItemMenuProps> = ({ resume 
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          onClick={() => handleDelete(resume.id)}
+          onClick={() => handleDelete()}
           className="flex items-center gap-2 text-destructive focus:text-destructive"
         >
           <Trash2 className="w-3.5 h-3.5" /> Supprimer
