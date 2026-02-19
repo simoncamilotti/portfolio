@@ -88,22 +88,34 @@ describe('Resume CRUD', () => {
   });
 
   describe('GET /api/resumes/public', () => {
-    it('should return 401 without a token', async () => {
-      const error = await axios.get('/api/resumes/public').catch((e: AxiosError) => e);
+    it('should be accessible without a token', async () => {
+      const res = await axios.get('/api/resumes/public').catch((e: AxiosError) => e);
 
-      expect(axios.isAxiosError(error)).toBe(true);
-      expect((error as AxiosError).response?.status).toBe(401);
+      if (axios.isAxiosError(res)) {
+        // No public resume in DB → 404 is acceptable, but never 401
+        expect(res.response?.status).not.toBe(401);
+      } else {
+        expect(res.status).toBe(200);
+      }
     });
 
-    it('should return 404 when no public resume exists', async () => {
-      const error = await axios
-        .get('/api/resumes/public', {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .catch((e: AxiosError) => e);
+    it('should return 200 when a public resume exists', async () => {
+      await axios.patch(
+        `/api/resumes/${createdResumeId}`,
+        { title: 'Mon CV', content: 'Contenu du CV', isPublic: true },
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
 
-      expect(axios.isAxiosError(error)).toBe(true);
-      expect((error as AxiosError).response?.status).toBe(404);
+      const res = await axios.get('/api/resumes/public');
+
+      expect(res.status).toBe(200);
+
+      // Restore original state
+      await axios.patch(
+        `/api/resumes/${createdResumeId}`,
+        { title: 'Mon CV', content: 'Contenu du CV', isPublic: false },
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
     });
   });
 

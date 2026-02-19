@@ -2,6 +2,7 @@ import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaService } from '@portfolio/core';
 
+import { ResumeMapper } from '../mappers/resume.mapper';
 import { ResumeService } from './resume.service';
 
 const mockPrismaService = {
@@ -13,6 +14,10 @@ const mockPrismaService = {
     update: jest.fn(),
     delete: jest.fn(),
   },
+};
+
+const mockResumeMapper = {
+  toGetAllResumesResponseDto: jest.fn(),
 };
 
 const mockResume = {
@@ -32,7 +37,11 @@ describe('ResumeService', () => {
     jest.clearAllMocks();
 
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ResumeService, { provide: PrismaService, useValue: mockPrismaService }],
+      providers: [
+        ResumeService,
+        { provide: PrismaService, useValue: mockPrismaService },
+        { provide: ResumeMapper, useValue: mockResumeMapper },
+      ],
     }).compile();
 
     service = module.get<ResumeService>(ResumeService);
@@ -40,20 +49,34 @@ describe('ResumeService', () => {
 
   describe('findAll', () => {
     it('should return an array of resumes', async () => {
+      const mappedResult = [
+        {
+          id: 'uuid-1',
+          title: 'Mon CV',
+          description: 'Description',
+          isPublic: false,
+          shareEnabled: false,
+          updatedAt: '2026-01-01',
+        },
+      ];
       mockPrismaService.resume.findMany.mockResolvedValue([mockResume]);
+      mockResumeMapper.toGetAllResumesResponseDto.mockReturnValue(mappedResult);
 
       const result = await service.findAll();
 
-      expect(result).toEqual([mockResume]);
+      expect(result).toEqual(mappedResult);
       expect(mockPrismaService.resume.findMany).toHaveBeenCalled();
+      expect(mockResumeMapper.toGetAllResumesResponseDto).toHaveBeenCalledWith([mockResume]);
     });
 
     it('should return an empty array', async () => {
       mockPrismaService.resume.findMany.mockResolvedValue([]);
+      mockResumeMapper.toGetAllResumesResponseDto.mockReturnValue([]);
 
       const result = await service.findAll();
 
       expect(result).toEqual([]);
+      expect(mockResumeMapper.toGetAllResumesResponseDto).toHaveBeenCalledWith([]);
     });
   });
 

@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "Resume" ADD COLUMN     "downloads" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "shareEnabled" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "views" INTEGER NOT NULL DEFAULT 0;
