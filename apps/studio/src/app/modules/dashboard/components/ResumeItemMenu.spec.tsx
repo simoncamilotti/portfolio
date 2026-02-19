@@ -5,6 +5,12 @@ vi.mock('sonner', () => ({
   toast: { success: vi.fn() },
 }));
 
+vi.mock('../hooks/use-delete-resume-by-id-mutation.hook', () => ({
+  useDeleteResumeById: () => ({
+    deleteResumeByIdMutation: { mutateAsync: vi.fn() },
+  }),
+}));
+
 vi.mock('../../ui/Dropdown-menu', () => ({
   DropdownMenu: ({ children }: any) => <div>{children}</div>,
   DropdownMenuTrigger: ({ children }: any) => <button>{children}</button>,
