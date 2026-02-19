@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@portfolio/core": ["libs/api/core/src/index.ts"],
-      "@portfolio/shared-models": ["libs/shared-models/src/index.ts"]
+      "@portfolio/shared-models": ["libs/shared-models/src/index.ts"],
+      "@portfolio/shared-ui": ["libs/shared-ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

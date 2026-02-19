@@ -12,7 +12,8 @@ vi.mock('../modules/dashboard/components/DashboardResumeList', () => ({
   DashboardResumeList: () => <div data-testid="resume-list" />,
 }));
 
-vi.mock('../modules/layout/PageLayout', () => ({
+vi.mock('@portfolio/shared-ui', async importOriginal => ({
+  ...((await importOriginal()) as Record<string, unknown>),
   PageLayout: ({ children }: { children: React.ReactNode }) => <div data-testid="page-layout">{children}</div>,
 }));
 
