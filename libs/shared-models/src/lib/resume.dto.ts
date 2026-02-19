@@ -1,7 +1,7 @@
 import { createZodDto } from 'nestjs-zod';
 import { z } from 'zod';
 
-const resumeDtoSchema = z.object({
+export const resumeDtoSchema = z.object({
   id: z.uuid(),
   title: z.string().min(3).max(50),
   description: z.string().optional(),

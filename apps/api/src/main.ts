@@ -24,6 +24,9 @@ async function createApp(): Promise<INestApplication> {
 }
 
 export const setupApp = async (app: INestApplication): Promise<void> => {
+  app.enableCors({
+    origin: ['https://cv.camilotti.fr', 'https://studio.camilotti.fr'],
+  });
   app.setGlobalPrefix(globalPrefix, { exclude: ['health'] });
   app.useGlobalPipes(new ZodValidationPipe());
 

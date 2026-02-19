@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
-import { CreateResumeRequestDto, UpdateResumeRequestDto } from '@portfolio/shared-models';
+import { Public } from '@portfolio/core';
+import { CreateResumeRequestDto, GetAllResumesResponseDto, UpdateResumeRequestDto } from '@portfolio/shared-models';
 import { Resume } from '@prisma/client';
 
 import { ResumeService } from '../services/resume.service';
@@ -9,10 +10,11 @@ export class ResumeController {
   constructor(private readonly _resumeService: ResumeService) {}
 
   @Get()
-  async findAll(): Promise<Resume[]> {
+  async findAll(): Promise<GetAllResumesResponseDto> {
     return this._resumeService.findAll();
   }
 
+  @Public()
   @Get('public')
   async findPublic(): Promise<Resume> {
     return this._resumeService.findPublic();
