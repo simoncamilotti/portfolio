@@ -10,6 +10,9 @@ export default defineConfig(() => ({
   server: {
     port: 4201,
     host: 'localhost',
+    proxy: {
+      '/api': 'http://localhost:3000',
+    },
   },
   preview: {
     port: 4201,

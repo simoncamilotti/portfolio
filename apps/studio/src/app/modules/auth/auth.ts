@@ -15,6 +15,10 @@ const getTokenStorageKey = (): string => {
   return `${window.location.host}-${TOKEN_STORAGE_KEY}`;
 };
 
+export const getStoredToken = (): string | null => {
+  return window.sessionStorage.getItem(getTokenStorageKey());
+};
+
 const setStoredToken = (token: string): void => {
   window.sessionStorage.setItem(getTokenStorageKey(), token);
 };
