@@ -16,13 +16,16 @@ Personal portfolio and SaaS CV management tool — an Nx monorepo with a NestJS 
 ```
 apps/
   api/           → NestJS API (port 3000, prefix /api)
-  client/        → React client (port 4200)
+  client/        → React client — public portfolio (port 4200)
+  studio/        → React client — CV management admin app (port 4201)
   api-e2e/       → E2E Tests API (Jest)
   client-e2e/    → E2E Tests client (Playwright)
+  studio-e2e/    → E2E Tests studio (Playwright)
 
 libs/
-  core/          → Global NestJS module (Prisma, Health, Logger, Auth)
-  shared-models  → All models
+  api/core/      → Global NestJS module (Prisma, Health, Logger, Auth)
+  shared-models/ → Shared DTOs and Zod schemas
+  shared-ui/     → Shared React components (PageLayout, Footer, Braces)
 ```
 
 
@@ -40,11 +43,10 @@ git clone <repo-url>
 cd portfolio
 npm install
 
-
 # 2. Environment
 cp .env.exemple .env
 # Edit .env file with your real environment values (database, etc.)
-cp config/client/config.exemple.js apps/client/public/config.js
+cp config/studio/config.exemple.js apps/studio/public/config.js
 # Edit config.js to match keycloak real environment values
 
 # 3. Start infrastructure
@@ -57,6 +59,7 @@ npm run prisma:migrate:deploy
 # 5. Start applications
 npm run serve:api      # API: http://localhost:3000
 npm run serve:client   # Client: http://localhost:4200
+npm run serve:studio   # Studio: http://localhost:4201
 ```
 
 ## Main Commands
@@ -64,9 +67,10 @@ npm run serve:client   # Client: http://localhost:4200
 ### Development
 
 ```bash
+docker compose up -d   
 npm run serve:api              # Start API
 npm run serve:client           # Start client
-docker compose up -d           # Start infrastructure (Postgres, Keycloak)
+npm run serve:studio           # Start studio        # Start infrastructure (Postgres, Keycloak)
 ```
 
 ### Build
@@ -74,7 +78,8 @@ docker compose up -d           # Start infrastructure (Postgres, Keycloak)
 ```bash
 npm run build:api              # Build API
 npm run build:client           # Build client
-npm run build:all              # Build all (API + client + libs)
+npm run build:studio           # Build studio
+npm run build:all              # Build all (API + client + studio + libs)
 ```
 
 ### Tests
@@ -82,10 +87,14 @@ npm run build:all              # Build all (API + client + libs)
 ```bash
 npm run test:api               # API unit tests
 npm run test:client            # Client unit tests
-npm run test:all               # All unit tests (API + client + libs) 
+npm run test:studio            # Studio unit tests
+npm run test:all               # All unit tests (API + client + studio + libs)
 
-npm run e2e:api                # E2E tests API
+npm run e2e:api                # E2E tests API (Jest)
 npm run e2e:client             # E2E tests client (Playwright)
+npm run e2e:client-ui          # E2E tests client (Playwright UI mode)
+npm run e2e:studio             # E2E tests studio (Playwright)
+npm run e2e:studio-ui          # E2E tests studio (Playwright UI mode)
 ```
 
 ### Lint & Format
@@ -93,7 +102,8 @@ npm run e2e:client             # E2E tests client (Playwright)
 ```bash
 npm run lint:api               # Lint API
 npm run lint:client            # Lint client
-npm run lint:all               # Lint all (API + client + libs)
+npm run lint:studio            # Lint studio
+npm run lint:all               # Lint all (API + client + studio + libs)
 npm run format                 # Format code
 ```
 
