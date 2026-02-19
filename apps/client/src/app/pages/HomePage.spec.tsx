@@ -14,7 +14,7 @@ vi.mock('../modules/home/components/PublicResume', () => ({
   PublicResume: () => <div data-testid="public-resume" />,
 }));
 
-vi.mock('../modules/layout/PageLayout', () => ({
+vi.mock('@portfolio/shared-ui', () => ({
   PageLayout: ({ children }: { children: React.ReactNode }) => <div data-testid="page-layout">{children}</div>,
 }));
 

@@ -1,8 +1,8 @@
+import { Braces } from '@portfolio/shared-ui';
 import type { FunctionComponent } from 'react';
 import { generatePath, Link } from 'react-router';
 
 import { RouteAnchors, RoutePaths } from '../../routes/paths.const';
-import { Braces } from '../ui/Braces';
 
 export const Navbar: FunctionComponent = () => {
   return (

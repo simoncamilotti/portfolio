@@ -1,10 +1,10 @@
+import { PageLayout } from '@portfolio/shared-ui';
 import type { FunctionComponent } from 'react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
 import { DashboardHeader } from '../modules/dashboard/components/DashboardHeader';
 import { DashboardResumeList } from '../modules/dashboard/components/DashboardResumeList';
-import { PageLayout } from '../modules/layout/PageLayout';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '../modules/ui/Dialog';
 
 export const DashboardPage: FunctionComponent = () => {

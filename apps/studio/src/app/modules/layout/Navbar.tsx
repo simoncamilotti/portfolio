@@ -1,9 +1,9 @@
+import { Braces } from '@portfolio/shared-ui';
 import type { FunctionComponent } from 'react';
 import { generatePath, Link } from 'react-router';
 
 import { RoutePaths } from '../../routes/paths.const';
 import { logout } from '../auth/auth';
-import { Braces } from '../ui/Braces';
 
 export const Navbar: FunctionComponent = () => {
   return (
