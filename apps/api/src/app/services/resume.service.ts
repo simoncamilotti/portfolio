@@ -1,6 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '@portfolio/core';
-import { CreateResumeRequestDto, GetAllResumesResponseDto, UpdateResumeRequestDto } from '@portfolio/shared-models';
+import {
+  CreateResumeRequestDto,
+  GetAllResumesResponseDto,
+  SetPublicResumeRequestDto,
+  UpdateResumeRequestDto,
+} from '@portfolio/shared-models';
 import { Resume } from '@prisma/client';
 
 import { ResumeMapper } from '../mappers/resume.mapper';
@@ -54,6 +59,37 @@ export class ResumeService {
 
   async update(id: string, dto: UpdateResumeRequestDto): Promise<Resume> {
     await this.findOne(id);
+
+    return this._prismaService.resume.update({
+      where: {
+        id,
+      },
+      data: dto,
+    });
+  }
+
+  async setPublic(id: string, dto: SetPublicResumeRequestDto): Promise<Resume> {
+    await this.findOne(id);
+
+    if (dto.isPublic) {
+      const currentPublicResume = await this._prismaService.resume.findFirst({
+        where: {
+          isPublic: true,
+        },
+      });
+
+      if (currentPublicResume) {
+        await this._prismaService.resume.update({
+          where: {
+            id: currentPublicResume.id,
+          },
+          data: {
+            isPublic: false,
+          },
+        });
+      }
+    }
+
     return this._prismaService.resume.update({
       where: {
         id,

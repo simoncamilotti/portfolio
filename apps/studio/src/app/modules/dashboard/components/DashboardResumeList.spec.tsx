@@ -7,27 +7,20 @@ vi.mock('framer-motion', () => ({
   },
 }));
 
-vi.mock('@tanstack/react-query', () => ({
-  useQuery: vi.fn().mockReturnValue({
-    data: [
-      {
-        id: 'mon-super-id',
-        title: 'CV number 1',
-        isPublic: true,
-        shareEnabled: true,
-        views: 12,
-        downloads: 6,
-        updatedAt: '2026-01-01',
-      },
-    ],
-    isPending: false,
-  }),
-}));
-
 vi.mock('../hooks/use-delete-resume-by-id-mutation.hook', () => ({
   useDeleteResumeById: () => ({
     deleteResumeByIdMutation: { mutateAsync: vi.fn() },
   }),
+}));
+
+vi.mock('../hooks/use-set-resume-is-public.hook', () => ({
+  useSetResumeIsPublic: () => ({
+    setResumeIsPublic: { mutateAsync: vi.fn() },
+  }),
+}));
+
+vi.mock('sonner', () => ({
+  toast: { success: vi.fn() },
 }));
 
 vi.mock('../../ui/Dropdown-menu', () => ({
@@ -44,11 +37,23 @@ vi.mock('../../ui/Dropdown-menu', () => ({
 
 import { DashboardResumeList } from './DashboardResumeList';
 
+const mockResumes = [
+  {
+    id: 'mon-super-id',
+    title: 'CV number 1',
+    isPublic: true,
+    shareEnabled: true,
+    views: 12,
+    downloads: 6,
+    updatedAt: '2026-01-01',
+  },
+];
+
 describe('DashboardResumeList', () => {
-  const renderList = () =>
+  const renderList = (resumes = mockResumes) =>
     render(
       <MemoryRouter>
-        <DashboardResumeList />
+        <DashboardResumeList resumes={resumes} />
       </MemoryRouter>,
     );
 
@@ -86,7 +91,7 @@ describe('DashboardResumeList', () => {
     renderList();
 
     const links = screen.getAllByRole('link');
-    const cvLink = links.find(l => l.getAttribute('href') === '/cv/mon-super-id');
+    const cvLink = links.find(l => l.getAttribute('href') === '/resumes/mon-super-id');
     expect(cvLink).toBeDefined();
   });
 });

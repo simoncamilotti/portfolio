@@ -1,9 +1,11 @@
 import { expect, test } from '@playwright/test';
 
+import { mockApi } from './api-mock';
 import { mockKeycloak } from './keycloak-mock';
 
 test.beforeEach(async ({ page, browserName }) => {
   await mockKeycloak(page, browserName);
+  await mockApi(page);
 });
 
 test.describe('Dashboard Page', () => {

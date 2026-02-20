@@ -10,6 +10,7 @@ const mockResumeService = {
   findOne: jest.fn(),
   create: jest.fn(),
   update: jest.fn(),
+  setPublic: jest.fn(),
   remove: jest.fn(),
 };
 
@@ -84,6 +85,17 @@ describe('ResumeController', () => {
 
     expect(result).toEqual(updatedResume);
     expect(mockResumeService.update).toHaveBeenCalledWith('uuid-1', dto);
+  });
+
+  it('setPublic(id, dto) should delegate with id and dto', async () => {
+    const dto = { isPublic: true };
+    const updatedResume = { ...mockResume, isPublic: true };
+    mockResumeService.setPublic.mockResolvedValue(updatedResume);
+
+    const result = await controller.setPublic('uuid-1', dto);
+
+    expect(result).toEqual(updatedResume);
+    expect(mockResumeService.setPublic).toHaveBeenCalledWith('uuid-1', dto);
   });
 
   it('remove(id) should delegate with the id', async () => {

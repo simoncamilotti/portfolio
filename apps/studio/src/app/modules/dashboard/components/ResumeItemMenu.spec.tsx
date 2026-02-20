@@ -11,6 +11,12 @@ vi.mock('../hooks/use-delete-resume-by-id-mutation.hook', () => ({
   }),
 }));
 
+vi.mock('../hooks/use-set-resume-is-public.hook', () => ({
+  useSetResumeIsPublic: () => ({
+    setResumeIsPublic: { mutateAsync: vi.fn() },
+  }),
+}));
+
 vi.mock('../../ui/Dropdown-menu', () => ({
   DropdownMenu: ({ children }: any) => <div>{children}</div>,
   DropdownMenuTrigger: ({ children }: any) => <button>{children}</button>,

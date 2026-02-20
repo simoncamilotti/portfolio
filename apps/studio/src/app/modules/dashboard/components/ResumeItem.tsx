@@ -2,8 +2,9 @@ import type { ResumeDto } from '@portfolio/shared-models';
 import { motion } from 'framer-motion';
 import { Download, Eye, Globe, Link as LinkIcon } from 'lucide-react';
 import type { FunctionComponent } from 'react';
-import { Link } from 'react-router';
+import { generatePath, Link } from 'react-router';
 
+import { RoutePaths } from '../../../routes/paths.const';
 import { ResumeItemMenu } from './ResumeItemMenu';
 
 type ResumeItemProps = {
@@ -23,7 +24,7 @@ export const ResumeItem: FunctionComponent<ResumeItemProps> = ({ resume, resumeI
       transition={{ delay: resumeIndex * 0.05 }}
       className="group flex items-center justify-between p-4 rounded-xl border border-border/50 bg-card hover:bg-surface-hover hover:border-primary/10 transition-all"
     >
-      <Link to={`/cv/${resume.id}`} className="flex-1 min-w-0">
+      <Link to={generatePath(RoutePaths.RESUME, { resumeId: resume.id })} className="flex-1 min-w-0">
         <div className="flex items-center gap-3">
           <h3 className="text-sm font-medium text-foreground truncate">{resume.title}</h3>
           {resume.isPublic && (

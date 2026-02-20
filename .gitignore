@@ -27,6 +27,9 @@ node_modules
 # environment & config
 .env
 /apps/client/public/config.js
+/apps/studio/public/config.js
+
+/config/keycloak/data/keycloakdb.lock.db
 
 # playwright
 playwright/.auth/
