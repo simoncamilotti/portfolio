@@ -11,6 +11,8 @@ import { axiosInstance } from '../api/axiosInstance';
 export const ResumesService = {
   getAllResumes: (): Promise<ResumeDto[]> =>
     axiosInstance.get<GetAllResumesResponseDto>('resumes').then(({ data }) => data),
+  getResumeById: (resumeId: string): Promise<ResumeDto> =>
+    axiosInstance.get<GetResumeResponseDto>(`resumes/${resumeId}`).then(({ data }) => data),
   deleteResumeById: (resumeId: string): Promise<void> => axiosInstance.delete(`resumes/${resumeId}`),
   createResume: (resume: CreateResumeRequestDto): Promise<ResumeDto> =>
     axiosInstance.post<GetResumeResponseDto>(`resumes`, resume).then(({ data }) => data),

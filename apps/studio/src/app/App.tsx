@@ -11,9 +11,7 @@ export const App: FunctionComponent<{
   return (
     <React.StrictMode>
       <ReactQueryProvider>
-        <div className="dark">
-          <RouterProvider router={router} />
-        </div>
+        <RouterProvider router={router} />
       </ReactQueryProvider>
     </React.StrictMode>
   );

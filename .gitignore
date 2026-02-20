@@ -30,6 +30,7 @@ node_modules
 /apps/studio/public/config.js
 
 /config/keycloak/data/keycloakdb.lock.db
+/config/keycloak/data/keycloakdb.trace.db
 
 # playwright
 playwright/.auth/

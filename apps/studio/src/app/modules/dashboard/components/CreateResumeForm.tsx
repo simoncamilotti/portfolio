@@ -8,19 +8,16 @@ import { useCreateResumeForm } from '../hooks/use-create-resume-form.hook';
 type CreateResumeFormProps = {
   resumes?: ResumeDto[];
   onSuccess: () => void;
+  onClose: () => void;
 };
 
-export const CreateResumeForm: FunctionComponent<CreateResumeFormProps> = ({ resumes, onSuccess }) => {
+export const CreateResumeForm: FunctionComponent<CreateResumeFormProps> = ({ resumes, onSuccess, onClose }) => {
   const alreadyTakenResumeNames = useMemo(() => resumes?.map(resume => resume.title) ?? [], [resumes]);
 
   const { control, isValid, onSubmit } = useCreateResumeForm({
     alreadyTakenResumeNames,
     onSuccess,
   });
-
-  const onCancel = () => {
-    onSuccess();
-  };
 
   return (
     <form onSubmit={onSubmit}>
@@ -55,7 +52,7 @@ export const CreateResumeForm: FunctionComponent<CreateResumeFormProps> = ({ res
       <div className="flex justify-end mt-4">
         <button
           type="button"
-          onClick={onCancel}
+          onClick={onClose}
           className="px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           Annuler

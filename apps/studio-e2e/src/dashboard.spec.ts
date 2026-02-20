@@ -48,14 +48,20 @@ test.describe('Navbar', () => {
 
     const nav = page.getByRole('navigation');
     await expect(nav).toBeVisible();
-    await expect(nav.getByRole('link')).toBeVisible();
+    await expect(nav.getByRole('link').first()).toBeVisible();
+  });
+
+  test('should display the Accueil link', async ({ page }) => {
+    await page.goto('/');
+
+    await expect(page.getByRole('navigation').getByRole('link', { name: 'Accueil' })).toBeVisible();
   });
 
   test('should not display public navigation anchors', async ({ page }) => {
     await page.goto('/');
 
-    await expect(page.getByRole('link', { name: 'Projets' })).not.toBeVisible();
-    await expect(page.getByRole('link', { name: 'CV' })).not.toBeVisible();
+    await expect(page.getByRole('link', { name: 'Projets' })).toBeHidden();
+    await expect(page.getByRole('link', { name: 'CV' })).toBeHidden();
   });
 });
 
@@ -74,7 +80,7 @@ test.describe('Create CV dialog', () => {
     await page.getByRole('button', { name: 'Nouveau CV' }).click();
     await page.getByRole('button', { name: 'Annuler' }).click();
 
-    await expect(page.getByPlaceholder('Titre du CV...')).not.toBeVisible();
+    await expect(page.getByPlaceholder('Titre du CV...')).toBeHidden();
   });
 
   test('should disable "Créer" button when title is empty', async ({ page }) => {

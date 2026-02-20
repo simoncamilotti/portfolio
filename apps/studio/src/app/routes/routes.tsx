@@ -20,8 +20,7 @@ export const routes: RouteObject[] = [
     },
     children: [
       {
-        index: true,
-        path: RoutePaths.DASHBOARD,
+        path: RoutePaths.HOME,
         element: <DashboardPage />,
       },
       {
@@ -32,6 +31,6 @@ export const routes: RouteObject[] = [
   },
   {
     path: '*',
-    loader: () => redirect(RoutePaths.DASHBOARD),
+    loader: () => redirect(RoutePaths.HOME),
   },
 ];

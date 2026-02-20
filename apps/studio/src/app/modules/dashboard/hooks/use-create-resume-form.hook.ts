@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import type { BaseSyntheticEvent } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { toast } from '../../ui/sonner';
 import type { CreateResumeForm } from '../resume.type';
 import { createResumeFormSchema } from '../resume.type';
 import { useCreateResumeMutationHook } from './use-create-resume-mutation.hook';
@@ -40,7 +41,8 @@ export const useCreateResumeForm = ({ alreadyTakenResumeNames, onSuccess }: UseC
       });
       return;
     }
-    await createResumeMutation.mutateAsync({ title: data.title, description: data.description, isPublic: false });
+    await createResumeMutation.mutateAsync({ ...data, isPublic: false });
+    toast.success('CV créer avec succès');
     reset({ ...defaultValues });
     clearErrors();
     onSuccess();

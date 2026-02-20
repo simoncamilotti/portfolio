@@ -1,4 +1,3 @@
-import { PageLayout } from '@portfolio/shared-ui';
 import { useQuery } from '@tanstack/react-query';
 import type { FunctionComponent } from 'react';
 import { useState } from 'react';
@@ -8,8 +7,17 @@ import { DashboardHeader } from '../modules/dashboard/components/DashboardHeader
 import { DashboardResumeList } from '../modules/dashboard/components/DashboardResumeList';
 import { resumesKey } from '../modules/dashboard/resumes.key';
 import { ResumesService } from '../modules/dashboard/resumes.service';
+import type { BreadcrumbItemsProps } from '../modules/layout/PageBreadcrumb';
+import { PageBreadcrumb } from '../modules/layout/PageBreadcrumb';
+import { RouteNames } from '../routes/paths.const';
 
 export const DashboardPage: FunctionComponent = () => {
+  const breadcrumbItems: BreadcrumbItemsProps = [
+    {
+      title: RouteNames.HOME,
+    },
+  ];
+
   const { data: resumes, isPending } = useQuery({
     queryKey: resumesKey.getAllResumes,
     queryFn: ResumesService.getAllResumes,
@@ -20,7 +28,8 @@ export const DashboardPage: FunctionComponent = () => {
   const [createOpen, setCreateOpen] = useState(false);
 
   return (
-    <PageLayout>
+    <>
+      <PageBreadcrumb breadcrumbItems={breadcrumbItems} />
       <div className="pt-20 pb-24 relative overflow-hidden">
         <DashboardHeader setCreateOpen={setCreateOpen} />
 
@@ -35,6 +44,6 @@ export const DashboardPage: FunctionComponent = () => {
         )}
         <CreateResumeDialog resumes={orderedResumes} open={createOpen} openChange={setCreateOpen} />
       </div>
-    </PageLayout>
+    </>
   );
 };
