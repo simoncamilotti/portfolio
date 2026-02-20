@@ -1,6 +1,11 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
 import { Public } from '@portfolio/core';
-import { CreateResumeRequestDto, GetAllResumesResponseDto, UpdateResumeRequestDto } from '@portfolio/shared-models';
+import {
+  CreateResumeRequestDto,
+  GetAllResumesResponseDto,
+  SetPublicResumeRequestDto,
+  UpdateResumeRequestDto,
+} from '@portfolio/shared-models';
 import { Resume } from '@prisma/client';
 
 import { ResumeService } from '../services/resume.service';
@@ -34,6 +39,11 @@ export class ResumeController {
   @Patch(':id')
   async update(@Param('id', ParseUUIDPipe) id: string, @Body() dto: UpdateResumeRequestDto): Promise<Resume> {
     return this._resumeService.update(id, dto);
+  }
+
+  @Patch(':id/public')
+  async setPublic(@Param('id', ParseUUIDPipe) id: string, @Body() dto: SetPublicResumeRequestDto): Promise<Resume> {
+    return this._resumeService.setPublic(id, dto);
   }
 
   @Delete(':id')

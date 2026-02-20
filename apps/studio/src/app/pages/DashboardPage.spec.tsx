@@ -1,5 +1,20 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
+vi.mock('@tanstack/react-query', () => ({
+  useQuery: vi.fn().mockReturnValue({
+    data: [
+      {
+        id: '1',
+        title: 'Mon CV',
+        isPublic: false,
+        shareEnabled: false,
+        updatedAt: '2026-01-01',
+      },
+    ],
+    isPending: false,
+  }),
+}));
+
 vi.mock('../modules/dashboard/components/DashboardHeader', () => ({
   DashboardHeader: ({ setCreateOpen }: { setCreateOpen: (v: boolean) => void }) => (
     <button data-testid="dashboard-header" onClick={() => setCreateOpen(true)}>
@@ -10,6 +25,11 @@ vi.mock('../modules/dashboard/components/DashboardHeader', () => ({
 
 vi.mock('../modules/dashboard/components/DashboardResumeList', () => ({
   DashboardResumeList: () => <div data-testid="resume-list" />,
+}));
+
+vi.mock('../modules/dashboard/components/CreateResumeDialog', () => ({
+  CreateResumeDialog: ({ open }: { open: boolean }) =>
+    open ? <div role="dialog" data-testid="create-dialog" /> : null,
 }));
 
 vi.mock('@portfolio/shared-ui', async importOriginal => ({

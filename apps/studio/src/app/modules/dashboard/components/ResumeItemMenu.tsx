@@ -1,9 +1,10 @@
 import type { ResumeDto } from '@portfolio/shared-models';
 import { ExternalLink, Globe, Link as LinkIcon, MoreHorizontal, Trash2 } from 'lucide-react';
 import type { FunctionComponent } from 'react';
-import { Link } from 'react-router';
+import { generatePath, Link } from 'react-router';
 import { toast } from 'sonner';
 
+import { RoutePaths } from '../../../routes/paths.const';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from '../../ui/Dropdown-menu';
 import { useDeleteResumeById } from '../hooks/use-delete-resume-by-id-mutation.hook';
+import { useSetResumeIsPublic } from '../hooks/use-set-resume-is-public.hook';
 
 type ResumeItemMenuProps = {
   resume: ResumeDto;
@@ -19,10 +21,10 @@ type ResumeItemMenuProps = {
 
 export const ResumeItemMenu: FunctionComponent<ResumeItemMenuProps> = ({ resume }) => {
   const { deleteResumeByIdMutation } = useDeleteResumeById(resume.id);
+  const { setResumeIsPublic } = useSetResumeIsPublic(resume.id);
 
-  const handleSetPublic = async (id: string) => {
-    // await api.setPublicCV(id);
-    // await loadCVs();
+  const handleSetPublic = async () => {
+    await setResumeIsPublic.mutateAsync();
     toast.success('CV défini comme public');
   };
 
@@ -54,11 +56,11 @@ export const ResumeItemMenu: FunctionComponent<ResumeItemMenuProps> = ({ resume 
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
         <DropdownMenuItem asChild>
-          <Link to={`/cv/${resume.id}`} className="flex items-center gap-2">
+          <Link to={generatePath(RoutePaths.RESUME, { resumeId: resume.id })} className="flex items-center gap-2">
             <ExternalLink className="w-3.5 h-3.5" /> Ouvrir
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => handleSetPublic(resume.id)} className="flex items-center gap-2">
+        <DropdownMenuItem onClick={() => handleSetPublic()} className="flex items-center gap-2">
           <Globe className="w-3.5 h-3.5" /> Définir comme public
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => handleToggleShare(resume.id)} className="flex items-center gap-2">

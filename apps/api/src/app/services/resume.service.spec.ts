@@ -133,7 +133,7 @@ describe('ResumeService', () => {
 
   describe('update', () => {
     it('should update and return the resume', async () => {
-      const dto = { title: 'CV Mis à jour', content: 'Nouveau contenu', isPublic: true };
+      const dto = { title: 'CV Mis à jour', content: 'Nouveau contenu', isPublic: false };
       const updatedResume = { ...mockResume, ...dto };
       mockPrismaService.resume.findUnique.mockResolvedValue(mockResume);
       mockPrismaService.resume.update.mockResolvedValue(updatedResume);
@@ -153,6 +153,70 @@ describe('ResumeService', () => {
       await expect(service.update('uuid-999', { title: 'Test', content: 'C', isPublic: false })).rejects.toThrow(
         NotFoundException,
       );
+    });
+  });
+
+  describe('setPublic', () => {
+    it('should unpublish existing public resume and publish the target', async () => {
+      const dto = { isPublic: true };
+      const currentPublicResume = { ...mockResume, id: 'uuid-public', isPublic: true };
+      const updatedResume = { ...mockResume, ...dto };
+      mockPrismaService.resume.findUnique.mockResolvedValue(mockResume);
+      mockPrismaService.resume.findFirst.mockResolvedValue(currentPublicResume);
+      mockPrismaService.resume.update.mockResolvedValue(updatedResume);
+
+      const result = await service.setPublic('uuid-1', dto);
+
+      expect(result).toEqual(updatedResume);
+      expect(mockPrismaService.resume.findFirst).toHaveBeenCalledWith({
+        where: { isPublic: true },
+      });
+      expect(mockPrismaService.resume.update).toHaveBeenCalledWith({
+        where: { id: currentPublicResume.id },
+        data: { isPublic: false },
+      });
+      expect(mockPrismaService.resume.update).toHaveBeenCalledWith({
+        where: { id: 'uuid-1' },
+        data: dto,
+      });
+    });
+
+    it('should publish even when no current public resume exists', async () => {
+      const dto = { isPublic: true };
+      const updatedResume = { ...mockResume, ...dto };
+      mockPrismaService.resume.findUnique.mockResolvedValue(mockResume);
+      mockPrismaService.resume.findFirst.mockResolvedValue(null);
+      mockPrismaService.resume.update.mockResolvedValue(updatedResume);
+
+      const result = await service.setPublic('uuid-1', dto);
+
+      expect(result).toEqual(updatedResume);
+      expect(mockPrismaService.resume.findFirst).toHaveBeenCalledWith({
+        where: { isPublic: true },
+      });
+      expect(mockPrismaService.resume.update).toHaveBeenCalledTimes(1);
+    });
+
+    it('should unpublish without looking for current public resume', async () => {
+      const dto = { isPublic: false };
+      const updatedResume = { ...mockResume, isPublic: false };
+      mockPrismaService.resume.findUnique.mockResolvedValue(mockResume);
+      mockPrismaService.resume.update.mockResolvedValue(updatedResume);
+
+      const result = await service.setPublic('uuid-1', dto);
+
+      expect(result).toEqual(updatedResume);
+      expect(mockPrismaService.resume.findFirst).not.toHaveBeenCalled();
+      expect(mockPrismaService.resume.update).toHaveBeenCalledWith({
+        where: { id: 'uuid-1' },
+        data: dto,
+      });
+    });
+
+    it('should throw NotFoundException if resume not found', async () => {
+      mockPrismaService.resume.findUnique.mockResolvedValue(null);
+
+      await expect(service.setPublic('uuid-999', { isPublic: true })).rejects.toThrow(NotFoundException);
     });
   });
 

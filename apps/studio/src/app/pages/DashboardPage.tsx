@@ -1,63 +1,39 @@
 import { PageLayout } from '@portfolio/shared-ui';
+import { useQuery } from '@tanstack/react-query';
 import type { FunctionComponent } from 'react';
 import { useState } from 'react';
-import { toast } from 'sonner';
 
+import { CreateResumeDialog } from '../modules/dashboard/components/CreateResumeDialog';
 import { DashboardHeader } from '../modules/dashboard/components/DashboardHeader';
 import { DashboardResumeList } from '../modules/dashboard/components/DashboardResumeList';
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '../modules/ui/Dialog';
+import { resumesKey } from '../modules/dashboard/resumes.key';
+import { ResumesService } from '../modules/dashboard/resumes.service';
 
 export const DashboardPage: FunctionComponent = () => {
-  const [createOpen, setCreateOpen] = useState(false);
-  const [newTitle, setNewTitle] = useState('');
+  const { data: resumes, isPending } = useQuery({
+    queryKey: resumesKey.getAllResumes,
+    queryFn: ResumesService.getAllResumes,
+  });
 
-  const handleCreate = async () => {
-    if (!newTitle.trim()) return;
-    // await api.createCV(newTitle);
-    setNewTitle('');
-    setCreateOpen(false);
-    // await loadCVs();
-    toast.success('CV créé avec succès');
-  };
+  const orderedResumes = [...(resumes ?? [])].sort((e1, e2) => e2.updatedAt.localeCompare(e1.updatedAt));
+
+  const [createOpen, setCreateOpen] = useState(false);
 
   return (
     <PageLayout>
       <div className="pt-20 pb-24 relative overflow-hidden">
         <DashboardHeader setCreateOpen={setCreateOpen} />
 
-        <DashboardResumeList />
-        {/* Create Dialog */}
-        <Dialog open={createOpen} onOpenChange={setCreateOpen}>
-          <DialogContent className="sm:max-w-md border-border/50">
-            <DialogHeader>
-              <DialogTitle>Nouveau CV</DialogTitle>
-            </DialogHeader>
-            <input
-              type="text"
-              value={newTitle}
-              onChange={e => setNewTitle(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && handleCreate()}
-              placeholder="Titre du CV..."
-              className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
-              autoFocus
-            />
-            <DialogFooter>
-              <button
-                onClick={() => setCreateOpen(false)}
-                className="px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Annuler
-              </button>
-              <button
-                onClick={handleCreate}
-                disabled={!newTitle.trim()}
-                className="px-3.5 py-1.5 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
-              >
-                Créer
-              </button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+        {isPending ? (
+          <div className="space-y-3">
+            {[1, 2].map(i => (
+              <div key={i} className="h-20 rounded-xl border border-border/50 bg-card animate-pulse" />
+            ))}
+          </div>
+        ) : (
+          <DashboardResumeList resumes={orderedResumes} />
+        )}
+        <CreateResumeDialog resumes={orderedResumes} open={createOpen} openChange={setCreateOpen} />
       </div>
     </PageLayout>
   );

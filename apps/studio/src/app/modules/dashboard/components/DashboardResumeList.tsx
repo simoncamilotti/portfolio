@@ -1,26 +1,17 @@
-import { useQuery } from '@tanstack/react-query';
+import type { ResumeDto } from '@portfolio/shared-models';
 import type { FunctionComponent } from 'react';
 
-import { resumesKey } from '../resumes.key';
-import { ResumesService } from '../resumes.service';
 import { NoResumePlaceholder } from './NoResumePlaceholder';
 import { ResumeItem } from './ResumeItem';
 
-export const DashboardResumeList: FunctionComponent = () => {
-  const { data: resumes, isPending } = useQuery({
-    queryKey: resumesKey.getAllResumes,
-    queryFn: ResumesService.getAllResumes,
-  });
+type DashboardResumeListProps = {
+  resumes?: ResumeDto[];
+};
 
+export const DashboardResumeList: FunctionComponent<DashboardResumeListProps> = ({ resumes }) => {
   return (
     <>
-      {isPending ? (
-        <div className="space-y-3">
-          {[1, 2].map(i => (
-            <div key={i} className="h-20 rounded-xl border border-border/50 bg-card animate-pulse" />
-          ))}
-        </div>
-      ) : resumes?.length === 0 ? (
+      {resumes?.length === 0 ? (
         <section className="max-w-7xl mx-auto">
           <div className="text-center py-20 text-muted-foreground">
             <NoResumePlaceholder />
@@ -29,9 +20,11 @@ export const DashboardResumeList: FunctionComponent = () => {
         </section>
       ) : (
         <section className="max-w-7xl mx-auto">
-          {resumes?.map((resume, index) => (
-            <ResumeItem key={resume.id} resumeIndex={index} resume={resume} />
-          ))}
+          <div className="space-y-1.5">
+            {resumes?.map((resume, index) => (
+              <ResumeItem key={resume.id} resumeIndex={index} resume={resume} />
+            ))}
+          </div>
         </section>
       )}
     </>
