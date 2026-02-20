@@ -2,6 +2,6 @@ import { RoutePaths } from './paths.const';
 
 describe('RoutePaths', () => {
   it('should define the correct paths', () => {
-    expect(RoutePaths.DASHBOARD).toBe('/');
+    expect(RoutePaths.HOME).toBe('/');
   });
 });

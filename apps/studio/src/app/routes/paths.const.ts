@@ -3,7 +3,12 @@ export const RoutePathParams = {
 } as const;
 
 export const RoutePaths = {
-  DASHBOARD: '/',
+  HOME: '/',
   RESUME: `/resumes/:${RoutePathParams.RESUME_ID}`,
   ERROR_FORBIDDEN: '/forbidden',
+} as const;
+
+export const RouteNames = {
+  HOME: 'Accueil',
+  RESUME: 'Cv',
 } as const;

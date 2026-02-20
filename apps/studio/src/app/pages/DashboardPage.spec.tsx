@@ -32,18 +32,19 @@ vi.mock('../modules/dashboard/components/CreateResumeDialog', () => ({
     open ? <div role="dialog" data-testid="create-dialog" /> : null,
 }));
 
-vi.mock('@portfolio/shared-ui', async importOriginal => ({
-  ...((await importOriginal()) as Record<string, unknown>),
-  PageLayout: ({ children }: { children: React.ReactNode }) => <div data-testid="page-layout">{children}</div>,
+vi.mock('../modules/layout/PageBreadcrumb', () => ({
+  PageBreadcrumb: ({ breadcrumbItems }: { breadcrumbItems: Array<{ title: string }> }) => (
+    <nav data-testid="page-breadcrumb">{breadcrumbItems.map(i => i.title).join(' / ')}</nav>
+  ),
 }));
 
 import { DashboardPage } from './DashboardPage';
 
 describe('DashboardPage', () => {
-  it('should render within PageLayout', () => {
+  it('should render the PageBreadcrumb', () => {
     render(<DashboardPage />);
 
-    expect(screen.getByTestId('page-layout')).toBeDefined();
+    expect(screen.getByTestId('page-breadcrumb')).toBeDefined();
   });
 
   it('should render the DashboardHeader', () => {
