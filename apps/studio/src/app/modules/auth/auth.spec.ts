@@ -53,8 +53,9 @@ describe('auth module', () => {
       await initAuth(authOptions);
 
       expect(mockKeycloakInstance.init).toHaveBeenCalledWith({
-        onLoad: 'check-sso',
-        silentCheckSsoRedirectUri: `${window.location.origin}/silent-check-sso.html`,
+        checkLoginIframe: false,
+        onLoad: 'login-required',
+        pkceMethod: 'S256',
       });
     });
 
