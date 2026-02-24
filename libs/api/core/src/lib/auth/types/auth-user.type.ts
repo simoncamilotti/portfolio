@@ -4,7 +4,6 @@ export type AuthUser = {
   username: string;
   firstName: string;
   lastName: string;
-  locale: string;
   email: string;
   roles: string[];
 };

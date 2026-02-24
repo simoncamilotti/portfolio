@@ -41,23 +41,17 @@ describe('JwtStrategy', () => {
     preferred_username: 'testuser',
     given_name: 'Test',
     family_name: 'User',
-    locale: 'fr',
     exp: 0,
     iat: 0,
-    auth_time: 0,
     jti: '',
     iss: '',
     aud: '',
     typ: '',
     azp: '',
-    session_state: '',
-    acr: '',
     'allowed-origins': [],
-    realm_access: { roles: ['user', 'admin'] },
-    resource_access: {},
+    resource_access: { roles: ['user', 'admin'] },
     scope: '',
     sid: '',
-    email_verified: true,
     ...overrides,
   });
 
@@ -88,7 +82,6 @@ describe('JwtStrategy', () => {
         username: 'testuser',
         firstName: 'Test',
         lastName: 'User',
-        locale: 'fr',
         roles: ['user', 'admin'],
       });
     });
@@ -108,7 +101,7 @@ describe('JwtStrategy', () => {
     it('should handle missing realm_access with empty roles array', async () => {
       const payload = createPayload();
       // Simulate missing realm_access
-      (payload as any).realm_access = undefined;
+      (payload as any).resource_access = undefined;
       (authService.getOrCreateUser as jest.Mock).mockResolvedValue({
         id: 'db-user-1',
       });
@@ -120,7 +113,7 @@ describe('JwtStrategy', () => {
 
     it('should handle empty roles array', async () => {
       const payload = createPayload({
-        realm_access: { roles: [] },
+        resource_access: { roles: [] },
       });
       (authService.getOrCreateUser as jest.Mock).mockResolvedValue({
         id: 'db-user-1',
