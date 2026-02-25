@@ -139,6 +139,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
     needs: [build-api, build-client, build-studio]
     steps:
       - name: Checkout GitOps repo
@@ -154,10 +155,11 @@ jobs:
       - name: Update image tags
         working-directory: gitops/apps/portfolio
         run: |
+          VERSION=${GITHUB_REF_NAME#v}
           kustomize edit set image \
-            ghcr.io/scamilotti1/portfolio/api=ghcr.io/scamilotti1/portfolio/api:sha-${GITHUB_SHA::7} \
-            ghcr.io/scamilotti1/portfolio/client=ghcr.io/scamilotti1/portfolio/client:sha-${GITHUB_SHA::7} \
-            ghcr.io/scamilotti1/portfolio/studio=ghcr.io/scamilotti1/portfolio/studio:sha-${GITHUB_SHA::7}
+            ghcr.io/scamilotti1/portfolio/api=ghcr.io/scamilotti1/portfolio/api:${VERSION} \
+            ghcr.io/scamilotti1/portfolio/client=ghcr.io/scamilotti1/portfolio/client:${VERSION} \
+            ghcr.io/scamilotti1/portfolio/studio=ghcr.io/scamilotti1/portfolio/studio:${VERSION}
 
       - name: Commit and push
         working-directory: gitops
@@ -165,7 +167,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git diff --staged --quiet || git commit -m "deploy: portfolio images to sha-${GITHUB_SHA::7}"
+          git diff --staged --quiet || git commit -m "deploy: portfolio images to ${GITHUB_REF_NAME}"
           git push
 
       - name: Notify Slack
@@ -182,7 +184,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*Portfolio deployed* :white_check_mark:\nImages `sha-${{ github.sha }}` pushed to GitOps.\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View workflow>"
+                    "text": "*Portfolio deployed* :white_check_mark:\nVersion `${{ github.ref_name }}` pushed to GitOps.\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View workflow>"
                   }
                 }
               ]
