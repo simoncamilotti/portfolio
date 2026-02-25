@@ -28,9 +28,20 @@ ENV TZ=Etc/UTC
 COPY --from=build /app/dist/apps/api ./
 RUN npm ci --omit=dev
 
+# Prisma client (runtime)
 COPY --from=deps /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=deps /app/node_modules/@prisma/client ./node_modules/@prisma/client
 
+# Prisma CLI (needed for migrate deploy at startup)
+RUN npm install prisma --no-save
+
+# Prisma schema, config & migrations
+COPY prisma.config.ts prisma.config.ts
+COPY libs/api/core/src/prisma/schema.prisma libs/api/core/src/prisma/schema.prisma
+COPY libs/api/core/src/prisma/migrations libs/api/core/src/prisma/migrations
+
+COPY apps/api/entrypoint.sh entrypoint.sh
+
 EXPOSE 3000
 
-CMD ["node", "main.js"]
+ENTRYPOINT ["./entrypoint.sh"]
