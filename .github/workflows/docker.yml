@@ -11,8 +11,8 @@ on:
       - 'package-lock.json'
       - 'nx.json'
       - 'tsconfig.base.json'
-    tags:
-      - 'v*'
+  release:
+    types: [published]
   workflow_dispatch:
 
 env:
@@ -198,7 +198,7 @@ jobs:
 
   deploy-prod:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: github.event_name == 'release'
     needs: [build-api, build-client, build-studio]
     steps:
       - name: Checkout GitOps repo
