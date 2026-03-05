@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CoreModule } from '@portfolio/core';
 
-import { ResumeController } from './controlles/resume.controller';
+import { ResumeController } from './controllers/resume.controller';
 import { ResumeMapper } from './mappers/resume.mapper';
 import { ResumeService } from './services/resume.service';
 
