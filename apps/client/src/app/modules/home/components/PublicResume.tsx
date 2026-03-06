@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import type { FunctionComponent } from 'react';
 
 import { RouteAnchors } from '../../../routes/paths.const';
+import { PublicCV } from './PublicCv';
 
 export const PublicResume: FunctionComponent = () => {
   return (
@@ -16,7 +17,7 @@ export const PublicResume: FunctionComponent = () => {
           <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-10">
             Curriculum Vitae
           </h2>
-          {/*<PublicCV />*/}
+          <PublicCV />
         </motion.div>
       </div>
     </section>
