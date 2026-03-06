@@ -27,6 +27,12 @@ export const Navbar: FunctionComponent = () => {
           >
             CV
           </a>
+          <a
+            href={`#${RouteAnchors.HOME.CONTACT}`}
+            className="text-[13px] text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Contact
+          </a>
         </div>
       </div>
     </nav>

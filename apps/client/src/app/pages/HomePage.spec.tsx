@@ -14,6 +14,10 @@ vi.mock('../modules/home/components/PublicResume', () => ({
   PublicResume: () => <div data-testid="public-resume" />,
 }));
 
+vi.mock('../modules/home/components/ContactSection', () => ({
+  ContactSection: () => <div data-testid="contact-section" />,
+}));
+
 vi.mock('@portfolio/shared-ui', () => ({
   PageLayout: ({ children }: { children: React.ReactNode }) => <div data-testid="page-layout">{children}</div>,
 }));
@@ -41,5 +45,11 @@ describe('HomePage', () => {
     render(<HomePage />);
 
     expect(screen.getByTestId('public-resume')).toBeDefined();
+  });
+
+  it('should render the ContactSection', () => {
+    render(<HomePage />);
+
+    expect(screen.getByTestId('contact-section')).toBeDefined();
   });
 });

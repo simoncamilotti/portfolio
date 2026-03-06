@@ -26,6 +26,7 @@ ENV NODE_ENV=production
 ENV TZ=Etc/UTC
 
 COPY --from=build /app/dist/apps/api ./
+COPY --from=build /app/package-lock.json ./
 RUN npm ci --omit=dev
 
 # Prisma client (runtime)

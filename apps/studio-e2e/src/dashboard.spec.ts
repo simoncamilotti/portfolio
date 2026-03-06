@@ -60,8 +60,9 @@ test.describe('Navbar', () => {
   test('should not display public navigation anchors', async ({ page }) => {
     await page.goto('/');
 
-    await expect(page.getByRole('link', { name: 'Projets' })).toBeHidden();
-    await expect(page.getByRole('link', { name: 'CV' })).toBeHidden();
+    const nav = page.getByRole('navigation');
+    await expect(nav.getByRole('link', { name: 'Projets' })).toBeHidden();
+    await expect(nav.getByRole('link', { name: 'CV' })).toBeHidden();
   });
 });
 

@@ -7,5 +7,6 @@ export const RouteAnchors = {
     HOME: 'home',
     PROJECTS: 'projects',
     RESUME: 'resume',
+    CONTACT: 'contact',
   },
 };
