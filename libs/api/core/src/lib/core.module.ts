@@ -1,5 +1,7 @@
 import { Global, Module, RequestMethod } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
+import { MailerModule, MailerOptions } from '@nestjs-modules/mailer';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { LoggerModule, Params } from 'nestjs-pino';
 import { Options } from 'pino-http';
 
@@ -20,9 +22,37 @@ const pinoOptions: Params = {
   } as Options,
 };
 
+const mailerOptions: MailerOptions = {
+  transport: {
+    host: process.env['SMTP_HOST'],
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env['SMTP_USER'],
+      pass: process.env['SMTP_PASS'],
+    },
+  },
+  defaults: {
+    from: process.env['SMTP_FROM'],
+  },
+  template: {
+    dir: __dirname + '/assets/',
+    adapter: new HandlebarsAdapter(),
+    options: {
+      strict: true,
+    },
+  },
+};
+
 @Global()
 @Module({
-  imports: [HealthModule, PrismaModule, AuthModule, LoggerModule.forRoot(pinoOptions)],
+  imports: [
+    HealthModule,
+    PrismaModule,
+    AuthModule,
+    LoggerModule.forRoot(pinoOptions),
+    MailerModule.forRoot(mailerOptions),
+  ],
   providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],
   exports: [PrismaModule, AuthModule, LoggerModule],
 })
