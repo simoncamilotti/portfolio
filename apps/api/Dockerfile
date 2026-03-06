@@ -34,7 +34,7 @@ COPY --from=deps /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=deps /app/node_modules/@prisma/client ./node_modules/@prisma/client
 
 # Prisma CLI (needed for migrate deploy at startup)
-RUN npm install prisma --no-save
+RUN npm install prisma dotenv --no-save
 
 # Prisma schema, config & migrations
 COPY prisma.config.ts prisma.config.ts
