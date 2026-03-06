@@ -4,5 +4,11 @@ import { createBrowserRouter } from 'react-router';
 import { App } from './app/App';
 import { routes } from './app/routes/routes';
 
+if (!window.config?.captcha) {
+  throw new Error(
+    'Missing config: public/config.js is not loaded. Copy public/config.example.js to public/config.js and fill in the values.',
+  );
+}
+
 const router = createBrowserRouter(routes);
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(<App router={router} />);

@@ -12,7 +12,7 @@ export type ContactFormValues = z.infer<typeof contactFormSchema>;
 export type FormStatus = 'idle' | 'loading' | 'success' | 'error';
 
 export type UseContactFormProps = {
-  recaptchaSiteKey: string | undefined;
+  recaptchaSiteKey: string;
 };
 
 export const useContactForm = ({ recaptchaSiteKey }: UseContactFormProps) => {
@@ -26,7 +26,7 @@ export const useContactForm = ({ recaptchaSiteKey }: UseContactFormProps) => {
     formState: { isValid },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
-    mode: 'onBlur',
+    mode: 'onTouched',
   });
 
   const { sendContactMutation } = useContactFormMutation();

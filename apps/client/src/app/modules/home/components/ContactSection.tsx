@@ -7,7 +7,7 @@ import { RouteAnchors } from '../../../routes/paths.const';
 import { useContactForm } from '../hooks/use-contact-form.hook';
 
 export const ContactSection: FunctionComponent = () => {
-  const recaptchaSiteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY as string | undefined;
+  const recaptchaSiteKey = window.config.captcha.siteKey;
 
   const { status, setStatus, isValid, recaptchaLoaded, control, onSubmit } = useContactForm({
     recaptchaSiteKey,
