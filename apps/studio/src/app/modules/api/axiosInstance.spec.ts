@@ -17,6 +17,7 @@ describe('axiosInstance', () => {
 
   describe('auth request interceptor', () => {
     const runRequestInterceptor = (config: InternalAxiosRequestConfig) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const interceptor = (axiosInstance.interceptors.request as any).handlers[0].fulfilled;
       return interceptor(config);
     };
@@ -51,7 +52,9 @@ describe('axiosInstance', () => {
 
   describe('forbidden interceptor', () => {
     const runForbiddenInterceptor = (error: unknown) => {
-      const interceptor = (axiosInstance.interceptors.response as any).handlers[0].rejected;
+      // errorInterceptor from createAxiosInstance is at index 0, forbiddenInterceptor is at index 1
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const interceptor = (axiosInstance.interceptors.response as any).handlers[1].rejected;
       return interceptor(error);
     };
 
@@ -64,7 +67,7 @@ describe('axiosInstance', () => {
 
       const error = new Axios.AxiosError('Unauthorized', '401', undefined, undefined, {
         status: 401,
-      } as any);
+      } as never);
 
       await expect(runForbiddenInterceptor(error)).rejects.toBeDefined();
       expect(window.location.href).toBe('/forbidden');
@@ -80,7 +83,7 @@ describe('axiosInstance', () => {
 
       const error = new Axios.AxiosError('Unauthorized', '401', undefined, undefined, {
         status: 401,
-      } as any);
+      } as never);
 
       await expect(runForbiddenInterceptor(error)).rejects.toBeDefined();
       expect(window.location.href).toBe('');
@@ -96,39 +99,12 @@ describe('axiosInstance', () => {
 
       const error = new Axios.AxiosError('Forbidden', '403', undefined, undefined, {
         status: 403,
-      } as any);
+      } as never);
 
       await expect(runForbiddenInterceptor(error)).rejects.toBeDefined();
       expect(window.location.href).toBe('');
 
       Object.defineProperty(window, 'location', { writable: true, value: { href: '' } });
-    });
-  });
-
-  describe('error interceptor', () => {
-    const runErrorInterceptor = (error: unknown) => {
-      const interceptor = (axiosInstance.interceptors.response as any).handlers[1].rejected;
-      return interceptor(error);
-    };
-
-    it('should extract response data from AxiosError', async () => {
-      const error = new Axios.AxiosError('Bad Request', '400', undefined, undefined, {
-        data: { message: 'Validation failed' },
-      } as any);
-
-      await expect(runErrorInterceptor(error)).rejects.toEqual({ message: 'Validation failed' });
-    });
-
-    it('should fallback to error itself when no response data', async () => {
-      const error = new Axios.AxiosError('Network Error', 'ERR_NETWORK');
-
-      await expect(runErrorInterceptor(error)).rejects.toBe(error);
-    });
-
-    it('should reject non-Axios errors as-is', async () => {
-      const error = new Error('Unknown error');
-
-      await expect(runErrorInterceptor(error)).rejects.toBe(error);
     });
   });
 });

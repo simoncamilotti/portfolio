@@ -1,3 +1,4 @@
+import { ReactQueryProvider } from '@portfolio/web';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 import type { createBrowserRouter } from 'react-router';
@@ -8,9 +9,9 @@ export const App: FunctionComponent<{
 }> = ({ router }) => {
   return (
     <React.StrictMode>
-      <div className="dark">
+      <ReactQueryProvider>
         <RouterProvider router={router} />
-      </div>
+      </ReactQueryProvider>
     </React.StrictMode>
   );
 };

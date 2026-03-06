@@ -5,7 +5,7 @@ import { Navbar } from './Navbar';
 
 export const Layout: FunctionComponent = () => {
   return (
-    <div className="relative min-h-screen bg-background">
+    <div className="dark relative min-h-screen bg-background">
       <Navbar />
       <Outlet />
     </div>
