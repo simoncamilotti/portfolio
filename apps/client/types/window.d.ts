@@ -1,3 +1,9 @@
+export type WindowConfig = {
+  captcha: {
+    siteKey: string;
+  };
+};
+
 declare global {
   // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface Window {
@@ -6,7 +12,6 @@ declare global {
       execute(siteKey: string, options: { action: string }): Promise<string>;
       render(container: string | HTMLElement, parameters: object): number;
     };
+    config: WindowConfig;
   }
 }
-
-export {};

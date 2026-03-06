@@ -5,7 +5,6 @@ import { ContactSection } from './ContactSection';
 
 vi.mock('framer-motion', () => ({
   motion: {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     div: ({ children, initial, whileInView, viewport, transition, ...props }: any) => <div {...props}>{children}</div>,
   },
 }));
@@ -16,6 +15,9 @@ const renderWithProviders = (ui: React.ReactElement) =>
   render(<QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>);
 
 describe('ContactSection', () => {
+  beforeAll(() => {
+    window.config = { captcha: { siteKey: 'test-site-key' } };
+  });
   it('should render the Contact heading', () => {
     renderWithProviders(<ContactSection />);
 
