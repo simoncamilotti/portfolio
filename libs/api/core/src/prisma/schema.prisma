@@ -16,15 +16,22 @@ model User {
 }
 
 model Resume {
-  id          String  @id @default(uuid())
-  title       String
-  description String?
-  content     Json    @default("{}")
-  isPublic    Boolean @default(false)
+  id           String  @id @default(uuid())
+  title        String
+  description  String?
+  content      Json    @default("{}")
+  isPublic     Boolean @default(false)
   shareEnabled Boolean @default(false)
   views        Int     @default(0)
   downloads    Int     @default(0)
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FeatureFlag {
+  key       String   @id
+  enabled   Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

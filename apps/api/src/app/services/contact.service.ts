@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
-import type { ContactRequestDto } from '@portfolio/shared-models';
+import type { ContactRequestDto } from '@portfolio/shared-models/server';
 import { firstValueFrom, map } from 'rxjs';
 
 type RecaptchaResponse = {
@@ -74,7 +74,7 @@ export class ContactService {
         },
       })
       .catch(err => {
-        console.log(err);
+        this._logger.error('Failed to send contact email', err);
       });
   }
 }

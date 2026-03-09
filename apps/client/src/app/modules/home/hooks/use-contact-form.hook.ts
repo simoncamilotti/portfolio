@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { contactRequestDtoSchema } from '@portfolio/shared-models/schemas';
+import { contactRequestDtoSchema } from '@portfolio/shared-models';
 import type { BaseSyntheticEvent } from 'react';
 import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';

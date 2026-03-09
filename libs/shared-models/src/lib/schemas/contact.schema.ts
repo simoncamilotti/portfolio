@@ -7,3 +7,5 @@ export const contactRequestDtoSchema = z.object({
   message: z.string().min(10, 'Le message doit contenir au moins 10 caractères').max(5000, '5000 caractères maximum'),
   captchaToken: z.string().min(1),
 });
+
+export type ContactRequestDto = z.infer<typeof contactRequestDtoSchema>;

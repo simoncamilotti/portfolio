@@ -1,6 +1,6 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { Public } from '@portfolio/core';
-import { ContactRequestDto } from '@portfolio/shared-models';
+import { ContactRequestDto } from '@portfolio/shared-models/server';
 
 import { ContactService } from '../services/contact.service';
 

@@ -1,12 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '@portfolio/core';
-import {
+import type {
   CreateResumeRequestDto,
-  GetAllResumesResponseDto,
+  ResumeDetailDto,
+  ResumeDto,
   SetPublicResumeRequestDto,
   UpdateResumeRequestDto,
-} from '@portfolio/shared-models';
-import { Resume } from '@prisma/client';
+} from '@portfolio/shared-models/server';
 
 import { ResumeMapper } from '../mappers/resume.mapper';
 
@@ -17,13 +17,13 @@ export class ResumeService {
     private readonly _resumeMapper: ResumeMapper,
   ) {}
 
-  async findAll(): Promise<GetAllResumesResponseDto> {
+  async findAll(): Promise<ResumeDto[]> {
     const resumes = await this._prismaService.resume.findMany();
 
-    return this._resumeMapper.toGetAllResumesResponseDto(resumes);
+    return this._resumeMapper.toResumeDtoList(resumes);
   }
 
-  async findPublic(): Promise<Resume> {
+  async findPublic(): Promise<ResumeDetailDto> {
     const resume = await this._prismaService.resume.findFirst({
       where: {
         isPublic: true,
@@ -34,10 +34,10 @@ export class ResumeService {
       throw new NotFoundException(`Public resume not found`);
     }
 
-    return resume;
+    return this._resumeMapper.toResumeDetailDto(resume);
   }
 
-  async findOne(id: string): Promise<Resume> {
+  async findOne(id: string): Promise<ResumeDetailDto> {
     const resume = await this._prismaService.resume.findUnique({
       where: {
         id,
@@ -48,27 +48,31 @@ export class ResumeService {
       throw new NotFoundException(`Resume #${id} not found`);
     }
 
-    return resume;
+    return this._resumeMapper.toResumeDetailDto(resume);
   }
 
-  async create(dto: CreateResumeRequestDto): Promise<Resume> {
-    return this._prismaService.resume.create({
+  async create(dto: CreateResumeRequestDto): Promise<ResumeDetailDto> {
+    const resume = await this._prismaService.resume.create({
       data: dto,
     });
+
+    return this._resumeMapper.toResumeDetailDto(resume);
   }
 
-  async update(id: string, dto: UpdateResumeRequestDto): Promise<Resume> {
+  async update(id: string, dto: UpdateResumeRequestDto): Promise<ResumeDetailDto> {
     await this.findOne(id);
 
-    return this._prismaService.resume.update({
+    const resume = await this._prismaService.resume.update({
       where: {
         id,
       },
       data: dto,
     });
+
+    return this._resumeMapper.toResumeDetailDto(resume);
   }
 
-  async setPublic(id: string, dto: SetPublicResumeRequestDto): Promise<Resume> {
+  async setPublic(id: string, dto: SetPublicResumeRequestDto): Promise<ResumeDetailDto> {
     await this.findOne(id);
 
     if (dto.isPublic) {
@@ -90,12 +94,14 @@ export class ResumeService {
       }
     }
 
-    return this._prismaService.resume.update({
+    const resume = await this._prismaService.resume.update({
       where: {
         id,
       },
       data: dto,
     });
+
+    return this._resumeMapper.toResumeDetailDto(resume);
   }
 
   async remove(id: string): Promise<void> {
