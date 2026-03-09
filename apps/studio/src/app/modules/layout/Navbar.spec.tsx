@@ -32,7 +32,6 @@ describe('Navbar', () => {
   it('should not render navigation anchors', () => {
     renderNavbar();
 
-    expect(screen.queryByText('Projets')).toBeNull();
     expect(screen.queryByText('CV')).toBeNull();
   });
 });

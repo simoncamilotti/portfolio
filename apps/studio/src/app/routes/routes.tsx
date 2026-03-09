@@ -4,7 +4,9 @@ import { redirect } from 'react-router';
 import { isAuthenticated, login } from '../modules/auth/auth';
 import { Layout } from '../modules/layout/Layout';
 import { DashboardPage } from '../pages/DashboardPage';
+import { ProjectsPage } from '../pages/ProjectsPage';
 import { ResumePage } from '../pages/ResumePage';
+import { SettingsPage } from '../pages/SettingsPage';
 import { RoutePaths } from './paths.const';
 
 export const routes: RouteObject[] = [
@@ -26,6 +28,14 @@ export const routes: RouteObject[] = [
       {
         path: RoutePaths.RESUME,
         element: <ResumePage />,
+      },
+      {
+        path: RoutePaths.PROJECTS,
+        element: <ProjectsPage />,
+      },
+      {
+        path: RoutePaths.SETTINGS,
+        element: <SettingsPage />,
       },
     ],
   },

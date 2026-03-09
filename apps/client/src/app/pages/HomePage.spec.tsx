@@ -2,6 +2,12 @@ import { render, screen } from '@testing-library/react';
 
 import { HomePage } from './HomePage';
 
+const mockIsEnabled = vi.fn();
+
+vi.mock('../modules/feature-flags/hooks/use-feature-flags.hook', () => ({
+  useFeatureFlags: () => ({ isEnabled: mockIsEnabled, loading: false }),
+}));
+
 vi.mock('../modules/home/components/HeroSection', () => ({
   HeroSection: () => <div data-testid="hero-section" />,
 }));
@@ -23,6 +29,10 @@ vi.mock('@portfolio/shared-ui', () => ({
 }));
 
 describe('HomePage', () => {
+  beforeEach(() => {
+    mockIsEnabled.mockReturnValue(false);
+  });
+
   it('should render within a PageLayout', () => {
     render(<HomePage />);
 
@@ -35,10 +45,17 @@ describe('HomePage', () => {
     expect(screen.getByTestId('hero-section')).toBeDefined();
   });
 
-  it('should render the ProjectsSection', () => {
+  it('should not render ProjectsSection when projects flag is disabled', () => {
     render(<HomePage />);
 
-    expect(screen.getByTestId('projects-section')).toBeDefined();
+    expect(screen.queryByTestId('projects-section')).toBeNull();
+  });
+
+  it('should not render ProjectsSection when projects flag is enabled but no projects', () => {
+    mockIsEnabled.mockReturnValue(true);
+    render(<HomePage />);
+
+    expect(screen.queryByTestId('projects-section')).toBeNull();
   });
 
   it('should render the PublicResume section', () => {
