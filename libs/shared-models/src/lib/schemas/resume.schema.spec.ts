@@ -1,8 +1,7 @@
-import { updateResumeSchema } from './dashboard-page.dto';
-import { createResumeRequestDtoSchema } from './dashboard-page.dto';
+import { createResumeRequestDtoSchema, updateResumeRequestDtoSchema } from './resume.schema';
 
-describe('DashboardPageDto', () => {
-  describe('createResumeSchema', () => {
+describe('ResumeSchema', () => {
+  describe('createResumeRequestDtoSchema', () => {
     const validInput = {
       title: 'Mon CV',
       content: 'Contenu du CV',
@@ -76,7 +75,7 @@ describe('DashboardPageDto', () => {
     });
   });
 
-  describe('updateResumeSchema', () => {
+  describe('updateResumeRequestDtoSchema', () => {
     const validInput = {
       title: 'Mon CV',
       content: 'Contenu du CV',
@@ -84,32 +83,37 @@ describe('DashboardPageDto', () => {
       isPublic: true,
     };
 
-    it('should accept a valid input', () => {
-      const result = updateResumeSchema.safeParse(validInput);
+    it('should accept a valid complete input', () => {
+      const result = updateResumeRequestDtoSchema.safeParse(validInput);
 
       expect(result.success).toBe(true);
       expect(result.data).toEqual(validInput);
     });
 
-    it('should default isPublic to false', () => {
-      const { isPublic, ...input } = validInput;
-
-      const result = updateResumeSchema.safeParse(input);
+    it('should accept an empty object (all fields optional for PATCH)', () => {
+      const result = updateResumeRequestDtoSchema.safeParse({});
 
       expect(result.success).toBe(true);
-      expect(result.data?.isPublic).toBe(false);
+      expect(result.data).toEqual({});
+    });
+
+    it('should accept input with only title', () => {
+      const result = updateResumeRequestDtoSchema.safeParse({ title: 'Mon CV' });
+
+      expect(result.success).toBe(true);
+      expect(result.data).toEqual({ title: 'Mon CV' });
+    });
+
+    it('should accept input without content (optional for PATCH)', () => {
+      const { content, ...input } = validInput;
+
+      const result = updateResumeRequestDtoSchema.safeParse(input);
+
+      expect(result.success).toBe(true);
     });
 
     it('should reject a title shorter than 3 characters', () => {
-      const result = updateResumeSchema.safeParse({ ...validInput, title: 'AB' });
-
-      expect(result.success).toBe(false);
-    });
-
-    it('should reject if content is missing', () => {
-      const { content, ...input } = validInput;
-
-      const result = updateResumeSchema.safeParse(input);
+      const result = updateResumeRequestDtoSchema.safeParse({ ...validInput, title: 'AB' });
 
       expect(result.success).toBe(false);
     });
@@ -117,7 +121,7 @@ describe('DashboardPageDto', () => {
     it('should accept input with optional description omitted', () => {
       const { description, ...input } = validInput;
 
-      const result = updateResumeSchema.safeParse(input);
+      const result = updateResumeRequestDtoSchema.safeParse(input);
 
       expect(result.success).toBe(true);
       expect(result.data).not.toHaveProperty('description');

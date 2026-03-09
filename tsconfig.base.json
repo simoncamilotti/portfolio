@@ -17,7 +17,7 @@
     "paths": {
       "@portfolio/core": ["libs/api/core/src/index.ts"],
       "@portfolio/shared-models": ["libs/shared-models/src/index.ts"],
-      "@portfolio/shared-models/schemas": ["libs/shared-models/src/lib/contact.schema.ts"],
+      "@portfolio/shared-models/server": ["libs/shared-models/src/server.ts"],
       "@portfolio/shared-ui": ["libs/shared-ui/src/index.ts"],
       "@portfolio/web": ["libs/web/src/index.ts"],
       "@portfolio/web/api": ["libs/web/src/lib/api/axiosInstance.ts"]

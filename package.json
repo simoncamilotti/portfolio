@@ -28,7 +28,9 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate:dev": "prisma migrate dev",
     "prisma:migrate:deploy": "prisma migrate deploy",
-    "prisma:studio": "prisma studio"
+    "prisma:studio": "prisma studio",
+    "pre-commit": "npm run format && npm run lint:all && npm run test:all",
+    "pre-commit-e2e": "npm run pre-commit && npm run e2e:api && npm run e2e:studio && npm run e2e:client"
   },
   "private": true,
   "devDependencies": {

@@ -1,4 +1,4 @@
-import { contactRequestDtoSchema } from './contact.dto';
+import { contactRequestDtoSchema } from './contact.schema';
 
 describe('ContactRequestDto', () => {
   const validInput = {

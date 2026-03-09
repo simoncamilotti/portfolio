@@ -1,7 +1,5 @@
 import { createZodDto } from 'nestjs-zod';
 
-import { contactRequestDtoSchema } from './contact.schema';
-
-export { contactRequestDtoSchema } from './contact.schema';
+import { contactRequestDtoSchema } from '../schemas/contact.schema';
 
 export class ContactRequestDto extends createZodDto(contactRequestDtoSchema) {}
