@@ -23,6 +23,20 @@ export const Navbar: FunctionComponent = () => {
             {RouteNames.HOME}
           </Link>
 
+          <Link
+            to={generatePath(RoutePaths.PROJECTS)}
+            className="text-[13px] text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {RouteNames.PROJECTS}
+          </Link>
+
+          <Link
+            to={generatePath(RoutePaths.SETTINGS)}
+            className="text-[13px] text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {RouteNames.SETTINGS}
+          </Link>
+
           <button
             onClick={() => logout()}
             className="text-[13px] px-3 py-1.5 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-medium"
