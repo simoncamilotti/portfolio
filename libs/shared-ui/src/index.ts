@@ -13,4 +13,5 @@ export {
   DialogTitle,
   DialogTrigger,
 } from './lib/ui/Dialog';
+export { LanguageSwitcher } from './lib/ui/LanguageSwitcher';
 export { cn } from './lib/utils';

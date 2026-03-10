@@ -1,0 +1,125 @@
+{
+  "nav": {
+    "projects": "Projets",
+    "resume": "CV",
+    "contact": "Contact"
+  },
+  "hero": {
+    "available": "Disponible",
+    "title": "Software Engineer",
+    "subtitle": "& créateur de produits.",
+    "description": "Je conçois et développe des applications web performantes avec une obsession pour l'expérience utilisateur et le code propre.",
+    "cta": "Voir mon CV"
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Une question, une proposition ? N'hésitez pas à me contacter.",
+    "success": {
+      "title": "Message envoyé avec succès !",
+      "description": "Merci pour votre message. Je vous répondrai dans les plus brefs délais.",
+      "another": "Envoyer un autre message"
+    },
+    "form": {
+      "name": "Votre nom",
+      "email": "Votre email",
+      "subject": "Sujet",
+      "message": "Votre message",
+      "submit": "Envoyer"
+    },
+    "error": "Une erreur est survenue. Veuillez réessayer plus tard."
+  },
+  "projects": {
+    "title": "Projets"
+  },
+  "resume": {
+    "title": "Curriculum Vitae"
+  },
+  "cv": {
+    "downloadPdf": "PDF",
+    "jobTitle": "Développeur Full Stack",
+    "bio": "Développeur autodidacte avec plus de 10 ans d'expérience, j'ai évolué du frontend pur vers la conception de systèmes complexes et scalables. Aujourd'hui, je me concentre sur la création d'architectures \"Prod-Ready\" capables de soutenir la croissance de produits exigeants.",
+    "sections": {
+      "contact": "Contact",
+      "languages": "Langues",
+      "skills": "Compétences",
+      "experience": "Expériences professionnelles",
+      "education": "Formations"
+    },
+    "englishLevel": "Anglais - niveau A2",
+    "location": "Grenoble, France",
+    "skills": [
+      { "label": "Langages", "value": "React, Angular, NestJs, Node, .NET C#, PHP, Python, SQL" },
+      { "label": "DevOps", "value": "Git, Gitlab, CI/CD, Kubernetes, ArgoCD, Traefik, Docker" },
+      { "label": "Base de données", "value": "PostgreSql, MySql, Oracle, Prisma, Entity Framework" },
+      { "label": "Méthodologies", "value": "SOLID, KISS, DRY, Clean Architecture, Agile, Scrum, Kanban" }
+    ],
+    "experiences": [
+      {
+        "role": "Développeur Logiciels",
+        "company": "Raise Partner",
+        "location": "Grenoble, France",
+        "period": "2020 - 2025",
+        "tasks": [
+          "Développement et maintenance d'applications web",
+          "Développement d'API REST",
+          "Déploiement d'infrastructure via IaC",
+          "Déploiement on premise",
+          "DevOps CI/CD",
+          "Relation technique pour client",
+          "Optimisation de mémoire / performance",
+          "Partage de connaissance / Tutorat et onboarding des nouveaux entrants"
+        ]
+      },
+      {
+        "role": "Développeur Web",
+        "company": "Homesend (Mastercard)",
+        "location": "Meylan",
+        "period": "2020",
+        "tasks": ["Développement d'applications web", "Développement d'un outil de génération d'applications web"]
+      },
+      {
+        "role": "Développeur Web",
+        "company": "La bonne agence",
+        "location": "Grenoble",
+        "period": "2019",
+        "tasks": ["Développement de l'API REST", "Développement de l'application web"]
+      },
+      {
+        "role": "Développeur Web",
+        "company": "Sopra Steria",
+        "location": "Grenoble",
+        "period": "2016 - 2018",
+        "tasks": [
+          "Développement d'applications web",
+          "Développement d'API Rest",
+          "Déploiement on premise",
+          "Rédaction des cahiers de démonstration"
+        ]
+      },
+      {
+        "role": "Développeur Web",
+        "company": "Symetrix",
+        "location": "Grenoble",
+        "period": "2012 - 2016",
+        "tasks": ["Développement de plateforme de formation e-learning"]
+      }
+    ],
+    "education": [
+      {
+        "title": "Formation algorithmique",
+        "school": "Université Joseph Fourier, Grenoble",
+        "year": "2015"
+      },
+      {
+        "title": "Initiation à la programmation orientée objet",
+        "school": "Université Polytechnique, Lausanne",
+        "year": "2014"
+      },
+      {
+        "title": "BTS Communication et Industries Graphique",
+        "school": "Lycée André Argourges, Grenoble",
+        "year": "2003 - 2005"
+      }
+    ]
+  }
+}

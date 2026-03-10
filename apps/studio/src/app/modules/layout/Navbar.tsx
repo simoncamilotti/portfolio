@@ -1,11 +1,14 @@
-import { Braces } from '@portfolio/shared-ui';
+import { Braces, LanguageSwitcher } from '@portfolio/shared-ui';
 import type { FunctionComponent } from 'react';
+import { useTranslation } from 'react-i18next';
 import { generatePath, Link } from 'react-router';
 
 import { RouteNames, RoutePaths } from '../../routes/paths.const';
 import { logout } from '../auth/auth';
 
 export const Navbar: FunctionComponent = () => {
+  const { t } = useTranslation('studio');
+
   return (
     <nav className="sticky top-0 z-[9999] w-full border-b border-border/50 glass-nav no-print">
       <div className="max-w-7xl mx-auto h-14 flex items-center justify-between">
@@ -20,28 +23,30 @@ export const Navbar: FunctionComponent = () => {
             to={generatePath(RoutePaths.HOME)}
             className="text-[13px] text-muted-foreground hover:text-foreground transition-colors"
           >
-            {RouteNames.HOME}
+            {t(RouteNames.HOME)}
           </Link>
 
           <Link
             to={generatePath(RoutePaths.PROJECTS)}
             className="text-[13px] text-muted-foreground hover:text-foreground transition-colors"
           >
-            {RouteNames.PROJECTS}
+            {t(RouteNames.PROJECTS)}
           </Link>
 
           <Link
             to={generatePath(RoutePaths.SETTINGS)}
             className="text-[13px] text-muted-foreground hover:text-foreground transition-colors"
           >
-            {RouteNames.SETTINGS}
+            {t(RouteNames.SETTINGS)}
           </Link>
+
+          <LanguageSwitcher />
 
           <button
             onClick={() => logout()}
             className="text-[13px] px-3 py-1.5 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-medium"
           >
-            Logout
+            {t('nav.logout')}
           </button>
         </div>
       </div>

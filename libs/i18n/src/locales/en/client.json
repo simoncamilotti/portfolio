@@ -1,0 +1,125 @@
+{
+  "nav": {
+    "projects": "Projects",
+    "resume": "Resume",
+    "contact": "Contact"
+  },
+  "hero": {
+    "available": "Available",
+    "title": "Software Engineer",
+    "subtitle": "& product creator.",
+    "description": "I design and develop high-performance web applications with an obsession for user experience and clean code.",
+    "cta": "View my resume"
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "A question, a proposal? Don't hesitate to reach out.",
+    "success": {
+      "title": "Message sent successfully!",
+      "description": "Thank you for your message. I will get back to you as soon as possible.",
+      "another": "Send another message"
+    },
+    "form": {
+      "name": "Your name",
+      "email": "Your email",
+      "subject": "Subject",
+      "message": "Your message",
+      "submit": "Send"
+    },
+    "error": "An error occurred. Please try again later."
+  },
+  "projects": {
+    "title": "Projects"
+  },
+  "resume": {
+    "title": "Resume"
+  },
+  "cv": {
+    "downloadPdf": "PDF",
+    "jobTitle": "Full Stack Developer",
+    "bio": "Self-taught developer with over 10 years of experience, I evolved from pure frontend to designing complex and scalable systems. Today, I focus on building \"Prod-Ready\" architectures capable of supporting the growth of demanding products.",
+    "sections": {
+      "contact": "Contact",
+      "languages": "Languages",
+      "skills": "Skills",
+      "experience": "Professional Experience",
+      "education": "Education"
+    },
+    "englishLevel": "English - A2 level",
+    "location": "Grenoble, France",
+    "skills": [
+      { "label": "Languages", "value": "React, Angular, NestJs, Node, .NET C#, PHP, Python, SQL" },
+      { "label": "DevOps", "value": "Git, Gitlab, CI/CD, Kubernetes, ArgoCD, Traefik, Docker" },
+      { "label": "Databases", "value": "PostgreSql, MySql, Oracle, Prisma, Entity Framework" },
+      { "label": "Methodologies", "value": "SOLID, KISS, DRY, Clean Architecture, Agile, Scrum, Kanban" }
+    ],
+    "experiences": [
+      {
+        "role": "Software Developer",
+        "company": "Raise Partner",
+        "location": "Grenoble, France",
+        "period": "2020 - 2025",
+        "tasks": [
+          "Development and maintenance of web applications",
+          "REST API development",
+          "Infrastructure deployment via IaC",
+          "On-premise deployment",
+          "DevOps CI/CD",
+          "Technical client liaison",
+          "Memory / performance optimization",
+          "Knowledge sharing / Tutoring and onboarding of new team members"
+        ]
+      },
+      {
+        "role": "Web Developer",
+        "company": "Homesend (Mastercard)",
+        "location": "Meylan",
+        "period": "2020",
+        "tasks": ["Web application development", "Development of a web application generation tool"]
+      },
+      {
+        "role": "Web Developer",
+        "company": "La bonne agence",
+        "location": "Grenoble",
+        "period": "2019",
+        "tasks": ["REST API development", "Web application development"]
+      },
+      {
+        "role": "Web Developer",
+        "company": "Sopra Steria",
+        "location": "Grenoble",
+        "period": "2016 - 2018",
+        "tasks": [
+          "Web application development",
+          "REST API development",
+          "On-premise deployment",
+          "Writing demonstration manuals"
+        ]
+      },
+      {
+        "role": "Web Developer",
+        "company": "Symetrix",
+        "location": "Grenoble",
+        "period": "2012 - 2016",
+        "tasks": ["E-learning platform development"]
+      }
+    ],
+    "education": [
+      {
+        "title": "Algorithmic Training",
+        "school": "Université Joseph Fourier, Grenoble",
+        "year": "2015"
+      },
+      {
+        "title": "Introduction to Object-Oriented Programming",
+        "school": "Université Polytechnique, Lausanne",
+        "year": "2014"
+      },
+      {
+        "title": "BTS in Communication and Graphic Industries",
+        "school": "Lycée André Argourges, Grenoble",
+        "year": "2003 - 2005"
+      }
+    ]
+  }
+}

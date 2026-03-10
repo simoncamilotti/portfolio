@@ -1,0 +1,58 @@
+{
+  "nav": {
+    "home": "Home",
+    "resume": "Resume",
+    "projects": "Projects",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "dashboard": {
+    "title": "My Resumes",
+    "subtitle": "Create, edit and share your resumes",
+    "newResume": "New Resume",
+    "empty": "No resume yet. Create your first one!"
+  },
+  "resume": {
+    "public": "Public",
+    "shared": "Shared",
+    "modifiedOn": "Modified on {{date}}",
+    "menu": {
+      "open": "Open",
+      "setPublic": "Set as public",
+      "revokeLink": "Revoke link",
+      "generateLink": "Generate link",
+      "delete": "Delete"
+    },
+    "toast": {
+      "setPublic": "Resume set as public",
+      "deleted": "Resume deleted",
+      "linkCopied": "Link copied to clipboard",
+      "linkRevoked": "Share link revoked",
+      "created": "Resume created successfully"
+    },
+    "dialog": {
+      "title": "New Resume"
+    },
+    "form": {
+      "titlePlaceholder": "Resume title...",
+      "descriptionPlaceholder": "Description (optional)...",
+      "cancel": "Cancel",
+      "create": "Create",
+      "titleTaken": "This title is already taken"
+    }
+  },
+  "featureFlags": {
+    "title": "Feature Flags",
+    "description": "Enable or disable sections of the public site.",
+    "placeholder": "Flag name (e.g. projects)",
+    "add": "Add",
+    "empty": "No feature flags configured.",
+    "enabled": "enabled",
+    "disabled": "disabled",
+    "toggled": "Flag \"{{key}}\" {{state}}",
+    "toggleError": "Error updating flag",
+    "created": "Flag \"{{key}}\" created",
+    "createError": "Error creating flag",
+    "alreadyExists": "This flag already exists"
+  }
+}
