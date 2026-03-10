@@ -35,3 +35,21 @@ model FeatureFlag {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Project {
+  id          String  @id @default(uuid())
+  title       String
+  description String?
+  tags        Tag[]
+  url         String?
+  repoUrl     String?
+  imageUrl    String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Tag {
+  title    String    @id @unique
+  projects Project[]
+}
