@@ -1,5 +1,6 @@
 import type { ResumeDto } from '@portfolio/shared-models';
 import type { FunctionComponent } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { NoResumePlaceholder } from './NoResumePlaceholder';
 import { ResumeItem } from './ResumeItem';
@@ -9,13 +10,15 @@ type DashboardResumeListProps = {
 };
 
 export const DashboardResumeList: FunctionComponent<DashboardResumeListProps> = ({ resumes }) => {
+  const { t } = useTranslation('studio');
+
   return (
     <>
       {resumes?.length === 0 ? (
         <section className="max-w-7xl mx-auto">
           <div className="text-center py-20 text-muted-foreground">
             <NoResumePlaceholder />
-            <p className="mt-4 text-sm">Aucun CV. Créez votre premier !</p>
+            <p className="mt-4 text-sm">{t('dashboard.empty')}</p>
           </div>
         </section>
       ) : (

@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import type { FunctionComponent } from 'react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { CreateResumeDialog } from '../modules/dashboard/components/CreateResumeDialog';
 import { DashboardHeader } from '../modules/dashboard/components/DashboardHeader';
@@ -12,9 +13,11 @@ import { PageBreadcrumb } from '../modules/layout/PageBreadcrumb';
 import { RouteNames } from '../routes/paths.const';
 
 export const DashboardPage: FunctionComponent = () => {
+  const { t } = useTranslation('studio');
+
   const breadcrumbItems: BreadcrumbItemsProps = [
     {
-      title: RouteNames.HOME,
+      title: t(RouteNames.HOME),
     },
   ];
 

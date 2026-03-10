@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import type { FunctionComponent } from 'react';
+import { useTranslation } from 'react-i18next';
 import { generatePath, useParams } from 'react-router';
 
 import { resumesKey } from '../modules/dashboard/resumes.key';
@@ -9,6 +10,7 @@ import type { RoutePathParams } from '../routes/paths.const';
 import { RouteNames, RoutePaths } from '../routes/paths.const';
 
 export const ResumePage: FunctionComponent = () => {
+  const { t } = useTranslation('studio');
   const { resumeId } = useParams<typeof RoutePathParams.RESUME_ID>() as {
     resumeId: string;
   };
@@ -20,11 +22,11 @@ export const ResumePage: FunctionComponent = () => {
 
   const breadcrumbItems: BreadcrumbItemsProps = [
     {
-      title: RouteNames.HOME,
+      title: t(RouteNames.HOME),
       to: generatePath(RoutePaths.HOME),
     },
     {
-      title: resume?.title ? `${RouteNames.RESUME} - ${resume.title}` : RouteNames.RESUME,
+      title: resume?.title ? `${t(RouteNames.RESUME)} - ${resume.title}` : t(RouteNames.RESUME),
     },
   ];
 

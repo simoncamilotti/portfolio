@@ -2,6 +2,7 @@ import type { ResumeDto } from '@portfolio/shared-models';
 import type { FunctionComponent } from 'react';
 import { useMemo } from 'react';
 import { Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { useCreateResumeForm } from '../hooks/use-create-resume-form.hook';
 
@@ -12,6 +13,7 @@ type CreateResumeFormProps = {
 };
 
 export const CreateResumeForm: FunctionComponent<CreateResumeFormProps> = ({ resumes, onSuccess, onClose }) => {
+  const { t } = useTranslation('studio');
   const alreadyTakenResumeNames = useMemo(() => resumes?.map(resume => resume.title) ?? [], [resumes]);
 
   const { control, isValid, onSubmit } = useCreateResumeForm({
@@ -30,7 +32,7 @@ export const CreateResumeForm: FunctionComponent<CreateResumeFormProps> = ({ res
               type="text"
               {...field}
               required
-              placeholder="Titre du CV..."
+              placeholder={t('resume.form.titlePlaceholder')}
               className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
               autoFocus
             />
@@ -42,7 +44,7 @@ export const CreateResumeForm: FunctionComponent<CreateResumeFormProps> = ({ res
           render={({ field }) => (
             <textarea
               {...field}
-              placeholder="Description (optionnelle)..."
+              placeholder={t('resume.form.descriptionPlaceholder')}
               rows={3}
               className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground resize-none"
             />
@@ -55,14 +57,14 @@ export const CreateResumeForm: FunctionComponent<CreateResumeFormProps> = ({ res
           onClick={onClose}
           className="px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
-          Annuler
+          {t('resume.form.cancel')}
         </button>
         <button
           type="submit"
           disabled={!isValid}
           className="px-3.5 py-1.5 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
         >
-          Créer
+          {t('resume.form.create')}
         </button>
       </div>
     </form>

@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { BaseSyntheticEvent } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { toast } from '../../ui/sonner';
 import type { CreateResumeForm } from '../resume.type';
@@ -18,6 +19,8 @@ const defaultValues: CreateResumeForm = {
 };
 
 export const useCreateResumeForm = ({ alreadyTakenResumeNames, onSuccess }: UseCreateResumeFormProps) => {
+  const { t } = useTranslation('studio');
+
   const {
     control,
     handleSubmit,
@@ -37,12 +40,12 @@ export const useCreateResumeForm = ({ alreadyTakenResumeNames, onSuccess }: UseC
     if (alreadyTakenResumeNames.includes(data.title)) {
       setError('title', {
         type: 'validate',
-        message: 'Le titre est déjà pris',
+        message: t('resume.form.titleTaken'),
       });
       return;
     }
     await createResumeMutation.mutateAsync({ ...data, isPublic: false });
-    toast.success('CV créer avec succès');
+    toast.success(t('resume.toast.created'));
     reset({ ...defaultValues });
     clearErrors();
     onSuccess();

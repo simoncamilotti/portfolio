@@ -1,0 +1,58 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "resume": "Cv",
+    "projects": "Projets",
+    "settings": "Paramétrage",
+    "logout": "Déconnexion"
+  },
+  "dashboard": {
+    "title": "Mes CVs",
+    "subtitle": "Créez, modifiez et partagez vos CVs",
+    "newResume": "Nouveau CV",
+    "empty": "Aucun CV. Créez votre premier !"
+  },
+  "resume": {
+    "public": "Public",
+    "shared": "Partagé",
+    "modifiedOn": "Modifié le {{date}}",
+    "menu": {
+      "open": "Ouvrir",
+      "setPublic": "Définir comme public",
+      "revokeLink": "Révoquer le lien",
+      "generateLink": "Générer un lien",
+      "delete": "Supprimer"
+    },
+    "toast": {
+      "setPublic": "CV défini comme public",
+      "deleted": "CV supprimé",
+      "linkCopied": "Lien copié dans le presse-papier",
+      "linkRevoked": "Lien de partage révoqué",
+      "created": "CV créé avec succès"
+    },
+    "dialog": {
+      "title": "Nouveau CV"
+    },
+    "form": {
+      "titlePlaceholder": "Titre du CV...",
+      "descriptionPlaceholder": "Description (optionnelle)...",
+      "cancel": "Annuler",
+      "create": "Créer",
+      "titleTaken": "Le titre est déjà pris"
+    }
+  },
+  "featureFlags": {
+    "title": "Feature Flags",
+    "description": "Activez ou désactivez des sections du site public.",
+    "placeholder": "Nom du flag (ex: projects)",
+    "add": "Ajouter",
+    "empty": "Aucun feature flag configuré.",
+    "enabled": "activé",
+    "disabled": "désactivé",
+    "toggled": "Flag \"{{key}}\" {{state}}",
+    "toggleError": "Erreur lors de la mise à jour du flag",
+    "created": "Flag \"{{key}}\" créé",
+    "createError": "Erreur lors de la création du flag",
+    "alreadyExists": "Ce flag existe déjà"
+  }
+}

@@ -2,11 +2,13 @@ import { motion } from 'framer-motion';
 import { Loader2, Send } from 'lucide-react';
 import { type FunctionComponent, useEffect } from 'react';
 import { Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { RouteAnchors } from '../../../routes/paths.const';
 import { useContactForm } from '../hooks/use-contact-form.hook';
 
 export const ContactSection: FunctionComponent = () => {
+  const { t } = useTranslation('client');
   const recaptchaSiteKey = window.config.captcha.siteKey;
 
   const { status, setStatus, isValid, recaptchaLoaded, control, onSubmit } = useContactForm({
@@ -33,24 +35,22 @@ export const ContactSection: FunctionComponent = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-10">Contact</h2>
-          <p className="text-muted-foreground text-sm mb-10">
-            Une question, une proposition ? N'hésitez pas à me contacter.
-          </p>
+          <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-10">
+            {t('contact.title')}
+          </h2>
+          <p className="text-muted-foreground text-sm mb-10">{t('contact.description')}</p>
 
           <div className="max-w-2xl">
             {status === 'success' ? (
               <div className="rounded-xl border border-border bg-card p-8 text-center">
-                <p className="text-sm text-foreground font-medium">Message envoy&eacute; avec succ&egrave;s !</p>
-                <p className="text-sm text-muted-foreground mt-2">
-                  Merci pour votre message. Je vous r&eacute;pondrai dans les plus brefs d&eacute;lais.
-                </p>
+                <p className="text-sm text-foreground font-medium">{t('contact.success.title')}</p>
+                <p className="text-sm text-muted-foreground mt-2">{t('contact.success.description')}</p>
                 <button
                   type="button"
                   onClick={() => setStatus('idle')}
                   className="mt-4 px-4 py-2 text-sm text-primary hover:text-primary/80 transition-colors"
                 >
-                  Envoyer un autre message
+                  {t('contact.success.another')}
                 </button>
               </div>
             ) : (
@@ -66,7 +66,7 @@ export const ContactSection: FunctionComponent = () => {
                             type="text"
                             {...field}
                             required
-                            placeholder="Votre nom"
+                            placeholder={t('contact.form.name')}
                             className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
                           />
                           {fieldState.error && (
@@ -86,7 +86,7 @@ export const ContactSection: FunctionComponent = () => {
                             type="email"
                             {...field}
                             required
-                            placeholder="Votre email"
+                            placeholder={t('contact.form.email')}
                             className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
                           />
                           {fieldState.error && (
@@ -108,7 +108,7 @@ export const ContactSection: FunctionComponent = () => {
                             type="text"
                             {...field}
                             required
-                            placeholder="Sujet"
+                            placeholder={t('contact.form.subject')}
                             className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
                           />
                           {fieldState.error && (
@@ -126,7 +126,7 @@ export const ContactSection: FunctionComponent = () => {
                     render={({ field, fieldState }) => (
                       <>
                         <textarea
-                          placeholder="Votre message"
+                          placeholder={t('contact.form.message')}
                           rows={5}
                           {...field}
                           required
@@ -140,11 +140,7 @@ export const ContactSection: FunctionComponent = () => {
                   />
                 </div>
 
-                {status === 'error' && (
-                  <p className="text-sm text-destructive">
-                    Une erreur est survenue. Veuillez r&eacute;essayer plus tard.
-                  </p>
-                )}
+                {status === 'error' && <p className="text-sm text-destructive">{t('contact.error')}</p>}
 
                 <button
                   type="submit"
@@ -152,7 +148,7 @@ export const ContactSection: FunctionComponent = () => {
                   className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
                 >
                   {status === 'loading' ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-                  Envoyer
+                  {t('contact.form.submit')}
                 </button>
               </form>
             )}

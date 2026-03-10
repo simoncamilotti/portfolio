@@ -1,3 +1,5 @@
+import '@portfolio/i18n';
+
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter } from 'react-router';
 

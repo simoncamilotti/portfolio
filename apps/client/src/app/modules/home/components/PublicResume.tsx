@@ -1,10 +1,13 @@
 import { motion } from 'framer-motion';
 import type { FunctionComponent } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { RouteAnchors } from '../../../routes/paths.const';
 import { PublicCV } from './PublicCv';
 
 export const PublicResume: FunctionComponent = () => {
+  const { t } = useTranslation('client');
+
   return (
     <section id={RouteAnchors.HOME.RESUME} className="py-24 border-t border-border/50">
       <div className="max-w-7xl mx-auto">
@@ -15,7 +18,7 @@ export const PublicResume: FunctionComponent = () => {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-10">
-            Curriculum Vitae
+            {t('resume.title')}
           </h2>
           <PublicCV />
         </motion.div>

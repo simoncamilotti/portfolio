@@ -3,12 +3,14 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Flag, Loader2, Plus } from 'lucide-react';
 import type { FunctionComponent } from 'react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { toast } from '../../ui/sonner';
 import { featureFlagsKey } from '../feature-flags.key';
 import { FeatureFlagsService } from '../feature-flags.service';
 
 export const FeatureFlagList: FunctionComponent = () => {
+  const { t } = useTranslation('studio');
   const queryClient = useQueryClient();
   const [newKey, setNewKey] = useState('');
 
@@ -25,11 +27,13 @@ export const FeatureFlagList: FunctionComponent = () => {
       );
     },
     onSuccess: (_, { key, enabled }) => {
-      toast.success(`Flag "${key}" ${enabled ? 'activé' : 'désactivé'}`);
+      toast.success(
+        t('featureFlags.toggled', { key, state: enabled ? t('featureFlags.enabled') : t('featureFlags.disabled') }),
+      );
     },
     onError: () => {
       queryClient.invalidateQueries({ queryKey: featureFlagsKey.getAll });
-      toast.error('Erreur lors de la mise à jour du flag');
+      toast.error(t('featureFlags.toggleError'));
     },
   });
 
@@ -38,10 +42,10 @@ export const FeatureFlagList: FunctionComponent = () => {
     onSuccess: created => {
       queryClient.setQueryData<FeatureFlagDto[]>(featureFlagsKey.getAll, data => [...(data ?? []), created]);
       setNewKey('');
-      toast.success(`Flag "${created.key}" créé`);
+      toast.success(t('featureFlags.created', { key: created.key }));
     },
     onError: () => {
-      toast.error('Erreur lors de la création du flag');
+      toast.error(t('featureFlags.createError'));
     },
   });
 
@@ -50,7 +54,7 @@ export const FeatureFlagList: FunctionComponent = () => {
     const trimmed = newKey.trim();
     if (!trimmed) return;
     if (flags?.some(f => f.key === trimmed)) {
-      toast.error('Ce flag existe déjà');
+      toast.error(t('featureFlags.alreadyExists'));
       return;
     }
     createMutation.mutate(trimmed);
@@ -59,8 +63,8 @@ export const FeatureFlagList: FunctionComponent = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-sm font-medium text-foreground mb-1">Feature Flags</h2>
-        <p className="text-xs text-muted-foreground">Activez ou désactivez des sections du site public.</p>
+        <h2 className="text-sm font-medium text-foreground mb-1">{t('featureFlags.title')}</h2>
+        <p className="text-xs text-muted-foreground">{t('featureFlags.description')}</p>
       </div>
 
       <form onSubmit={handleCreate} className="flex items-center gap-2">
@@ -68,7 +72,7 @@ export const FeatureFlagList: FunctionComponent = () => {
           type="text"
           value={newKey}
           onChange={e => setNewKey(e.target.value)}
-          placeholder="Nom du flag (ex: projects)"
+          placeholder={t('featureFlags.placeholder')}
           className="flex-1 px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
         />
         <button
@@ -77,7 +81,7 @@ export const FeatureFlagList: FunctionComponent = () => {
           className="inline-flex items-center gap-1.5 px-3 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
         >
           {createMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
-          Ajouter
+          {t('featureFlags.add')}
         </button>
       </form>
 
@@ -88,7 +92,7 @@ export const FeatureFlagList: FunctionComponent = () => {
           ))}
         </div>
       ) : flags?.length === 0 ? (
-        <div className="text-center py-10 text-muted-foreground text-sm">Aucun feature flag configuré.</div>
+        <div className="text-center py-10 text-muted-foreground text-sm">{t('featureFlags.empty')}</div>
       ) : (
         <div className="space-y-2">
           {flags?.map(flag => (

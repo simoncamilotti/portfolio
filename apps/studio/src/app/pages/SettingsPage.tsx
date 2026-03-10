@@ -1,4 +1,5 @@
 import type { FunctionComponent } from 'react';
+import { useTranslation } from 'react-i18next';
 import { generatePath } from 'react-router';
 
 import type { BreadcrumbItemsProps } from '../modules/layout/PageBreadcrumb';
@@ -7,13 +8,15 @@ import { FeatureFlagList } from '../modules/settings/components/FeatureFlagList'
 import { RouteNames, RoutePaths } from '../routes/paths.const';
 
 export const SettingsPage: FunctionComponent = () => {
+  const { t } = useTranslation('studio');
+
   const breadcrumbItems: BreadcrumbItemsProps = [
     {
-      title: RouteNames.HOME,
+      title: t(RouteNames.HOME),
       to: generatePath(RoutePaths.HOME),
     },
     {
-      title: RouteNames.SETTINGS,
+      title: t(RouteNames.SETTINGS),
     },
   ];
 

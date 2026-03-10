@@ -1,79 +1,7 @@
 import { motion } from 'framer-motion';
 import { Briefcase, Globe, GraduationCap, MapPin, Wrench } from 'lucide-react';
 import type { FunctionComponent, ReactNode } from 'react';
-
-const skills = [
-  { label: 'Langages', value: 'React, Angular, NestJs, Node, .NET C#, PHP, Python, SQL' },
-  { label: 'DevOps', value: 'Git, Gitlab, CI/CD, Kubernetes, ArgoCD, Traefik, Docker' },
-  { label: 'Base de données', value: 'PostgreSql, MySql, Oracle, Prisma, Entity Framework' },
-  { label: 'Méthodologies', value: 'SOLID, KISS, DRY, Clean Architecture, Agile, Scrum, Kanban' },
-];
-
-const experiences = [
-  {
-    role: 'Développeur Logiciels',
-    company: 'Raise Partner',
-    location: 'Grenoble, France',
-    period: '2020 - 2025',
-    tasks: [
-      "Développement et maintenance d'applications web",
-      "Développement d'API REST",
-      "Déploiement d'infrastructure via IaC",
-      'Déploiement on premise',
-      'DevOps CI/CD',
-      'Relation technique pour client',
-      'Optimisation de mémoire / performance',
-      'Partage de connaissance / Tutorat et onboarding des nouveaux entrants',
-    ],
-  },
-  {
-    role: 'Développeur Web',
-    company: 'Homesend (Mastercard)',
-    location: 'Meylan',
-    period: '2020',
-    tasks: ["Développement d'applications web", "Développement d'un outil de génération d'applications web"],
-  },
-  {
-    role: 'Développeur Web',
-    company: 'La bonne agence',
-    location: 'Grenoble',
-    period: '2019',
-    tasks: ["Développement de l'API REST", "Développement de l'application web"],
-  },
-  {
-    role: 'Développeur Web',
-    company: 'Sopra Steria',
-    location: 'Grenoble',
-    period: '2016 - 2018',
-    tasks: [
-      "Développement d'applications web",
-      "Développement d'API Rest",
-      'Déploiement on premise',
-      'Rédaction des cahiers de démonstration',
-    ],
-  },
-  {
-    role: 'Développeur Web',
-    company: 'Symetrix',
-    location: 'Grenoble',
-    period: '2012 - 2016',
-    tasks: ['Développement de plateforme de formation e-learning'],
-  },
-];
-
-const formations = [
-  { title: 'Formation algorithmique', school: 'Université Joseph Fourier, Grenoble', year: '2015' },
-  {
-    title: 'Initiation à la programmation orientée objet',
-    school: 'Université Polytechnique, Lausanne',
-    year: '2014',
-  },
-  {
-    title: 'BTS Communication et Industries Graphique',
-    school: 'Lycée André Argourges, Grenoble',
-    year: '2003 - 2005',
-  },
-];
+import { useTranslation } from 'react-i18next';
 
 const stagger = {
   hidden: {},
@@ -86,6 +14,22 @@ const fadeUp = {
 };
 
 export const PublicCV: FunctionComponent = () => {
+  const { t, i18n } = useTranslation('client');
+
+  const skills = t('cv.skills', { returnObjects: true }) as Array<{ label: string; value: string }>;
+  const experiences = t('cv.experiences', { returnObjects: true }) as Array<{
+    role: string;
+    company: string;
+    location: string;
+    period: string;
+    tasks: string[];
+  }>;
+  const education = t('cv.education', { returnObjects: true }) as Array<{
+    title: string;
+    school: string;
+    year: string;
+  }>;
+
   return (
     <div className="rounded-xl border border-border overflow-hidden bg-card shadow-lg">
       <div className="flex items-center justify-between px-6 py-4 border-b border-border no-print">
@@ -111,7 +55,7 @@ export const PublicCV: FunctionComponent = () => {
             <polyline points="7 10 12 15 17 10"></polyline>
             <line x1="12" x2="12" y1="15" y2="3"></line>
           </svg>
-          PDF
+          {t('cv.downloadPdf')}
         </a>
       </div>
       <div className="flex flex-col lg:flex-row">
@@ -123,29 +67,29 @@ export const PublicCV: FunctionComponent = () => {
               <img className="rounded-full" src="/Portrait.jpg" alt="SC" />
             </div>
             <h3 className="text-xl font-bold text-foreground tracking-tight">Simon Camilotti</h3>
-            <p className="text-sm text-primary font-medium mt-1">Développeur Full Stack</p>
+            <p className="text-sm text-primary font-medium mt-1">{t('cv.jobTitle')}</p>
           </div>
 
           {/* Contact */}
           <div className="p-8 border-b border-border space-y-3">
-            <SidebarHeading icon={<MapPin className="w-3.5 h-3.5" />} label="Contact" />
+            <SidebarHeading icon={<MapPin className="w-3.5 h-3.5" />} label={t('cv.sections.contact')} />
             <div className="space-y-2 text-sm text-muted-foreground">
               <div className="flex items-center gap-2.5">
                 <MapPin className="w-3.5 h-3.5 text-muted-foreground/60 shrink-0" />
-                <span>Grenoble, France</span>
+                <span>{t('cv.location')}</span>
               </div>
             </div>
           </div>
 
           {/* Languages */}
           <div className="p-8 border-b border-border">
-            <SidebarHeading icon={<Globe className="w-3.5 h-3.5" />} label="Langues" />
-            <p className="text-sm text-muted-foreground mt-3">Anglais - niveau A2</p>
+            <SidebarHeading icon={<Globe className="w-3.5 h-3.5" />} label={t('cv.sections.languages')} />
+            <p className="text-sm text-muted-foreground mt-3">{t('cv.englishLevel')}</p>
           </div>
 
           {/* Skills */}
           <div className="p-8 border-b border-border lg:border-b-0">
-            <SidebarHeading icon={<Wrench className="w-3.5 h-3.5" />} label="Compétences" />
+            <SidebarHeading icon={<Wrench className="w-3.5 h-3.5" />} label={t('cv.sections.skills')} />
             <div className="mt-3 space-y-3">
               {skills.map(s => (
                 <div key={s.label}>
@@ -161,16 +105,12 @@ export const PublicCV: FunctionComponent = () => {
         <main className="flex-1 min-w-0">
           {/* Description */}
           <div className="p-8 border-b border-border">
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl">
-              Développeur autodidacte avec plus de 10 ans d'expérience, j'ai évolué du frontend pur vers la conception
-              de systèmes complexes et scalables. Aujourd'hui, je me concentre sur la création d'architectures
-              "Prod-Ready" capables de soutenir la croissance de produits exigeants.
-            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl">{t('cv.bio')}</p>
           </div>
 
           {/* Experiences */}
           <div className="p-8 border-b border-border">
-            <SectionHeading icon={<Briefcase className="w-4 h-4" />} label="Expériences professionnelles" />
+            <SectionHeading icon={<Briefcase className="w-4 h-4" />} label={t('cv.sections.experience')} />
             <motion.div
               className="mt-6 space-y-6"
               variants={stagger}
@@ -202,9 +142,9 @@ export const PublicCV: FunctionComponent = () => {
             </motion.div>
           </div>
 
-          {/* Formations */}
+          {/* Education */}
           <div className="p-8">
-            <SectionHeading icon={<GraduationCap className="w-4 h-4" />} label="Formations" />
+            <SectionHeading icon={<GraduationCap className="w-4 h-4" />} label={t('cv.sections.education')} />
             <motion.div
               className="mt-6 space-y-4"
               variants={stagger}
@@ -212,8 +152,8 @@ export const PublicCV: FunctionComponent = () => {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              {formations.map(f => (
-                <motion.div key={f.title} variants={fadeUp}>
+              {education.map(f => (
+                <motion.div key={`${f.school}`} variants={fadeUp}>
                   <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
                     <div>
                       <h4 className="text-sm font-semibold text-foreground">{f.title}</h4>

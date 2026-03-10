@@ -21,7 +21,7 @@ describe('HeroSection', () => {
 
     render(<HeroSection />);
 
-    expect(screen.getByText('Disponible pour des missions')).toBeDefined();
+    expect(screen.getByText('Disponible')).toBeDefined();
   });
 
   it('should render the CV link', async () => {

@@ -26,7 +26,7 @@ describe('Navbar', () => {
   it('should render the logout button', () => {
     renderNavbar();
 
-    expect(screen.getByRole('button', { name: 'Logout' })).toBeDefined();
+    expect(screen.getByRole('button', { name: 'Déconnexion' })).toBeDefined();
   });
 
   it('should not render navigation anchors', () => {

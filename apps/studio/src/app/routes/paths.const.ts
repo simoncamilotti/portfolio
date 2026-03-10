@@ -11,8 +11,8 @@ export const RoutePaths = {
 } as const;
 
 export const RouteNames = {
-  HOME: 'Accueil',
-  RESUME: 'Cv',
-  PROJECTS: 'Projets',
-  SETTINGS: 'Paramétrage',
+  HOME: 'nav.home',
+  RESUME: 'nav.resume',
+  PROJECTS: 'nav.projects',
+  SETTINGS: 'nav.settings',
 } as const;
