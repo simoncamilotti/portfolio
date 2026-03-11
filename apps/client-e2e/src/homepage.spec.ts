@@ -1,5 +1,11 @@
 import { expect, test } from '@playwright/test';
 
+import { mockApi } from './api-mock';
+
+test.beforeEach(async ({ page }) => {
+  await mockApi(page);
+});
+
 test.describe('Home Page', () => {
   test('should display the hero section', async ({ page }) => {
     await page.goto('/');
@@ -11,14 +17,21 @@ test.describe('Home Page', () => {
     await page.goto('/');
 
     await expect(page.getByRole('navigation')).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Projets', exact: true })).toBeVisible();
     await expect(page.getByRole('link', { name: 'CV', exact: true })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Contact', exact: true })).toBeVisible();
   });
 
-  test('should display the projects section', async ({ page }) => {
+  test('should display the Projets nav link when feature flag is enabled', async ({ page }) => {
+    await mockApi(page, { projects: true });
     await page.goto('/');
 
-    await expect(page.getByRole('heading', { name: 'Projets' })).toBeVisible();
+    await expect(page.getByRole('navigation').getByRole('link', { name: 'Projets', exact: true })).toBeVisible();
+  });
+
+  test('should hide the Projets nav link when feature flag is disabled', async ({ page }) => {
+    await page.goto('/');
+
+    await expect(page.getByRole('navigation').getByRole('link', { name: 'Projets', exact: true })).toBeHidden();
   });
 
   test('should display the CV section', async ({ page }) => {

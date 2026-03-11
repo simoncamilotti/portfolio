@@ -41,6 +41,48 @@
       "titleTaken": "This title is already taken"
     }
   },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Manage the projects displayed on your portfolio.",
+    "newProject": "New project",
+    "empty": "No projects yet.",
+    "createFirst": "Create your first project",
+    "grid": {
+      "title": "Title",
+      "description": "Description",
+      "tags": "Tags",
+      "links": "Links"
+    },
+    "dialog": {
+      "createTitle": "New project",
+      "createDescription": "Add a new project to your portfolio.",
+      "editTitle": "Edit project",
+      "editDescription": "Edit the project details.",
+      "deleteTitle": "Delete project",
+      "deleteDescription": "Are you sure you want to delete \"{{title}}\"? This action cannot be undone.",
+      "deleteConfirm": "Delete"
+    },
+    "form": {
+      "title": "Title",
+      "titlePlaceholder": "My project",
+      "description": "Description",
+      "descriptionPlaceholder": "A short description of the project...",
+      "tags": "Tags",
+      "tagsPlaceholder": "React, TypeScript, Node.js",
+      "tagsHint": "Separate tags with commas.",
+      "repoUrl": "Git repository URL",
+      "url": "Deployed project URL",
+      "cancel": "Cancel",
+      "create": "Create",
+      "update": "Update"
+    },
+    "toast": {
+      "created": "Project created",
+      "updated": "Project updated",
+      "deleted": "Project deleted",
+      "error": "An error occurred."
+    }
+  },
   "featureFlags": {
     "title": "Feature Flags",
     "description": "Enable or disable sections of the public site.",

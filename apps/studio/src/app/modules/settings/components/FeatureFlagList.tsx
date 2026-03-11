@@ -1,7 +1,7 @@
 import type { FeatureFlagDto } from '@portfolio/shared-models';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Flag, Loader2, Plus } from 'lucide-react';
-import type { FunctionComponent } from 'react';
+import type { FunctionComponent, SyntheticEvent } from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -38,7 +38,7 @@ export const FeatureFlagList: FunctionComponent = () => {
   });
 
   const createMutation = useMutation({
-    mutationFn: (key: string) => FeatureFlagsService.update(key, false),
+    mutationFn: (key: string) => FeatureFlagsService.create(key, false),
     onSuccess: created => {
       queryClient.setQueryData<FeatureFlagDto[]>(featureFlagsKey.getAll, data => [...(data ?? []), created]);
       setNewKey('');
@@ -49,7 +49,7 @@ export const FeatureFlagList: FunctionComponent = () => {
     },
   });
 
-  const handleCreate = (e: React.FormEvent) => {
+  const handleCreate = (e: SyntheticEvent) => {
     e.preventDefault();
     const trimmed = newKey.trim();
     if (!trimmed) return;

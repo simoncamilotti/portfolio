@@ -5,6 +5,7 @@ import { FeatureFlagController } from './feature-flag.controller';
 
 const mockFeatureFlagService = {
   findAll: jest.fn(),
+  create: jest.fn(),
   update: jest.fn(),
 };
 
@@ -34,6 +35,18 @@ describe('FeatureFlagController', () => {
 
       expect(result).toEqual(flags);
       expect(mockFeatureFlagService.findAll).toHaveBeenCalled();
+    });
+  });
+
+  describe('create', () => {
+    it('should create feature flag', async () => {
+      const created = { key: 'blog', enabled: true };
+      mockFeatureFlagService.create.mockResolvedValue(created);
+
+      const result = await controller.create({ key: 'blog', enabled: true });
+
+      expect(result).toEqual(created);
+      expect(mockFeatureFlagService.create).toHaveBeenCalledWith({ key: 'blog', enabled: true });
     });
   });
 

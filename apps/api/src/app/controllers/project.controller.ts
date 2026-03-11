@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
+import { Public } from '@portfolio/core';
 import { CreateProjectRequestDto, ProjectDto, UpdateProjectRequestDto } from '@portfolio/shared-models/server';
 
 import { ProjectService } from '../services/project.service';
@@ -7,6 +8,7 @@ import { ProjectService } from '../services/project.service';
 export class ProjectController {
   constructor(private readonly _projectService: ProjectService) {}
 
+  @Public()
   @Get()
   async findAll(): Promise<ProjectDto[]> {
     return this._projectService.findAll();

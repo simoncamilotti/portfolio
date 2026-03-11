@@ -41,6 +41,48 @@
       "titleTaken": "Le titre est déjà pris"
     }
   },
+  "projects": {
+    "title": "Projets",
+    "subtitle": "Gérez vos projets affichés sur le portfolio.",
+    "newProject": "Nouveau projet",
+    "empty": "Aucun projet pour le moment.",
+    "createFirst": "Créer votre premier projet",
+    "grid": {
+      "title": "Titre",
+      "description": "Description",
+      "tags": "Tags",
+      "links": "Liens"
+    },
+    "dialog": {
+      "createTitle": "Nouveau projet",
+      "createDescription": "Ajoutez un nouveau projet à votre portfolio.",
+      "editTitle": "Modifier le projet",
+      "editDescription": "Modifiez les informations du projet.",
+      "deleteTitle": "Supprimer le projet",
+      "deleteDescription": "Êtes-vous sûr de vouloir supprimer « {{title}} » ? Cette action est irréversible.",
+      "deleteConfirm": "Supprimer"
+    },
+    "form": {
+      "title": "Titre",
+      "titlePlaceholder": "Mon projet",
+      "description": "Description",
+      "descriptionPlaceholder": "Une courte description du projet...",
+      "tags": "Tags",
+      "tagsPlaceholder": "React, TypeScript, Node.js",
+      "tagsHint": "Séparez les tags par des virgules.",
+      "repoUrl": "Lien du dépôt Git",
+      "url": "Lien du projet déployé",
+      "cancel": "Annuler",
+      "create": "Créer",
+      "update": "Mettre à jour"
+    },
+    "toast": {
+      "created": "Projet créé",
+      "updated": "Projet mis à jour",
+      "deleted": "Projet supprimé",
+      "error": "Une erreur est survenue."
+    }
+  },
   "featureFlags": {
     "title": "Feature Flags",
     "description": "Activez ou désactivez des sections du site public.",

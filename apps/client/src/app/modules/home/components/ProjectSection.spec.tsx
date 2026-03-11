@@ -1,10 +1,9 @@
+import type { ProjectDto } from '@portfolio/shared-models';
 import { render, screen } from '@testing-library/react';
 
 vi.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, initial, whileInView, viewport, transition, ...props }: any) => (
-      <div {...props}>{children}</div>
-    ),
+    div: ({ children, initial, whileInView, viewport, transition, ...props }: any) => <div {...props}>{children}</div>,
   },
 }));
 
@@ -19,7 +18,7 @@ describe('ProjectsSection', () => {
 
   it('should render project items', async () => {
     const { ProjectsSection } = await import('./ProjectSection');
-    const projects = [{ name: 'Project A' }, { name: 'Project B' }];
+    const projects = [{ title: 'Project A' }, { title: 'Project B' }] as ProjectDto[];
 
     render(<ProjectsSection projects={projects} />);
 

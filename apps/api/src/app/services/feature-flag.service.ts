@@ -1,6 +1,10 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '@portfolio/core';
-import type { FeatureFlagDto, UpdateFeatureFlagRequestDto } from '@portfolio/shared-models/server';
+import {
+  CreateFeatureFlagRequestDto,
+  FeatureFlagDto,
+  UpdateFeatureFlagRequestDto,
+} from '@portfolio/shared-models/server';
 
 import { FeatureFlagMapper } from '../mappers/feature-flag.mapper';
 
@@ -18,8 +22,18 @@ export class FeatureFlagService {
     return this._featureFlagMapper.toFeatureFlagDtoList(flags);
   }
 
+  async create(dto: CreateFeatureFlagRequestDto): Promise<FeatureFlagDto> {
+    const featureFlag = await this._prisma.featureFlag.create({
+      data: dto,
+    });
+
+    return this._featureFlagMapper.toFeatureFlagDto(featureFlag);
+  }
+
   async update(key: string, dto: UpdateFeatureFlagRequestDto): Promise<FeatureFlagDto> {
     const existing = await this._prisma.featureFlag.findUnique({ where: { key } });
+
+    this._logger.log(existing);
 
     if (!existing) {
       throw new NotFoundException(`Feature flag '${key}' not found`);

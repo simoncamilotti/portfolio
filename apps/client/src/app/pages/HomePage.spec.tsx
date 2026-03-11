@@ -1,8 +1,13 @@
 import { render, screen } from '@testing-library/react';
+import type { ReactNode } from 'react';
 
 import { HomePage } from './HomePage';
 
 const mockIsEnabled = vi.fn();
+
+vi.mock('@tanstack/react-query', () => ({
+  useQuery: vi.fn().mockReturnValue({ data: undefined }),
+}));
 
 vi.mock('../modules/feature-flags/hooks/use-feature-flags.hook', () => ({
   useFeatureFlags: () => ({ isEnabled: mockIsEnabled, loading: false }),
@@ -25,7 +30,7 @@ vi.mock('../modules/home/components/ContactSection', () => ({
 }));
 
 vi.mock('@portfolio/shared-ui', () => ({
-  PageLayout: ({ children }: { children: React.ReactNode }) => <div data-testid="page-layout">{children}</div>,
+  PageLayout: ({ children }: { children: ReactNode }) => <div data-testid="page-layout">{children}</div>,
 }));
 
 describe('HomePage', () => {
