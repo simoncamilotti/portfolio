@@ -1,3 +1,4 @@
+import type { ProjectDto } from '@portfolio/shared-models';
 import { motion } from 'framer-motion';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -5,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { RouteAnchors } from '../../../routes/paths.const';
 
 type ProjectSectionProps = {
-  projects: any[];
+  projects: ProjectDto[];
 };
 
 export const ProjectsSection: FunctionComponent<ProjectSectionProps> = ({ projects }) => {
@@ -26,7 +27,7 @@ export const ProjectsSection: FunctionComponent<ProjectSectionProps> = ({ projec
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
             {/*<ProjectCard key={project.id} project={project} index={i} />*/}
             {projects.map((project, i) => (
-              <div>{project.name}</div>
+              <div>{project.title}</div>
             ))}
           </div>
         </motion.div>

@@ -1,6 +1,10 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Patch } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Patch, Post } from '@nestjs/common';
 import { Public } from '@portfolio/core';
-import { FeatureFlagDto, UpdateFeatureFlagRequestDto } from '@portfolio/shared-models/server';
+import {
+  CreateFeatureFlagRequestDto,
+  FeatureFlagDto,
+  UpdateFeatureFlagRequestDto,
+} from '@portfolio/shared-models/server';
 
 import { FeatureFlagService } from '../services/feature-flag.service';
 
@@ -12,6 +16,12 @@ export class FeatureFlagController {
   @Get()
   async findAll(): Promise<FeatureFlagDto[]> {
     return this._featureFlagService.findAll();
+  }
+
+  @Post()
+  @HttpCode(HttpStatus.CREATED)
+  async create(@Body() dto: CreateFeatureFlagRequestDto): Promise<FeatureFlagDto> {
+    return this._featureFlagService.create(dto);
   }
 
   @Patch(':key')
