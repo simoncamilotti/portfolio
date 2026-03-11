@@ -40,7 +40,7 @@ test.describe('Navbar', () => {
   test('should display the logout button', async ({ page }) => {
     await page.goto('/');
 
-    await expect(page.getByRole('button', { name: 'Logout' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Déconnexion' })).toBeVisible();
   });
 
   test('should display the logo link', async ({ page }) => {
@@ -51,18 +51,13 @@ test.describe('Navbar', () => {
     await expect(nav.getByRole('link').first()).toBeVisible();
   });
 
-  test('should display the Accueil link', async ({ page }) => {
-    await page.goto('/');
-
-    await expect(page.getByRole('navigation').getByRole('link', { name: 'Accueil' })).toBeVisible();
-  });
-
-  test('should not display public navigation anchors', async ({ page }) => {
+  test('should display navigation links', async ({ page }) => {
     await page.goto('/');
 
     const nav = page.getByRole('navigation');
-    await expect(nav.getByRole('link', { name: 'Projets' })).toBeHidden();
-    await expect(nav.getByRole('link', { name: 'CV' })).toBeHidden();
+    await expect(nav.getByRole('link', { name: 'Accueil' })).toBeVisible();
+    await expect(nav.getByRole('link', { name: 'Projets' })).toBeVisible();
+    await expect(nav.getByRole('link', { name: 'Paramétrage' })).toBeVisible();
   });
 });
 
