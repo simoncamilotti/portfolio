@@ -1,4 +1,3 @@
-import { PageLayout } from '@portfolio/shared-ui';
 import { useQuery } from '@tanstack/react-query';
 import type { FunctionComponent } from 'react';
 
@@ -20,11 +19,11 @@ export const HomePage: FunctionComponent = () => {
   const showProjects = isEnabled('projects') && projects != null && projects.length > 0;
 
   return (
-    <PageLayout>
+    <>
       <HeroSection />
       {showProjects && <ProjectsSection projects={projects} />}
       <PublicResume />
       <ContactSection />
-    </PageLayout>
+    </>
   );
 };

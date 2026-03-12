@@ -1,10 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { ProjectDto } from '@portfolio/shared-models';
+import { toast } from '@portfolio/shared-ui';
 import type { BaseSyntheticEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { toast } from '../../ui/sonner';
 import type { ProjectForm } from '../project.type';
 import { projectFormSchema } from '../project.type';
 import { useCreateProjectMutation } from './use-create-project-mutation.hook';

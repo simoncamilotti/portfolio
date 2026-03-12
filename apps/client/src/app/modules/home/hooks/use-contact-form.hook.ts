@@ -1,7 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { contactRequestDtoSchema } from '@portfolio/shared-models';
 import type { BaseSyntheticEvent } from 'react';
-import { useRef, useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
+import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 
@@ -13,10 +14,10 @@ export type FormStatus = 'idle' | 'loading' | 'success' | 'error';
 
 export type UseContactFormProps = {
   recaptchaSiteKey: string;
+  setStatus: Dispatch<SetStateAction<FormStatus>>;
 };
 
-export const useContactForm = ({ recaptchaSiteKey }: UseContactFormProps) => {
-  const [status, setStatus] = useState<FormStatus>('idle');
+export const useContactForm = ({ recaptchaSiteKey, setStatus }: UseContactFormProps) => {
   const recaptchaLoaded = useRef(false);
 
   const {
@@ -51,8 +52,6 @@ export const useContactForm = ({ recaptchaSiteKey }: UseContactFormProps) => {
   };
 
   return {
-    status,
-    setStatus,
     recaptchaLoaded,
     control,
     isValid,

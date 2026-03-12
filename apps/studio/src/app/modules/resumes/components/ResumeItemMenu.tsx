@@ -1,4 +1,5 @@
 import type { ResumeDto } from '@portfolio/shared-models';
+import { toast } from '@portfolio/shared-ui';
 import { ExternalLink, Globe, Link as LinkIcon, MoreHorizontal, Trash2 } from 'lucide-react';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -12,7 +13,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../../ui/Dropdown-menu';
-import { toast } from '../../ui/sonner';
 import { useDeleteResumeById } from '../hooks/use-delete-resume-by-id-mutation.hook';
 import { useSetResumeIsPublic } from '../hooks/use-set-resume-is-public.hook';
 

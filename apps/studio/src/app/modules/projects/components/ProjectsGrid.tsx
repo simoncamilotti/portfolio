@@ -1,77 +1,16 @@
 import type { ProjectDto } from '@portfolio/shared-models';
-import {
-  AllCommunityModule,
-  type ColDef,
-  type ICellRendererParams,
-  ModuleRegistry,
-  themeQuartz,
-} from 'ag-grid-community';
+import { AllCommunityModule, type ColDef, type ICellRendererParams, ModuleRegistry } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import { ExternalLink, Github, Pencil, Plus, Trash2 } from 'lucide-react';
+import { Pencil, Plus, Trash2 } from 'lucide-react';
 import type { FunctionComponent } from 'react';
 import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { agTheme } from '../../ui/constants/ag-grid-theme';
+import { LinksCellRenderer } from '../renderers/LinksCellRenderer';
+import { TagsCellRenderer } from '../renderers/TagCellRenderer';
+
 ModuleRegistry.registerModules([AllCommunityModule]);
-
-const agTheme = themeQuartz.withParams({
-  backgroundColor: 'hsl(240 14% 6%)',
-  foregroundColor: 'hsl(240 10% 93%)',
-  headerTextColor: 'hsl(240 5% 50%)',
-  borderColor: 'hsl(240 10% 13%)',
-  rowHoverColor: 'hsl(240 12% 10%)',
-  selectedRowBackgroundColor: 'hsl(245 58% 61% / 0.1)',
-  fontFamily: 'Inter, sans-serif',
-  fontSize: 13,
-  headerFontSize: 12,
-  headerFontWeight: 500,
-  columnBorder: false,
-  wrapperBorderRadius: 12,
-  cellHorizontalPadding: 16,
-});
-
-const TagsCellRenderer = (params: ICellRendererParams<ProjectDto>) => {
-  const tags = params.value as string[];
-  if (!tags?.length) return null;
-  return (
-    <div className="flex flex-wrap gap-1 items-center h-full">
-      {tags.map((tag: string) => (
-        <span key={tag} className="px-1.5 py-0.5 text-[10px] rounded bg-muted text-muted-foreground">
-          {tag}
-        </span>
-      ))}
-    </div>
-  );
-};
-
-const LinksCellRenderer = (params: ICellRendererParams<ProjectDto>) => {
-  const data = params.data;
-  if (!data) return null;
-  return (
-    <div className="flex gap-2 items-center h-full">
-      {data.repoUrl && (
-        <a
-          href={data.repoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <Github className="w-4 h-4" />
-        </a>
-      )}
-      {data.url && (
-        <a
-          href={data.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <ExternalLink className="w-4 h-4" />
-        </a>
-      )}
-    </div>
-  );
-};
 
 type ProjectsGridProps = {
   projects: ProjectDto[];
@@ -79,6 +18,10 @@ type ProjectsGridProps = {
   onDelete: (project: ProjectDto) => void;
   onCreateClick: () => void;
 };
+
+const ROW_HEIGHT = 48;
+const HEADER_HEIGHT = 42;
+const MARGIN_AGGREGATION = 3;
 
 export const ProjectsGrid: FunctionComponent<ProjectsGridProps> = ({ projects, onEdit, onDelete, onCreateClick }) => {
   const { t } = useTranslation('studio');
@@ -168,14 +111,14 @@ export const ProjectsGrid: FunctionComponent<ProjectsGridProps> = ({ projects, o
   }
 
   return (
-    <div style={{ height: Math.min(projects.length * 48 + 49 + 20, 500) }}>
+    <div style={{ height: Math.min(projects.length, 10) * ROW_HEIGHT + HEADER_HEIGHT + MARGIN_AGGREGATION }}>
       <AgGridReact<ProjectDto>
         theme={agTheme}
         rowData={projects}
         columnDefs={columnDefs}
         defaultColDef={defaultColDef}
-        rowHeight={48}
-        headerHeight={42}
+        rowHeight={ROW_HEIGHT}
+        headerHeight={HEADER_HEIGHT}
         animateRows
         domLayout="normal"
       />

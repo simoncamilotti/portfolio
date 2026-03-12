@@ -10,22 +10,35 @@ const mockUseQuery = vi.fn();
 
 vi.mock('@tanstack/react-query', () => ({
   useQuery: (...args: unknown[]) => mockUseQuery(...args),
-  useMutation: ({ mutationFn, onMutate, onSuccess }: any) => ({
-    mutate: (vars: any) => {
-      onMutate?.(vars);
-      onSuccess?.(vars, vars);
-      mockMutate(vars);
-    },
-    isPending: false,
-  }),
   useQueryClient: () => ({
     setQueryData: vi.fn(),
     invalidateQueries: vi.fn(),
   }),
 }));
 
-vi.mock('../../ui/sonner', () => ({
+vi.mock('react-i18next', () => ({
+  useTranslation: () => ({ t: (key: string) => key }),
+}));
+
+vi.mock('@portfolio/shared-ui', () => ({
   toast: { success: vi.fn(), error: vi.fn() },
+}));
+
+vi.mock('../hooks/use-toggle-feature-flag-mutation.hook', () => ({
+  useToggleFeatureFlagMutation: () => ({
+    toggleFeatureFlagMutation: {
+      mutate: mockMutate,
+      isPending: false,
+    },
+  }),
+}));
+
+vi.mock('./FeatureFlagForm', () => ({
+  FeatureFlagForm: () => <div data-testid="feature-flag-form" />,
+}));
+
+vi.mock('./FeatureFlagListSkeleton', () => ({
+  FeatureFlagListSkeleton: () => <div data-testid="feature-flag-skeleton" />,
 }));
 
 import { FeatureFlagList } from './FeatureFlagList';
@@ -57,24 +70,16 @@ describe('FeatureFlagList', () => {
     const switches = screen.getAllByRole('switch');
     fireEvent.click(switches[0]);
 
-    expect(mockMutate).toHaveBeenCalledWith({ key: 'projects', enabled: false });
+    expect(mockMutate).toHaveBeenCalledWith(
+      { key: 'projects', enabled: false },
+      expect.objectContaining({ onSuccess: expect.any(Function), onError: expect.any(Function) }),
+    );
   });
 
   it('should render the add form', () => {
     render(<FeatureFlagList />);
 
-    expect(screen.getByPlaceholderText('Nom du flag (ex: projects)')).toBeDefined();
-    expect(screen.getByText('Ajouter')).toBeDefined();
-  });
-
-  it('should submit the new flag form', () => {
-    render(<FeatureFlagList />);
-
-    const input = screen.getByPlaceholderText('Nom du flag (ex: projects)');
-    fireEvent.change(input, { target: { value: 'new-flag' } });
-    fireEvent.submit(input.closest('form')!);
-
-    expect(mockMutate).toHaveBeenCalledWith('new-flag');
+    expect(screen.getByTestId('feature-flag-form')).toBeDefined();
   });
 
   it('should show empty state when no flags exist', () => {
@@ -82,7 +87,7 @@ describe('FeatureFlagList', () => {
 
     render(<FeatureFlagList />);
 
-    expect(screen.getByText('Aucun feature flag configuré.')).toBeDefined();
+    expect(screen.getByText('featureFlags.empty')).toBeDefined();
   });
 
   it('should show loading skeleton while fetching', () => {
@@ -90,6 +95,7 @@ describe('FeatureFlagList', () => {
 
     render(<FeatureFlagList />);
 
+    expect(screen.getByTestId('feature-flag-skeleton')).toBeDefined();
     expect(screen.queryByText('projects')).toBeNull();
   });
 });

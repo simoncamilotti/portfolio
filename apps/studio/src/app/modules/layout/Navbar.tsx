@@ -10,7 +10,7 @@ export const Navbar: FunctionComponent = () => {
   const { t } = useTranslation('studio');
 
   return (
-    <nav className="sticky top-0 z-[9999] w-full border-b border-border/50 glass-nav no-print">
+    <nav className="fixed top-0 w-full z-50 border-b border-border/50 glass-nav no-print">
       <div className="max-w-7xl mx-auto h-14 flex items-center justify-between">
         <Link to={generatePath(RoutePaths.HOME)}>
           <span className="text-sm font-semibold tracking-tight text-foreground">

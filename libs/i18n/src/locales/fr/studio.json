@@ -87,7 +87,8 @@
   "featureFlags": {
     "title": "Feature Flags",
     "description": "Activez ou désactivez des sections du site public.",
-    "placeholder": "Nom du flag (ex: projects)",
+    "placeholder": "Nom du flag (ex: my-feature)",
+    "keyHint": "Minuscules uniquement, mots séparés par des tirets.",
     "add": "Ajouter",
     "empty": "Aucun feature flag configuré.",
     "enabled": "activé",
