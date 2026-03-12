@@ -3,9 +3,9 @@ import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, useParams } from 'react-router';
 
-import { resumesKey } from '../modules/dashboard/resumes.key';
-import { ResumesService } from '../modules/dashboard/resumes.service';
 import { type BreadcrumbItemsProps, PageBreadcrumb } from '../modules/layout/PageBreadcrumb';
+import { resumesKey } from '../modules/resumes/resumes.key';
+import { ResumesService } from '../modules/resumes/resumes.service';
 import type { RoutePathParams } from '../routes/paths.const';
 import { RouteNames, RoutePaths } from '../routes/paths.const';
 
@@ -24,6 +24,10 @@ export const ResumePage: FunctionComponent = () => {
     {
       title: t(RouteNames.HOME),
       to: generatePath(RoutePaths.HOME),
+    },
+    {
+      title: t(RouteNames.RESUMES),
+      to: generatePath(RoutePaths.RESUMES),
     },
     {
       title: resume?.title ? `${t(RouteNames.RESUME)} - ${resume.title}` : t(RouteNames.RESUME),

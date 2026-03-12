@@ -2,22 +2,27 @@ import { useQuery } from '@tanstack/react-query';
 import type { FunctionComponent } from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { generatePath } from 'react-router';
 
-import { CreateResumeDialog } from '../modules/dashboard/components/CreateResumeDialog';
-import { DashboardHeader } from '../modules/dashboard/components/DashboardHeader';
-import { DashboardResumeList } from '../modules/dashboard/components/DashboardResumeList';
-import { resumesKey } from '../modules/dashboard/resumes.key';
-import { ResumesService } from '../modules/dashboard/resumes.service';
 import type { BreadcrumbItemsProps } from '../modules/layout/PageBreadcrumb';
 import { PageBreadcrumb } from '../modules/layout/PageBreadcrumb';
-import { RouteNames } from '../routes/paths.const';
+import { CreateResumeDialog } from '../modules/resumes/components/CreateResumeDialog';
+import { ResumeHeader } from '../modules/resumes/components/ResumeHeader';
+import { ResumeList } from '../modules/resumes/components/ResumeList';
+import { resumesKey } from '../modules/resumes/resumes.key';
+import { ResumesService } from '../modules/resumes/resumes.service';
+import { RouteNames, RoutePaths } from '../routes/paths.const';
 
-export const DashboardPage: FunctionComponent = () => {
+export const ResumesPage: FunctionComponent = () => {
   const { t } = useTranslation('studio');
 
   const breadcrumbItems: BreadcrumbItemsProps = [
     {
       title: t(RouteNames.HOME),
+      to: generatePath(RoutePaths.HOME),
+    },
+    {
+      title: t(RouteNames.RESUMES),
     },
   ];
 
@@ -34,7 +39,7 @@ export const DashboardPage: FunctionComponent = () => {
     <>
       <PageBreadcrumb breadcrumbItems={breadcrumbItems} />
       <div className="pt-20 pb-24 relative overflow-hidden">
-        <DashboardHeader setCreateOpen={setCreateOpen} />
+        <ResumeHeader setCreateOpen={setCreateOpen} />
 
         {isPending ? (
           <div className="space-y-3">
@@ -43,7 +48,7 @@ export const DashboardPage: FunctionComponent = () => {
             ))}
           </div>
         ) : (
-          <DashboardResumeList resumes={orderedResumes} />
+          <ResumeList resumes={orderedResumes} />
         )}
         <CreateResumeDialog resumes={orderedResumes} open={createOpen} openChange={setCreateOpen} />
       </div>

@@ -1,12 +1,13 @@
 {
   "nav": {
     "home": "Accueil",
+    "resumes": "CVs",
     "resume": "Cv",
     "projects": "Projets",
     "settings": "Paramétrage",
     "logout": "Déconnexion"
   },
-  "dashboard": {
+  "resumes": {
     "title": "Mes CVs",
     "subtitle": "Créez, modifiez et partagez vos CVs",
     "newResume": "Nouveau CV",

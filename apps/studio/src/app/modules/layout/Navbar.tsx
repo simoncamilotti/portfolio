@@ -27,6 +27,13 @@ export const Navbar: FunctionComponent = () => {
           </Link>
 
           <Link
+            to={generatePath(RoutePaths.RESUMES)}
+            className="text-[13px] text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {t(RouteNames.RESUMES)}
+          </Link>
+
+          <Link
             to={generatePath(RoutePaths.PROJECTS)}
             className="text-[13px] text-muted-foreground hover:text-foreground transition-colors"
           >
