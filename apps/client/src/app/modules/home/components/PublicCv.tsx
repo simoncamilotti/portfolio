@@ -14,7 +14,7 @@ const fadeUp = {
 };
 
 export const PublicCV: FunctionComponent = () => {
-  const { t, i18n } = useTranslation('client');
+  const { t } = useTranslation('client');
 
   const skills = t('cv.skills', { returnObjects: true }) as Array<{ label: string; value: string }>;
   const experiences = t('cv.experiences', { returnObjects: true }) as Array<{

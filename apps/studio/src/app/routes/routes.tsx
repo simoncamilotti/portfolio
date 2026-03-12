@@ -1,8 +1,9 @@
+import { Layout } from '@portfolio/shared-ui';
 import type { RouteObject } from 'react-router';
 import { redirect } from 'react-router';
 
 import { isAuthenticated, login } from '../modules/auth/auth';
-import { Layout } from '../modules/layout/Layout';
+import { Navbar } from '../modules/layout/Navbar';
 import { HomePage } from '../pages/HomePage';
 import { ProjectsPage } from '../pages/ProjectsPage';
 import { ResumePage } from '../pages/ResumePage';
@@ -12,7 +13,7 @@ import { RoutePaths } from './paths.const';
 
 export const routes: RouteObject[] = [
   {
-    element: <Layout />,
+    element: <Layout navBar={<Navbar />} />,
     hydrateFallbackElement: <div>Loading...</div>,
     loader: async ({ request }) => {
       if (!isAuthenticated()) {

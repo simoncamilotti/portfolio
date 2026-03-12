@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import type { ReactNode } from 'react';
 
 import { HomePage } from './HomePage';
 
@@ -29,19 +28,9 @@ vi.mock('../modules/home/components/ContactSection', () => ({
   ContactSection: () => <div data-testid="contact-section" />,
 }));
 
-vi.mock('@portfolio/shared-ui', () => ({
-  PageLayout: ({ children }: { children: ReactNode }) => <div data-testid="page-layout">{children}</div>,
-}));
-
 describe('HomePage', () => {
   beforeEach(() => {
     mockIsEnabled.mockReturnValue(false);
-  });
-
-  it('should render within a PageLayout', () => {
-    render(<HomePage />);
-
-    expect(screen.getByTestId('page-layout')).toBeDefined();
   });
 
   it('should render the HeroSection', () => {

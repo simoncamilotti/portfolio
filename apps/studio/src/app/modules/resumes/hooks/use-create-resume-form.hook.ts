@@ -1,9 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from '@portfolio/shared-ui';
 import type { BaseSyntheticEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { toast } from '../../ui/sonner';
 import type { CreateResumeForm } from '../resume.type';
 import { createResumeFormSchema } from '../resume.type';
 import { useCreateResumeMutationHook } from './use-create-resume-mutation.hook';

@@ -6,11 +6,11 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  toast,
 } from '@portfolio/shared-ui';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { toast } from '../../ui/sonner';
 import { useDeleteProjectMutation } from '../hooks/use-delete-project-mutation.hook';
 
 type DeleteProjectDialogProps = {

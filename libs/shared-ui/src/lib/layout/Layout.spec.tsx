@@ -1,38 +1,34 @@
 import { render, screen } from '@testing-library/react';
 
+import { Layout } from './Layout';
+
 vi.mock('react-router', () => ({
   Outlet: () => <div data-testid="outlet" />,
 }));
 
-vi.mock('./Navbar', () => ({
-  Navbar: () => <nav data-testid="navbar" />,
-}));
-
-vi.mock('@portfolio/shared-ui', () => ({
+vi.mock('./Footer', () => ({
   Footer: () => <footer data-testid="footer" />,
 }));
 
-vi.mock('../ui/sonner', () => ({
+vi.mock('../ui/Sonner', () => ({
   Toaster: () => <div data-testid="toaster" />,
 }));
 
-import { Layout } from './Layout';
-
 describe('Layout', () => {
   it('should render the Navbar', () => {
-    render(<Layout />);
+    render(<Layout navBar={<nav data-testid="navbar" />} />);
 
     expect(screen.getByTestId('navbar')).toBeDefined();
   });
 
   it('should render the Outlet', () => {
-    render(<Layout />);
+    render(<Layout navBar={<nav data-testid="navbar" />} />);
 
     expect(screen.getByTestId('outlet')).toBeDefined();
   });
 
   it('should render the Footer', () => {
-    render(<Layout />);
+    render(<Layout navBar={<nav data-testid="navbar" />} />);
 
     expect(screen.getByTestId('footer')).toBeDefined();
   });
