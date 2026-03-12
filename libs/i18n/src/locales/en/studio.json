@@ -1,12 +1,13 @@
 {
   "nav": {
     "home": "Home",
+    "resumes": "Resumes",
     "resume": "Resume",
     "projects": "Projects",
     "settings": "Settings",
     "logout": "Logout"
   },
-  "dashboard": {
+  "resumes": {
     "title": "My Resumes",
     "subtitle": "Create, edit and share your resumes",
     "newResume": "New Resume",

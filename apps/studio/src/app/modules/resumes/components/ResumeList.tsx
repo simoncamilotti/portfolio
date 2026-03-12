@@ -5,11 +5,11 @@ import { useTranslation } from 'react-i18next';
 import { NoResumePlaceholder } from './NoResumePlaceholder';
 import { ResumeItem } from './ResumeItem';
 
-type DashboardResumeListProps = {
+type ResumeListProps = {
   resumes?: ResumeDto[];
 };
 
-export const DashboardResumeList: FunctionComponent<DashboardResumeListProps> = ({ resumes }) => {
+export const ResumeList: FunctionComponent<ResumeListProps> = ({ resumes }) => {
   const { t } = useTranslation('studio');
 
   return (
@@ -18,7 +18,7 @@ export const DashboardResumeList: FunctionComponent<DashboardResumeListProps> = 
         <section className="max-w-7xl mx-auto">
           <div className="text-center py-20 text-muted-foreground">
             <NoResumePlaceholder />
-            <p className="mt-4 text-sm">{t('dashboard.empty')}</p>
+            <p className="mt-4 text-sm">{t('resumes.empty')}</p>
           </div>
         </section>
       ) : (

@@ -3,9 +3,10 @@ import { redirect } from 'react-router';
 
 import { isAuthenticated, login } from '../modules/auth/auth';
 import { Layout } from '../modules/layout/Layout';
-import { DashboardPage } from '../pages/DashboardPage';
+import { HomePage } from '../pages/HomePage';
 import { ProjectsPage } from '../pages/ProjectsPage';
 import { ResumePage } from '../pages/ResumePage';
+import { ResumesPage } from '../pages/ResumesPage';
 import { SettingsPage } from '../pages/SettingsPage';
 import { RoutePaths } from './paths.const';
 
@@ -23,7 +24,11 @@ export const routes: RouteObject[] = [
     children: [
       {
         path: RoutePaths.HOME,
-        element: <DashboardPage />,
+        element: <HomePage />,
+      },
+      {
+        path: RoutePaths.RESUMES,
+        element: <ResumesPage />,
       },
       {
         path: RoutePaths.RESUME,

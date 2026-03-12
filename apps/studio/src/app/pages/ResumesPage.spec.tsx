@@ -15,19 +15,19 @@ vi.mock('@tanstack/react-query', () => ({
   }),
 }));
 
-vi.mock('../modules/dashboard/components/DashboardHeader', () => ({
-  DashboardHeader: ({ setCreateOpen }: { setCreateOpen: (v: boolean) => void }) => (
-    <button data-testid="dashboard-header" onClick={() => setCreateOpen(true)}>
+vi.mock('../modules/resumes/components/ResumeHeader', () => ({
+  ResumeHeader: ({ setCreateOpen }: { setCreateOpen: (v: boolean) => void }) => (
+    <button data-testid="resumes-header" onClick={() => setCreateOpen(true)}>
       Nouveau CV
     </button>
   ),
 }));
 
-vi.mock('../modules/dashboard/components/DashboardResumeList', () => ({
-  DashboardResumeList: () => <div data-testid="resume-list" />,
+vi.mock('../modules/resumes/components/ResumeList', () => ({
+  ResumeList: () => <div data-testid="resume-list" />,
 }));
 
-vi.mock('../modules/dashboard/components/CreateResumeDialog', () => ({
+vi.mock('../modules/resumes/components/CreateResumeDialog', () => ({
   CreateResumeDialog: ({ open }: { open: boolean }) =>
     open ? <div role="dialog" data-testid="create-dialog" /> : null,
 }));
@@ -38,31 +38,31 @@ vi.mock('../modules/layout/PageBreadcrumb', () => ({
   ),
 }));
 
-import { DashboardPage } from './DashboardPage';
+import { ResumesPage } from './ResumesPage';
 
-describe('DashboardPage', () => {
+describe('ResumesPage', () => {
   it('should render the PageBreadcrumb', () => {
-    render(<DashboardPage />);
+    render(<ResumesPage />);
 
     expect(screen.getByTestId('page-breadcrumb')).toBeDefined();
   });
 
-  it('should render the DashboardHeader', () => {
-    render(<DashboardPage />);
+  it('should render the ResumeHeader', () => {
+    render(<ResumesPage />);
 
-    expect(screen.getByTestId('dashboard-header')).toBeDefined();
+    expect(screen.getByTestId('resumes-header')).toBeDefined();
   });
 
-  it('should render the DashboardResumeList', () => {
-    render(<DashboardPage />);
+  it('should render the ResumeList', () => {
+    render(<ResumesPage />);
 
     expect(screen.getByTestId('resume-list')).toBeDefined();
   });
 
   it('should open the create dialog when header triggers it', () => {
-    render(<DashboardPage />);
+    render(<ResumesPage />);
 
-    fireEvent.click(screen.getByTestId('dashboard-header'));
+    fireEvent.click(screen.getByTestId('resumes-header'));
 
     expect(screen.getByRole('dialog')).toBeDefined();
   });

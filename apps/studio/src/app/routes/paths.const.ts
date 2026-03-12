@@ -4,6 +4,7 @@ export const RoutePathParams = {
 
 export const RoutePaths = {
   HOME: '/',
+  RESUMES: '/resumes',
   RESUME: `/resumes/:${RoutePathParams.RESUME_ID}`,
   PROJECTS: '/projects',
   SETTINGS: '/settings',
@@ -12,6 +13,7 @@ export const RoutePaths = {
 
 export const RouteNames = {
   HOME: 'nav.home',
+  RESUMES: 'nav.resumes',
   RESUME: 'nav.resume',
   PROJECTS: 'nav.projects',
   SETTINGS: 'nav.settings',

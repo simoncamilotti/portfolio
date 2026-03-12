@@ -35,7 +35,7 @@ vi.mock('../../ui/Dropdown-menu', () => ({
   DropdownMenuSeparator: () => <hr />,
 }));
 
-import { DashboardResumeList } from './DashboardResumeList';
+import { ResumeList } from './ResumeList';
 
 const mockResumes = [
   {
@@ -49,11 +49,11 @@ const mockResumes = [
   },
 ];
 
-describe('DashboardResumeList', () => {
+describe('ResumeList', () => {
   const renderList = (resumes = mockResumes) =>
     render(
       <MemoryRouter>
-        <DashboardResumeList resumes={resumes} />
+        <ResumeList resumes={resumes} />
       </MemoryRouter>,
     );
 

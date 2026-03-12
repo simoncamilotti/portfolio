@@ -45,10 +45,16 @@ describe('ResumePage', () => {
     expect(screen.getByTestId('breadcrumb-0').textContent).toBe('Accueil');
   });
 
+  it('should show "CVs" as the second breadcrumb item', () => {
+    render(<ResumePage />);
+
+    expect(screen.getByTestId('breadcrumb-1').textContent).toBe('CVs');
+  });
+
   it('should show fallback breadcrumb title when resume is not loaded', () => {
     render(<ResumePage />);
 
-    expect(screen.getByTestId('breadcrumb-1').textContent).toBe('Cv');
+    expect(screen.getByTestId('breadcrumb-2').textContent).toBe('Cv');
   });
 
   it('should show resume title in breadcrumb when loaded', () => {
@@ -58,6 +64,6 @@ describe('ResumePage', () => {
 
     render(<ResumePage />);
 
-    expect(screen.getByTestId('breadcrumb-1').textContent).toBe('Cv - Mon CV');
+    expect(screen.getByTestId('breadcrumb-2').textContent).toBe('Cv - Mon CV');
   });
 });

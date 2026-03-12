@@ -8,29 +8,29 @@ test.beforeEach(async ({ page, browserName }) => {
   await mockApi(page);
 });
 
-test.describe('Dashboard Page', () => {
-  test('should display the dashboard header', async ({ page }) => {
-    await page.goto('/');
+test.describe('Resumes Page', () => {
+  test('should display the resumes header', async ({ page }) => {
+    await page.goto('/resumes');
 
     await expect(page.getByRole('heading', { name: 'Mes CVs' })).toBeVisible();
     await expect(page.getByText('Créez, modifiez et partagez vos CVs')).toBeVisible();
   });
 
   test('should display the resume list', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/resumes');
 
     await expect(page.getByText('CV number 1')).toBeVisible();
   });
 
   test('should display public and shared badges', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/resumes');
 
     await expect(page.getByText('Public')).toBeVisible();
     await expect(page.getByText('Partagé')).toBeVisible();
   });
 
   test('should display the footer', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/resumes');
 
     await expect(page.getByText('Tous droits réservés')).toBeVisible();
   });
@@ -38,13 +38,13 @@ test.describe('Dashboard Page', () => {
 
 test.describe('Navbar', () => {
   test('should display the logout button', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/resumes');
 
     await expect(page.getByRole('button', { name: 'Déconnexion' })).toBeVisible();
   });
 
   test('should display the logo link', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/resumes');
 
     const nav = page.getByRole('navigation');
     await expect(nav).toBeVisible();
@@ -52,7 +52,7 @@ test.describe('Navbar', () => {
   });
 
   test('should display navigation links', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/resumes');
 
     const nav = page.getByRole('navigation');
     await expect(nav.getByRole('link', { name: 'Accueil' })).toBeVisible();
@@ -63,7 +63,7 @@ test.describe('Navbar', () => {
 
 test.describe('Create CV dialog', () => {
   test('should open the create dialog when clicking "Nouveau CV"', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/resumes');
 
     await page.getByRole('button', { name: 'Nouveau CV' }).click();
 
@@ -71,7 +71,7 @@ test.describe('Create CV dialog', () => {
   });
 
   test('should close the dialog when clicking "Annuler"', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/resumes');
 
     await page.getByRole('button', { name: 'Nouveau CV' }).click();
     await page.getByRole('button', { name: 'Annuler' }).click();
@@ -80,7 +80,7 @@ test.describe('Create CV dialog', () => {
   });
 
   test('should disable "Créer" button when title is empty', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/resumes');
 
     await page.getByRole('button', { name: 'Nouveau CV' }).click();
 
@@ -88,7 +88,7 @@ test.describe('Create CV dialog', () => {
   });
 
   test('should enable "Créer" button when title is filled', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/resumes');
 
     await page.getByRole('button', { name: 'Nouveau CV' }).click();
     await page.getByPlaceholder('Titre du CV...').fill('Mon nouveau CV');
@@ -102,6 +102,6 @@ test.describe('Navigation', () => {
     await page.goto('/unknown-page');
 
     await expect(page).toHaveURL('/');
-    await expect(page.getByRole('heading', { name: 'Mes CVs' })).toBeVisible();
+    await expect(page.getByText('Homepage')).toBeVisible();
   });
 });

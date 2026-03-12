@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
+import type { ReactElement } from 'react';
 
 import { ContactSection } from './ContactSection';
 
@@ -11,7 +12,7 @@ vi.mock('framer-motion', () => ({
 
 const queryClient = new QueryClient();
 
-const renderWithProviders = (ui: React.ReactElement) =>
+const renderWithProviders = (ui: ReactElement) =>
   render(<QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>);
 
 describe('ContactSection', () => {
