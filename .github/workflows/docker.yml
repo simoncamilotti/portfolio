@@ -27,13 +27,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
 
       - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -41,7 +41,7 @@ jobs:
 
       - name: Extract metadata (tags, labels)
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@c299e40c65443455700f0fdfc63efafe5b349051 # v5
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository }}/api
           tags: |
@@ -53,7 +53,7 @@ jobs:
             type=sha
 
       - name: Build and push API image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
         with:
           context: .
           file: apps/api/Dockerfile
@@ -67,13 +67,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
 
       - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -81,7 +81,7 @@ jobs:
 
       - name: Extract metadata (tags, labels)
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@c299e40c65443455700f0fdfc63efafe5b349051 # v5
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository }}/client
           tags: |
@@ -93,7 +93,7 @@ jobs:
             type=sha
 
       - name: Build and push Client image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
         with:
           context: .
           file: apps/client/Dockerfile
@@ -107,13 +107,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
 
       - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -121,7 +121,7 @@ jobs:
 
       - name: Extract metadata (tags, labels)
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@c299e40c65443455700f0fdfc63efafe5b349051 # v5
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository }}/studio
           tags: |
@@ -133,7 +133,7 @@ jobs:
             type=sha
 
       - name: Build and push Studio image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
         with:
           context: .
           file: apps/studio/Dockerfile
@@ -149,23 +149,23 @@ jobs:
     needs: [build-api, build-client, build-studio]
     steps:
       - name: Checkout GitOps repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
-          repository: scamilotti1/gitops
+          repository: ${{ vars.GITOPS_REPO }}
           token: ${{ secrets.GITOPS_PAT }}
           path: gitops
 
       - name: Setup Kustomize
-        uses: imranismail/setup-kustomize@v2
+        uses: imranismail/setup-kustomize@2ba527d4d055ab63514ba50a99456fc35684947f # v2
 
       - name: Update image tags
-        working-directory: gitops/apps/portfolio/overlays/dev
+        working-directory: gitops/apps/${{ github.event.repository.name }}/overlays/dev
         run: |
           TAG="${GITHUB_REF_NAME}-${GITHUB_RUN_ID}"
           kustomize edit set image \
-            ghcr.io/scamilotti1/portfolio/api=ghcr.io/scamilotti1/portfolio/api:${TAG} \
-            ghcr.io/scamilotti1/portfolio/client=ghcr.io/scamilotti1/portfolio/client:${TAG} \
-            ghcr.io/scamilotti1/portfolio/studio=ghcr.io/scamilotti1/portfolio/studio:${TAG}
+            ghcr.io/${{ github.repository }}/api=ghcr.io/${{ github.repository }}/api:${TAG} \
+            ghcr.io/${{ github.repository }}/client=ghcr.io/${{ github.repository }}/client:${TAG} \
+            ghcr.io/${{ github.repository }}/studio=ghcr.io/${{ github.repository }}/studio:${TAG}
 
       - name: Commit and push
         working-directory: gitops
@@ -173,24 +173,24 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git diff --staged --quiet || git commit -m "deploy(dev): portfolio images to ${GITHUB_REF_NAME}-${GITHUB_RUN_ID}"
+          git diff --staged --quiet || git commit -m "deploy(dev): ${{ github.event.repository.name }} images to ${GITHUB_REF_NAME}-${GITHUB_RUN_ID}"
           git push
 
       - name: Notify Slack
         if: success()
-        uses: slackapi/slack-github-action@v2.1.0
+        uses: slackapi/slack-github-action@b0fa283ad8fea605de13dc3f449259339835fc52 # v2.1.0
         with:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
           payload: |
             {
-              "text": "Portfolio deployed to dev :rocket:",
+              "text": "${{ github.event.repository.name }} deployed to dev :rocket:",
               "blocks": [
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*Portfolio deployed to dev* :rocket:\nTag `${{ github.ref_name }}-${{ github.run_id }}` pushed to GitOps (dev overlay).\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View workflow>"
+                    "text": "*${{ github.event.repository.name }} deployed to dev* :rocket:\nTag `${{ github.ref_name }}-${{ github.run_id }}` pushed to GitOps (dev overlay).\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View workflow>"
                   }
                 }
               ]
@@ -202,23 +202,23 @@ jobs:
     needs: [build-api, build-client, build-studio]
     steps:
       - name: Checkout GitOps repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
-          repository: scamilotti1/gitops
+          repository: ${{ vars.GITOPS_REPO }}
           token: ${{ secrets.GITOPS_PAT }}
           path: gitops
 
       - name: Setup Kustomize
-        uses: imranismail/setup-kustomize@v2
+        uuses: imranismail/setup-kustomize@2ba527d4d055ab63514ba50a99456fc35684947f # v2
 
       - name: Update image tags
-        working-directory: gitops/apps/portfolio/overlays/prod
+        working-directory: gitops/apps/${{ github.event.repository.name }}/overlays/prod
         run: |
           VERSION=${GITHUB_REF_NAME#v}
           kustomize edit set image \
-            ghcr.io/scamilotti1/portfolio/api=ghcr.io/scamilotti1/portfolio/api:${VERSION} \
-            ghcr.io/scamilotti1/portfolio/client=ghcr.io/scamilotti1/portfolio/client:${VERSION} \
-            ghcr.io/scamilotti1/portfolio/studio=ghcr.io/scamilotti1/portfolio/studio:${VERSION}
+            ghcr.io/${{ github.repository }}/api=ghcr.io/${{ github.repository }}/api:${VERSION} \
+            ghcr.io/${{ github.repository }}/client=ghcr.io/${{ github.repository }}/client:${VERSION} \
+            ghcr.io/${{ github.repository }}/studio=ghcr.io/${{ github.repository }}/studio:${VERSION}
 
       - name: Commit and push
         working-directory: gitops
@@ -226,24 +226,24 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git diff --staged --quiet || git commit -m "deploy(prod): portfolio images to ${GITHUB_REF_NAME}"
+          git diff --staged --quiet || git commit -m "deploy(prod): ${{ github.event.repository.name }} images to ${GITHUB_REF_NAME}"
           git push
 
       - name: Notify Slack
         if: success()
-        uses: slackapi/slack-github-action@v2.1.0
+        uses: slackapi/slack-github-action@b0fa283ad8fea605de13dc3f449259339835fc52 # v2.1.0
         with:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
           payload: |
             {
-              "text": "Portfolio deployed to prod :white_check_mark:",
+              "text": "${{ github.event.repository.name }} deployed to prod :white_check_mark:",
               "blocks": [
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*Portfolio deployed to prod* :white_check_mark:\nVersion `${{ github.ref_name }}` pushed to GitOps (prod overlay).\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View workflow>"
+                    "text": "*${{ github.event.repository.name }} deployed to prod* :white_check_mark:\nVersion `${{ github.ref_name }}` pushed to GitOps (prod overlay).\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View workflow>"
                   }
                 }
               ]
