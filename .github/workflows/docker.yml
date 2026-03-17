@@ -78,7 +78,7 @@ jobs:
           cache-to: type=gha,mode=max
 
   build-studio:
-    if: (vars.DOCKER_MANUAL_ONLY != 'true' || github.event_name == 'workflow_dispatch') && (github.event_name != 'workflow_dispatch' || inputs.build_web)
+    if: (vars.DOCKER_MANUAL_ONLY != 'true' || github.event_name == 'workflow_dispatch') && (github.event_name != 'workflow_dispatch' || inputs.build_studio)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -119,7 +119,7 @@ jobs:
           cache-to: type=gha,mode=max
 
   build-client:
-    if: (vars.DOCKER_MANUAL_ONLY != 'true' || github.event_name == 'workflow_dispatch') && (github.event_name != 'workflow_dispatch' || inputs.build_web)
+    if: (vars.DOCKER_MANUAL_ONLY != 'true' || github.event_name == 'workflow_dispatch') && (github.event_name != 'workflow_dispatch' || inputs.build_client)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
