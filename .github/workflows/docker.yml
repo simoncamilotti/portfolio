@@ -14,6 +14,19 @@ on:
   release:
     types: [published]
   workflow_dispatch:
+    inputs:
+      build_api:
+        description: 'Build API image'
+        type: boolean
+        default: true
+      build_studio:
+        description: 'Build Studio image'
+        type: boolean
+        default: true
+      build_client:
+        description: 'Build Client image'
+        type: boolean
+        default: true
 
 env:
   REGISTRY: ghcr.io
@@ -24,6 +37,7 @@ permissions:
 
 jobs:
   build-api:
+    if: (vars.DOCKER_MANUAL_ONLY != 'true' || github.event_name == 'workflow_dispatch') && (github.event_name != 'workflow_dispatch' || inputs.build_api)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -63,47 +77,8 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  build-client:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
-
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Extract metadata (tags, labels)
-        id: meta
-        uses: docker/metadata-action@c299e40c65443455700f0fdfc63efafe5b349051 # v5
-        with:
-          images: ${{ env.REGISTRY }}/${{ github.repository }}/client
-          tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
-            type=ref,event=branch
-            type=raw,value=${{ github.ref_name }}-${{ github.run_id }},enable={{is_default_branch}}
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=sha
-
-      - name: Build and push Client image
-        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
-        with:
-          context: .
-          file: apps/client/Dockerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
   build-studio:
+    if: (vars.DOCKER_MANUAL_ONLY != 'true' || github.event_name == 'workflow_dispatch') && (github.event_name != 'workflow_dispatch' || inputs.build_web)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -143,10 +118,51 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+  build-client:
+    if: (vars.DOCKER_MANUAL_ONLY != 'true' || github.event_name == 'workflow_dispatch') && (github.event_name != 'workflow_dispatch' || inputs.build_web)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels)
+        id: meta
+        uses: docker/metadata-action@c299e40c65443455700f0fdfc63efafe5b349051 # v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ github.repository }}/client
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=ref,event=branch
+            type=raw,value=${{ github.ref_name }}-${{ github.run_id }},enable={{is_default_branch}}
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha
+
+      - name: Build and push Client image
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
+        with:
+          context: .
+          file: apps/client/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
   deploy-dev:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
-    needs: [build-api, build-client, build-studio]
+    needs: [build-api, build-studio, build-client]
     steps:
       - name: Checkout GitOps repo
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
@@ -164,8 +180,8 @@ jobs:
           TAG="${GITHUB_REF_NAME}-${GITHUB_RUN_ID}"
           kustomize edit set image \
             ghcr.io/${{ github.repository }}/api=ghcr.io/${{ github.repository }}/api:${TAG} \
-            ghcr.io/${{ github.repository }}/client=ghcr.io/${{ github.repository }}/client:${TAG} \
-            ghcr.io/${{ github.repository }}/studio=ghcr.io/${{ github.repository }}/studio:${TAG}
+            ghcr.io/${{ github.repository }}/studio=ghcr.io/${{ github.repository }}/studio:${TAG} \
+            ghcr.io/${{ github.repository }}/client=ghcr.io/${{ github.repository }}/client:${TAG}
 
       - name: Commit and push
         working-directory: gitops
@@ -199,7 +215,7 @@ jobs:
   deploy-prod:
     runs-on: ubuntu-latest
     if: github.event_name == 'release'
-    needs: [build-api, build-client, build-studio]
+    needs: [build-api, build-studio, build-client]
     steps:
       - name: Checkout GitOps repo
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
@@ -217,8 +233,8 @@ jobs:
           VERSION=${GITHUB_REF_NAME#v}
           kustomize edit set image \
             ghcr.io/${{ github.repository }}/api=ghcr.io/${{ github.repository }}/api:${VERSION} \
-            ghcr.io/${{ github.repository }}/client=ghcr.io/${{ github.repository }}/client:${VERSION} \
-            ghcr.io/${{ github.repository }}/studio=ghcr.io/${{ github.repository }}/studio:${VERSION}
+            ghcr.io/${{ github.repository }}/studio=ghcr.io/${{ github.repository }}/studio:${VERSION} \
+            ghcr.io/${{ github.repository }}/client=ghcr.io/${{ github.repository }}/client:${VERSION}
 
       - name: Commit and push
         working-directory: gitops
