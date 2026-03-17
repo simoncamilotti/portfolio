@@ -38,7 +38,7 @@ export const HeroSection: FunctionComponent = () => {
             </a>
             <div className="flex items-center gap-1">
               <a
-                href="https://github.com/scamilotti1"
+                href="https://github.com/simoncamilotti"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 text-muted-foreground hover:text-foreground hover:bg-surface-hover rounded-lg transition-colors"
