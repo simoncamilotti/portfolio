@@ -8,8 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="/logo-cv.ico" />
     <link rel="stylesheet" href="/src/styles.css" />
-    <script defer src="https://analytics.camilottidomo.fr/script.js" data-website-id="ac932abe-5298-4ee7-a505-999d98d9a4e8"></script>
-    <script src="/config.js"></script>
+    <script defer src="/config.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const s = document.createElement('script');
+        s.defer = true;
+        s.src = window.config.umami.src;
+        s.dataset.websiteId = window.config.umami.websiteId;
+        document.head.appendChild(s);
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>
