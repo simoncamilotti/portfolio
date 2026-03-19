@@ -45,7 +45,7 @@
       "experience": "Professional Experience",
       "education": "Education"
     },
-    "englishLevel": "English - A2 level",
+    "englishLevel": "English - Professional",
     "location": "Grenoble, France",
     "skills": [
       { "label": "Languages", "value": "React, Angular, NestJs, Node, .NET C#, PHP, Python, SQL" },
