@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Briefcase, Globe, GraduationCap, MapPin, Wrench } from 'lucide-react';
+import { Briefcase, Globe, GraduationCap, Heart, MapPin, Wrench } from 'lucide-react';
 import type { FunctionComponent, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -17,25 +17,29 @@ export const PublicCV: FunctionComponent = () => {
   const { t } = useTranslation('client');
 
   const skills = t('cv.skills', { returnObjects: true }) as Array<{ label: string; value: string }>;
+  const languages = t('cv.languages', { returnObjects: true }) as string[];
   const experiences = t('cv.experiences', { returnObjects: true }) as Array<{
     role: string;
     company: string;
     location: string;
     period: string;
+    summary?: string;
     tasks: string[];
+    stack: string[];
   }>;
   const education = t('cv.education', { returnObjects: true }) as Array<{
     title: string;
     school: string;
     year: string;
   }>;
+  const interests = t('cv.interests', { returnObjects: true }) as Array<{ title: string; description: string }>;
 
   return (
     <div className="rounded-xl border border-border overflow-hidden bg-card shadow-lg">
       <div className="flex items-center justify-between px-6 py-4 border-b border-border no-print">
         <span></span>
         <a
-          href="/Simon Camilotti.pdf"
+          href="/cv-simon-camilotti.pdf"
           download="Simon Camilotti.pdf"
           className="inline-flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg border border-border hover:bg-surface-hover transition-colors text-foreground"
         >
@@ -84,17 +88,38 @@ export const PublicCV: FunctionComponent = () => {
           {/* Languages */}
           <div className="p-8 border-b border-border">
             <SidebarHeading icon={<Globe className="w-3.5 h-3.5" />} label={t('cv.sections.languages')} />
-            <p className="text-sm text-muted-foreground mt-3">{t('cv.englishLevel')}</p>
+            <div className="mt-3 space-y-1">
+              {languages.map(language => (
+                <p key={language} className="text-sm text-muted-foreground">
+                  {language}
+                </p>
+              ))}
+            </div>
           </div>
 
           {/* Skills */}
-          <div className="p-8 border-b border-border lg:border-b-0">
+          <div className="p-8 border-b border-border">
             <SidebarHeading icon={<Wrench className="w-3.5 h-3.5" />} label={t('cv.sections.skills')} />
             <div className="mt-3 space-y-3">
               {skills.map(s => (
                 <div key={s.label}>
                   <span className="text-xs font-semibold text-foreground uppercase tracking-wider">{s.label}</span>
                   <p className="text-sm text-muted-foreground mt-0.5 leading-relaxed">{s.value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Interests */}
+          <div className="p-8 border-b border-border lg:border-b-0">
+            <SidebarHeading icon={<Heart className="w-3.5 h-3.5" />} label={t('cv.sections.interests')} />
+            <div className="mt-3 space-y-3">
+              {interests.map(interest => (
+                <div key={interest.title}>
+                  <span className="text-xs font-semibold text-foreground uppercase tracking-wider">
+                    {interest.title}
+                  </span>
+                  <p className="text-sm text-muted-foreground mt-0.5 leading-relaxed">{interest.description}</p>
                 </div>
               ))}
             </div>
@@ -129,6 +154,7 @@ export const PublicCV: FunctionComponent = () => {
                     </div>
                     <span className="text-xs text-muted-foreground font-mono shrink-0">{exp.period}</span>
                   </div>
+                  {exp.summary && <p className="text-sm text-muted-foreground mb-2 leading-relaxed">{exp.summary}</p>}
                   <ul className="space-y-1 ml-3.5">
                     {exp.tasks.map(task => (
                       <li key={task} className="text-sm text-muted-foreground flex items-start gap-2">
@@ -137,6 +163,16 @@ export const PublicCV: FunctionComponent = () => {
                       </li>
                     ))}
                   </ul>
+                  <div className="flex flex-wrap items-center gap-1.5 mt-3">
+                    {exp.stack.map(item => (
+                      <span
+                        key={item}
+                        className="px-2 py-0.5 text-[11px] rounded-md border border-border bg-surface text-muted-foreground"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </motion.div>
               ))}
             </motion.div>

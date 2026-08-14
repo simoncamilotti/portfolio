@@ -29,8 +29,8 @@ describe('PublicResume', () => {
     render(<PublicResume />);
 
     expect(screen.getByText('Simon Camilotti')).toBeDefined();
-    expect(screen.getByText('Développeur Full Stack')).toBeDefined();
-    expect(screen.getByText('Expériences professionnelles')).toBeDefined();
-    expect(screen.getByText('Formations')).toBeDefined();
+    expect(screen.getByText('Développeur Full Stack Senior')).toBeDefined();
+    expect(screen.getByText('Expériences')).toBeDefined();
+    expect(screen.getByText('Formation')).toBeDefined();
   });
 });

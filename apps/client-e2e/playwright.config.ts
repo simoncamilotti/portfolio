@@ -29,7 +29,7 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         launchOptions: {
           // Disable private network access checks so the mocked Keycloak iframe
-          // redirect (localhost:8080 → localhost:4200) is not blocked by Chrome.
+          // redirect (localhost:8081 → localhost:4200) is not blocked by Chrome.
           args: ['--disable-features=PrivateNetworkAccessForIframes,BlockInsecurePrivateNetworkRequests'],
         },
       },

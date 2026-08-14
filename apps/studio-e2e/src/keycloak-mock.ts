@@ -1,6 +1,6 @@
 import type { Page } from '@playwright/test';
 
-const KEYCLOAK_URL = 'http://localhost:8080';
+const KEYCLOAK_URL = 'http://localhost:8081';
 const REALM = 'portfolio';
 const CLIENT_ID = 'portfolio-studio';
 const ISSUER = `${KEYCLOAK_URL}/realms/${REALM}`;
