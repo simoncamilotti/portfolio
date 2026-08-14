@@ -120,5 +120,5 @@ npm run prisma:studio         # Interface graphique BDD
 
 | Service    | Port | Description          |
 |------------|------|----------------------|
-| PostgreSQL | 5432 | Base de données      |
-| Keycloak   | 8080 | Serveur OIDC/OAuth2  |
+| PostgreSQL | 5433 | Base de données      |
+| Keycloak   | 8081 | Serveur OIDC/OAuth2  |
