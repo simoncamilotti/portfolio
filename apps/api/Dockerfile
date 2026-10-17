@@ -1,5 +1,5 @@
 # ---------- Stage 1: Install dependencies ----------
-FROM node:20-alpine AS deps
+FROM node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 AS deps
 WORKDIR /app
 
 COPY package.json package-lock.json ./
@@ -10,7 +10,7 @@ COPY prisma.config.ts prisma.config.ts
 RUN DATABASE_URL="postgresql://dummy:dummy@localhost:5432/dummy" npx prisma generate --schema=libs/api/core/src/prisma/schema.prisma
 
 # ---------- Stage 2: Build ----------
-FROM node:20-alpine AS build
+FROM node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 AS build
 WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
@@ -19,7 +19,7 @@ COPY . .
 RUN npx nx build api --configuration=production
 
 # ---------- Stage 3: Production ----------
-FROM node:20-alpine AS prod
+FROM node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 AS prod
 WORKDIR /app
 
 ENV NODE_ENV=production
