@@ -33,8 +33,10 @@ RUN npm ci --omit=dev
 COPY --from=deps /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=deps /app/node_modules/@prisma/client ./node_modules/@prisma/client
 
-# Prisma CLI (needed for migrate deploy at startup)
-RUN npm install prisma dotenv --no-save
+# Prisma CLI (needed for migrate deploy at startup), pinned to the lockfile versions
+RUN npm install --no-save \
+  prisma@$(node -p "require('./package-lock.json').packages['node_modules/prisma'].version") \
+  dotenv@$(node -p "require('./package-lock.json').packages['node_modules/dotenv'].version")
 
 # Prisma schema, config & migrations
 COPY prisma.config.ts prisma.config.ts
