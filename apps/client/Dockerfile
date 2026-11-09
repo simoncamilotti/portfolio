@@ -15,7 +15,7 @@ COPY . .
 RUN npx nx build client --configuration=production
 
 # ---------- Stage 3: Production ----------
-FROM nginxinc/nginx-unprivileged:alpine AS prod
+FROM nginxinc/nginx-unprivileged:alpine@sha256:b5047b9b76845eac124358373c6852377c52e4b05834a47647e955dd91cb8f1e AS prod
 
 COPY ../../config/client/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist/apps/client/ /usr/share/nginx/html/
