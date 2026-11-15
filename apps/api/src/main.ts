@@ -3,7 +3,6 @@ import { NestFactory } from '@nestjs/core';
 import type { NextFunction, Request, Response } from 'express';
 import helmet from 'helmet';
 import { Logger } from 'nestjs-pino';
-import { ZodValidationPipe } from 'nestjs-zod';
 
 import { AppModule } from './app.module.js';
 import type { Env } from './config/env.js';
@@ -14,7 +13,6 @@ app.useLogger(app.get(Logger));
 
 const config = app.get<ConfigService<Env, true>>(ConfigService);
 app.setGlobalPrefix('api');
-app.useGlobalPipes(new ZodValidationPipe());
 
 // The Scalar UI loads its script from a CDN: relax the content security policy on the docs only.
 const secureHeaders = helmet();

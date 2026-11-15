@@ -2,7 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MailerService } from '@nestjs-modules/mailer';
-import type { ContactRequestDto } from '@repo/contracts/server';
+import type { ContactRequestDto } from '@repo/contracts';
 import { firstValueFrom, map } from 'rxjs';
 
 import type { Env } from '../../config/env.js';

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type { FeatureFlagDto } from '@repo/contracts/server';
+import type { FeatureFlagDto } from '@repo/contracts';
 import { FeatureFlag } from '../../generated/prisma/client.js';
 
 @Injectable()

@@ -101,7 +101,11 @@ there, then `"catalog:"` in `package.json`. A version published less than 3 days
 - Every route requires an OIDC access token (`jose`, keys found by discovery of
   `OIDC_ISSUER_URL`, `aud` checked against `OIDC_AUDIENCE`), unless marked `@Public()`;
   `@Roles()` reads a top-level `roles` claim, `@CurrentUser()` gives the caller.
-- Errors are RFC 9457 Problem Details (`application/problem+json`).
+- Requests and responses go through the Zod schemas of `@repo/contracts`: `@Body({ schema })`,
+  `@Query({ schema })` validate, `@ResponseSchema()` / `@ResponseListSchema()` strip undeclared
+  fields and document the route in OpenAPI.
+- Errors are RFC 9457 Problem Details (`application/problem+json`), with the invalid fields in
+  `errors`.
 - Probes: `/api/health/live` (process) and `/api/health/ready` (database).
 - helmet, CORS (`CORS_ORIGINS`), rate limiting (100 requests per minute and client).
 - OpenTelemetry traces and metrics over OTLP when `OTEL_EXPORTER_OTLP_ENDPOINT` is set.

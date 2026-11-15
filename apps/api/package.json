@@ -131,7 +131,6 @@
     "helmet": "catalog:",
     "jose": "catalog:",
     "nestjs-pino": "catalog:",
-    "nestjs-zod": "catalog:",
     "nodemailer": "catalog:",
     "pino": "catalog:",
     "pino-http": "catalog:",
