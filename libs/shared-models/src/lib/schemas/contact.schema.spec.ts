@@ -17,7 +17,6 @@ describe('ContactRequestDto', () => {
   });
 
   it('should reject if name is missing', () => {
-     
     const { name: _, ...input } = validInput;
 
     const result = contactRequestDtoSchema.safeParse(input);
@@ -38,7 +37,6 @@ describe('ContactRequestDto', () => {
   });
 
   it('should reject if email is missing', () => {
-     
     const { email: _, ...input } = validInput;
 
     const result = contactRequestDtoSchema.safeParse(input);
@@ -62,7 +60,6 @@ describe('ContactRequestDto', () => {
   });
 
   it('should reject if subject is missing', () => {
-     
     const { subject: _, ...input } = validInput;
 
     const result = contactRequestDtoSchema.safeParse(input);
@@ -83,7 +80,6 @@ describe('ContactRequestDto', () => {
   });
 
   it('should reject if message is missing', () => {
-     
     const { message: _, ...input } = validInput;
 
     const result = contactRequestDtoSchema.safeParse(input);
@@ -104,7 +100,6 @@ describe('ContactRequestDto', () => {
   });
 
   it('should reject if captchaToken is missing', () => {
-     
     const { captchaToken: _, ...input } = validInput;
 
     const result = contactRequestDtoSchema.safeParse(input);

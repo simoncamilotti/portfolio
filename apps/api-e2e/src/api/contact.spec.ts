@@ -28,7 +28,6 @@ describe('POST /api/contact', () => {
   });
 
   it('should return 400 when name is missing', async () => {
-     
     const { name: _, ...dto } = validDto;
     const error = await axios.post('/api/contact', dto).catch((e: AxiosError) => e);
 
@@ -46,7 +45,6 @@ describe('POST /api/contact', () => {
   });
 
   it('should return 400 when subject is missing', async () => {
-     
     const { subject: _, ...dto } = validDto;
     const error = await axios.post('/api/contact', dto).catch((e: AxiosError) => e);
 
@@ -64,7 +62,6 @@ describe('POST /api/contact', () => {
   });
 
   it('should return 400 when captchaToken is missing', async () => {
-     
     const { captchaToken: _, ...dto } = validDto;
     const error = await axios.post('/api/contact', dto).catch((e: AxiosError) => e);
 
