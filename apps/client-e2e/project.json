@@ -5,6 +5,25 @@
   "sourceRoot": "apps/client-e2e/src",
   "tags": ["type:e2e", "platform:node"],
   "implicitDependencies": ["client"],
-  "// targets": "to see all targets run: nx show project client-e2e --web",
-  "targets": {}
+  "targets": {
+    "e2e": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "playwright test",
+        "cwd": "{projectRoot}"
+      },
+      "dependsOn": ["client:build"],
+      "parallelism": false
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": ["default", "^default"],
+      "options": {
+        "cwd": "{projectRoot}",
+        "commands": ["tsc --noEmit -p tsconfig.json"],
+        "parallel": false
+      }
+    }
+  }
 }

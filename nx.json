@@ -51,12 +51,6 @@
         "watchDepsTargetName": "watch-deps"
       },
       "exclude": ["apps/api-e2e/**/*"]
-    },
-    {
-      "plugin": "@nx/playwright/plugin",
-      "options": {
-        "targetName": "e2e"
-      }
     }
   ],
   "analytics": false,
