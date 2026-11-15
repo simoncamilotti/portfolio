@@ -3,12 +3,12 @@ import type { RouteObject } from 'react-router';
 import { redirect } from 'react-router';
 
 import { isAuthenticated, login } from '../modules/auth/auth.js';
-import { Navbar } from '../modules/layout/Navbar.js';
-import { HomePage } from '../pages/HomePage.js';
-import { ProjectsPage } from '../pages/ProjectsPage.js';
-import { ResumePage } from '../pages/ResumePage.js';
-import { ResumesPage } from '../pages/ResumesPage.js';
-import { SettingsPage } from '../pages/SettingsPage.js';
+import { Navbar } from '../modules/layout/navbar.js';
+import { HomePage } from '../pages/home-page.js';
+import { ProjectsPage } from '../pages/projects-page.js';
+import { ResumePage } from '../pages/resume-page.js';
+import { ResumesPage } from '../pages/resumes-page.js';
+import { SettingsPage } from '../pages/settings-page.js';
 import { RoutePaths } from './paths.const.js';
 
 export const routes: RouteObject[] = [

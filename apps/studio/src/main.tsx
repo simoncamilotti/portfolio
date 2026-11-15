@@ -3,7 +3,7 @@ import '@repo/i18n';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter } from 'react-router';
 
-import { App } from './app/App.js';
+import { App } from './app/app.js';
 import { initAuth } from './app/modules/auth/auth.js';
 import { routes } from './app/routes/routes.js';
 
