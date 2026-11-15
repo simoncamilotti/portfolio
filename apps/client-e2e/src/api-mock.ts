@@ -9,7 +9,7 @@ type FeatureFlagOverrides = {
  * Must be called before any page navigation.
  */
 export async function mockApi(page: Page, featureFlags?: FeatureFlagOverrides): Promise<void> {
-  // /config.js is not versioned (config/client/config.exemple.js): serve one without reCAPTCHA
+  // /config.js is not versioned (config/client/config.example.js): serve one without reCAPTCHA
   // nor analytics.
   await page.route('**/config.js', (route) =>
     route.fulfill({

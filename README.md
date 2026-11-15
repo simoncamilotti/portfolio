@@ -52,13 +52,12 @@ corepack enable
 pnpm install
 
 # 2. Environment
-cp .env.exemple .env
-# Edit .env with your environment values (database, etc.)
-cp config/client/config.exemple.js apps/client/public/config.js
-cp config/studio/config.exemple.js apps/studio/public/config.js
-# Edit the config.js files to match your Keycloak values
+cp .env.example .env
+cp config/client/config.example.js apps/client/public/config.js
+cp config/studio/config.example.js apps/studio/public/config.js
 
-# 3. Infrastructure, migrations, API, client and studio
+# 3. Local services (PostgreSQL, Keycloak with the imported realm, Mailpit), migrations,
+#    API, client and studio
 pnpm dev
 ```
 
@@ -115,9 +114,18 @@ Installed by `pnpm install` ([lefthook](lefthook.yml)):
 - `docker`: builds the `api`, `client` and `studio` images; on `main` they are deployed to dev, on a
   GitHub Release to prod, through the GitOps repository (`GITOPS_DEPLOY` repository variable).
 
-## Docker Infrastructure
+## Local services
 
-| Service    | Port | Description         |
-| ---------- | ---- | ------------------- |
-| PostgreSQL | 5433 | Base de données     |
-| Keycloak   | 8081 | Serveur OIDC/OAuth2 |
+`docker-compose.yml`: PostgreSQL 17 (`5433`), Keycloak 26 (`8081`, stored in PostgreSQL, realm
+imported from `docker/keycloak/realm.json`, console `admin` / `admin`), Mailpit (`1025`, UI `8025`).
+Users of the realm: `admin` (role `ADMIN`), `user` (role `USER`), `test-e2e`.
+
+Moving from the former setup (Keycloak 23 on an H2 file): rename `DB_USER`, `DB_PASSWORD`,
+`DB_NAME` and `DB_PORT` to `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` and `POSTGRES_PORT`
+in `.env`, then create once the databases the init script only creates on a fresh volume:
+
+```bash
+docker compose up -d postgres
+docker compose exec postgres psql -U postgres -c 'CREATE DATABASE keycloak' -c 'CREATE DATABASE portfolio_e2e'
+docker compose up -d --wait
+```

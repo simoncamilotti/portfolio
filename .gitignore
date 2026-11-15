@@ -48,7 +48,6 @@ Thumbs.db
 .env
 .env.*
 !.env.example
-!.env.exemple
 
 # Test reports
 test-output
@@ -65,13 +64,9 @@ libs/shared/api-client/src/generated
 # Playwright
 playwright-report
 
-# Runtime configuration of the web apps, written from config/*/config.exemple.js
+# Runtime configuration of the web apps, written from config/*/config.example.js
 /apps/client/public/config.js
 /apps/studio/public/config.js
-
-# Keycloak dev database: only keycloakdb.mv.db is versioned until the realm import (#55)
-/config/keycloak/data/keycloakdb.lock.db
-/config/keycloak/data/keycloakdb.trace.db
 
 # Playwright
 playwright/.auth/

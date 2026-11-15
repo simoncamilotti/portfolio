@@ -4,4 +4,3 @@
 /.nx/workspace-data
 .nx/self-healing
 pnpm-lock.yaml
-config/keycloak/data
