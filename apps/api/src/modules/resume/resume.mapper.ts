@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type { ResumeDetailDto, ResumeDto } from '@repo/contracts/server';
+import type { ResumeDetailDto, ResumeDto } from '@repo/contracts';
 import { Resume } from '../../generated/prisma/client.js';
 
 @Injectable()

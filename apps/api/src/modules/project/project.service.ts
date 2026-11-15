@@ -1,10 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../common/database/prisma.service.js';
-import {
-  CreateProjectRequestDto,
-  ProjectDto,
-  UpdateProjectRequestDto,
-} from '@repo/contracts/server';
+import type { CreateProjectRequestDto, ProjectDto, UpdateProjectRequestDto } from '@repo/contracts';
 
 import { ProjectMapper } from './project.mapper.js';
 

@@ -6,7 +6,7 @@ import type {
   ResumeDto,
   SetPublicResumeRequestDto,
   UpdateResumeRequestDto,
-} from '@repo/contracts/server';
+} from '@repo/contracts';
 
 import { ResumeMapper } from './resume.mapper.js';
 

@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../common/database/prisma.service.js';
-import {
+import type {
   CreateFeatureFlagRequestDto,
   FeatureFlagDto,
   UpdateFeatureFlagRequestDto,
-} from '@repo/contracts/server';
+} from '@repo/contracts';
 
 import { FeatureFlagMapper } from './feature-flag.mapper.js';
 

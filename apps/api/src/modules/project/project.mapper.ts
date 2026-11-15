@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ProjectWithTags } from './project.type.js';
-import { ProjectDto } from '@repo/contracts/server';
+import type { ProjectDto } from '@repo/contracts';
 
 @Injectable()
 export class ProjectMapper {

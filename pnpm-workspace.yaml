@@ -84,7 +84,6 @@ catalog:
   lefthook: 2.1.14
   lucide-react: 1.47.0
   nestjs-pino: 5.2.0
-  nestjs-zod: 5.5.0
   nodemailer: 10.0.10
   nx: 23.2.1
   pino: 10.3.1
