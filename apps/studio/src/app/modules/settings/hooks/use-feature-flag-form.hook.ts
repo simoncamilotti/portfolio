@@ -1,13 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import type { FeatureFlagDto } from '@portfolio/shared-models';
-import { toast } from '@portfolio/shared-ui';
+import type { FeatureFlagDto } from '@repo/contracts';
+import { toast } from '@repo/ui';
 import type { BaseSyntheticEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import type { FeatureFlagForm } from '../feature-flag.type';
-import { featureFlagFormSchema } from '../feature-flag.type';
-import { useCreateFeatureFlagMutation } from './use-create-feature-flag-mutation.hook';
+import type { FeatureFlagForm } from '../feature-flag.type.js';
+import { featureFlagFormSchema } from '../feature-flag.type.js';
+import { useCreateFeatureFlagMutation } from './use-create-feature-flag-mutation.hook.js';
 
 export type UseFeatureFlagFormProps = {
   existingFlags?: FeatureFlagDto[];

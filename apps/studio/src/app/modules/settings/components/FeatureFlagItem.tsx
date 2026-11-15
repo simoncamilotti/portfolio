@@ -1,4 +1,4 @@
-import type { FeatureFlagDto } from '@portfolio/shared-models';
+import type { FeatureFlagDto } from '@repo/contracts';
 import { Flag } from 'lucide-react';
 import type { FunctionComponent } from 'react';
 

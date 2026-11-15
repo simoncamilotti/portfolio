@@ -1,15 +1,15 @@
-import { Layout } from '@portfolio/shared-ui';
+import { Layout } from '@repo/ui';
 import type { RouteObject } from 'react-router';
 import { redirect } from 'react-router';
 
-import { isAuthenticated, login } from '../modules/auth/auth';
-import { Navbar } from '../modules/layout/Navbar';
-import { HomePage } from '../pages/HomePage';
-import { ProjectsPage } from '../pages/ProjectsPage';
-import { ResumePage } from '../pages/ResumePage';
-import { ResumesPage } from '../pages/ResumesPage';
-import { SettingsPage } from '../pages/SettingsPage';
-import { RoutePaths } from './paths.const';
+import { isAuthenticated, login } from '../modules/auth/auth.js';
+import { Navbar } from '../modules/layout/Navbar.js';
+import { HomePage } from '../pages/HomePage.js';
+import { ProjectsPage } from '../pages/ProjectsPage.js';
+import { ResumePage } from '../pages/ResumePage.js';
+import { ResumesPage } from '../pages/ResumesPage.js';
+import { SettingsPage } from '../pages/SettingsPage.js';
+import { RoutePaths } from './paths.const.js';
 
 export const routes: RouteObject[] = [
   {

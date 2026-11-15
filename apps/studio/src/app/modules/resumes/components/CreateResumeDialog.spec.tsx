@@ -1,15 +1,15 @@
 import { render, screen } from '@testing-library/react';
 
-import { CreateResumeDialog } from './CreateResumeDialog';
+import { CreateResumeDialog } from './CreateResumeDialog.js';
 
-vi.mock('@portfolio/shared-ui', () => ({
+vi.mock('@repo/ui', () => ({
   Dialog: ({ children, open }: any) => (open ? <div data-testid="dialog">{children}</div> : null),
   DialogContent: ({ children }: any) => <div>{children}</div>,
   DialogHeader: ({ children }: any) => <div>{children}</div>,
   DialogTitle: ({ children }: any) => <h2 data-testid="dialog-title">{children}</h2>,
 }));
 
-vi.mock('./CreateResumeForm', () => ({
+vi.mock('./CreateResumeForm.js', () => ({
   CreateResumeForm: () => <div data-testid="create-resume-form" />,
 }));
 

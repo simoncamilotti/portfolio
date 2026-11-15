@@ -1,10 +1,10 @@
-import { Layout } from '@portfolio/shared-ui';
+import { Layout } from '@repo/ui';
 import type { RouteObject } from 'react-router';
 import { redirect } from 'react-router';
 
-import { Navbar } from '../modules/layout/Navbar';
-import { HomePage } from '../pages/HomePage';
-import { RoutePaths } from './paths.const';
+import { Navbar } from '../modules/layout/Navbar.js';
+import { HomePage } from '../pages/HomePage.js';
+import { RoutePaths } from './paths.const.js';
 
 export const routes: RouteObject[] = [
   {

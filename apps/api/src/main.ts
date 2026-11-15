@@ -4,7 +4,7 @@ import { NestFactory } from '@nestjs/core';
 import { Logger as PinoLogger } from 'nestjs-pino';
 import { ZodValidationPipe } from 'nestjs-zod';
 
-import { AppModule } from './app/app.module';
+import { AppModule } from './app.module.js';
 
 const DEFAULT_TIMEZONE = 'Etc/UTC';
 const globalPrefix = 'api';

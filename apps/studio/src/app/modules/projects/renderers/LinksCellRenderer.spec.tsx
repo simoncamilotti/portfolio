@@ -1,8 +1,8 @@
-import type { ProjectDto } from '@portfolio/shared-models';
+import type { ProjectDto } from '@repo/contracts';
 import { render, screen } from '@testing-library/react';
 import type { ICellRendererParams } from 'ag-grid-community';
 
-import { LinksCellRenderer } from './LinksCellRenderer';
+import { LinksCellRenderer } from './LinksCellRenderer.js';
 
 const makeParams = (data: Partial<ProjectDto> | undefined) =>
   ({ data }) as ICellRendererParams<ProjectDto>;

@@ -1,8 +1,8 @@
-import type { ProjectDto } from '@portfolio/shared-models';
+import type { ProjectDto } from '@repo/contracts';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { projectsKey } from '../projects.key';
-import { ProjectsService } from '../projects.service';
+import { projectsKey } from '../projects.key.js';
+import { ProjectsService } from '../projects.service.js';
 
 export const useDeleteProjectMutation = (projectIdToDelete: string) => {
   const queryClient = useQueryClient();

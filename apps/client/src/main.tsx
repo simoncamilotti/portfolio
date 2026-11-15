@@ -1,10 +1,10 @@
-import '@portfolio/i18n';
+import '@repo/i18n';
 
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter } from 'react-router';
 
-import { App } from './app/App';
-import { routes } from './app/routes/routes';
+import { App } from './app/App.js';
+import { routes } from './app/routes/routes.js';
 
 if (!window.config?.captcha) {
   throw new Error(

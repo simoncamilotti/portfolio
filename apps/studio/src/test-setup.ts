@@ -1,4 +1,4 @@
-import '@portfolio/i18n';
+import '@repo/i18n';
 
 import i18n from 'i18next';
 

@@ -1,12 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { contactRequestDtoSchema } from '@portfolio/shared-models';
+import { contactRequestDtoSchema } from '@repo/contracts';
 import type { BaseSyntheticEvent } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
 import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 
-import { useContactFormMutation } from './use-contact-form-mutation.hook';
+import { useContactFormMutation } from './use-contact-form-mutation.hook.js';
 
 const contactFormSchema = contactRequestDtoSchema.omit({ captchaToken: true });
 export type ContactFormValues = z.infer<typeof contactFormSchema>;

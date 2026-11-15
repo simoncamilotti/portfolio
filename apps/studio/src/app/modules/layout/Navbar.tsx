@@ -1,10 +1,10 @@
-import { Braces, LanguageSwitcher } from '@portfolio/shared-ui';
+import { Braces, LanguageSwitcher } from '@repo/ui';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link } from 'react-router';
 
-import { RouteNames, RoutePaths } from '../../routes/paths.const';
-import { logout } from '../auth/auth';
+import { RouteNames, RoutePaths } from '../../routes/paths.const.js';
+import { logout } from '../auth/auth.js';
 
 export const Navbar: FunctionComponent = () => {
   const { t } = useTranslation('studio');

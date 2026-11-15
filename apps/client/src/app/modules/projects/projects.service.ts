@@ -1,6 +1,6 @@
-import type { ProjectDto } from '@portfolio/shared-models';
+import type { ProjectDto } from '@repo/contracts';
 
-import { axiosInstance } from '../api/axiosInstance';
+import { axiosInstance } from '../api/axiosInstance.js';
 
 export const ProjectsService = {
   getAllProjects: (): Promise<ProjectDto[]> =>

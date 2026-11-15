@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { DeleteProjectDialog } from './DeleteProjectDialog';
+import { DeleteProjectDialog } from './DeleteProjectDialog.js';
 
 const mockMutateAsync = vi.fn().mockResolvedValue(undefined);
 
@@ -11,7 +11,7 @@ vi.mock('react-i18next', () => ({
   }),
 }));
 
-vi.mock('@portfolio/shared-ui', () => ({
+vi.mock('@repo/ui', () => ({
   Dialog: ({ children, open }: any) => (open ? <div data-testid="dialog">{children}</div> : null),
   DialogContent: ({ children }: any) => <div>{children}</div>,
   DialogDescription: ({ children }: any) => <p>{children}</p>,
@@ -21,7 +21,7 @@ vi.mock('@portfolio/shared-ui', () => ({
   toast: { success: vi.fn(), error: vi.fn() },
 }));
 
-vi.mock('../hooks/use-delete-project-mutation.hook', () => ({
+vi.mock('../hooks/use-delete-project-mutation.hook.js', () => ({
   useDeleteProjectMutation: () => ({
     deleteProjectMutation: { mutateAsync: mockMutateAsync },
   }),

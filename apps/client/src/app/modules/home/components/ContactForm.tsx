@@ -3,7 +3,7 @@ import type { Dispatch, FunctionComponent, SetStateAction } from 'react';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { type FormStatus, useContactForm } from '../hooks/use-contact-form.hook';
+import { type FormStatus, useContactForm } from '../hooks/use-contact-form.hook.js';
 
 type ContactFormProps = {
   status: FormStatus;

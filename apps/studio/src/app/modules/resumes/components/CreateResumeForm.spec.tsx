@@ -1,11 +1,11 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { useCreateResumeForm } from '../hooks/use-create-resume-form.hook';
-import { CreateResumeForm } from './CreateResumeForm';
+import { useCreateResumeForm } from '../hooks/use-create-resume-form.hook.js';
+import { CreateResumeForm } from './CreateResumeForm.js';
 
 const mockOnSubmit = vi.fn((e: any) => e.preventDefault());
 
-vi.mock('../hooks/use-create-resume-form.hook', () => ({
+vi.mock('../hooks/use-create-resume-form.hook.js', () => ({
   useCreateResumeForm: vi.fn(() => ({
     control: {} as any,
     isValid: true,

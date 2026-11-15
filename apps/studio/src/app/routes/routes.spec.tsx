@@ -1,21 +1,21 @@
-import { routes } from './routes';
+import { routes } from './routes.js';
 
-vi.mock('../modules/auth/auth', () => ({
+vi.mock('../modules/auth/auth.js', () => ({
   isAuthenticated: vi.fn(),
   login: vi.fn(),
 }));
 
 describe('routes', () => {
   it('should define a root layout route', () => {
-    expect(routes[0].element).toBeDefined();
+    expect(routes[0]!.element).toBeDefined();
   });
 
   it('should have a loader on the root route for auth', () => {
-    expect(routes[0].loader).toBeDefined();
+    expect(routes[0]!.loader).toBeDefined();
   });
 
   it('should define the home route as a child', () => {
-    const children = routes[0].children!;
+    const children = routes[0]!.children!;
     const homeRoute = children.find((r) => r.path === '/');
 
     expect(homeRoute).toBeDefined();
@@ -23,7 +23,7 @@ describe('routes', () => {
   });
 
   it('should define the resume route as a child', () => {
-    const children = routes[0].children!;
+    const children = routes[0]!.children!;
     const resumeRoute = children.find((r) => r.path?.includes('resumes'));
 
     expect(resumeRoute).toBeDefined();

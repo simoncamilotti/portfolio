@@ -1,15 +1,15 @@
-import type { FeatureFlagDto } from '@portfolio/shared-models';
-import { toast } from '@portfolio/shared-ui';
+import type { FeatureFlagDto } from '@repo/contracts';
+import { toast } from '@repo/ui';
 import { useQuery } from '@tanstack/react-query';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { featureFlagsKey } from '../feature-flags.key';
-import { FeatureFlagsService } from '../feature-flags.service';
-import { useToggleFeatureFlagMutation } from '../hooks/use-toggle-feature-flag-mutation.hook';
-import { FeatureFlagForm } from './FeatureFlagForm';
-import { FeatureFlagItem } from './FeatureFlagItem';
-import { FeatureFlagListSkeleton } from './FeatureFlagListSkeleton';
+import { featureFlagsKey } from '../feature-flags.key.js';
+import { FeatureFlagsService } from '../feature-flags.service.js';
+import { useToggleFeatureFlagMutation } from '../hooks/use-toggle-feature-flag-mutation.hook.js';
+import { FeatureFlagForm } from './FeatureFlagForm.js';
+import { FeatureFlagItem } from './FeatureFlagItem.js';
+import { FeatureFlagListSkeleton } from './FeatureFlagListSkeleton.js';
 
 export const FeatureFlagList: FunctionComponent = () => {
   const { t } = useTranslation('studio');

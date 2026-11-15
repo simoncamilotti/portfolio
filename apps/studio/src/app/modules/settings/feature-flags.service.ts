@@ -1,6 +1,6 @@
-import type { FeatureFlagDto } from '@portfolio/shared-models';
+import type { FeatureFlagDto } from '@repo/contracts';
 
-import { axiosInstance } from '../api/axiosInstance';
+import { axiosInstance } from '../api/axiosInstance.js';
 
 export const FeatureFlagsService = {
   getAll: (): Promise<FeatureFlagDto[]> =>

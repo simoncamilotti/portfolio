@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import type { ReactElement } from 'react';
 
-import { ContactSection } from './ContactSection';
+import { ContactSection } from './ContactSection.js';
 
 vi.mock('framer-motion', () => ({
   motion: {

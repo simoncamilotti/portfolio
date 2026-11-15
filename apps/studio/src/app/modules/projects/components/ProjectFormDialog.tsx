@@ -1,15 +1,9 @@
-import type { ProjectDto } from '@portfolio/shared-models';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@portfolio/shared-ui';
+import type { ProjectDto } from '@repo/contracts';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@repo/ui';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ProjectForm } from './ProjectForm';
+import { ProjectForm } from './ProjectForm.js';
 
 export type ProjectFormDialogProps = {
   project?: ProjectDto;

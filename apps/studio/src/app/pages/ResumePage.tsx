@@ -3,11 +3,11 @@ import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, useParams } from 'react-router';
 
-import { type BreadcrumbItemsProps, PageBreadcrumb } from '../modules/layout/PageBreadcrumb';
-import { resumesKey } from '../modules/resumes/resumes.key';
-import { ResumesService } from '../modules/resumes/resumes.service';
-import type { RoutePathParams } from '../routes/paths.const';
-import { RouteNames, RoutePaths } from '../routes/paths.const';
+import { type BreadcrumbItemsProps, PageBreadcrumb } from '../modules/layout/PageBreadcrumb.js';
+import { resumesKey } from '../modules/resumes/resumes.key.js';
+import { ResumesService } from '../modules/resumes/resumes.service.js';
+import type { RoutePathParams } from '../routes/paths.const.js';
+import { RouteNames, RoutePaths } from '../routes/paths.const.js';
 
 export const ResumePage: FunctionComponent = () => {
   const { t } = useTranslation('studio');

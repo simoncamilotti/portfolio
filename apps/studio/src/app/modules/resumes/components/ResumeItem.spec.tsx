@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 
-import { ResumeItem } from './ResumeItem';
+import { ResumeItem } from './ResumeItem.js';
 
 vi.mock('framer-motion', () => ({
   motion: {
@@ -9,7 +9,7 @@ vi.mock('framer-motion', () => ({
   },
 }));
 
-vi.mock('./ResumeItemMenu', () => ({
+vi.mock('./ResumeItemMenu.js', () => ({
   ResumeItemMenu: () => <div data-testid="resume-item-menu" />,
 }));
 

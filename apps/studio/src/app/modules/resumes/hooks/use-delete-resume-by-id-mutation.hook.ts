@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { resumesKey } from '../resumes.key';
-import { ResumesService } from '../resumes.service';
+import { resumesKey } from '../resumes.key.js';
+import { ResumesService } from '../resumes.service.js';
 
 export const useDeleteResumeById = (resumeIdToDelete: string) => {
   const queryClient = useQueryClient();

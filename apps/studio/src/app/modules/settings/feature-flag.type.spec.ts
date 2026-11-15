@@ -1,4 +1,4 @@
-import { featureFlagFormSchema } from './feature-flag.type';
+import { featureFlagFormSchema } from './feature-flag.type.js';
 
 describe('featureFlagFormSchema', () => {
   it('should accept a valid lowercase key', () => {

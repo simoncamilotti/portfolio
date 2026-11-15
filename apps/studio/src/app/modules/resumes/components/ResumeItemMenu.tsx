@@ -1,20 +1,20 @@
-import type { ResumeDto } from '@portfolio/shared-models';
-import { toast } from '@portfolio/shared-ui';
+import type { ResumeDto } from '@repo/contracts';
+import { toast } from '@repo/ui';
 import { ExternalLink, Globe, Link as LinkIcon, MoreHorizontal, Trash2 } from 'lucide-react';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link } from 'react-router';
 
-import { RoutePaths } from '../../../routes/paths.const';
+import { RoutePaths } from '../../../routes/paths.const.js';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '../../ui/Dropdown-menu';
-import { useDeleteResumeById } from '../hooks/use-delete-resume-by-id-mutation.hook';
-import { useSetResumeIsPublic } from '../hooks/use-set-resume-is-public.hook';
+} from '../../ui/Dropdown-menu.js';
+import { useDeleteResumeById } from '../hooks/use-delete-resume-by-id-mutation.hook.js';
+import { useSetResumeIsPublic } from '../hooks/use-set-resume-is-public.hook.js';
 
 type ResumeItemMenuProps = {
   resume: ResumeDto;

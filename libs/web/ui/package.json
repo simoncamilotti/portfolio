@@ -1,0 +1,45 @@
+{
+  "name": "@repo/ui",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@repo/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "nx": {
+    "tags": [
+      "type:lib",
+      "platform:browser"
+    ]
+  },
+  "dependencies": {
+    "@radix-ui/react-dialog": "catalog:",
+    "@repo/i18n": "workspace:*",
+    "clsx": "catalog:",
+    "i18next": "catalog:",
+    "lucide-react": "catalog:",
+    "react-i18next": "catalog:",
+    "react-router": "catalog:",
+    "sonner": "catalog:",
+    "tailwind-merge": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "catalog:",
+    "@testing-library/react": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "jsdom": "catalog:",
+    "vitest": "catalog:"
+  }
+}

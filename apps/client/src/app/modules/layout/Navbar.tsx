@@ -1,10 +1,10 @@
-import { Braces, LanguageSwitcher } from '@portfolio/shared-ui';
+import { Braces, LanguageSwitcher } from '@repo/ui';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link } from 'react-router';
 
-import { RouteAnchors, RoutePaths } from '../../routes/paths.const';
-import { useFeatureFlags } from '../feature-flags/hooks/use-feature-flags.hook';
+import { RouteAnchors, RoutePaths } from '../../routes/paths.const.js';
+import { useFeatureFlags } from '../feature-flags/hooks/use-feature-flags.hook.js';
 
 export const Navbar: FunctionComponent = () => {
   const { isEnabled } = useFeatureFlags();

@@ -1,4 +1,4 @@
-import { ReactQueryProvider } from '@portfolio/web';
+import { ReactQueryProvider } from '@repo/query';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 import type { createBrowserRouter } from 'react-router';

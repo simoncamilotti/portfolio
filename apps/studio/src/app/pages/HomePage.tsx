@@ -1,9 +1,9 @@
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import type { BreadcrumbItemsProps } from '../modules/layout/PageBreadcrumb';
-import { PageBreadcrumb } from '../modules/layout/PageBreadcrumb';
-import { RouteNames } from '../routes/paths.const';
+import type { BreadcrumbItemsProps } from '../modules/layout/PageBreadcrumb.js';
+import { PageBreadcrumb } from '../modules/layout/PageBreadcrumb.js';
+import { RouteNames } from '../routes/paths.const.js';
 
 export const HomePage: FunctionComponent = () => {
   const { t } = useTranslation('studio');

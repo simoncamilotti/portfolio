@@ -1,4 +1,4 @@
-import type { ProjectDto } from '@portfolio/shared-models';
+import type { ProjectDto } from '@repo/contracts';
 import {
   Dialog,
   DialogContent,
@@ -7,11 +7,11 @@ import {
   DialogHeader,
   DialogTitle,
   toast,
-} from '@portfolio/shared-ui';
+} from '@repo/ui';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useDeleteProjectMutation } from '../hooks/use-delete-project-mutation.hook';
+import { useDeleteProjectMutation } from '../hooks/use-delete-project-mutation.hook.js';
 
 type DeleteProjectDialogProps = {
   project: ProjectDto | null;

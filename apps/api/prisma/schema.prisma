@@ -1,0 +1,58 @@
+generator client {
+  provider            = "prisma-client"
+  output              = "../src/generated/prisma"
+  moduleFormat        = "esm"
+  importFileExtension = "js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id         String   @id @default(uuid())
+  keycloakId String   @unique
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([keycloakId], name: "user_kc_index")
+}
+
+model Resume {
+  id           String  @id @default(uuid())
+  title        String
+  description  String?
+  content      Json    @default("{}")
+  isPublic     Boolean @default(false)
+  shareEnabled Boolean @default(false)
+  views        Int     @default(0)
+  downloads    Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FeatureFlag {
+  key       String   @id
+  enabled   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id          String  @id @default(uuid())
+  title       String
+  description String?
+  tags        Tag[]
+  url         String?
+  repoUrl     String?
+  imageUrl    String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Tag {
+  title    String    @id @unique
+  projects Project[]
+}

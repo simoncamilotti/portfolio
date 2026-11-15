@@ -1,9 +1,9 @@
-import type { ProjectDto } from '@portfolio/shared-models';
+import type { ProjectDto } from '@repo/contracts';
 import type { FunctionComponent } from 'react';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { useProjectForm } from '../hooks/use-project-form.hook';
+import { useProjectForm } from '../hooks/use-project-form.hook.js';
 
 type ProjectFormProps = {
   project?: ProjectDto;

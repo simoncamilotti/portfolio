@@ -1,0 +1,43 @@
+{
+  "name": "@repo/client",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "nx": {
+    "name": "client",
+    "tags": [
+      "type:app",
+      "platform:browser"
+    ]
+  },
+  "dependencies": {
+    "@hookform/resolvers": "catalog:",
+    "@repo/contracts": "workspace:*",
+    "@repo/i18n": "workspace:*",
+    "@repo/query": "workspace:*",
+    "@repo/ui": "workspace:*",
+    "@tanstack/react-query": "catalog:",
+    "framer-motion": "catalog:",
+    "i18next": "catalog:",
+    "lucide-react": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-hook-form": "catalog:",
+    "react-i18next": "catalog:",
+    "react-router": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "catalog:",
+    "@testing-library/react": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "autoprefixer": "catalog:",
+    "jsdom": "catalog:",
+    "postcss": "catalog:",
+    "tailwindcss": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  }
+}

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { ContactForm } from './ContactForm';
+import { ContactForm } from './ContactForm.js';
 
 const mockOnSubmit = vi.fn((e: Event) => e.preventDefault());
 
@@ -8,7 +8,7 @@ vi.mock('react-i18next', () => ({
   useTranslation: () => ({ t: (key: string) => key }),
 }));
 
-vi.mock('../hooks/use-contact-form.hook', () => ({
+vi.mock('../hooks/use-contact-form.hook.js', () => ({
   useContactForm: () => ({
     isValid: true,
     control: undefined,

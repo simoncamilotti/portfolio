@@ -1,9 +1,9 @@
-import type { ResumeDto } from '@portfolio/shared-models';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@portfolio/shared-ui';
+import type { ResumeDto } from '@repo/contracts';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@repo/ui';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { CreateResumeForm } from './CreateResumeForm';
+import { CreateResumeForm } from './CreateResumeForm.js';
 
 export type CreateResumeDialogProps = {
   resumes?: ResumeDto[];

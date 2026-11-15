@@ -1,0 +1,122 @@
+import { NotFoundException } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
+
+import { ResumeService } from './resume.service.js';
+import { ResumeController } from './resume.controller.js';
+
+const mockResumeService = {
+  findAll: vi.fn(),
+  findPublic: vi.fn(),
+  findOne: vi.fn(),
+  create: vi.fn(),
+  update: vi.fn(),
+  setPublic: vi.fn(),
+  remove: vi.fn(),
+};
+
+const mockResumeDto = {
+  id: 'uuid-1',
+  title: 'Mon CV',
+  description: 'Description',
+  isPublic: false,
+  shareEnabled: false,
+  updatedAt: '2026-01-01T00:00:00.000Z',
+  views: 0,
+  downloads: 0,
+};
+
+const mockResumeDetailDto = {
+  ...mockResumeDto,
+  content: 'Contenu',
+};
+
+describe('ResumeController', () => {
+  let controller: ResumeController;
+
+  beforeEach(async () => {
+    vi.clearAllMocks();
+
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [ResumeController],
+      providers: [{ provide: ResumeService, useValue: mockResumeService }],
+    }).compile();
+
+    controller = module.get<ResumeController>(ResumeController);
+  });
+
+  it('findAll() should delegate to service and return the result', async () => {
+    mockResumeService.findAll.mockResolvedValue([mockResumeDto]);
+
+    const result = await controller.findAll();
+
+    expect(result).toEqual([mockResumeDto]);
+    expect(mockResumeService.findAll).toHaveBeenCalled();
+  });
+
+  it('findPublic() should delegate to service', async () => {
+    const publicResume = { ...mockResumeDetailDto, isPublic: true };
+    mockResumeService.findPublic.mockResolvedValue(publicResume);
+
+    const result = await controller.findPublic();
+
+    expect(result).toEqual(publicResume);
+    expect(mockResumeService.findPublic).toHaveBeenCalled();
+  });
+
+  it('findOne(id) should delegate with the id', async () => {
+    mockResumeService.findOne.mockResolvedValue(mockResumeDetailDto);
+
+    const result = await controller.findOne('uuid-1');
+
+    expect(result).toEqual(mockResumeDetailDto);
+    expect(mockResumeService.findOne).toHaveBeenCalledWith('uuid-1');
+  });
+
+  it('create(dto) should delegate with the dto', async () => {
+    const dto = { title: 'Mon CV', content: 'Contenu', isPublic: false };
+    mockResumeService.create.mockResolvedValue(mockResumeDetailDto);
+
+    const result = await controller.create(dto);
+
+    expect(result).toEqual(mockResumeDetailDto);
+    expect(mockResumeService.create).toHaveBeenCalledWith(dto);
+  });
+
+  it('update(id, dto) should delegate with id and dto', async () => {
+    const dto = { title: 'CV Mis à jour', content: 'Nouveau contenu', isPublic: true };
+    const updatedResume = { ...mockResumeDetailDto, ...dto };
+    mockResumeService.update.mockResolvedValue(updatedResume);
+
+    const result = await controller.update('uuid-1', dto);
+
+    expect(result).toEqual(updatedResume);
+    expect(mockResumeService.update).toHaveBeenCalledWith('uuid-1', dto);
+  });
+
+  it('setPublic(id, dto) should delegate with id and dto', async () => {
+    const dto = { isPublic: true };
+    const updatedResume = { ...mockResumeDetailDto, isPublic: true };
+    mockResumeService.setPublic.mockResolvedValue(updatedResume);
+
+    const result = await controller.setPublic('uuid-1', dto);
+
+    expect(result).toEqual(updatedResume);
+    expect(mockResumeService.setPublic).toHaveBeenCalledWith('uuid-1', dto);
+  });
+
+  it('remove(id) should delegate with the id', async () => {
+    mockResumeService.remove.mockResolvedValue(undefined);
+
+    await controller.remove('uuid-1');
+
+    expect(mockResumeService.remove).toHaveBeenCalledWith('uuid-1');
+  });
+
+  it('should propagate NotFoundException from service', async () => {
+    mockResumeService.findOne.mockRejectedValue(
+      new NotFoundException('Resume #uuid-999 not found'),
+    );
+
+    await expect(controller.findOne('uuid-999')).rejects.toThrow(NotFoundException);
+  });
+});

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 
-import { ResumeList } from './ResumeList';
+import { ResumeList } from './ResumeList.js';
 
 vi.mock('framer-motion', () => ({
   motion: {
@@ -11,13 +11,13 @@ vi.mock('framer-motion', () => ({
   },
 }));
 
-vi.mock('../hooks/use-delete-resume-by-id-mutation.hook', () => ({
+vi.mock('../hooks/use-delete-resume-by-id-mutation.hook.js', () => ({
   useDeleteResumeById: () => ({
     deleteResumeByIdMutation: { mutateAsync: vi.fn() },
   }),
 }));
 
-vi.mock('../hooks/use-set-resume-is-public.hook', () => ({
+vi.mock('../hooks/use-set-resume-is-public.hook.js', () => ({
   useSetResumeIsPublic: () => ({
     setResumeIsPublic: { mutateAsync: vi.fn() },
   }),
@@ -27,7 +27,7 @@ vi.mock('sonner', () => ({
   toast: { success: vi.fn() },
 }));
 
-vi.mock('../../ui/Dropdown-menu', () => ({
+vi.mock('../../ui/Dropdown-menu.js', () => ({
   DropdownMenu: ({ children }: any) => <div>{children}</div>,
   DropdownMenuTrigger: ({ children }: any) => <button>{children}</button>,
   DropdownMenuContent: ({ children }: any) => <div>{children}</div>,

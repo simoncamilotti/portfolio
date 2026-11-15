@@ -1,4 +1,4 @@
-import type { ProjectDto } from '@portfolio/shared-models';
+import type { ProjectDto } from '@repo/contracts';
 import type { ICellRendererParams } from 'ag-grid-community';
 
 export const TagsCellRenderer = (params: ICellRendererParams<ProjectDto>) => {

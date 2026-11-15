@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { ContactSuccess } from './ContactSuccess';
+import { ContactSuccess } from './ContactSuccess.js';
 
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({ t: (key: string) => key }),

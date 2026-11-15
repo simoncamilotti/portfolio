@@ -1,0 +1,31 @@
+{
+  "name": "@repo/contracts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@repo/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./server": {
+      "@repo/source": "./src/server.ts",
+      "types": "./dist/server.d.ts",
+      "import": "./dist/server.js",
+      "default": "./dist/server.js"
+    }
+  },
+  "nx": {
+    "tags": [
+      "type:lib",
+      "platform:universal"
+    ]
+  },
+  "dependencies": {
+    "nestjs-zod": "catalog:",
+    "zod": "catalog:"
+  }
+}

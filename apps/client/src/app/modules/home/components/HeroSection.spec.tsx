@@ -10,7 +10,7 @@ vi.mock('framer-motion', () => ({
 
 describe('HeroSection', () => {
   it('should render the main heading', async () => {
-    const { HeroSection } = await import('./HeroSection');
+    const { HeroSection } = await import('./HeroSection.js');
 
     render(<HeroSection />);
 
@@ -19,7 +19,7 @@ describe('HeroSection', () => {
   });
 
   it('should render the availability badge', async () => {
-    const { HeroSection } = await import('./HeroSection');
+    const { HeroSection } = await import('./HeroSection.js');
 
     render(<HeroSection />);
 
@@ -27,7 +27,7 @@ describe('HeroSection', () => {
   });
 
   it('should render the CV link', async () => {
-    const { HeroSection } = await import('./HeroSection');
+    const { HeroSection } = await import('./HeroSection.js');
 
     render(<HeroSection />);
 
@@ -35,7 +35,7 @@ describe('HeroSection', () => {
   });
 
   it('should render social links', async () => {
-    const { HeroSection } = await import('./HeroSection');
+    const { HeroSection } = await import('./HeroSection.js');
 
     render(<HeroSection />);
 
