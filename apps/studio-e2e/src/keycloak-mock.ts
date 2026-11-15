@@ -23,7 +23,7 @@ export async function mockKeycloak(page: Page, browserName = 'chromium'): Promis
   const sessionState = 'mock-session-id';
   let capturedNonce: string | null = null;
 
-  // /config.js is not versioned (config/studio/config.exemple.js): point the app at this mock.
+  // /config.js is not versioned (config/studio/config.example.js): point the app at this mock.
   await page.route('**/config.js', (route) =>
     route.fulfill({
       contentType: 'text/javascript',
