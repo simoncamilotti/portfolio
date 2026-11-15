@@ -10,7 +10,7 @@ vi.mock('framer-motion', () => ({
 
 describe('PublicResume', () => {
   it('should render the CV heading', async () => {
-    const { PublicResume } = await import('./PublicResume');
+    const { PublicResume } = await import('./PublicResume.js');
 
     render(<PublicResume />);
 
@@ -18,7 +18,7 @@ describe('PublicResume', () => {
   });
 
   it('should set the correct section id', async () => {
-    const { PublicResume } = await import('./PublicResume');
+    const { PublicResume } = await import('./PublicResume.js');
 
     const { container } = render(<PublicResume />);
 
@@ -26,7 +26,7 @@ describe('PublicResume', () => {
   });
 
   it('should render the CV content', async () => {
-    const { PublicResume } = await import('./PublicResume');
+    const { PublicResume } = await import('./PublicResume.js');
 
     render(<PublicResume />);
 

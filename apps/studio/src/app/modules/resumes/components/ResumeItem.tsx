@@ -1,12 +1,12 @@
-import type { ResumeDto } from '@portfolio/shared-models';
+import type { ResumeDto } from '@repo/contracts';
 import { motion } from 'framer-motion';
 import { Download, Eye, Globe, Link as LinkIcon } from 'lucide-react';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link } from 'react-router';
 
-import { RoutePaths } from '../../../routes/paths.const';
-import { ResumeItemMenu } from './ResumeItemMenu';
+import { RoutePaths } from '../../../routes/paths.const.js';
+import { ResumeItemMenu } from './ResumeItemMenu.js';
 
 type ResumeItemProps = {
   resume: ResumeDto;

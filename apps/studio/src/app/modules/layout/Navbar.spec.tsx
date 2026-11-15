@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 
-import { Navbar } from './Navbar';
+import { Navbar } from './Navbar.js';
 
-vi.mock('../auth/auth', () => ({
+vi.mock('../auth/auth.js', () => ({
   logout: vi.fn(),
 }));
 

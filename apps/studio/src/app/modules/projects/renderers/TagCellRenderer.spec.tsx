@@ -1,8 +1,8 @@
-import type { ProjectDto } from '@portfolio/shared-models';
+import type { ProjectDto } from '@repo/contracts';
 import { render, screen } from '@testing-library/react';
 import type { ICellRendererParams } from 'ag-grid-community';
 
-import { TagsCellRenderer } from './TagCellRenderer';
+import { TagsCellRenderer } from './TagCellRenderer.js';
 
 const makeParams = (value: string[] | undefined) => ({ value }) as ICellRendererParams<ProjectDto>;
 

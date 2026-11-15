@@ -1,8 +1,8 @@
-import { ResumesService } from './resumes.service';
+import { ResumesService } from './resumes.service.js';
 
-import { axiosInstance } from '../api/axiosInstance';
+import { axiosInstance } from '../api/axiosInstance.js';
 
-vi.mock('../api/axiosInstance', () => ({
+vi.mock('../api/axiosInstance.js', () => ({
   axiosInstance: {
     get: vi.fn(),
     post: vi.fn(),

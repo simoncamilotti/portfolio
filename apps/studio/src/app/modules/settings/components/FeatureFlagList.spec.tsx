@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { FeatureFlagList } from './FeatureFlagList';
+import { FeatureFlagList } from './FeatureFlagList.js';
 
 const mockFlags = [
   { key: 'projects', enabled: true },
@@ -22,11 +22,11 @@ vi.mock('react-i18next', () => ({
   useTranslation: () => ({ t: (key: string) => key }),
 }));
 
-vi.mock('@portfolio/shared-ui', () => ({
+vi.mock('@repo/ui', () => ({
   toast: { success: vi.fn(), error: vi.fn() },
 }));
 
-vi.mock('../hooks/use-toggle-feature-flag-mutation.hook', () => ({
+vi.mock('../hooks/use-toggle-feature-flag-mutation.hook.js', () => ({
   useToggleFeatureFlagMutation: () => ({
     toggleFeatureFlagMutation: {
       mutate: mockMutate,
@@ -35,11 +35,11 @@ vi.mock('../hooks/use-toggle-feature-flag-mutation.hook', () => ({
   }),
 }));
 
-vi.mock('./FeatureFlagForm', () => ({
+vi.mock('./FeatureFlagForm.js', () => ({
   FeatureFlagForm: () => <div data-testid="feature-flag-form" />,
 }));
 
-vi.mock('./FeatureFlagListSkeleton', () => ({
+vi.mock('./FeatureFlagListSkeleton.js', () => ({
   FeatureFlagListSkeleton: () => <div data-testid="feature-flag-skeleton" />,
 }));
 
@@ -60,15 +60,15 @@ describe('FeatureFlagList', () => {
     render(<FeatureFlagList />);
 
     const switches = screen.getAllByRole('switch');
-    expect(switches[0].getAttribute('aria-checked')).toBe('true');
-    expect(switches[1].getAttribute('aria-checked')).toBe('false');
+    expect(switches[0]!.getAttribute('aria-checked')).toBe('true');
+    expect(switches[1]!.getAttribute('aria-checked')).toBe('false');
   });
 
   it('should call mutation when toggling a flag', () => {
     render(<FeatureFlagList />);
 
     const switches = screen.getAllByRole('switch');
-    fireEvent.click(switches[0]);
+    fireEvent.click(switches[0]!);
 
     expect(mockMutate).toHaveBeenCalledWith(
       { key: 'projects', enabled: false },

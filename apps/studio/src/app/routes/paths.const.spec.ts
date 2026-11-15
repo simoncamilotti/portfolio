@@ -1,4 +1,4 @@
-import { RoutePaths } from './paths.const';
+import { RoutePaths } from './paths.const.js';
 
 describe('RoutePaths', () => {
   it('should define the correct paths', () => {

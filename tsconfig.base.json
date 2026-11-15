@@ -1,34 +1,23 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
-    "rootDir": ".",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+    "composite": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
     "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "isolatedModules": true,
+    "lib": ["es2024"],
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
     "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@portfolio/core": ["libs/api/core/src/index.ts"],
-      "@portfolio/shared-models": ["libs/shared-models/src/index.ts"],
-      "@portfolio/shared-models/server": ["libs/shared-models/src/server.ts"],
-      "@portfolio/shared-ui": ["libs/shared-ui/src/index.ts"],
-      "@portfolio/i18n": ["libs/i18n/src/index.ts"],
-      "@portfolio/web": ["libs/web/src/index.ts"],
-      "@portfolio/web/api": ["libs/web/src/lib/api/axiosInstance.ts"]
-    },
-    "strict": false,
+    "strict": true,
+    "target": "es2024",
+    "customConditions": ["@repo/source"],
     "noUncheckedSideEffectImports": false,
-    "types": ["*"],
-    "esModuleInterop": false,
-    "ignoreDeprecations": "6.0",
-    "resolveJsonModule": true
-  },
-  "exclude": ["node_modules", "tmp"]
+    "noUncheckedIndexedAccess": true
+  }
 }

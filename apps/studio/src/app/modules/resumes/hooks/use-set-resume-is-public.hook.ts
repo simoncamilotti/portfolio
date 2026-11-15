@@ -1,8 +1,8 @@
-import type { ResumeDto } from '@portfolio/shared-models';
+import type { ResumeDto } from '@repo/contracts';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { resumesKey } from '../resumes.key';
-import { ResumesService } from '../resumes.service';
+import { resumesKey } from '../resumes.key.js';
+import { ResumesService } from '../resumes.service.js';
 
 export const useSetResumeIsPublic = (resumeId: string) => {
   const queryClient = useQueryClient();

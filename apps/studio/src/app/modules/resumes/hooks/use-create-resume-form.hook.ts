@@ -1,12 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { toast } from '@portfolio/shared-ui';
+import { toast } from '@repo/ui';
 import type { BaseSyntheticEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import type { CreateResumeForm } from '../resume.type';
-import { createResumeFormSchema } from '../resume.type';
-import { useCreateResumeMutationHook } from './use-create-resume-mutation.hook';
+import type { CreateResumeForm } from '../resume.type.js';
+import { createResumeFormSchema } from '../resume.type.js';
+import { useCreateResumeMutationHook } from './use-create-resume-mutation.hook.js';
 
 export type UseCreateResumeFormProps = {
   alreadyTakenResumeNames: string[];

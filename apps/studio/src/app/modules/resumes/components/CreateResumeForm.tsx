@@ -1,10 +1,10 @@
-import type { ResumeDto } from '@portfolio/shared-models';
+import type { ResumeDto } from '@repo/contracts';
 import type { FunctionComponent } from 'react';
 import { useMemo } from 'react';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { useCreateResumeForm } from '../hooks/use-create-resume-form.hook';
+import { useCreateResumeForm } from '../hooks/use-create-resume-form.hook.js';
 
 type CreateResumeFormProps = {
   resumes?: ResumeDto[];

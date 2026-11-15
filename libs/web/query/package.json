@@ -1,0 +1,40 @@
+{
+  "name": "@repo/query",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@repo/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./api": {
+      "@repo/source": "./src/lib/api/axiosInstance.ts",
+      "types": "./dist/lib/api/axiosInstance.d.ts",
+      "import": "./dist/lib/api/axiosInstance.js",
+      "default": "./dist/lib/api/axiosInstance.js"
+    }
+  },
+  "nx": {
+    "tags": [
+      "type:lib",
+      "platform:browser"
+    ]
+  },
+  "dependencies": {
+    "@tanstack/react-query": "catalog:",
+    "axios": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "catalog:"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "jsdom": "catalog:",
+    "vitest": "catalog:"
+  }
+}

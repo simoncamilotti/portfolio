@@ -3,9 +3,9 @@ import type {
   ResumeDetailDto,
   ResumeDto,
   SetPublicResumeRequestDto,
-} from '@portfolio/shared-models';
+} from '@repo/contracts';
 
-import { axiosInstance } from '../api/axiosInstance';
+import { axiosInstance } from '../api/axiosInstance.js';
 
 export const ResumesService = {
   getAllResumes: (): Promise<ResumeDto[]> =>

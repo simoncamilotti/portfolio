@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import type { FunctionComponent } from 'react';
 
-import { useFeatureFlags } from '../modules/feature-flags/hooks/use-feature-flags.hook';
-import { ContactSection } from '../modules/home/components/ContactSection';
-import { HeroSection } from '../modules/home/components/HeroSection';
-import { ProjectsSection } from '../modules/home/components/ProjectSection';
-import { PublicResume } from '../modules/home/components/PublicResume';
-import { projectsKey } from '../modules/projects/projects.key';
-import { ProjectsService } from '../modules/projects/projects.service';
+import { useFeatureFlags } from '../modules/feature-flags/hooks/use-feature-flags.hook.js';
+import { ContactSection } from '../modules/home/components/ContactSection.js';
+import { HeroSection } from '../modules/home/components/HeroSection.js';
+import { ProjectsSection } from '../modules/home/components/ProjectSection.js';
+import { PublicResume } from '../modules/home/components/PublicResume.js';
+import { projectsKey } from '../modules/projects/projects.key.js';
+import { ProjectsService } from '../modules/projects/projects.service.js';
 
 export const HomePage: FunctionComponent = () => {
   const { data: projects } = useQuery({

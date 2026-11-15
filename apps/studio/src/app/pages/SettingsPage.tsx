@@ -2,10 +2,10 @@ import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath } from 'react-router';
 
-import type { BreadcrumbItemsProps } from '../modules/layout/PageBreadcrumb';
-import { PageBreadcrumb } from '../modules/layout/PageBreadcrumb';
-import { FeatureFlagList } from '../modules/settings/components/FeatureFlagList';
-import { RouteNames, RoutePaths } from '../routes/paths.const';
+import type { BreadcrumbItemsProps } from '../modules/layout/PageBreadcrumb.js';
+import { PageBreadcrumb } from '../modules/layout/PageBreadcrumb.js';
+import { FeatureFlagList } from '../modules/settings/components/FeatureFlagList.js';
+import { RouteNames, RoutePaths } from '../routes/paths.const.js';
 
 export const SettingsPage: FunctionComponent = () => {
   const { t } = useTranslation('studio');

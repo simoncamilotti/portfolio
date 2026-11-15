@@ -1,10 +1,12 @@
+import { vi } from 'vitest';
+
 const mockKeycloakInstance = {
   init: vi.fn().mockResolvedValue(true),
   login: vi.fn().mockResolvedValue(undefined),
   logout: vi.fn().mockResolvedValue(undefined),
   updateToken: vi.fn().mockResolvedValue(true),
   authenticated: false,
-  token: 'mock-token',
+  token: 'mock-token' as string | undefined,
   onTokenExpired: null as (() => void) | null,
   onAuthSuccess: null as (() => void) | null,
   onAuthRefreshSuccess: null as (() => void) | null,
@@ -36,7 +38,7 @@ describe('auth module', () => {
   describe('initAuth', () => {
     it('should initialize keycloak with correct options', async () => {
       const Keycloak = (await import('keycloak-js')).default;
-      const { initAuth } = await import('./auth');
+      const { initAuth } = await import('./auth.js');
 
       await initAuth(authOptions);
 
@@ -48,7 +50,7 @@ describe('auth module', () => {
     });
 
     it('should call keycloak.init with check-sso', async () => {
-      const { initAuth } = await import('./auth');
+      const { initAuth } = await import('./auth.js');
 
       await initAuth(authOptions);
 
@@ -60,7 +62,7 @@ describe('auth module', () => {
     });
 
     it('should return the authenticated status', async () => {
-      const { initAuth } = await import('./auth');
+      const { initAuth } = await import('./auth.js');
 
       const result = await initAuth(authOptions);
 
@@ -69,7 +71,7 @@ describe('auth module', () => {
 
     it('should return false when not authenticated', async () => {
       mockKeycloakInstance.init.mockResolvedValue(false);
-      const { initAuth } = await import('./auth');
+      const { initAuth } = await import('./auth.js');
 
       const result = await initAuth(authOptions);
 
@@ -77,7 +79,7 @@ describe('auth module', () => {
     });
 
     it('should throw if called twice', async () => {
-      const { initAuth } = await import('./auth');
+      const { initAuth } = await import('./auth.js');
 
       await initAuth(authOptions);
 
@@ -85,7 +87,7 @@ describe('auth module', () => {
     });
 
     it('should register onTokenExpired callback that refreshes token', async () => {
-      const { initAuth } = await import('./auth');
+      const { initAuth } = await import('./auth.js');
 
       await initAuth(authOptions);
       mockKeycloakInstance.onTokenExpired!();
@@ -94,7 +96,7 @@ describe('auth module', () => {
     });
 
     it('should store token in sessionStorage on auth success', async () => {
-      const { initAuth } = await import('./auth');
+      const { initAuth } = await import('./auth.js');
 
       await initAuth(authOptions);
       mockKeycloakInstance.onAuthSuccess!();
@@ -104,7 +106,7 @@ describe('auth module', () => {
     });
 
     it('should update token in sessionStorage on auth refresh', async () => {
-      const { initAuth } = await import('./auth');
+      const { initAuth } = await import('./auth.js');
 
       await initAuth(authOptions);
       mockKeycloakInstance.token = 'refreshed-token';
@@ -115,7 +117,7 @@ describe('auth module', () => {
     });
 
     it('should not store token if token is undefined', async () => {
-      const { initAuth } = await import('./auth');
+      const { initAuth } = await import('./auth.js');
 
       await initAuth(authOptions);
       mockKeycloakInstance.token = undefined;
@@ -128,7 +130,7 @@ describe('auth module', () => {
 
   describe('login', () => {
     it('should call keycloak.login with redirectUri', async () => {
-      const { initAuth, login } = await import('./auth');
+      const { initAuth, login } = await import('./auth.js');
 
       await initAuth(authOptions);
       login('http://localhost/callback');
@@ -139,7 +141,7 @@ describe('auth module', () => {
     });
 
     it('should call keycloak.login without redirectUri', async () => {
-      const { initAuth, login } = await import('./auth');
+      const { initAuth, login } = await import('./auth.js');
 
       await initAuth(authOptions);
       login();
@@ -152,7 +154,7 @@ describe('auth module', () => {
 
   describe('logout', () => {
     it('should call keycloak.logout and remove stored token', async () => {
-      const { initAuth, logout } = await import('./auth');
+      const { initAuth, logout } = await import('./auth.js');
 
       await initAuth(authOptions);
       sessionStorage.setItem(`${window.location.host}-auth_token`, 'some-token');
@@ -167,7 +169,7 @@ describe('auth module', () => {
 
   describe('isAuthenticated', () => {
     it('should return keycloak.authenticated value', async () => {
-      const { initAuth, isAuthenticated } = await import('./auth');
+      const { initAuth, isAuthenticated } = await import('./auth.js');
 
       await initAuth(authOptions);
       mockKeycloakInstance.authenticated = true;
@@ -176,7 +178,7 @@ describe('auth module', () => {
     });
 
     it('should return false when not authenticated', async () => {
-      const { initAuth, isAuthenticated } = await import('./auth');
+      const { initAuth, isAuthenticated } = await import('./auth.js');
 
       await initAuth(authOptions);
 
@@ -186,7 +188,7 @@ describe('auth module', () => {
 
   describe('removeStoredToken', () => {
     it('should remove token from sessionStorage', async () => {
-      const { removeStoredToken } = await import('./auth');
+      const { removeStoredToken } = await import('./auth.js');
       const key = `${window.location.host}-auth_token`;
 
       sessionStorage.setItem(key, 'test-token');
@@ -198,7 +200,7 @@ describe('auth module', () => {
 
   describe('redirect URL management', () => {
     it('should store and retrieve redirect URL', async () => {
-      const { setRedirectUrl, getRedirectUrl } = await import('./auth');
+      const { setRedirectUrl, getRedirectUrl } = await import('./auth.js');
 
       setRedirectUrl('http://localhost/dashboard');
 
@@ -206,13 +208,13 @@ describe('auth module', () => {
     });
 
     it('should return null when no redirect URL is stored', async () => {
-      const { getRedirectUrl } = await import('./auth');
+      const { getRedirectUrl } = await import('./auth.js');
 
       expect(getRedirectUrl()).toBeNull();
     });
 
     it('should remove redirect URL', async () => {
-      const { setRedirectUrl, removeRedirectUrl, getRedirectUrl } = await import('./auth');
+      const { setRedirectUrl, removeRedirectUrl, getRedirectUrl } = await import('./auth.js');
 
       setRedirectUrl('http://localhost/dashboard');
       removeRedirectUrl();

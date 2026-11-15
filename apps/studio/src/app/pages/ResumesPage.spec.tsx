@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { ResumesPage } from './ResumesPage';
+import { ResumesPage } from './ResumesPage.js';
 
 vi.mock('@tanstack/react-query', () => ({
   useQuery: vi.fn().mockReturnValue({
@@ -17,7 +17,7 @@ vi.mock('@tanstack/react-query', () => ({
   }),
 }));
 
-vi.mock('../modules/resumes/components/ResumeHeader', () => ({
+vi.mock('../modules/resumes/components/ResumeHeader.js', () => ({
   ResumeHeader: ({ setCreateOpen }: { setCreateOpen: (v: boolean) => void }) => (
     <button data-testid="resumes-header" onClick={() => setCreateOpen(true)}>
       Nouveau CV
@@ -25,16 +25,16 @@ vi.mock('../modules/resumes/components/ResumeHeader', () => ({
   ),
 }));
 
-vi.mock('../modules/resumes/components/ResumeList', () => ({
+vi.mock('../modules/resumes/components/ResumeList.js', () => ({
   ResumeList: () => <div data-testid="resume-list" />,
 }));
 
-vi.mock('../modules/resumes/components/CreateResumeDialog', () => ({
+vi.mock('../modules/resumes/components/CreateResumeDialog.js', () => ({
   CreateResumeDialog: ({ open }: { open: boolean }) =>
     open ? <div role="dialog" data-testid="create-dialog" /> : null,
 }));
 
-vi.mock('../modules/layout/PageBreadcrumb', () => ({
+vi.mock('../modules/layout/PageBreadcrumb.js', () => ({
   PageBreadcrumb: ({ breadcrumbItems }: { breadcrumbItems: Array<{ title: string }> }) => (
     <nav data-testid="page-breadcrumb">{breadcrumbItems.map((i) => i.title).join(' / ')}</nav>
   ),

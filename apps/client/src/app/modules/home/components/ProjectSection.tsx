@@ -1,9 +1,9 @@
-import type { ProjectDto } from '@portfolio/shared-models';
+import type { ProjectDto } from '@repo/contracts';
 import { motion } from 'framer-motion';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { RouteAnchors } from '../../../routes/paths.const';
+import { RouteAnchors } from '../../../routes/paths.const.js';
 
 type ProjectSectionProps = {
   projects: ProjectDto[];

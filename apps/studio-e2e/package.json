@@ -1,0 +1,35 @@
+{
+  "name": "@repo/studio-e2e",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "nx": {
+    "name": "studio-e2e",
+    "tags": [
+      "type:e2e",
+      "platform:node"
+    ],
+    "implicitDependencies": [
+      "studio"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "playwright test",
+          "cwd": "{projectRoot}"
+        },
+        "dependsOn": [
+          "^build",
+          "studio:build"
+        ],
+        "parallelism": false
+      }
+    }
+  },
+  "devDependencies": {
+    "@playwright/test": "catalog:",
+    "@types/node": "catalog:",
+    "eslint-plugin-playwright": "catalog:"
+  }
+}

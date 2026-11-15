@@ -1,19 +1,19 @@
-import type { ProjectDto } from '@portfolio/shared-models';
+import type { ProjectDto } from '@repo/contracts';
 import { useQuery } from '@tanstack/react-query';
 import type { FunctionComponent } from 'react';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath } from 'react-router';
 
-import type { BreadcrumbItemsProps } from '../modules/layout/PageBreadcrumb';
-import { PageBreadcrumb } from '../modules/layout/PageBreadcrumb';
-import { DeleteProjectDialog } from '../modules/projects/components/DeleteProjectDialog';
-import { ProjectFormDialog } from '../modules/projects/components/ProjectFormDialog';
-import { ProjectsGrid } from '../modules/projects/components/ProjectsGrid';
-import { ProjectsHeader } from '../modules/projects/components/ProjectsHeader';
-import { projectsKey } from '../modules/projects/projects.key';
-import { ProjectsService } from '../modules/projects/projects.service';
-import { RouteNames, RoutePaths } from '../routes/paths.const';
+import type { BreadcrumbItemsProps } from '../modules/layout/PageBreadcrumb.js';
+import { PageBreadcrumb } from '../modules/layout/PageBreadcrumb.js';
+import { DeleteProjectDialog } from '../modules/projects/components/DeleteProjectDialog.js';
+import { ProjectFormDialog } from '../modules/projects/components/ProjectFormDialog.js';
+import { ProjectsGrid } from '../modules/projects/components/ProjectsGrid.js';
+import { ProjectsHeader } from '../modules/projects/components/ProjectsHeader.js';
+import { projectsKey } from '../modules/projects/projects.key.js';
+import { ProjectsService } from '../modules/projects/projects.service.js';
+import { RouteNames, RoutePaths } from '../routes/paths.const.js';
 
 export const ProjectsPage: FunctionComponent = () => {
   const { t } = useTranslation('studio');

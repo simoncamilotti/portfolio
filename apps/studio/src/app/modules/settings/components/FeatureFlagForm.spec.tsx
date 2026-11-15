@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
-import { FeatureFlagForm } from './FeatureFlagForm';
+import { FeatureFlagForm } from './FeatureFlagForm.js';
 
 const mockOnSubmit = vi.fn((e: Event) => e.preventDefault());
 
@@ -8,7 +8,7 @@ vi.mock('react-i18next', () => ({
   useTranslation: () => ({ t: (key: string) => key }),
 }));
 
-vi.mock('../hooks/use-feature-flag-form.hook', () => ({
+vi.mock('../hooks/use-feature-flag-form.hook.js', () => ({
   useFeatureFlagForm: () => ({
     control: undefined,
     isValid: true,

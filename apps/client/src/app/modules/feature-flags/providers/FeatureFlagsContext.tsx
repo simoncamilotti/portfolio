@@ -1,7 +1,7 @@
 import type { FunctionComponent, ReactNode } from 'react';
 import { createContext, useMemo } from 'react';
 
-import { useFeatureFlagsQuery } from '../hooks/use-feature-flags-query.hook';
+import { useFeatureFlagsQuery } from '../hooks/use-feature-flags-query.hook.js';
 
 export type FeatureFlagsContextValue = {
   isEnabled: (key: string) => boolean;

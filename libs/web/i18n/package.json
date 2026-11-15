@@ -1,0 +1,26 @@
+{
+  "name": "@repo/i18n",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@repo/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "nx": {
+    "tags": [
+      "type:lib",
+      "platform:browser"
+    ]
+  },
+  "dependencies": {
+    "i18next": "catalog:",
+    "i18next-browser-languagedetector": "catalog:",
+    "react-i18next": "catalog:"
+  }
+}

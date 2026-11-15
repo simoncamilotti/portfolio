@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 
-import { Navbar } from './Navbar';
+import { Navbar } from './Navbar.js';
 
 const mockIsEnabled = vi.fn();
 
-vi.mock('../feature-flags/hooks/use-feature-flags.hook', () => ({
+vi.mock('../feature-flags/hooks/use-feature-flags.hook.js', () => ({
   useFeatureFlags: () => ({ isEnabled: mockIsEnabled, loading: false }),
 }));
 

@@ -1,9 +1,9 @@
-import type { ResumeDto } from '@portfolio/shared-models';
+import type { ResumeDto } from '@repo/contracts';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { NoResumePlaceholder } from './NoResumePlaceholder';
-import { ResumeItem } from './ResumeItem';
+import { NoResumePlaceholder } from './NoResumePlaceholder.js';
+import { ResumeItem } from './ResumeItem.js';
 
 type ResumeListProps = {
   resumes?: ResumeDto[];

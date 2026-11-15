@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { ResumeHeader } from './ResumeHeader';
+import { ResumeHeader } from './ResumeHeader.js';
 
 describe('ResumeHeader', () => {
   it('should render the title', () => {

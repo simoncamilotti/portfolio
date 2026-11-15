@@ -1,25 +1,25 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 
-import { ResumeItemMenu } from './ResumeItemMenu';
+import { ResumeItemMenu } from './ResumeItemMenu.js';
 
 vi.mock('sonner', () => ({
   toast: { success: vi.fn() },
 }));
 
-vi.mock('../hooks/use-delete-resume-by-id-mutation.hook', () => ({
+vi.mock('../hooks/use-delete-resume-by-id-mutation.hook.js', () => ({
   useDeleteResumeById: () => ({
     deleteResumeByIdMutation: { mutateAsync: vi.fn() },
   }),
 }));
 
-vi.mock('../hooks/use-set-resume-is-public.hook', () => ({
+vi.mock('../hooks/use-set-resume-is-public.hook.js', () => ({
   useSetResumeIsPublic: () => ({
     setResumeIsPublic: { mutateAsync: vi.fn() },
   }),
 }));
 
-vi.mock('../../ui/Dropdown-menu', () => ({
+vi.mock('../../ui/Dropdown-menu.js', () => ({
   DropdownMenu: ({ children }: any) => <div>{children}</div>,
   DropdownMenuTrigger: ({ children }: any) => <button>{children}</button>,
   DropdownMenuContent: ({ children }: any) => <div>{children}</div>,

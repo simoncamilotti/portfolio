@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { FeatureFlagItem } from './FeatureFlagItem';
+import { FeatureFlagItem } from './FeatureFlagItem.js';
 
 describe('FeatureFlagItem', () => {
   const handleToggle = vi.fn();

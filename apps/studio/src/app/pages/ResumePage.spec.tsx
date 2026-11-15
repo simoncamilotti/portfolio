@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { ResumePage } from './ResumePage';
+import { ResumePage } from './ResumePage.js';
 
 vi.mock('@tanstack/react-query', () => ({
   useQuery: vi.fn().mockReturnValue({ data: undefined }),
@@ -13,7 +13,7 @@ vi.mock('react-router', () => ({
   generatePath: vi.fn((path: string) => path),
 }));
 
-vi.mock('../modules/layout/PageBreadcrumb', () => ({
+vi.mock('../modules/layout/PageBreadcrumb.js', () => ({
   PageBreadcrumb: ({
     breadcrumbItems,
   }: {

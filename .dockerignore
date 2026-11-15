@@ -1,31 +1,17 @@
-node_modules
-dist
-.nx
 .git
-.gitignore
-coverage
-tmp
-
-# Environment files
+.nx
+**/node_modules
+**/dist
+**/out-tsc
+**/coverage
+**/test-output
+**/src/generated
 .env
 .env.*
+!.env.example
+.claude
 
-# Documentation
-*.md
-
-# IDE
-.vscode
-.idea
-*.swp
-*.swo
-
-# Tests
-apps/*/playwright
-apps/*-e2e
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Docker
-docker-compose.yml
+# Local only: the Keycloak H2 files of the dev setup, the runtime configuration of the web apps.
+config/keycloak/data
+apps/client/public/config.js
+apps/studio/public/config.js

@@ -1,4 +1,4 @@
-import { createResumeFormSchema } from './resume.type';
+import { createResumeFormSchema } from './resume.type.js';
 
 describe('createResumeFormSchema', () => {
   it('should accept a valid form with title and description', () => {

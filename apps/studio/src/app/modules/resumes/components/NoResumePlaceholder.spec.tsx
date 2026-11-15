@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import { NoResumePlaceholder } from './NoResumePlaceholder';
+import { NoResumePlaceholder } from './NoResumePlaceholder.js';
 
 describe('NoResumePlaceholder', () => {
   it('should render the placeholder container', () => {

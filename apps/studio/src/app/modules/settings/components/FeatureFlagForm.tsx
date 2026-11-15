@@ -1,10 +1,10 @@
-import type { FeatureFlagDto } from '@portfolio/shared-models';
+import type { FeatureFlagDto } from '@repo/contracts';
 import { Loader2, Plus } from 'lucide-react';
 import type { FunctionComponent } from 'react';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { useFeatureFlagForm } from '../hooks/use-feature-flag-form.hook';
+import { useFeatureFlagForm } from '../hooks/use-feature-flag-form.hook.js';
 
 type FeatureFlagFormProps = {
   existingFlags?: FeatureFlagDto[];

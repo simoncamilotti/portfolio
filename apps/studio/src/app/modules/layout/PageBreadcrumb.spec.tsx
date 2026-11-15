@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 
-import type { BreadcrumbItemsProps } from './PageBreadcrumb';
-import { PageBreadcrumb } from './PageBreadcrumb';
+import type { BreadcrumbItemsProps } from './PageBreadcrumb.js';
+import { PageBreadcrumb } from './PageBreadcrumb.js';
 
 describe('PageBreadcrumb', () => {
   it('should render a single breadcrumb item as text', () => {

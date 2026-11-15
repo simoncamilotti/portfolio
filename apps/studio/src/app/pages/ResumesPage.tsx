@@ -4,14 +4,14 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath } from 'react-router';
 
-import type { BreadcrumbItemsProps } from '../modules/layout/PageBreadcrumb';
-import { PageBreadcrumb } from '../modules/layout/PageBreadcrumb';
-import { CreateResumeDialog } from '../modules/resumes/components/CreateResumeDialog';
-import { ResumeHeader } from '../modules/resumes/components/ResumeHeader';
-import { ResumeList } from '../modules/resumes/components/ResumeList';
-import { resumesKey } from '../modules/resumes/resumes.key';
-import { ResumesService } from '../modules/resumes/resumes.service';
-import { RouteNames, RoutePaths } from '../routes/paths.const';
+import type { BreadcrumbItemsProps } from '../modules/layout/PageBreadcrumb.js';
+import { PageBreadcrumb } from '../modules/layout/PageBreadcrumb.js';
+import { CreateResumeDialog } from '../modules/resumes/components/CreateResumeDialog.js';
+import { ResumeHeader } from '../modules/resumes/components/ResumeHeader.js';
+import { ResumeList } from '../modules/resumes/components/ResumeList.js';
+import { resumesKey } from '../modules/resumes/resumes.key.js';
+import { ResumesService } from '../modules/resumes/resumes.service.js';
+import { RouteNames, RoutePaths } from '../routes/paths.const.js';
 
 export const ResumesPage: FunctionComponent = () => {
   const { t } = useTranslation('studio');

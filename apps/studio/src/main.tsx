@@ -1,11 +1,11 @@
-import '@portfolio/i18n';
+import '@repo/i18n';
 
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter } from 'react-router';
 
-import { App } from './app/App';
-import { initAuth } from './app/modules/auth/auth';
-import { routes } from './app/routes/routes';
+import { App } from './app/App.js';
+import { initAuth } from './app/modules/auth/auth.js';
+import { routes } from './app/routes/routes.js';
 
 if (!window.config?.auth) {
   throw new Error(

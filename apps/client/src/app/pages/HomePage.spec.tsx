@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { HomePage } from './HomePage';
+import { HomePage } from './HomePage.js';
 
 const mockIsEnabled = vi.fn();
 
@@ -8,23 +8,23 @@ vi.mock('@tanstack/react-query', () => ({
   useQuery: vi.fn().mockReturnValue({ data: undefined }),
 }));
 
-vi.mock('../modules/feature-flags/hooks/use-feature-flags.hook', () => ({
+vi.mock('../modules/feature-flags/hooks/use-feature-flags.hook.js', () => ({
   useFeatureFlags: () => ({ isEnabled: mockIsEnabled, loading: false }),
 }));
 
-vi.mock('../modules/home/components/HeroSection', () => ({
+vi.mock('../modules/home/components/HeroSection.js', () => ({
   HeroSection: () => <div data-testid="hero-section" />,
 }));
 
-vi.mock('../modules/home/components/ProjectSection', () => ({
+vi.mock('../modules/home/components/ProjectSection.js', () => ({
   ProjectsSection: () => <div data-testid="projects-section" />,
 }));
 
-vi.mock('../modules/home/components/PublicResume', () => ({
+vi.mock('../modules/home/components/PublicResume.js', () => ({
   PublicResume: () => <div data-testid="public-resume" />,
 }));
 
-vi.mock('../modules/home/components/ContactSection', () => ({
+vi.mock('../modules/home/components/ContactSection.js', () => ({
   ContactSection: () => <div data-testid="contact-section" />,
 }));
 

@@ -2,10 +2,10 @@ import { motion } from 'framer-motion';
 import { type FunctionComponent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { RouteAnchors } from '../../../routes/paths.const';
-import type { FormStatus } from '../hooks/use-contact-form.hook';
-import { ContactForm } from './ContactForm';
-import { ContactSuccess } from './ContactSuccess';
+import { RouteAnchors } from '../../../routes/paths.const.js';
+import type { FormStatus } from '../hooks/use-contact-form.hook.js';
+import { ContactForm } from './ContactForm.js';
+import { ContactSuccess } from './ContactSuccess.js';
 
 export const ContactSection: FunctionComponent = () => {
   const { t } = useTranslation('client');

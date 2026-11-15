@@ -1,4 +1,4 @@
-import type { ProjectDto } from '@portfolio/shared-models';
+import type { ProjectDto } from '@repo/contracts';
 import { render, screen } from '@testing-library/react';
 
 vi.mock('framer-motion', () => ({
@@ -11,7 +11,7 @@ vi.mock('framer-motion', () => ({
 
 describe('ProjectsSection', () => {
   it('should render the projects heading', async () => {
-    const { ProjectsSection } = await import('./ProjectSection');
+    const { ProjectsSection } = await import('./ProjectSection.js');
 
     render(<ProjectsSection projects={[]} />);
 
@@ -19,7 +19,7 @@ describe('ProjectsSection', () => {
   });
 
   it('should render project items', async () => {
-    const { ProjectsSection } = await import('./ProjectSection');
+    const { ProjectsSection } = await import('./ProjectSection.js');
     const projects = [{ title: 'Project A' }, { title: 'Project B' }] as ProjectDto[];
 
     render(<ProjectsSection projects={projects} />);
@@ -29,7 +29,7 @@ describe('ProjectsSection', () => {
   });
 
   it('should set the correct section id', async () => {
-    const { ProjectsSection } = await import('./ProjectSection');
+    const { ProjectsSection } = await import('./ProjectSection.js');
 
     const { container } = render(<ProjectsSection projects={[]} />);
 

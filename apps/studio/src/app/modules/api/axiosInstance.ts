@@ -1,9 +1,9 @@
-import { createAxiosInstance } from '@portfolio/web/api';
+import { createAxiosInstance } from '@repo/query/api';
 import type { InternalAxiosRequestConfig } from 'axios';
 import Axios from 'axios';
 
-import { RoutePaths } from '../../routes/paths.const';
-import { getStoredToken } from '../auth/auth';
+import { RoutePaths } from '../../routes/paths.const.js';
+import { getStoredToken } from '../auth/auth.js';
 
 export const axiosInstance = createAxiosInstance();
 
