@@ -1,0 +1,17 @@
+import { render } from '@testing-library/react';
+
+import { NoResumePlaceholder } from './no-resume-placeholder.js';
+
+describe('NoResumePlaceholder', () => {
+  it('should render the placeholder container', () => {
+    const { container } = render(<NoResumePlaceholder />);
+
+    expect(container.firstChild).toBeDefined();
+  });
+
+  it('should render an SVG icon', () => {
+    const { container } = render(<NoResumePlaceholder />);
+
+    expect(container.querySelector('svg')).toBeDefined();
+  });
+});

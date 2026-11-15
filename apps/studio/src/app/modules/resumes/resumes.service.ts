@@ -5,7 +5,7 @@ import type {
   SetPublicResumeRequestDto,
 } from '@repo/contracts';
 
-import { axiosInstance } from '../api/axiosInstance.js';
+import { axiosInstance } from '../api/axios-instance.js';
 
 export const ResumesService = {
   getAllResumes: (): Promise<ResumeDto[]> =>

@@ -12,10 +12,10 @@
       "default": "./dist/index.js"
     },
     "./api": {
-      "@repo/source": "./src/lib/api/axiosInstance.ts",
-      "types": "./dist/lib/api/axiosInstance.d.ts",
-      "import": "./dist/lib/api/axiosInstance.js",
-      "default": "./dist/lib/api/axiosInstance.js"
+      "@repo/source": "./src/lib/api/axios-instance.ts",
+      "types": "./dist/lib/api/axios-instance.d.ts",
+      "import": "./dist/lib/api/axios-instance.js",
+      "default": "./dist/lib/api/axios-instance.js"
     }
   },
   "nx": {
