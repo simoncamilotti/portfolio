@@ -1,9 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 
+import { ResumeList } from './ResumeList';
+
 vi.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, initial, animate, transition, ...props }: any) => <div {...props}>{children}</div>,
+    div: ({ children, initial, animate, transition, ...props }: any) => (
+      <div {...props}>{children}</div>
+    ),
   },
 }));
 
@@ -34,8 +38,6 @@ vi.mock('../../ui/Dropdown-menu', () => ({
   ),
   DropdownMenuSeparator: () => <hr />,
 }));
-
-import { ResumeList } from './ResumeList';
 
 const mockResumes = [
   {
@@ -91,7 +93,7 @@ describe('ResumeList', () => {
     renderList();
 
     const links = screen.getAllByRole('link');
-    const cvLink = links.find(l => l.getAttribute('href') === '/resumes/mon-super-id');
+    const cvLink = links.find((l) => l.getAttribute('href') === '/resumes/mon-super-id');
     expect(cvLink).toBeDefined();
   });
 });

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, ChevronRight, Github, Linkedin } from 'lucide-react';
+import { Github, Linkedin } from '@portfolio/shared-ui';
+import { ArrowRight, ChevronRight } from 'lucide-react';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -27,7 +28,9 @@ export const HeroSection: FunctionComponent = () => {
             <br />
             <span className="glow-text">{t('hero.subtitle')}</span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-xl mb-10 leading-relaxed">{t('hero.description')}</p>
+          <p className="text-lg text-muted-foreground max-w-xl mb-10 leading-relaxed">
+            {t('hero.description')}
+          </p>
           <div className="flex items-center gap-4">
             <a
               href={`#${RouteAnchors.HOME.RESUME}`}

@@ -32,7 +32,10 @@ export const PublicCV: FunctionComponent = () => {
     school: string;
     year: string;
   }>;
-  const interests = t('cv.interests', { returnObjects: true }) as Array<{ title: string; description: string }>;
+  const interests = t('cv.interests', { returnObjects: true }) as Array<{
+    title: string;
+    description: string;
+  }>;
 
   return (
     <div className="rounded-xl border border-border overflow-hidden bg-card shadow-lg">
@@ -76,7 +79,10 @@ export const PublicCV: FunctionComponent = () => {
 
           {/* Contact */}
           <div className="p-8 border-b border-border space-y-3">
-            <SidebarHeading icon={<MapPin className="w-3.5 h-3.5" />} label={t('cv.sections.contact')} />
+            <SidebarHeading
+              icon={<MapPin className="w-3.5 h-3.5" />}
+              label={t('cv.sections.contact')}
+            />
             <div className="space-y-2 text-sm text-muted-foreground">
               <div className="flex items-center gap-2.5">
                 <MapPin className="w-3.5 h-3.5 text-muted-foreground/60 shrink-0" />
@@ -87,9 +93,12 @@ export const PublicCV: FunctionComponent = () => {
 
           {/* Languages */}
           <div className="p-8 border-b border-border">
-            <SidebarHeading icon={<Globe className="w-3.5 h-3.5" />} label={t('cv.sections.languages')} />
+            <SidebarHeading
+              icon={<Globe className="w-3.5 h-3.5" />}
+              label={t('cv.sections.languages')}
+            />
             <div className="mt-3 space-y-1">
-              {languages.map(language => (
+              {languages.map((language) => (
                 <p key={language} className="text-sm text-muted-foreground">
                   {language}
                 </p>
@@ -99,11 +108,16 @@ export const PublicCV: FunctionComponent = () => {
 
           {/* Skills */}
           <div className="p-8 border-b border-border">
-            <SidebarHeading icon={<Wrench className="w-3.5 h-3.5" />} label={t('cv.sections.skills')} />
+            <SidebarHeading
+              icon={<Wrench className="w-3.5 h-3.5" />}
+              label={t('cv.sections.skills')}
+            />
             <div className="mt-3 space-y-3">
-              {skills.map(s => (
+              {skills.map((s) => (
                 <div key={s.label}>
-                  <span className="text-xs font-semibold text-foreground uppercase tracking-wider">{s.label}</span>
+                  <span className="text-xs font-semibold text-foreground uppercase tracking-wider">
+                    {s.label}
+                  </span>
                   <p className="text-sm text-muted-foreground mt-0.5 leading-relaxed">{s.value}</p>
                 </div>
               ))}
@@ -112,14 +126,19 @@ export const PublicCV: FunctionComponent = () => {
 
           {/* Interests */}
           <div className="p-8 border-b border-border lg:border-b-0">
-            <SidebarHeading icon={<Heart className="w-3.5 h-3.5" />} label={t('cv.sections.interests')} />
+            <SidebarHeading
+              icon={<Heart className="w-3.5 h-3.5" />}
+              label={t('cv.sections.interests')}
+            />
             <div className="mt-3 space-y-3">
-              {interests.map(interest => (
+              {interests.map((interest) => (
                 <div key={interest.title}>
                   <span className="text-xs font-semibold text-foreground uppercase tracking-wider">
                     {interest.title}
                   </span>
-                  <p className="text-sm text-muted-foreground mt-0.5 leading-relaxed">{interest.description}</p>
+                  <p className="text-sm text-muted-foreground mt-0.5 leading-relaxed">
+                    {interest.description}
+                  </p>
                 </div>
               ))}
             </div>
@@ -135,7 +154,10 @@ export const PublicCV: FunctionComponent = () => {
 
           {/* Experiences */}
           <div className="p-8 border-b border-border">
-            <SectionHeading icon={<Briefcase className="w-4 h-4" />} label={t('cv.sections.experience')} />
+            <SectionHeading
+              icon={<Briefcase className="w-4 h-4" />}
+              label={t('cv.sections.experience')}
+            />
             <motion.div
               className="mt-6 space-y-6"
               variants={stagger}
@@ -143,8 +165,12 @@ export const PublicCV: FunctionComponent = () => {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              {experiences.map(exp => (
-                <motion.div key={`${exp.company}-${exp.period}`} variants={fadeUp} className="group">
+              {experiences.map((exp) => (
+                <motion.div
+                  key={`${exp.company}-${exp.period}`}
+                  variants={fadeUp}
+                  className="group"
+                >
                   <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
                     <div>
                       <h4 className="text-sm font-semibold text-foreground">{exp.role}</h4>
@@ -152,19 +178,28 @@ export const PublicCV: FunctionComponent = () => {
                         {exp.company} · {exp.location}
                       </p>
                     </div>
-                    <span className="text-xs text-muted-foreground font-mono shrink-0">{exp.period}</span>
+                    <span className="text-xs text-muted-foreground font-mono shrink-0">
+                      {exp.period}
+                    </span>
                   </div>
-                  {exp.summary && <p className="text-sm text-muted-foreground mb-2 leading-relaxed">{exp.summary}</p>}
+                  {exp.summary && (
+                    <p className="text-sm text-muted-foreground mb-2 leading-relaxed">
+                      {exp.summary}
+                    </p>
+                  )}
                   <ul className="space-y-1 ml-3.5">
-                    {exp.tasks.map(task => (
-                      <li key={task} className="text-sm text-muted-foreground flex items-start gap-2">
+                    {exp.tasks.map((task) => (
+                      <li
+                        key={task}
+                        className="text-sm text-muted-foreground flex items-start gap-2"
+                      >
                         <span className="w-1 h-1 rounded-full bg-muted-foreground/40 mt-2 shrink-0" />
                         {task}
                       </li>
                     ))}
                   </ul>
                   <div className="flex flex-wrap items-center gap-1.5 mt-3">
-                    {exp.stack.map(item => (
+                    {exp.stack.map((item) => (
                       <span
                         key={item}
                         className="px-2 py-0.5 text-[11px] rounded-md border border-border bg-surface text-muted-foreground"
@@ -180,7 +215,10 @@ export const PublicCV: FunctionComponent = () => {
 
           {/* Education */}
           <div className="p-8">
-            <SectionHeading icon={<GraduationCap className="w-4 h-4" />} label={t('cv.sections.education')} />
+            <SectionHeading
+              icon={<GraduationCap className="w-4 h-4" />}
+              label={t('cv.sections.education')}
+            />
             <motion.div
               className="mt-6 space-y-4"
               variants={stagger}
@@ -188,14 +226,16 @@ export const PublicCV: FunctionComponent = () => {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              {education.map(f => (
+              {education.map((f) => (
                 <motion.div key={`${f.school}`} variants={fadeUp}>
                   <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
                     <div>
                       <h4 className="text-sm font-semibold text-foreground">{f.title}</h4>
                       <p className="text-xs text-primary">{f.school}</p>
                     </div>
-                    <span className="text-xs text-muted-foreground font-mono shrink-0">{f.year}</span>
+                    <span className="text-xs text-muted-foreground font-mono shrink-0">
+                      {f.year}
+                    </span>
                   </div>
                 </motion.div>
               ))}

@@ -12,9 +12,16 @@ type CreateResumeFormProps = {
   onClose: () => void;
 };
 
-export const CreateResumeForm: FunctionComponent<CreateResumeFormProps> = ({ resumes, onSuccess, onClose }) => {
+export const CreateResumeForm: FunctionComponent<CreateResumeFormProps> = ({
+  resumes,
+  onSuccess,
+  onClose,
+}) => {
   const { t } = useTranslation('studio');
-  const alreadyTakenResumeNames = useMemo(() => resumes?.map(resume => resume.title) ?? [], [resumes]);
+  const alreadyTakenResumeNames = useMemo(
+    () => resumes?.map((resume) => resume.title) ?? [],
+    [resumes],
+  );
 
   const { control, isValid, onSubmit } = useCreateResumeForm({
     alreadyTakenResumeNames,

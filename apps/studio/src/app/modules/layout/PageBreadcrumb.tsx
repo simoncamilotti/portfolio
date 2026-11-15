@@ -3,10 +3,12 @@ import type { FunctionComponent } from 'react';
 import type { To } from 'react-router';
 import { Link } from 'react-router';
 
-export type BreadcrumbItemProps = { title: string; to?: To };
+type BreadcrumbItemProps = { title: string; to?: To };
 export type BreadcrumbItemsProps = BreadcrumbItemProps[];
 
-const BreadcrumbItem: FunctionComponent<{ breadcrumbItem: BreadcrumbItemProps }> = ({ breadcrumbItem }) => {
+const BreadcrumbItem: FunctionComponent<{ breadcrumbItem: BreadcrumbItemProps }> = ({
+  breadcrumbItem,
+}) => {
   if (breadcrumbItem.to != null) {
     return (
       <li className={'inline-flex items-center gap-1.5'}>
@@ -27,7 +29,9 @@ const BreadcrumbItem: FunctionComponent<{ breadcrumbItem: BreadcrumbItemProps }>
   );
 };
 
-export const PageBreadcrumb: FunctionComponent<{ breadcrumbItems: BreadcrumbItemsProps }> = ({ breadcrumbItems }) => {
+export const PageBreadcrumb: FunctionComponent<{ breadcrumbItems: BreadcrumbItemsProps }> = ({
+  breadcrumbItems,
+}) => {
   return (
     <div className={'h-10 flex items-center border-b border-border/50 bg-card/50 no-print'}>
       <ol className="flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5">

@@ -17,7 +17,6 @@ describe('ContactRequestDto', () => {
   });
 
   it('should reject if name is missing', () => {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     const { name: _, ...input } = validInput;
 
     const result = contactRequestDtoSchema.safeParse(input);
@@ -38,7 +37,6 @@ describe('ContactRequestDto', () => {
   });
 
   it('should reject if email is missing', () => {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     const { email: _, ...input } = validInput;
 
     const result = contactRequestDtoSchema.safeParse(input);
@@ -53,13 +51,15 @@ describe('ContactRequestDto', () => {
   });
 
   it('should reject if email exceeds 255 characters', () => {
-    const result = contactRequestDtoSchema.safeParse({ ...validInput, email: `${'a'.repeat(244)}@example.com` });
+    const result = contactRequestDtoSchema.safeParse({
+      ...validInput,
+      email: `${'a'.repeat(244)}@example.com`,
+    });
 
     expect(result.success).toBe(false);
   });
 
   it('should reject if subject is missing', () => {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     const { subject: _, ...input } = validInput;
 
     const result = contactRequestDtoSchema.safeParse(input);
@@ -80,7 +80,6 @@ describe('ContactRequestDto', () => {
   });
 
   it('should reject if message is missing', () => {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     const { message: _, ...input } = validInput;
 
     const result = contactRequestDtoSchema.safeParse(input);
@@ -101,7 +100,6 @@ describe('ContactRequestDto', () => {
   });
 
   it('should reject if captchaToken is missing', () => {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     const { captchaToken: _, ...input } = validInput;
 
     const result = contactRequestDtoSchema.safeParse(input);

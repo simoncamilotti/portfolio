@@ -5,13 +5,13 @@ import { ResumeService } from '../services/resume.service';
 import { ResumeController } from './resume.controller';
 
 const mockResumeService = {
-  findAll: jest.fn(),
-  findPublic: jest.fn(),
-  findOne: jest.fn(),
-  create: jest.fn(),
-  update: jest.fn(),
-  setPublic: jest.fn(),
-  remove: jest.fn(),
+  findAll: vi.fn(),
+  findPublic: vi.fn(),
+  findOne: vi.fn(),
+  create: vi.fn(),
+  update: vi.fn(),
+  setPublic: vi.fn(),
+  remove: vi.fn(),
 };
 
 const mockResumeDto = {
@@ -34,7 +34,7 @@ describe('ResumeController', () => {
   let controller: ResumeController;
 
   beforeEach(async () => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ResumeController],
@@ -113,7 +113,9 @@ describe('ResumeController', () => {
   });
 
   it('should propagate NotFoundException from service', async () => {
-    mockResumeService.findOne.mockRejectedValue(new NotFoundException('Resume #uuid-999 not found'));
+    mockResumeService.findOne.mockRejectedValue(
+      new NotFoundException('Resume #uuid-999 not found'),
+    );
 
     await expect(controller.findOne('uuid-999')).rejects.toThrow(NotFoundException);
   });

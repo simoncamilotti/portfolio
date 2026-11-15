@@ -10,7 +10,7 @@ export const useCreateProjectMutation = () => {
   const createProjectMutation = useMutation({
     mutationFn: ProjectsService.createProject,
     onSuccess: (createdProject: ProjectDto) => {
-      queryClient.setQueryData<ProjectDto[]>(projectsKey.getAllProjects, projects => [
+      queryClient.setQueryData<ProjectDto[]>(projectsKey.getAllProjects, (projects) => [
         createdProject,
         ...(projects ?? []),
       ]);

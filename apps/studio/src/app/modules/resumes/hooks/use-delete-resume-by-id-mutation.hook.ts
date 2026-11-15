@@ -10,12 +10,12 @@ export const useDeleteResumeById = (resumeIdToDelete: string) => {
     mutationFn: () => ResumesService.deleteResumeById(resumeIdToDelete),
     ...{
       onMutate: () => {
-        queryClient.setQueryData<any[]>(resumesKey.getAllResumes, data =>
+        queryClient.setQueryData<any[]>(resumesKey.getAllResumes, (data) =>
           data?.filter(({ id: resumeIdToKeep }) => resumeIdToKeep !== resumeIdToDelete),
         );
       },
       onSuccess: () => queryClient.invalidateQueries({ queryKey: resumesKey.getAllResumes }),
-      onError: async error => {
+      onError: async (error) => {
         queryClient.invalidateQueries({ queryKey: resumesKey.getAllResumes });
         throw error;
       },

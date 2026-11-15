@@ -27,7 +27,10 @@ export const FeatureFlagList: FunctionComponent = () => {
       {
         onSuccess: (_, { key, enabled }) => {
           toast.success(
-            t('featureFlags.toggled', { key, state: enabled ? t('featureFlags.enabled') : t('featureFlags.disabled') }),
+            t('featureFlags.toggled', {
+              key,
+              state: enabled ? t('featureFlags.enabled') : t('featureFlags.disabled'),
+            }),
           );
         },
         onError: () => {
@@ -49,10 +52,12 @@ export const FeatureFlagList: FunctionComponent = () => {
       {isPending ? (
         <FeatureFlagListSkeleton />
       ) : flags?.length === 0 ? (
-        <div className="text-center py-10 text-muted-foreground text-sm">{t('featureFlags.empty')}</div>
+        <div className="text-center py-10 text-muted-foreground text-sm">
+          {t('featureFlags.empty')}
+        </div>
       ) : (
         <div className="space-y-2">
-          {flags?.map(flag => (
+          {flags?.map((flag) => (
             <FeatureFlagItem key={flag.key} flag={flag} handleToggle={handleToggle} />
           ))}
         </div>

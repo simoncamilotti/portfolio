@@ -9,7 +9,7 @@ export class ProjectMapper {
       id: project.id,
       title: project.title,
       description: project.description,
-      tags: project.tags.map(tag => tag.title),
+      tags: project.tags.map((tag) => tag.title),
       url: project.url,
       repoUrl: project.repoUrl,
       imageUrl: project.imageUrl,
@@ -17,6 +17,6 @@ export class ProjectMapper {
   }
 
   toProjectDtoList(projects: ProjectWithTags[]): ProjectDto[] {
-    return projects.map(project => this.toProjectDto(project));
+    return projects.map((project) => this.toProjectDto(project));
   }
 }

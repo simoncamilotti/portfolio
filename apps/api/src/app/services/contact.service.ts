@@ -39,11 +39,13 @@ export class ContactService {
           new URLSearchParams({ secret: secretKey, response: token }),
           { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } },
         )
-        .pipe(map(response => response.data)),
+        .pipe(map((response) => response.data)),
     );
 
     if (!response.success || (response.score !== undefined && response.score < 0.5)) {
-      this._logger.warn(`reCAPTCHA verification failed: score=${response.score}, errors=${response['error-codes']}`);
+      this._logger.warn(
+        `reCAPTCHA verification failed: score=${response.score}, errors=${response['error-codes']}`,
+      );
       throw new BadRequestException('reCAPTCHA verification failed');
     }
   }
@@ -73,7 +75,7 @@ export class ContactService {
           message: dto.message,
         },
       })
-      .catch(err => {
+      .catch((err) => {
         this._logger.error('Failed to send contact email', err);
       });
   }

@@ -1,10 +1,13 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
+import { DeleteProjectDialog } from './DeleteProjectDialog';
+
 const mockMutateAsync = vi.fn().mockResolvedValue(undefined);
 
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({
-    t: (key: string, params?: Record<string, string>) => (params ? `${key} ${JSON.stringify(params)}` : key),
+    t: (key: string, params?: Record<string, string>) =>
+      params ? `${key} ${JSON.stringify(params)}` : key,
   }),
 }));
 
@@ -23,8 +26,6 @@ vi.mock('../hooks/use-delete-project-mutation.hook', () => ({
     deleteProjectMutation: { mutateAsync: mockMutateAsync },
   }),
 }));
-
-import { DeleteProjectDialog } from './DeleteProjectDialog';
 
 const project = { id: '1', title: 'My Project', description: '', tags: [], repoUrl: '', url: '' };
 

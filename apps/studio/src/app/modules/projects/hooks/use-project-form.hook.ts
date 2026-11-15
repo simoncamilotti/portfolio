@@ -51,7 +51,7 @@ export const useProjectForm = ({ project, onSuccess }: UseProjectFormProps) => {
   const onSubmit = async (data: ProjectForm) => {
     const tags = (data.tags ?? '')
       .split(',')
-      .map(tag => tag.trim())
+      .map((tag) => tag.trim())
       .filter(Boolean);
 
     const payload = {
@@ -82,6 +82,7 @@ export const useProjectForm = ({ project, onSuccess }: UseProjectFormProps) => {
     isValid,
     isEditing: !!project,
     onSubmit: (form: BaseSyntheticEvent) => handleSubmit(onSubmit)(form),
-    reset: (nextProject?: ProjectDto) => reset(nextProject ? projectToFormValues(nextProject) : { ...defaultValues }),
+    reset: (nextProject?: ProjectDto) =>
+      reset(nextProject ? projectToFormValues(nextProject) : { ...defaultValues }),
   };
 };

@@ -46,10 +46,7 @@
       "education": "Formation",
       "interests": "Centres d'intérêt"
     },
-    "languages": [
-      "Français : natif",
-      "Anglais : professionnel"
-    ],
+    "languages": ["Français : natif", "Anglais : professionnel"],
     "location": "Herbeys (38)",
     "skills": [
       {
@@ -108,11 +105,7 @@
         "tasks": [
           "Réécriture d'une application Angular, puis conception d'un générateur d'applications en CLI : à partir d'un fichier RAML annoté, génération automatique de pages (tables, formulaires) sur un même socle"
         ],
-        "stack": [
-          "Angular",
-          "NestJS (nest-commander)",
-          "RAML"
-        ]
+        "stack": ["Angular", "NestJS (nest-commander)", "RAML"]
       },
       {
         "role": "Développeur Full Stack",
@@ -122,12 +115,7 @@
         "tasks": [
           "Participation à la réécriture complète d'une application de consolidation des chiffres de vente par zone géographique et business unit pour Schneider Electric, améliorant la performance et la fiabilité des données"
         ],
-        "stack": [
-          "Symfony (PHP)",
-          "Angular",
-          "MariaDB",
-          "Docker"
-        ]
+        "stack": ["Symfony (PHP)", "Angular", "MariaDB", "Docker"]
       },
       {
         "role": "Développeur Web",
@@ -139,14 +127,7 @@
           "Data-visualisation de données de capteurs de centrales nucléaires (AngularJS, Java Spring Boot, cluster Hadoop)",
           "Application de génération de rapports réglementaires : conception BDD, rédaction des spécifications et implémentation des fonctionnalités"
         ],
-        "stack": [
-          "PHP / Zend",
-          "AngularJS",
-          "Java Spring",
-          "MySQL",
-          "PostgreSQL",
-          "Hadoop"
-        ]
+        "stack": ["PHP / Zend", "AngularJS", "Java Spring", "MySQL", "PostgreSQL", "Hadoop"]
       },
       {
         "role": "Développeur Junior",
@@ -156,10 +137,7 @@
         "tasks": [
           "Conception de plateformes de formation et développement d'activités pédagogiques interactives"
         ],
-        "stack": [
-          "Moodle",
-          "AngularJS"
-        ]
+        "stack": ["Moodle", "AngularJS"]
       }
     ],
     "education": [

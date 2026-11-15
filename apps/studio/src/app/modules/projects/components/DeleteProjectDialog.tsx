@@ -19,7 +19,11 @@ type DeleteProjectDialogProps = {
   onOpenChange: (open: boolean) => void;
 };
 
-export const DeleteProjectDialog: FunctionComponent<DeleteProjectDialogProps> = ({ project, open, onOpenChange }) => {
+export const DeleteProjectDialog: FunctionComponent<DeleteProjectDialogProps> = ({
+  project,
+  open,
+  onOpenChange,
+}) => {
   const { t } = useTranslation('studio');
   const { deleteProjectMutation } = useDeleteProjectMutation(project?.id ?? '');
 
@@ -38,7 +42,9 @@ export const DeleteProjectDialog: FunctionComponent<DeleteProjectDialogProps> = 
       <DialogContent className="sm:max-w-sm border-border/50">
         <DialogHeader>
           <DialogTitle>{t('projects.dialog.deleteTitle')}</DialogTitle>
-          <DialogDescription>{t('projects.dialog.deleteDescription', { title: project?.title })}</DialogDescription>
+          <DialogDescription>
+            {t('projects.dialog.deleteDescription', { title: project?.title })}
+          </DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <button

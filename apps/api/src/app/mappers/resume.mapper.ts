@@ -18,7 +18,7 @@ export class ResumeMapper {
   }
 
   toResumeDtoList(resumes: Resume[]): ResumeDto[] {
-    return resumes.map(resume => this.toResumeDto(resume));
+    return resumes.map((resume) => this.toResumeDto(resume));
   }
 
   toResumeDetailDto(resume: Resume): ResumeDetailDto {

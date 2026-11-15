@@ -8,10 +8,12 @@ import type {
 import { axiosInstance } from '../api/axiosInstance';
 
 export const ResumesService = {
-  getAllResumes: (): Promise<ResumeDto[]> => axiosInstance.get<ResumeDto[]>('resumes').then(({ data }) => data),
+  getAllResumes: (): Promise<ResumeDto[]> =>
+    axiosInstance.get<ResumeDto[]>('resumes').then(({ data }) => data),
   getResumeById: (resumeId: string): Promise<ResumeDetailDto> =>
     axiosInstance.get<ResumeDetailDto>(`resumes/${resumeId}`).then(({ data }) => data),
-  deleteResumeById: (resumeId: string): Promise<void> => axiosInstance.delete(`resumes/${resumeId}`),
+  deleteResumeById: (resumeId: string): Promise<void> =>
+    axiosInstance.delete(`resumes/${resumeId}`),
   createResume: (resume: CreateResumeRequestDto): Promise<ResumeDetailDto> =>
     axiosInstance.post<ResumeDetailDto>(`resumes`, resume).then(({ data }) => data),
   setResumeIsPublic: (resumeId: string, dto: SetPublicResumeRequestDto) =>

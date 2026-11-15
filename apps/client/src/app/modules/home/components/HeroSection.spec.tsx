@@ -2,7 +2,9 @@ import { render, screen } from '@testing-library/react';
 
 vi.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, initial, animate, transition, ...props }: any) => <div {...props}>{children}</div>,
+    div: ({ children, initial, animate, transition, ...props }: any) => (
+      <div {...props}>{children}</div>
+    ),
   },
 }));
 
@@ -38,8 +40,8 @@ describe('HeroSection', () => {
     render(<HeroSection />);
 
     const links = screen.getAllByRole('link');
-    const githubLink = links.find(l => l.getAttribute('href')?.includes('github.com'));
-    const linkedinLink = links.find(l => l.getAttribute('href')?.includes('linkedin.com'));
+    const githubLink = links.find((l) => l.getAttribute('href')?.includes('github.com'));
+    const linkedinLink = links.find((l) => l.getAttribute('href')?.includes('linkedin.com'));
 
     expect(githubLink).toBeDefined();
     expect(linkedinLink).toBeDefined();

@@ -1,6 +1,6 @@
 # @portfolio/shared-models
 
-Global library containing all models. 
+Global library containing all models.
 
 ## Structure
 

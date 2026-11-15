@@ -31,7 +31,9 @@ export const ResumesPage: FunctionComponent = () => {
     queryFn: ResumesService.getAllResumes,
   });
 
-  const orderedResumes = [...(resumes ?? [])].sort((e1, e2) => e2.updatedAt.localeCompare(e1.updatedAt));
+  const orderedResumes = [...(resumes ?? [])].sort((e1, e2) =>
+    e2.updatedAt.localeCompare(e1.updatedAt),
+  );
 
   const [createOpen, setCreateOpen] = useState(false);
 
@@ -43,8 +45,11 @@ export const ResumesPage: FunctionComponent = () => {
 
         {isPending ? (
           <div className="space-y-3">
-            {[1, 2].map(i => (
-              <div key={i} className="h-20 rounded-xl border border-border/50 bg-card animate-pulse" />
+            {[1, 2].map((i) => (
+              <div
+                key={i}
+                className="h-20 rounded-xl border border-border/50 bg-card animate-pulse"
+              />
             ))}
           </div>
         ) : (

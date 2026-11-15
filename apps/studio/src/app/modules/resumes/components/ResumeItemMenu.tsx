@@ -58,14 +58,20 @@ export const ResumeItemMenu: FunctionComponent<ResumeItemMenuProps> = ({ resume 
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
         <DropdownMenuItem asChild>
-          <Link to={generatePath(RoutePaths.RESUME, { resumeId: resume.id })} className="flex items-center gap-2">
+          <Link
+            to={generatePath(RoutePaths.RESUME, { resumeId: resume.id })}
+            className="flex items-center gap-2"
+          >
             <ExternalLink className="w-3.5 h-3.5" /> {t('resume.menu.open')}
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => handleSetPublic()} className="flex items-center gap-2">
           <Globe className="w-3.5 h-3.5" /> {t('resume.menu.setPublic')}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => handleToggleShare(resume.id)} className="flex items-center gap-2">
+        <DropdownMenuItem
+          onClick={() => handleToggleShare(resume.id)}
+          className="flex items-center gap-2"
+        >
           <LinkIcon className="w-3.5 h-3.5" />
           {resume.shareEnabled ? t('resume.menu.revokeLink') : t('resume.menu.generateLink')}
         </DropdownMenuItem>

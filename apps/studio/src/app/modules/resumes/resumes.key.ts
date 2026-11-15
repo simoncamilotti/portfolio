@@ -1,4 +1,4 @@
-export const resumesRootKey = 'resumes';
+const resumesRootKey = 'resumes';
 
 export const resumesKey = {
   getAllResumes: [resumesRootKey, 'getAllResumes'] as const,

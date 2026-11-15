@@ -8,14 +8,14 @@ export const useCreateResumeMutationHook = () => {
   const queryClient = useQueryClient();
 
   const onSuccess = (createdResume: ResumeDetailDto) =>
-    queryClient.setQueryData<ResumeDto[]>(resumesKey.getAllResumes, resumes => {
+    queryClient.setQueryData<ResumeDto[]>(resumesKey.getAllResumes, (resumes) => {
       const newItem: ResumeDto = {
         ...createdResume,
         updatedAt: new Date().toISOString(),
       };
 
       const olderItems =
-        resumes?.map(resume => ({
+        resumes?.map((resume) => ({
           ...resume,
         })) ?? [];
 

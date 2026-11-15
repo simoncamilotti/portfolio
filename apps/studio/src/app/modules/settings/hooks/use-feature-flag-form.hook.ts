@@ -37,7 +37,7 @@ export const useFeatureFlagForm = ({ existingFlags }: UseFeatureFlagFormProps) =
   const onSubmit = async (data: FeatureFlagForm) => {
     const trimmed = data.key.trim();
 
-    if (existingFlags?.some(f => f.key === trimmed)) {
+    if (existingFlags?.some((f) => f.key === trimmed)) {
       setError('key', { message: t('featureFlags.alreadyExists') });
       return;
     }

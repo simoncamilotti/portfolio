@@ -7,22 +7,22 @@ import { FeatureFlagService } from './feature-flag.service';
 
 const mockPrismaService = {
   featureFlag: {
-    findMany: jest.fn(),
-    findUnique: jest.fn(),
-    update: jest.fn(),
+    findMany: vi.fn(),
+    findUnique: vi.fn(),
+    update: vi.fn(),
   },
 };
 
 const mockFeatureFlagMapper = {
-  toFeatureFlagDto: jest.fn(),
-  toFeatureFlagDtoList: jest.fn(),
+  toFeatureFlagDto: vi.fn(),
+  toFeatureFlagDtoList: vi.fn(),
 };
 
 describe('FeatureFlagService', () => {
   let service: FeatureFlagService;
 
   beforeEach(async () => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -67,7 +67,12 @@ describe('FeatureFlagService', () => {
 
   describe('update', () => {
     it('should update a feature flag and return it via mapper', async () => {
-      const dbFlag = { key: 'projects', enabled: true, createdAt: new Date(), updatedAt: new Date() };
+      const dbFlag = {
+        key: 'projects',
+        enabled: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
       const mappedFlag = { key: 'projects', enabled: true };
       mockPrismaService.featureFlag.findUnique.mockResolvedValue(dbFlag);
       mockPrismaService.featureFlag.update.mockResolvedValue(dbFlag);
@@ -76,7 +81,9 @@ describe('FeatureFlagService', () => {
       const result = await service.update('projects', { enabled: true });
 
       expect(result).toEqual(mappedFlag);
-      expect(mockPrismaService.featureFlag.findUnique).toHaveBeenCalledWith({ where: { key: 'projects' } });
+      expect(mockPrismaService.featureFlag.findUnique).toHaveBeenCalledWith({
+        where: { key: 'projects' },
+      });
       expect(mockPrismaService.featureFlag.update).toHaveBeenCalledWith({
         where: { key: 'projects' },
         data: { enabled: true },

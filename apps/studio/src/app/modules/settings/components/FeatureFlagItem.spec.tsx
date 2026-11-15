@@ -10,13 +10,17 @@ describe('FeatureFlagItem', () => {
   });
 
   it('should display the flag key', () => {
-    render(<FeatureFlagItem flag={{ key: 'projects', enabled: true }} handleToggle={handleToggle} />);
+    render(
+      <FeatureFlagItem flag={{ key: 'projects', enabled: true }} handleToggle={handleToggle} />,
+    );
 
     expect(screen.getByText('projects')).toBeDefined();
   });
 
   it('should render a switch with aria-checked true when enabled', () => {
-    render(<FeatureFlagItem flag={{ key: 'projects', enabled: true }} handleToggle={handleToggle} />);
+    render(
+      <FeatureFlagItem flag={{ key: 'projects', enabled: true }} handleToggle={handleToggle} />,
+    );
 
     expect(screen.getByRole('switch').getAttribute('aria-checked')).toBe('true');
   });

@@ -8,5 +8,7 @@ export const FeatureFlagsService = {
   create: (key: string, enabled: boolean): Promise<FeatureFlagDto> =>
     axiosInstance.post<FeatureFlagDto>(`feature-flags`, { key, enabled }).then(({ data }) => data),
   update: (key: string, enabled: boolean): Promise<FeatureFlagDto> =>
-    axiosInstance.patch<FeatureFlagDto>(`feature-flags/${key}`, { enabled }).then(({ data }) => data),
+    axiosInstance
+      .patch<FeatureFlagDto>(`feature-flags/${key}`, { enabled })
+      .then(({ data }) => data),
 };

@@ -1,0 +1,7 @@
+# False positives: Keycloak id fixtures in the auth specs.
+d1e20b34174cb9e62a9d715512b295fa911c37f7:libs/api/core/src/lib/auth/strategies/jwt.strategy.spec.ts:generic-api-key:86
+d1e20b34174cb9e62a9d715512b295fa911c37f7:libs/api/core/src/lib/auth/services/auth.service.spec.ts:generic-api-key:57
+d1e20b34174cb9e62a9d715512b295fa911c37f7:libs/api/core/src/lib/auth/services/auth.service.spec.ts:generic-api-key:67
+d1e20b34174cb9e62a9d715512b295fa911c37f7:libs/api/core/src/lib/auth/services/auth.service.spec.ts:generic-api-key:74
+d1e20b34174cb9e62a9d715512b295fa911c37f7:libs/api/core/src/lib/auth/services/auth.service.spec.ts:generic-api-key:86
+d1e20b34174cb9e62a9d715512b295fa911c37f7:libs/api/core/src/lib/auth/services/auth.service.spec.ts:generic-api-key:94

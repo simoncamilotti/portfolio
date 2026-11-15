@@ -9,7 +9,11 @@ export const Footer: FunctionComponent = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between text-[13px] text-muted-foreground">
         <span>{t('footer.copyright', { year: new Date().getFullYear() })}</span>
         <span>
-          <Trans i18nKey="footer.madeWith" ns="common" components={{ heart: <span className="text-primary" /> }} />
+          <Trans
+            i18nKey="footer.madeWith"
+            ns="common"
+            components={{ heart: <span className="text-primary" /> }}
+          />
         </span>
       </div>
     </footer>

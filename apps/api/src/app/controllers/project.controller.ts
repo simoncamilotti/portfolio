@@ -1,6 +1,21 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  ParseUUIDPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { Public } from '@portfolio/core';
-import { CreateProjectRequestDto, ProjectDto, UpdateProjectRequestDto } from '@portfolio/shared-models/server';
+import {
+  CreateProjectRequestDto,
+  ProjectDto,
+  UpdateProjectRequestDto,
+} from '@portfolio/shared-models/server';
 
 import { ProjectService } from '../services/project.service';
 
@@ -26,7 +41,10 @@ export class ProjectController {
   }
 
   @Patch(':id')
-  async update(@Param('id', ParseUUIDPipe) id: string, @Body() dto: UpdateProjectRequestDto): Promise<ProjectDto> {
+  async update(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() dto: UpdateProjectRequestDto,
+  ): Promise<ProjectDto> {
     return this._projectService.update(id, dto);
   }
 

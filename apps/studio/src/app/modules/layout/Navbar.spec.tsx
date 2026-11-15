@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 
+import { Navbar } from './Navbar';
+
 vi.mock('../auth/auth', () => ({
   logout: vi.fn(),
 }));
-
-import { Navbar } from './Navbar';
 
 describe('Navbar', () => {
   const renderNavbar = () =>
@@ -19,7 +19,7 @@ describe('Navbar', () => {
     renderNavbar();
 
     const links = screen.getAllByRole('link');
-    const homeLink = links.find(link => link.getAttribute('href') === '/');
+    const homeLink = links.find((link) => link.getAttribute('href') === '/');
     expect(homeLink).toBeDefined();
   });
 

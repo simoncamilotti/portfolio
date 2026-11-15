@@ -15,18 +15,18 @@ const mockDto = {
 };
 
 const mockHttpService = {
-  post: jest.fn(),
+  post: vi.fn(),
 };
 
 const mockMailerService = {
-  sendMail: jest.fn().mockResolvedValue(undefined),
+  sendMail: vi.fn().mockResolvedValue(undefined),
 };
 
 describe('ContactService', () => {
   let service: ContactService;
 
   beforeEach(async () => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
     process.env.RECAPTCHA_SECRET_KEY = 'test-secret';
     process.env.SMTP_FROM = 'test@example.com';

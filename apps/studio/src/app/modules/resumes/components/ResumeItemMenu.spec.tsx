@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 
+import { ResumeItemMenu } from './ResumeItemMenu';
+
 vi.mock('sonner', () => ({
   toast: { success: vi.fn() },
 }));
@@ -28,8 +30,6 @@ vi.mock('../../ui/Dropdown-menu', () => ({
   ),
   DropdownMenuSeparator: () => <hr />,
 }));
-
-import { ResumeItemMenu } from './ResumeItemMenu';
 
 const resume = {
   id: 'test-id',

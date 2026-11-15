@@ -1,5 +1,7 @@
 import { ResumesService } from './resumes.service';
 
+import { axiosInstance } from '../api/axiosInstance';
+
 vi.mock('../api/axiosInstance', () => ({
   axiosInstance: {
     get: vi.fn(),
@@ -8,8 +10,6 @@ vi.mock('../api/axiosInstance', () => ({
     patch: vi.fn(),
   },
 }));
-
-import { axiosInstance } from '../api/axiosInstance';
 
 const mockedAxios = {
   get: vi.mocked(axiosInstance.get),
@@ -64,7 +64,10 @@ describe('ResumesService', () => {
 
       const result = await ResumesService.createResume({ title: 'Nouveau', isPublic: false });
 
-      expect(mockedAxios.post).toHaveBeenCalledWith('resumes', { title: 'Nouveau', isPublic: false });
+      expect(mockedAxios.post).toHaveBeenCalledWith('resumes', {
+        title: 'Nouveau',
+        isPublic: false,
+      });
       expect(result).toEqual(created);
     });
   });

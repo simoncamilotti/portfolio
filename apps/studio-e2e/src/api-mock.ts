@@ -18,7 +18,7 @@ const MOCK_RESUMES = [
  * Must be called before any page navigation.
  */
 export async function mockApi(page: Page): Promise<void> {
-  await page.route('**/api/resumes', route => {
+  await page.route('**/api/resumes', (route) => {
     if (route.request().method() === 'GET') {
       return route.fulfill({
         status: 200,

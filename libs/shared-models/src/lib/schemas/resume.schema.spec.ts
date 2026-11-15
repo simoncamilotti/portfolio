@@ -41,7 +41,10 @@ describe('ResumeSchema', () => {
     });
 
     it('should reject a title longer than 50 characters', () => {
-      const result = createResumeRequestDtoSchema.safeParse({ ...validInput, title: 'A'.repeat(51) });
+      const result = createResumeRequestDtoSchema.safeParse({
+        ...validInput,
+        title: 'A'.repeat(51),
+      });
 
       expect(result.success).toBe(false);
     });

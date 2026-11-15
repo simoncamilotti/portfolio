@@ -1,6 +1,7 @@
 export { Footer } from './lib/layout/Footer';
 export { Layout } from './lib/layout/Layout';
 export { PageLayout } from './lib/layout/PageLayout';
+export { Github, Linkedin } from './lib/ui/BrandIcons';
 export { Braces } from './lib/ui/Braces';
 export {
   Dialog,

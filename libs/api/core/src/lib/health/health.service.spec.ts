@@ -5,7 +5,7 @@ import { PrismaService } from '../prisma/services/prisma.service';
 import { HealthService } from './health.service';
 
 const mockPrismaHealthIndicator = {
-  pingCheck: jest.fn(),
+  pingCheck: vi.fn(),
 };
 
 const mockPrismaService = {};
@@ -14,7 +14,7 @@ describe('HealthService', () => {
   let service: HealthService;
 
   beforeEach(async () => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -34,7 +34,10 @@ describe('HealthService', () => {
 
       await service.database();
 
-      expect(mockPrismaHealthIndicator.pingCheck).toHaveBeenCalledWith('database', mockPrismaService);
+      expect(mockPrismaHealthIndicator.pingCheck).toHaveBeenCalledWith(
+        'database',
+        mockPrismaService,
+      );
     });
 
     it('should return the health indicator result', async () => {

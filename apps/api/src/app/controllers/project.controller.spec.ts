@@ -4,11 +4,11 @@ import { ProjectService } from '../services/project.service';
 import { ProjectController } from './project.controller';
 
 const mockProjectService = {
-  findAll: jest.fn(),
-  findOne: jest.fn(),
-  create: jest.fn(),
-  update: jest.fn(),
-  remove: jest.fn(),
+  findAll: vi.fn(),
+  findOne: vi.fn(),
+  create: vi.fn(),
+  update: vi.fn(),
+  remove: vi.fn(),
 };
 
 const makeMappedDto = (overrides = {}) => ({
@@ -26,7 +26,7 @@ describe('ProjectController', () => {
   let controller: ProjectController;
 
   beforeEach(async () => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ProjectController],
@@ -88,7 +88,10 @@ describe('ProjectController', () => {
       const result = await controller.update('550e8400-e29b-41d4-a716-446655440000', updateDto);
 
       expect(result).toEqual(updated);
-      expect(mockProjectService.update).toHaveBeenCalledWith('550e8400-e29b-41d4-a716-446655440000', updateDto);
+      expect(mockProjectService.update).toHaveBeenCalledWith(
+        '550e8400-e29b-41d4-a716-446655440000',
+        updateDto,
+      );
     });
 
     it('should propagate errors from service', async () => {
@@ -104,7 +107,9 @@ describe('ProjectController', () => {
 
       await controller.remove('550e8400-e29b-41d4-a716-446655440000');
 
-      expect(mockProjectService.remove).toHaveBeenCalledWith('550e8400-e29b-41d4-a716-446655440000');
+      expect(mockProjectService.remove).toHaveBeenCalledWith(
+        '550e8400-e29b-41d4-a716-446655440000',
+      );
     });
 
     it('should propagate errors from service', async () => {

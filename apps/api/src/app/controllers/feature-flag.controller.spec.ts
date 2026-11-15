@@ -4,16 +4,16 @@ import { FeatureFlagService } from '../services/feature-flag.service';
 import { FeatureFlagController } from './feature-flag.controller';
 
 const mockFeatureFlagService = {
-  findAll: jest.fn(),
-  create: jest.fn(),
-  update: jest.fn(),
+  findAll: vi.fn(),
+  create: vi.fn(),
+  update: vi.fn(),
 };
 
 describe('FeatureFlagController', () => {
   let controller: FeatureFlagController;
 
   beforeEach(async () => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
     const module: TestingModule = await Test.createTestingModule({
       controllers: [FeatureFlagController],

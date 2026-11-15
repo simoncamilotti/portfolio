@@ -11,7 +11,11 @@ type ProjectFormProps = {
   onClose: () => void;
 };
 
-export const ProjectForm: FunctionComponent<ProjectFormProps> = ({ project, onSuccess, onClose }) => {
+export const ProjectForm: FunctionComponent<ProjectFormProps> = ({
+  project,
+  onSuccess,
+  onClose,
+}) => {
   const { t } = useTranslation('studio');
   const { control, isValid, isEditing, onSubmit } = useProjectForm({ project, onSuccess });
 
@@ -34,7 +38,9 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = ({ project, onSu
         />
       </div>
       <div className="space-y-2">
-        <label className="text-sm font-medium text-foreground">{t('projects.form.description')}</label>
+        <label className="text-sm font-medium text-foreground">
+          {t('projects.form.description')}
+        </label>
         <Controller
           name="description"
           control={control}

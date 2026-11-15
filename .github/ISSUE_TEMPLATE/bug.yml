@@ -1,0 +1,34 @@
+name: Bug
+description: Un comportement ne correspond pas à ce qui est attendu.
+labels: ['type: bug']
+body:
+  - type: textarea
+    id: actual
+    attributes:
+      label: Comportement actuel
+      description: Ce qui se passe, avec les messages d'erreur et les captures utiles.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportement attendu
+      description: Ce qui devrait se passer. Lien vers la spec concernée si elle existe.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Étapes pour reproduire
+      placeholder: |
+        1. Aller sur …
+        2. Cliquer sur …
+        3. Constater …
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environnement
+      description: Local, dev ou prod ; version ou commit ; navigateur si besoin.
+      placeholder: prod v1.2.0, Firefox 140

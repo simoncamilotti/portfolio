@@ -46,10 +46,7 @@
       "education": "Education",
       "interests": "Interests"
     },
-    "languages": [
-      "French: native",
-      "English: professional"
-    ],
+    "languages": ["French: native", "English: professional"],
     "location": "Herbeys (38), France",
     "skills": [
       {
@@ -108,11 +105,7 @@
         "tasks": [
           "Rewrote an Angular application, then designed a CLI application generator: from an annotated RAML file, pages (tables, forms) are generated automatically on a shared foundation"
         ],
-        "stack": [
-          "Angular",
-          "NestJS (nest-commander)",
-          "RAML"
-        ]
+        "stack": ["Angular", "NestJS (nest-commander)", "RAML"]
       },
       {
         "role": "Full Stack Developer",
@@ -122,12 +115,7 @@
         "tasks": [
           "Took part in the complete rewrite of a sales figures consolidation application by geographic area and business unit for Schneider Electric, improving performance and data reliability"
         ],
-        "stack": [
-          "Symfony (PHP)",
-          "Angular",
-          "MariaDB",
-          "Docker"
-        ]
+        "stack": ["Symfony (PHP)", "Angular", "MariaDB", "Docker"]
       },
       {
         "role": "Web Developer",
@@ -139,27 +127,15 @@
           "Data visualisation of nuclear plant sensor data (AngularJS, Java Spring Boot, Hadoop cluster)",
           "Regulatory report generation application: database design, specification writing and feature implementation"
         ],
-        "stack": [
-          "PHP / Zend",
-          "AngularJS",
-          "Java Spring",
-          "MySQL",
-          "PostgreSQL",
-          "Hadoop"
-        ]
+        "stack": ["PHP / Zend", "AngularJS", "Java Spring", "MySQL", "PostgreSQL", "Hadoop"]
       },
       {
         "role": "Junior Developer",
         "company": "Symetrix",
         "location": "Grenoble",
         "period": "2012 - 2016",
-        "tasks": [
-          "Designed training platforms and developed interactive learning activities"
-        ],
-        "stack": [
-          "Moodle",
-          "AngularJS"
-        ]
+        "tasks": ["Designed training platforms and developed interactive learning activities"],
+        "stack": ["Moodle", "AngularJS"]
       }
     ],
     "education": [
