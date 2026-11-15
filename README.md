@@ -5,11 +5,14 @@ Personal portfolio and SaaS CV management tool — an Nx monorepo with a NestJS 
 ## Technical Stack
 
 | Layer        | Technology                         |
-|:-------------|:-----------------------------------|
-| **Monorepo** | Nx 22                              |
-| **Backend**  | NestJS 11, Prisma 7, PostgreSQL 17 |
+| :----------- | :--------------------------------- |
+| **Monorepo** | Nx 23, pnpm workspaces (catalog)   |
+| **Backend**  | NestJS 12, Prisma 7, PostgreSQL 17 |
 | **Frontend** | React 19, TailwindCSS              |
-| **Auth**     | Keycloak 23 (OIDC)                 |
+| **Auth**     | Keycloak (OIDC)                    |
+| **Tests**    | Vitest, Playwright                 |
+
+Being aligned on [monorepo-starter](https://github.com/simoncamilotti/monorepo-starter) (#55).
 
 ## Architecture
 
@@ -18,107 +21,100 @@ apps/
   api/           → NestJS API (port 3000, prefix /api)
   client/        → React client — public portfolio (port 4200)
   studio/        → React client — CV management admin app (port 4201)
-  api-e2e/       → E2E Tests API (Jest)
-  client-e2e/    → E2E Tests client (Playwright)
-  studio-e2e/    → E2E Tests studio (Playwright)
+  api-e2e/       → E2E tests of the API (Vitest, local only: needs Postgres and Keycloak)
+  client-e2e/    → E2E tests of the client (Playwright, mocked API)
+  studio-e2e/    → E2E tests of the studio (Playwright, mocked API and Keycloak)
 
 libs/
   api/core/      → Global NestJS module (Prisma, Health, Logger, Auth)
   shared-models/ → Shared DTOs and Zod schemas
-  shared-ui/     → Shared React components (PageLayout, Footer, Braces)
+  shared-ui/     → Shared React components (PageLayout, Footer, Braces, brand icons)
+  web/           → Shared web code (API client)
+  i18n/          → Translations (fr, en)
 ```
-
 
 ## Prerequisites
 
-- Node.js 20+
+- Node.js 24 (`.nvmrc`)
+- pnpm through corepack (`corepack enable`): the version comes from `packageManager`
 - Docker & Docker Compose
-- npm
 
 ## Quick Start
 
 ```bash
-# 1. Clone and setup
+# 1. Clone and install (also installs the git hooks)
 git clone <repo-url>
 cd portfolio
-npm install
+corepack enable
+pnpm install
 
 # 2. Environment
 cp .env.exemple .env
-# Edit .env file with your real environment values (database, etc.)
+# Edit .env with your environment values (database, etc.)
+cp config/client/config.exemple.js apps/client/public/config.js
 cp config/studio/config.exemple.js apps/studio/public/config.js
-# Edit config.js to match keycloak real environment values
+# Edit the config.js files to match your Keycloak values
 
-# 3. Start infrastructure
-docker compose up -d
-
-# 4. Generate the Prisma client and deploy the migrations
-npm run prisma:generate
-npm run prisma:migrate:deploy
-
-# 5. Start applications
-npm run serve:api      # API: http://localhost:3000
-npm run serve:client   # Client: http://localhost:4200
-npm run serve:studio   # Studio: http://localhost:4201
+# 3. Infrastructure, migrations, API, client and studio
+pnpm dev
 ```
 
 ## Main Commands
 
-### Development
+Always through Nx: `pnpm nx <target> <project>`.
 
 ```bash
-docker compose up -d   
-npm run serve:api              # Start API
-npm run serve:client           # Start client
-npm run serve:studio           # Start studio        # Start infrastructure (Postgres, Keycloak)
-```
+pnpm nx serve api                                   # API: http://localhost:3000
+pnpm nx serve client                                # Client: http://localhost:4200
+pnpm nx serve studio                                # Studio: http://localhost:4201
 
-### Build
+pnpm nx run-many -t lint typecheck test build e2e   # Everything the CI checks
+pnpm nx affected -t lint typecheck test             # Only what the branch changed
+pnpm nx e2e client-e2e --ui                         # Playwright UI mode
+pnpm nx e2e-local api-e2e                           # API e2e: needs Postgres and Keycloak
 
-```bash
-npm run build:api              # Build API
-npm run build:client           # Build client
-npm run build:studio           # Build studio
-npm run build:all              # Build all (API + client + studio + libs)
-```
-
-### Tests
-
-```bash
-npm run test:api               # API unit tests
-npm run test:client            # Client unit tests
-npm run test:studio            # Studio unit tests
-npm run test:all               # All unit tests (API + client + studio + libs)
-
-npm run e2e:api                # E2E tests API (Jest)
-npm run e2e:client             # E2E tests client (Playwright)
-npm run e2e:client-ui          # E2E tests client (Playwright UI mode)
-npm run e2e:studio             # E2E tests studio (Playwright)
-npm run e2e:studio-ui          # E2E tests studio (Playwright UI mode)
-```
-
-### Lint & Format
-
-```bash
-npm run lint:api               # Lint API
-npm run lint:client            # Lint client
-npm run lint:studio            # Lint studio
-npm run lint:all               # Lint all (API + client + studio + libs)
-npm run format                 # Format code
+pnpm knip                                           # Unused files, exports and dependencies
+pnpm format                                         # Prettier
 ```
 
 ### Database
 
 ```bash
-npm run prisma:generate       # Generate Prisma client
-npm run prisma:migrate:dev    # Create or apply migrations (dev)
-npm run prisma:migrate:deploy # Apply migrations (prod)
-npm run prisma:studio         # Interface graphique BDD
+pnpm prisma:generate         # Generate the Prisma client (also run by Nx before build, test, typecheck)
+pnpm prisma:migrate:dev      # Create or apply migrations (dev)
+pnpm prisma:migrate:deploy   # Apply migrations (prod)
+pnpm prisma:studio           # Database GUI
 ```
+
+### Dependencies
+
+Versions live in the catalog of `pnpm-workspace.yaml` (`catalogMode: strict`): add the version
+there, then `"catalog:"` in `package.json`. A version published less than 3 days ago is refused
+(`minimumReleaseAge`). Renovate proposes updates on Monday (`renovate.json`).
+
+## Git hooks
+
+Installed by `pnpm install` ([lefthook](lefthook.yml)):
+
+| Moment     | Check                                                              |
+| ---------- | ------------------------------------------------------------------ |
+| pre-commit | Prettier and ESLint on staged files; gitleaks if installed         |
+| commit-msg | commitlint (Conventional Commits)                                  |
+| pre-push   | No push to `main`; `typecheck` and `test` of the affected projects |
+
+## CI and deployment
+
+`.github/workflows/main.yml` calls the shared workflows of
+[shared-workflows](https://github.com/simoncamilotti/shared-workflows) (`@v1`):
+
+- `ci`: lint, typecheck, test and build of the affected projects, knip and gitleaks;
+- `e2e`: Playwright suites of the client and the studio;
+- `docker`: builds the `api`, `client` and `studio` images; on `main` they are deployed to dev, on a
+  GitHub Release to prod, through the GitOps repository (`GITOPS_DEPLOY` repository variable).
 
 ## Docker Infrastructure
 
-| Service    | Port | Description          |
-|------------|------|----------------------|
-| PostgreSQL | 5433 | Base de données      |
-| Keycloak   | 8081 | Serveur OIDC/OAuth2  |
+| Service    | Port | Description         |
+| ---------- | ---- | ------------------- |
+| PostgreSQL | 5433 | Base de données     |
+| Keycloak   | 8081 | Serveur OIDC/OAuth2 |

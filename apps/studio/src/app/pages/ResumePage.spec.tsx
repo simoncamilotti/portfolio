@@ -1,5 +1,9 @@
 import { render, screen } from '@testing-library/react';
 
+import { useQuery } from '@tanstack/react-query';
+
+import { ResumePage } from './ResumePage';
+
 vi.mock('@tanstack/react-query', () => ({
   useQuery: vi.fn().mockReturnValue({ data: undefined }),
 }));
@@ -10,7 +14,11 @@ vi.mock('react-router', () => ({
 }));
 
 vi.mock('../modules/layout/PageBreadcrumb', () => ({
-  PageBreadcrumb: ({ breadcrumbItems }: { breadcrumbItems: Array<{ title: string; to?: string }> }) => (
+  PageBreadcrumb: ({
+    breadcrumbItems,
+  }: {
+    breadcrumbItems: Array<{ title: string; to?: string }>;
+  }) => (
     <nav data-testid="page-breadcrumb">
       {breadcrumbItems.map((item, i) => (
         <span key={i} data-testid={`breadcrumb-${i}`}>
@@ -20,10 +28,6 @@ vi.mock('../modules/layout/PageBreadcrumb', () => ({
     </nav>
   ),
 }));
-
-import { useQuery } from '@tanstack/react-query';
-
-import { ResumePage } from './ResumePage';
 
 const mockedUseQuery = vi.mocked(useQuery);
 
@@ -59,7 +63,13 @@ describe('ResumePage', () => {
 
   it('should show resume title in breadcrumb when loaded', () => {
     mockedUseQuery.mockReturnValue({
-      data: { id: '42', title: 'Mon CV', isPublic: false, shareEnabled: false, updatedAt: '2026-01-01' },
+      data: {
+        id: '42',
+        title: 'Mon CV',
+        isPublic: false,
+        shareEnabled: false,
+        updatedAt: '2026-01-01',
+      },
     } as any);
 
     render(<ResumePage />);

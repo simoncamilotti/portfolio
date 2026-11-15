@@ -8,10 +8,11 @@ export const useToggleFeatureFlagMutation = () => {
   const queryClient = useQueryClient();
 
   const toggleFeatureFlagMutation = useMutation({
-    mutationFn: ({ key, enabled }: { key: string; enabled: boolean }) => FeatureFlagsService.update(key, enabled),
+    mutationFn: ({ key, enabled }: { key: string; enabled: boolean }) =>
+      FeatureFlagsService.update(key, enabled),
     onMutate: ({ key, enabled }) => {
-      queryClient.setQueryData<FeatureFlagDto[]>(featureFlagsKey.getAll, data =>
-        data?.map(f => (f.key === key ? { ...f, enabled } : f)),
+      queryClient.setQueryData<FeatureFlagDto[]>(featureFlagsKey.getAll, (data) =>
+        data?.map((f) => (f.key === key ? { ...f, enabled } : f)),
       );
     },
     onError: () => {

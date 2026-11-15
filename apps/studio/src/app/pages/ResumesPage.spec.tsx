@@ -1,5 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
+import { ResumesPage } from './ResumesPage';
+
 vi.mock('@tanstack/react-query', () => ({
   useQuery: vi.fn().mockReturnValue({
     data: [
@@ -34,11 +36,9 @@ vi.mock('../modules/resumes/components/CreateResumeDialog', () => ({
 
 vi.mock('../modules/layout/PageBreadcrumb', () => ({
   PageBreadcrumb: ({ breadcrumbItems }: { breadcrumbItems: Array<{ title: string }> }) => (
-    <nav data-testid="page-breadcrumb">{breadcrumbItems.map(i => i.title).join(' / ')}</nav>
+    <nav data-testid="page-breadcrumb">{breadcrumbItems.map((i) => i.title).join(' / ')}</nav>
   ),
 }));
-
-import { ResumesPage } from './ResumesPage';
 
 describe('ResumesPage', () => {
   it('should render the PageBreadcrumb', () => {

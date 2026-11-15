@@ -4,7 +4,8 @@ import type { ICellRendererParams } from 'ag-grid-community';
 
 import { LinksCellRenderer } from './LinksCellRenderer';
 
-const makeParams = (data: Partial<ProjectDto> | undefined) => ({ data }) as ICellRendererParams<ProjectDto>;
+const makeParams = (data: Partial<ProjectDto> | undefined) =>
+  ({ data }) as ICellRendererParams<ProjectDto>;
 
 describe('LinksCellRenderer', () => {
   it('should render nothing when data is undefined', () => {
@@ -29,7 +30,11 @@ describe('LinksCellRenderer', () => {
   });
 
   it('should render both links when both urls are set', () => {
-    render(<LinksCellRenderer {...makeParams({ repoUrl: 'https://github.com/test', url: 'https://example.com' })} />);
+    render(
+      <LinksCellRenderer
+        {...makeParams({ repoUrl: 'https://github.com/test', url: 'https://example.com' })}
+      />,
+    );
 
     const links = screen.getAllByRole('link');
     expect(links).toHaveLength(2);

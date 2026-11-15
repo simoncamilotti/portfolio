@@ -1,6 +1,5 @@
 import { Loader2, Send } from 'lucide-react';
 import type { Dispatch, FunctionComponent, SetStateAction } from 'react';
-import { useEffect } from 'react';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -15,21 +14,10 @@ export const ContactForm: FunctionComponent<ContactFormProps> = ({ status, setSt
   const { t } = useTranslation('client');
   const recaptchaSiteKey = window.config.captcha.siteKey;
 
-  const { isValid, recaptchaLoaded, control, onSubmit } = useContactForm({
+  const { isValid, control, onSubmit } = useContactForm({
     recaptchaSiteKey,
     setStatus,
   });
-
-  useEffect(() => {
-    if (!recaptchaSiteKey || recaptchaLoaded.current) {
-      return;
-    }
-    const script = document.createElement('script');
-    script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
-    script.async = true;
-    document.head.appendChild(script);
-    recaptchaLoaded.current = true;
-  }, [recaptchaSiteKey, recaptchaLoaded]);
 
   return (
     <form onSubmit={onSubmit} className="space-y-4">
@@ -47,7 +35,9 @@ export const ContactForm: FunctionComponent<ContactFormProps> = ({ status, setSt
                   placeholder={t('contact.form.name')}
                   className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
                 />
-                {fieldState.error && <p className="text-xs text-destructive mt-1">{fieldState.error.message}</p>}
+                {fieldState.error && (
+                  <p className="text-xs text-destructive mt-1">{fieldState.error.message}</p>
+                )}
               </>
             )}
           />
@@ -65,7 +55,9 @@ export const ContactForm: FunctionComponent<ContactFormProps> = ({ status, setSt
                   placeholder={t('contact.form.email')}
                   className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
                 />
-                {fieldState.error && <p className="text-xs text-destructive mt-1">{fieldState.error.message}</p>}
+                {fieldState.error && (
+                  <p className="text-xs text-destructive mt-1">{fieldState.error.message}</p>
+                )}
               </>
             )}
           />
@@ -85,7 +77,9 @@ export const ContactForm: FunctionComponent<ContactFormProps> = ({ status, setSt
                   placeholder={t('contact.form.subject')}
                   className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
                 />
-                {fieldState.error && <p className="text-xs text-destructive mt-1">{fieldState.error.message}</p>}
+                {fieldState.error && (
+                  <p className="text-xs text-destructive mt-1">{fieldState.error.message}</p>
+                )}
               </>
             )}
           />
@@ -104,7 +98,9 @@ export const ContactForm: FunctionComponent<ContactFormProps> = ({ status, setSt
                 required
                 className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground resize-none"
               />
-              {fieldState.error && <p className="text-xs text-destructive mt-1">{fieldState.error.message}</p>}
+              {fieldState.error && (
+                <p className="text-xs text-destructive mt-1">{fieldState.error.message}</p>
+              )}
             </>
           )}
         />
@@ -117,7 +113,11 @@ export const ContactForm: FunctionComponent<ContactFormProps> = ({ status, setSt
         disabled={!isValid || status === 'loading'}
         className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
       >
-        {status === 'loading' ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+        {status === 'loading' ? (
+          <Loader2 className="w-4 h-4 animate-spin" />
+        ) : (
+          <Send className="w-4 h-4" />
+        )}
         {t('contact.form.submit')}
       </button>
     </form>

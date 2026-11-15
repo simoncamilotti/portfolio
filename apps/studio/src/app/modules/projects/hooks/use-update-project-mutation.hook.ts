@@ -18,7 +18,7 @@ export const useUpdateProjectMutation = () => {
     onSuccess: (updatedProject: ProjectDto) => {
       queryClient.setQueryData<ProjectDto[]>(
         projectsKey.getAllProjects,
-        projects => projects?.map(p => (p.id === updatedProject.id ? updatedProject : p)) ?? [],
+        (projects) => projects?.map((p) => (p.id === updatedProject.id ? updatedProject : p)) ?? [],
       );
     },
   });

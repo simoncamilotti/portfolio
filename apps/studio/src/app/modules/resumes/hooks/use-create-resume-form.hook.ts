@@ -18,7 +18,10 @@ const defaultValues: CreateResumeForm = {
   description: '',
 };
 
-export const useCreateResumeForm = ({ alreadyTakenResumeNames, onSuccess }: UseCreateResumeFormProps) => {
+export const useCreateResumeForm = ({
+  alreadyTakenResumeNames,
+  onSuccess,
+}: UseCreateResumeFormProps) => {
   const { t } = useTranslation('studio');
 
   const {

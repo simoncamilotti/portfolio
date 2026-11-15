@@ -28,7 +28,7 @@ describe('POST /api/contact', () => {
   });
 
   it('should return 400 when name is missing', async () => {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
+     
     const { name: _, ...dto } = validDto;
     const error = await axios.post('/api/contact', dto).catch((e: AxiosError) => e);
 
@@ -37,14 +37,16 @@ describe('POST /api/contact', () => {
   });
 
   it('should return 400 when email is invalid', async () => {
-    const error = await axios.post('/api/contact', { ...validDto, email: 'not-an-email' }).catch((e: AxiosError) => e);
+    const error = await axios
+      .post('/api/contact', { ...validDto, email: 'not-an-email' })
+      .catch((e: AxiosError) => e);
 
     expect(axios.isAxiosError(error)).toBe(true);
     expect((error as AxiosError).response?.status).toBe(400);
   });
 
   it('should return 400 when subject is missing', async () => {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
+     
     const { subject: _, ...dto } = validDto;
     const error = await axios.post('/api/contact', dto).catch((e: AxiosError) => e);
 
@@ -53,14 +55,16 @@ describe('POST /api/contact', () => {
   });
 
   it('should return 400 when message is too short', async () => {
-    const error = await axios.post('/api/contact', { ...validDto, message: 'short' }).catch((e: AxiosError) => e);
+    const error = await axios
+      .post('/api/contact', { ...validDto, message: 'short' })
+      .catch((e: AxiosError) => e);
 
     expect(axios.isAxiosError(error)).toBe(true);
     expect((error as AxiosError).response?.status).toBe(400);
   });
 
   it('should return 400 when captchaToken is missing', async () => {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
+     
     const { captchaToken: _, ...dto } = validDto;
     const error = await axios.post('/api/contact', dto).catch((e: AxiosError) => e);
 
@@ -69,7 +73,9 @@ describe('POST /api/contact', () => {
   });
 
   it('should return 400 when name exceeds max length', async () => {
-    const error = await axios.post('/api/contact', { ...validDto, name: 'a'.repeat(101) }).catch((e: AxiosError) => e);
+    const error = await axios
+      .post('/api/contact', { ...validDto, name: 'a'.repeat(101) })
+      .catch((e: AxiosError) => e);
 
     expect(axios.isAxiosError(error)).toBe(true);
     expect((error as AxiosError).response?.status).toBe(400);

@@ -67,7 +67,10 @@ describe('ProjectMapper', () => {
 
   describe('toProjectDtoList', () => {
     it('should map an array of projects to DTOs', () => {
-      const projects = [makeProject({ id: '1', title: 'Project 1' }), makeProject({ id: '2', title: 'Project 2' })];
+      const projects = [
+        makeProject({ id: '1', title: 'Project 1' }),
+        makeProject({ id: '2', title: 'Project 2' }),
+      ];
 
       const result = mapper.toProjectDtoList(projects);
 

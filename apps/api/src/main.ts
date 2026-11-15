@@ -11,7 +11,9 @@ const globalPrefix = 'api';
 
 async function createApp(): Promise<INestApplication> {
   if (process.env.TZ !== DEFAULT_TIMEZONE) {
-    throw new Error(`Invalid timezone. Should be defined to ${DEFAULT_TIMEZONE}, got: ${process.env.TZ}`);
+    throw new Error(
+      `Invalid timezone. Should be defined to ${DEFAULT_TIMEZONE}, got: ${process.env.TZ}`,
+    );
   }
 
   const app = await NestFactory.create(AppModule, {

@@ -1,4 +1,15 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  ParseUUIDPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { Public } from '@portfolio/core';
 import type {
   CreateResumeRequestDto,
@@ -37,7 +48,10 @@ export class ResumeController {
   }
 
   @Patch(':id')
-  async update(@Param('id', ParseUUIDPipe) id: string, @Body() dto: UpdateResumeRequestDto): Promise<ResumeDetailDto> {
+  async update(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() dto: UpdateResumeRequestDto,
+  ): Promise<ResumeDetailDto> {
     return this._resumeService.update(id, dto);
   }
 

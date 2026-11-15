@@ -1,5 +1,10 @@
 import { Controller, Get } from '@nestjs/common';
-import { HealthCheck, HealthCheckResult, HealthCheckService, HealthIndicatorResult } from '@nestjs/terminus';
+import {
+  HealthCheck,
+  HealthCheckResult,
+  HealthCheckService,
+  HealthIndicatorResult,
+} from '@nestjs/terminus';
 
 import { Public } from '../auth/decorators/public.decorator';
 import { HealthService } from './health.service';
@@ -15,6 +20,8 @@ export class HealthController {
   @Get('health')
   @HealthCheck()
   ready(): Promise<HealthCheckResult> {
-    return this._healthCheckService.check([(): Promise<HealthIndicatorResult> => this._healthService.database()]);
+    return this._healthCheckService.check([
+      (): Promise<HealthIndicatorResult> => this._healthService.database(),
+    ]);
   }
 }

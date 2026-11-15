@@ -11,7 +11,11 @@ export type CreateResumeDialogProps = {
   openChange: (open: boolean) => void;
 };
 
-export const CreateResumeDialog: FunctionComponent<CreateResumeDialogProps> = ({ resumes, open, openChange }) => {
+export const CreateResumeDialog: FunctionComponent<CreateResumeDialogProps> = ({
+  resumes,
+  open,
+  openChange,
+}) => {
   const { t } = useTranslation('studio');
 
   return (
@@ -20,7 +24,11 @@ export const CreateResumeDialog: FunctionComponent<CreateResumeDialogProps> = ({
         <DialogHeader>
           <DialogTitle>{t('resume.dialog.title')}</DialogTitle>
         </DialogHeader>
-        <CreateResumeForm resumes={resumes} onSuccess={() => openChange(false)} onClose={() => openChange(false)} />
+        <CreateResumeForm
+          resumes={resumes}
+          onSuccess={() => openChange(false)}
+          onClose={() => openChange(false)}
+        />
       </DialogContent>
     </Dialog>
   );

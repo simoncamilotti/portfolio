@@ -1,6 +1,7 @@
 import type { ProjectDto } from '@portfolio/shared-models';
 import type { ICellRendererParams } from 'ag-grid-community';
-import { ExternalLink, Github } from 'lucide-react';
+import { Github } from '@portfolio/shared-ui';
+import { ExternalLink } from 'lucide-react';
 
 export const LinksCellRenderer = (params: ICellRendererParams<ProjectDto>) => {
   const data = params.data;

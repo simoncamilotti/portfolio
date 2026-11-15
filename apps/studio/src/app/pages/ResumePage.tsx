@@ -34,9 +34,5 @@ export const ResumePage: FunctionComponent = () => {
     },
   ];
 
-  return (
-    <>
-      <PageBreadcrumb breadcrumbItems={breadcrumbItems} />
-    </>
-  );
+  return <PageBreadcrumb breadcrumbItems={breadcrumbItems} />;
 };

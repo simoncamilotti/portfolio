@@ -25,13 +25,17 @@ test.describe('Home Page', () => {
     await mockApi(page, { projects: true });
     await page.goto('/');
 
-    await expect(page.getByRole('navigation').getByRole('link', { name: 'Projets', exact: true })).toBeVisible();
+    await expect(
+      page.getByRole('navigation').getByRole('link', { name: 'Projets', exact: true }),
+    ).toBeVisible();
   });
 
   test('should hide the Projets nav link when feature flag is disabled', async ({ page }) => {
     await page.goto('/');
 
-    await expect(page.getByRole('navigation').getByRole('link', { name: 'Projets', exact: true })).toBeHidden();
+    await expect(
+      page.getByRole('navigation').getByRole('link', { name: 'Projets', exact: true }),
+    ).toBeHidden();
   });
 
   test('should display the CV section', async ({ page }) => {

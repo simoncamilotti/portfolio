@@ -25,7 +25,7 @@ describe('Navbar', () => {
     renderNavbar();
 
     const links = screen.getAllByRole('link');
-    const homeLink = links.find(link => link.getAttribute('href') === '/');
+    const homeLink = links.find((link) => link.getAttribute('href') === '/');
     expect(homeLink).toBeDefined();
   });
 

@@ -12,6 +12,6 @@ export class FeatureFlagMapper {
   }
 
   toFeatureFlagDtoList(flags: FeatureFlag[]): FeatureFlagDto[] {
-    return flags.map(flag => this.toFeatureFlagDto(flag));
+    return flags.map((flag) => this.toFeatureFlagDto(flag));
   }
 }

@@ -26,7 +26,10 @@ export class FeatureFlagController {
 
   @Patch(':key')
   @HttpCode(HttpStatus.OK)
-  async update(@Param('key') key: string, @Body() dto: UpdateFeatureFlagRequestDto): Promise<FeatureFlagDto> {
+  async update(
+    @Param('key') key: string,
+    @Body() dto: UpdateFeatureFlagRequestDto,
+  ): Promise<FeatureFlagDto> {
     return this._featureFlagService.update(key, dto);
   }
 }

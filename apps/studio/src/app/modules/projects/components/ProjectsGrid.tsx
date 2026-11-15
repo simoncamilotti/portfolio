@@ -1,5 +1,10 @@
 import type { ProjectDto } from '@portfolio/shared-models';
-import { AllCommunityModule, type ColDef, type ICellRendererParams, ModuleRegistry } from 'ag-grid-community';
+import {
+  AllCommunityModule,
+  type ColDef,
+  type ICellRendererParams,
+  ModuleRegistry,
+} from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { Pencil, Plus, Trash2 } from 'lucide-react';
 import type { FunctionComponent } from 'react';
@@ -23,7 +28,12 @@ const ROW_HEIGHT = 48;
 const HEADER_HEIGHT = 42;
 const MARGIN_AGGREGATION = 3;
 
-export const ProjectsGrid: FunctionComponent<ProjectsGridProps> = ({ projects, onEdit, onDelete, onCreateClick }) => {
+export const ProjectsGrid: FunctionComponent<ProjectsGridProps> = ({
+  projects,
+  onEdit,
+  onDelete,
+  onCreateClick,
+}) => {
   const { t } = useTranslation('studio');
 
   const ActionsCellRenderer = useCallback(
@@ -35,7 +45,10 @@ export const ProjectsGrid: FunctionComponent<ProjectsGridProps> = ({ projects, o
           <button className="h-7 w-7" onClick={() => onEdit(data)}>
             <Pencil className="w-3.5 h-3.5" />
           </button>
-          <button className="h-7 w-7 text-destructive hover:text-destructive" onClick={() => onDelete(data)}>
+          <button
+            className="h-7 w-7 text-destructive hover:text-destructive"
+            onClick={() => onDelete(data)}
+          >
             <Trash2 className="w-3.5 h-3.5" />
           </button>
         </div>
@@ -111,7 +124,11 @@ export const ProjectsGrid: FunctionComponent<ProjectsGridProps> = ({ projects, o
   }
 
   return (
-    <div style={{ height: Math.min(projects.length, 10) * ROW_HEIGHT + HEADER_HEIGHT + MARGIN_AGGREGATION }}>
+    <div
+      style={{
+        height: Math.min(projects.length, 10) * ROW_HEIGHT + HEADER_HEIGHT + MARGIN_AGGREGATION,
+      }}
+    >
       <AgGridReact<ProjectDto>
         theme={agTheme}
         rowData={projects}

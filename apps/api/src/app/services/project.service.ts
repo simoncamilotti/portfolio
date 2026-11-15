@@ -1,6 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '@portfolio/core';
-import { CreateProjectRequestDto, ProjectDto, UpdateProjectRequestDto } from '@portfolio/shared-models/server';
+import {
+  CreateProjectRequestDto,
+  ProjectDto,
+  UpdateProjectRequestDto,
+} from '@portfolio/shared-models/server';
 
 import { ProjectMapper } from '../mappers/project.mapper';
 
@@ -43,7 +47,7 @@ export class ProjectService {
         repoUrl: dto.repoUrl,
         imageUrl: dto.imageUrl,
         tags: {
-          connectOrCreate: dto.tags.map(tag => ({
+          connectOrCreate: dto.tags.map((tag) => ({
             where: { title: tag },
             create: { title: tag },
           })),
@@ -63,7 +67,7 @@ export class ProjectService {
     const tagsUpdate = dto.tags
       ? {
           set: [],
-          connectOrCreate: dto.tags.map(tag => ({
+          connectOrCreate: dto.tags.map((tag) => ({
             where: { title: tag },
             create: { title: tag },
           })),

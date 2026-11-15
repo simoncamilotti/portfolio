@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { contactRequestDtoSchema } from '@portfolio/shared-models';
 import type { BaseSyntheticEvent } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 
@@ -19,6 +19,17 @@ export type UseContactFormProps = {
 
 export const useContactForm = ({ recaptchaSiteKey, setStatus }: UseContactFormProps) => {
   const recaptchaLoaded = useRef(false);
+
+  useEffect(() => {
+    if (!recaptchaSiteKey || recaptchaLoaded.current) {
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
+    script.async = true;
+    document.head.appendChild(script);
+    recaptchaLoaded.current = true;
+  }, [recaptchaSiteKey]);
 
   const {
     control,
@@ -52,7 +63,6 @@ export const useContactForm = ({ recaptchaSiteKey, setStatus }: UseContactFormPr
   };
 
   return {
-    recaptchaLoaded,
     control,
     isValid,
     onSubmit: (form: BaseSyntheticEvent) => handleSubmit(onSubmit)(form),

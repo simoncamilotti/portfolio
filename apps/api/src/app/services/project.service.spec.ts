@@ -7,20 +7,20 @@ import { ProjectService } from './project.service';
 
 const mockPrismaService = {
   project: {
-    findMany: jest.fn(),
-    findUnique: jest.fn(),
-    create: jest.fn(),
-    update: jest.fn(),
-    delete: jest.fn(),
+    findMany: vi.fn(),
+    findUnique: vi.fn(),
+    create: vi.fn(),
+    update: vi.fn(),
+    delete: vi.fn(),
   },
   tag: {
-    deleteMany: jest.fn(),
+    deleteMany: vi.fn(),
   },
 };
 
 const mockProjectMapper = {
-  toProjectDto: jest.fn(),
-  toProjectDtoList: jest.fn(),
+  toProjectDto: vi.fn(),
+  toProjectDtoList: vi.fn(),
 };
 
 const makeDbProject = (overrides = {}) => ({
@@ -51,7 +51,7 @@ describe('ProjectService', () => {
   let service: ProjectService;
 
   beforeEach(async () => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -156,7 +156,10 @@ describe('ProjectService', () => {
         tags: ['React'],
       };
       const existingProject = makeDbProject();
-      const updatedProject = makeDbProject({ title: 'Updated Project', tags: [{ title: 'React' }] });
+      const updatedProject = makeDbProject({
+        title: 'Updated Project',
+        tags: [{ title: 'React' }],
+      });
       const mappedDto = makeMappedDto({ title: 'Updated Project', tags: ['React'] });
 
       mockPrismaService.project.findUnique.mockResolvedValue(existingProject);
@@ -193,7 +196,9 @@ describe('ProjectService', () => {
 
       mockPrismaService.project.findUnique.mockResolvedValue(existingProject);
       mockPrismaService.project.update.mockResolvedValue(updatedProject);
-      mockProjectMapper.toProjectDto.mockReturnValueOnce(makeMappedDto()).mockReturnValueOnce(mappedDto);
+      mockProjectMapper.toProjectDto
+        .mockReturnValueOnce(makeMappedDto())
+        .mockReturnValueOnce(mappedDto);
 
       await service.update(existingProject.id, updateDto);
 
@@ -220,7 +225,9 @@ describe('ProjectService', () => {
     it('should throw NotFoundException if project to update does not exist', async () => {
       mockPrismaService.project.findUnique.mockResolvedValue(null);
 
-      await expect(service.update('non-existent-id', { title: 'X' })).rejects.toThrow(NotFoundException);
+      await expect(service.update('non-existent-id', { title: 'X' })).rejects.toThrow(
+        NotFoundException,
+      );
       expect(mockPrismaService.project.update).not.toHaveBeenCalled();
     });
   });
@@ -233,7 +240,9 @@ describe('ProjectService', () => {
 
       await service.remove(dbProject.id);
 
-      expect(mockPrismaService.project.delete).toHaveBeenCalledWith({ where: { id: dbProject.id } });
+      expect(mockPrismaService.project.delete).toHaveBeenCalledWith({
+        where: { id: dbProject.id },
+      });
       expect(mockPrismaService.tag.deleteMany).toHaveBeenCalledWith({
         where: { projects: { none: {} } },
       });

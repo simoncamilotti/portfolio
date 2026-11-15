@@ -3,7 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/client-e2e/src",
-  "tags": [],
+  "tags": ["type:e2e", "platform:node"],
   "implicitDependencies": ["client"],
   "// targets": "to see all targets run: nx show project client-e2e --web",
   "targets": {}

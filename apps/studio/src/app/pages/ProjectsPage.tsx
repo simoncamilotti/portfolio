@@ -61,16 +61,32 @@ export const ProjectsPage: FunctionComponent = () => {
 
         {isPending ? (
           <div className="space-y-3">
-            {[1, 2].map(i => (
-              <div key={i} className="h-12 rounded-xl border border-border/50 bg-card animate-pulse" />
+            {[1, 2].map((i) => (
+              <div
+                key={i}
+                className="h-12 rounded-xl border border-border/50 bg-card animate-pulse"
+              />
             ))}
           </div>
         ) : (
-          <ProjectsGrid projects={projects ?? []} onEdit={openEdit} onDelete={openDelete} onCreateClick={openCreate} />
+          <ProjectsGrid
+            projects={projects ?? []}
+            onEdit={openEdit}
+            onDelete={openDelete}
+            onCreateClick={openCreate}
+          />
         )}
 
-        <ProjectFormDialog project={editingProject} open={formDialogOpen} onOpenChange={setFormDialogOpen} />
-        <DeleteProjectDialog project={projectToDelete} open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen} />
+        <ProjectFormDialog
+          project={editingProject}
+          open={formDialogOpen}
+          onOpenChange={setFormDialogOpen}
+        />
+        <DeleteProjectDialog
+          project={projectToDelete}
+          open={deleteDialogOpen}
+          onOpenChange={setDeleteDialogOpen}
+        />
       </div>
     </>
   );

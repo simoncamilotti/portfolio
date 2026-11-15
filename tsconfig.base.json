@@ -22,7 +22,13 @@
       "@portfolio/i18n": ["libs/i18n/src/index.ts"],
       "@portfolio/web": ["libs/web/src/index.ts"],
       "@portfolio/web/api": ["libs/web/src/lib/api/axiosInstance.ts"]
-    }
+    },
+    "strict": false,
+    "noUncheckedSideEffectImports": false,
+    "types": ["*"],
+    "esModuleInterop": false,
+    "ignoreDeprecations": "6.0",
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules", "tmp"]
 }

@@ -16,7 +16,7 @@ describe('routes', () => {
 
   it('should define the home route as a child', () => {
     const children = routes[0].children!;
-    const homeRoute = children.find(r => r.path === '/');
+    const homeRoute = children.find((r) => r.path === '/');
 
     expect(homeRoute).toBeDefined();
     expect(homeRoute!.element).toBeDefined();
@@ -24,14 +24,14 @@ describe('routes', () => {
 
   it('should define the resume route as a child', () => {
     const children = routes[0].children!;
-    const resumeRoute = children.find(r => r.path?.includes('resumes'));
+    const resumeRoute = children.find((r) => r.path?.includes('resumes'));
 
     expect(resumeRoute).toBeDefined();
     expect(resumeRoute!.element).toBeDefined();
   });
 
   it('should define a catch-all redirect route', () => {
-    const catchAll = routes.find(r => r.path === '*');
+    const catchAll = routes.find((r) => r.path === '*');
 
     expect(catchAll).toBeDefined();
     expect(catchAll!.loader).toBeDefined();

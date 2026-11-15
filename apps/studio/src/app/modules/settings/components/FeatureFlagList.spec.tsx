@@ -1,5 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
+import { FeatureFlagList } from './FeatureFlagList';
+
 const mockFlags = [
   { key: 'projects', enabled: true },
   { key: 'blog', enabled: false },
@@ -40,8 +42,6 @@ vi.mock('./FeatureFlagForm', () => ({
 vi.mock('./FeatureFlagListSkeleton', () => ({
   FeatureFlagListSkeleton: () => <div data-testid="feature-flag-skeleton" />,
 }));
-
-import { FeatureFlagList } from './FeatureFlagList';
 
 describe('FeatureFlagList', () => {
   beforeEach(() => {

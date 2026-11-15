@@ -10,12 +10,12 @@ export const useDeleteProjectMutation = (projectIdToDelete: string) => {
   const deleteProjectMutation = useMutation({
     mutationFn: () => ProjectsService.deleteProject(projectIdToDelete),
     onMutate: () => {
-      queryClient.setQueryData<ProjectDto[]>(projectsKey.getAllProjects, data =>
+      queryClient.setQueryData<ProjectDto[]>(projectsKey.getAllProjects, (data) =>
         data?.filter(({ id }) => id !== projectIdToDelete),
       );
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: projectsKey.getAllProjects }),
-    onError: async error => {
+    onError: async (error) => {
       queryClient.invalidateQueries({ queryKey: projectsKey.getAllProjects });
       throw error;
     },

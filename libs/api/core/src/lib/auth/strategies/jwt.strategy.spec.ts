@@ -1,3 +1,4 @@
+import type { Mock } from 'vitest';
 import { AuthService } from '../services/auth.service';
 import { JWTPayload } from '../types/jwt-payload.type';
 import { JwtStrategy } from './jwt.strategy';
@@ -6,9 +7,9 @@ import { JwtStrategy } from './jwt.strategy';
 process.env['KEYCLOAK_ISSUER_URL'] = 'http://localhost:8080/realms/portfolio';
 
 // Mock the external dependencies that the constructor uses
-jest.mock('passport-jwt', () => ({
+vi.mock('passport-jwt', () => ({
   ExtractJwt: {
-    fromAuthHeaderAsBearerToken: jest.fn().mockReturnValue(() => null),
+    fromAuthHeaderAsBearerToken: vi.fn().mockReturnValue(() => null),
   },
   Strategy: class MockStrategy {
     name = 'jwt';
@@ -18,8 +19,8 @@ jest.mock('passport-jwt', () => ({
   },
 }));
 
-jest.mock('jwks-rsa', () => ({
-  passportJwtSecret: jest.fn().mockReturnValue(() => null),
+vi.mock('jwks-rsa', () => ({
+  passportJwtSecret: vi.fn().mockReturnValue(() => null),
 }));
 
 describe('JwtStrategy', () => {
@@ -28,7 +29,7 @@ describe('JwtStrategy', () => {
 
   beforeEach(() => {
     authService = {
-      getOrCreateUser: jest.fn(),
+      getOrCreateUser: vi.fn(),
     } as unknown as AuthService;
 
     strategy = new JwtStrategy(authService);
@@ -58,7 +59,7 @@ describe('JwtStrategy', () => {
   describe('validate', () => {
     it('should call authService.getOrCreateUser with the payload', async () => {
       const payload = createPayload();
-      (authService.getOrCreateUser as jest.Mock).mockResolvedValue({
+      (authService.getOrCreateUser as Mock).mockResolvedValue({
         id: 'db-user-1',
       });
 
@@ -69,7 +70,7 @@ describe('JwtStrategy', () => {
 
     it('should return an AuthUser with mapped fields', async () => {
       const payload = createPayload();
-      (authService.getOrCreateUser as jest.Mock).mockResolvedValue({
+      (authService.getOrCreateUser as Mock).mockResolvedValue({
         id: 'db-user-1',
       });
 
@@ -88,7 +89,7 @@ describe('JwtStrategy', () => {
 
     it('should use dbUser.id, not the JWT sub, for the id field', async () => {
       const payload = createPayload({ sub: 'keycloak-uuid' });
-      (authService.getOrCreateUser as jest.Mock).mockResolvedValue({
+      (authService.getOrCreateUser as Mock).mockResolvedValue({
         id: 'prisma-uuid',
       });
 
@@ -102,7 +103,7 @@ describe('JwtStrategy', () => {
       const payload = createPayload();
       // Simulate missing realm_access
       (payload as any).resource_access = undefined;
-      (authService.getOrCreateUser as jest.Mock).mockResolvedValue({
+      (authService.getOrCreateUser as Mock).mockResolvedValue({
         id: 'db-user-1',
       });
 
@@ -115,7 +116,7 @@ describe('JwtStrategy', () => {
       const payload = createPayload({
         resource_access: { roles: [] },
       });
-      (authService.getOrCreateUser as jest.Mock).mockResolvedValue({
+      (authService.getOrCreateUser as Mock).mockResolvedValue({
         id: 'db-user-1',
       });
 

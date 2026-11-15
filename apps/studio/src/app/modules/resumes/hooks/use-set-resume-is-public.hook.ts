@@ -11,12 +11,12 @@ export const useSetResumeIsPublic = (resumeId: string) => {
     mutationFn: () => ResumesService.setResumeIsPublic(resumeId, { isPublic: true }),
     ...{
       onMutate: () => {
-        queryClient.setQueryData<ResumeDto[]>(resumesKey.getAllResumes, data =>
-          data?.map(resume => ({ ...resume, isPublic: resume.id === resumeId })),
+        queryClient.setQueryData<ResumeDto[]>(resumesKey.getAllResumes, (data) =>
+          data?.map((resume) => ({ ...resume, isPublic: resume.id === resumeId })),
         );
       },
       onSuccess: () => queryClient.invalidateQueries({ queryKey: resumesKey.getAllResumes }),
-      onError: async error => {
+      onError: async (error) => {
         queryClient.invalidateQueries({ queryKey: resumesKey.getAllResumes });
         throw error;
       },

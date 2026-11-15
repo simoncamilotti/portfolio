@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  actions: read
+  contents: read
+
+# `if` on ci and e2e: a repository created from the template starts with an "Initial commit"
+# pushed before the init generator and the secrets. Nothing to check or deploy there.
+jobs:
+  # Pull requests: affected projects only. main: the whole monorepo (ADR 0010).
+  ci:
+    if: github.event.head_commit.message != 'Initial commit'
+    uses: simoncamilotti/shared-workflows/.github/workflows/nx-ci.yml@v1
+    with:
+      # Keep in sync with .nvmrc.
+      node_version: '24.22.1'
+      nx_targets: lint typecheck test build
+      affected: true
+      knip: true
+      gitleaks: true
+    secrets: inherit
+
+  e2e:
+    if: github.event.head_commit.message != 'Initial commit'
+    uses: simoncamilotti/shared-workflows/.github/workflows/nx-e2e.yml@v1
+    with:
+      node_version: '24.22.1'
+      affected: true
+      # No --filter until the e2e projects become packages (step 2 of #55).
+      browsers_command: pnpm exec playwright install chromium
+    secrets: inherit
+
+  # main → dev, release → prod, through the GitOps repository.
+  docker:
+    needs: [ci, e2e]
+    if: github.event_name != 'pull_request'
+    permissions:
+      contents: read
+      packages: write
+    uses: simoncamilotti/shared-workflows/.github/workflows/docker.yml@v1
+    with:
+      images: >-
+        [{"name": "api", "dockerfile": "apps/api/Dockerfile"},
+         {"name": "client", "dockerfile": "apps/client/Dockerfile"},
+         {"name": "studio", "dockerfile": "apps/studio/Dockerfile"}]
+      # The starter only checks that its images build; the projects push them.
+      push: ${{ github.repository != 'simoncamilotti/monorepo-starter' }}
+      # Only once apps/<project>/ exists in the GitOps repository: set the GITOPS_DEPLOY repository
+      # variable after merging the GitOps pull request (docs/runbooks/deployment.md).
+      deploy: ${{ vars.GITOPS_DEPLOY == 'true' }}
+    secrets: inherit

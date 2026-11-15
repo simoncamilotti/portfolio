@@ -54,7 +54,9 @@ describe('Resume CRUD', () => {
 
       expect(res.status).toBe(200);
       expect(Array.isArray(res.data)).toBe(true);
-      expect(res.data).toEqual(expect.arrayContaining([expect.objectContaining({ id: createdResumeId })]));
+      expect(res.data).toEqual(
+        expect.arrayContaining([expect.objectContaining({ id: createdResumeId })]),
+      );
     });
   });
 
@@ -137,13 +139,17 @@ describe('Resume CRUD', () => {
       );
 
       expect(res.status).toBe(200);
-      expect(res.data).toEqual(expect.objectContaining({ title: 'CV Updated', content: 'Nouveau contenu' }));
+      expect(res.data).toEqual(
+        expect.objectContaining({ title: 'CV Updated', content: 'Nouveau contenu' }),
+      );
     });
   });
 
   describe('DELETE /api/resumes/:id', () => {
     it('should return 401 without a token', async () => {
-      const error = await axios.delete(`/api/resumes/${createdResumeId}`).catch((e: AxiosError) => e);
+      const error = await axios
+        .delete(`/api/resumes/${createdResumeId}`)
+        .catch((e: AxiosError) => e);
 
       expect(axios.isAxiosError(error)).toBe(true);
       expect((error as AxiosError).response?.status).toBe(401);

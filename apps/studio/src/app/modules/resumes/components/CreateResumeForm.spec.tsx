@@ -1,5 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
+import { useCreateResumeForm } from '../hooks/use-create-resume-form.hook';
+import { CreateResumeForm } from './CreateResumeForm';
+
 const mockOnSubmit = vi.fn((e: any) => e.preventDefault());
 
 vi.mock('../hooks/use-create-resume-form.hook', () => ({
@@ -12,17 +15,18 @@ vi.mock('../hooks/use-create-resume-form.hook', () => ({
 
 vi.mock('react-hook-form', () => ({
   Controller: ({ render: renderFn }: any) =>
-    renderFn({ field: { value: '', onChange: vi.fn(), onBlur: vi.fn(), name: 'title', ref: vi.fn() } }),
+    renderFn({
+      field: { value: '', onChange: vi.fn(), onBlur: vi.fn(), name: 'title', ref: vi.fn() },
+    }),
 }));
-
-import { useCreateResumeForm } from '../hooks/use-create-resume-form.hook';
-import { CreateResumeForm } from './CreateResumeForm';
 
 const mockedUseCreateResumeForm = vi.mocked(useCreateResumeForm);
 
 describe('CreateResumeForm', () => {
   const defaultProps = {
-    resumes: [{ id: '1', title: 'Existing', isPublic: false, shareEnabled: false, updatedAt: '2026-01-01' }] as any[],
+    resumes: [
+      { id: '1', title: 'Existing', isPublic: false, shareEnabled: false, updatedAt: '2026-01-01' },
+    ] as any[],
     onSuccess: vi.fn(),
     onClose: vi.fn(),
   };

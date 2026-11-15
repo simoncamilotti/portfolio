@@ -10,7 +10,10 @@ export const useCreateFeatureFlagMutation = () => {
   const createFeatureFlagMutation = useMutation({
     mutationFn: (key: string) => FeatureFlagsService.create(key, false),
     onSuccess: (created: FeatureFlagDto) => {
-      queryClient.setQueryData<FeatureFlagDto[]>(featureFlagsKey.getAll, data => [...(data ?? []), created]);
+      queryClient.setQueryData<FeatureFlagDto[]>(featureFlagsKey.getAll, (data) => [
+        ...(data ?? []),
+        created,
+      ]);
     },
   });
 

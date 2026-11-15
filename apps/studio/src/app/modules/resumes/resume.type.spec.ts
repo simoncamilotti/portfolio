@@ -2,7 +2,10 @@ import { createResumeFormSchema } from './resume.type';
 
 describe('createResumeFormSchema', () => {
   it('should accept a valid form with title and description', () => {
-    const result = createResumeFormSchema.safeParse({ title: 'Mon CV', description: 'Description' });
+    const result = createResumeFormSchema.safeParse({
+      title: 'Mon CV',
+      description: 'Description',
+    });
 
     expect(result.success).toBe(true);
   });

@@ -6,7 +6,9 @@ import { ContactSection } from './ContactSection';
 
 vi.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, initial, whileInView, viewport, transition, ...props }: any) => <div {...props}>{children}</div>,
+    div: ({ children, initial, whileInView, viewport, transition, ...props }: any) => (
+      <div {...props}>{children}</div>
+    ),
   },
 }));
 

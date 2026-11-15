@@ -32,4 +32,4 @@ const forbiddenInterceptor = (error: unknown) => {
 };
 
 axiosInstance.interceptors.request.use(authRequestInterceptor);
-axiosInstance.interceptors.response.use(_ => _, forbiddenInterceptor);
+axiosInstance.interceptors.response.use((_) => _, forbiddenInterceptor);

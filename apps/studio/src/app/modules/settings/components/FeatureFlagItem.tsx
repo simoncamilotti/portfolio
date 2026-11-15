@@ -7,7 +7,10 @@ type FeatureFlagItemProps = {
   handleToggle: (flag: FeatureFlagDto) => void;
 };
 
-export const FeatureFlagItem: FunctionComponent<FeatureFlagItemProps> = ({ flag, handleToggle }) => {
+export const FeatureFlagItem: FunctionComponent<FeatureFlagItemProps> = ({
+  flag,
+  handleToggle,
+}) => {
   return (
     <div
       key={flag.key}

@@ -7,19 +7,19 @@ import { ResumeService } from './resume.service';
 
 const mockPrismaService = {
   resume: {
-    findMany: jest.fn(),
-    findFirst: jest.fn(),
-    findUnique: jest.fn(),
-    create: jest.fn(),
-    update: jest.fn(),
-    delete: jest.fn(),
+    findMany: vi.fn(),
+    findFirst: vi.fn(),
+    findUnique: vi.fn(),
+    create: vi.fn(),
+    update: vi.fn(),
+    delete: vi.fn(),
   },
 };
 
 const mockResumeMapper = {
-  toResumeDto: jest.fn(),
-  toResumeDtoList: jest.fn(),
-  toResumeDetailDto: jest.fn(),
+  toResumeDto: vi.fn(),
+  toResumeDtoList: vi.fn(),
+  toResumeDetailDto: vi.fn(),
 };
 
 const mockResume = {
@@ -51,7 +51,7 @@ describe('ResumeService', () => {
   let service: ResumeService;
 
   beforeEach(async () => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -101,7 +101,10 @@ describe('ResumeService', () => {
     it('should return the first public resume as detail DTO', async () => {
       const publicResume = { ...mockResume, isPublic: true };
       mockPrismaService.resume.findFirst.mockResolvedValue(publicResume);
-      mockResumeMapper.toResumeDetailDto.mockReturnValue({ ...mockResumeDetailDto, isPublic: true });
+      mockResumeMapper.toResumeDetailDto.mockReturnValue({
+        ...mockResumeDetailDto,
+        isPublic: true,
+      });
 
       const result = await service.findPublic();
 
@@ -161,7 +164,9 @@ describe('ResumeService', () => {
       const updatedDto = { ...mockResumeDetailDto, ...dto };
       mockPrismaService.resume.findUnique.mockResolvedValue(mockResume);
       mockPrismaService.resume.update.mockResolvedValue(updatedResume);
-      mockResumeMapper.toResumeDetailDto.mockReturnValueOnce(mockResumeDetailDto).mockReturnValueOnce(updatedDto);
+      mockResumeMapper.toResumeDetailDto
+        .mockReturnValueOnce(mockResumeDetailDto)
+        .mockReturnValueOnce(updatedDto);
 
       const result = await service.update('uuid-1', dto);
 
@@ -175,7 +180,9 @@ describe('ResumeService', () => {
     it('should throw NotFoundException if resume not found', async () => {
       mockPrismaService.resume.findUnique.mockResolvedValue(null);
 
-      await expect(service.update('uuid-999', { title: 'Test' })).rejects.toThrow(NotFoundException);
+      await expect(service.update('uuid-999', { title: 'Test' })).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 
@@ -188,7 +195,9 @@ describe('ResumeService', () => {
       mockPrismaService.resume.findUnique.mockResolvedValue(mockResume);
       mockPrismaService.resume.findFirst.mockResolvedValue(currentPublicResume);
       mockPrismaService.resume.update.mockResolvedValue(updatedResume);
-      mockResumeMapper.toResumeDetailDto.mockReturnValueOnce(mockResumeDetailDto).mockReturnValueOnce(updatedDto);
+      mockResumeMapper.toResumeDetailDto
+        .mockReturnValueOnce(mockResumeDetailDto)
+        .mockReturnValueOnce(updatedDto);
 
       const result = await service.setPublic('uuid-1', dto);
 
@@ -213,7 +222,9 @@ describe('ResumeService', () => {
       mockPrismaService.resume.findUnique.mockResolvedValue(mockResume);
       mockPrismaService.resume.findFirst.mockResolvedValue(null);
       mockPrismaService.resume.update.mockResolvedValue(updatedResume);
-      mockResumeMapper.toResumeDetailDto.mockReturnValueOnce(mockResumeDetailDto).mockReturnValueOnce(updatedDto);
+      mockResumeMapper.toResumeDetailDto
+        .mockReturnValueOnce(mockResumeDetailDto)
+        .mockReturnValueOnce(updatedDto);
 
       const result = await service.setPublic('uuid-1', dto);
 
@@ -230,7 +241,9 @@ describe('ResumeService', () => {
       const updatedDto = { ...mockResumeDetailDto, isPublic: false };
       mockPrismaService.resume.findUnique.mockResolvedValue(mockResume);
       mockPrismaService.resume.update.mockResolvedValue(updatedResume);
-      mockResumeMapper.toResumeDetailDto.mockReturnValueOnce(mockResumeDetailDto).mockReturnValueOnce(updatedDto);
+      mockResumeMapper.toResumeDetailDto
+        .mockReturnValueOnce(mockResumeDetailDto)
+        .mockReturnValueOnce(updatedDto);
 
       const result = await service.setPublic('uuid-1', dto);
 
@@ -245,7 +258,9 @@ describe('ResumeService', () => {
     it('should throw NotFoundException if resume not found', async () => {
       mockPrismaService.resume.findUnique.mockResolvedValue(null);
 
-      await expect(service.setPublic('uuid-999', { isPublic: true })).rejects.toThrow(NotFoundException);
+      await expect(service.setPublic('uuid-999', { isPublic: true })).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 

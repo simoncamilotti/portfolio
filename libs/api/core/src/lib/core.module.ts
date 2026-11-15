@@ -16,7 +16,7 @@ const pinoOptions: Params = {
     level: process.env['NODE_ENV'] !== 'production' ? 'debug' : 'info',
     redact: ['req.headers.authorization', 'req.headers.cookie'],
     autoLogging: {
-      ignore: (req): boolean => ['/health'].some(publicPath => req.url === publicPath),
+      ignore: (req): boolean => ['/health'].some((publicPath) => req.url === publicPath),
     },
     transport: process.env['NODE_ENV'] !== 'production' ? { target: 'pino-pretty' } : undefined,
   } as Options,

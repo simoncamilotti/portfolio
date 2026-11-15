@@ -1,5 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
+import { FeatureFlagForm } from './FeatureFlagForm';
+
 const mockOnSubmit = vi.fn((e: Event) => e.preventDefault());
 
 vi.mock('react-i18next', () => ({
@@ -22,8 +24,6 @@ vi.mock('react-hook-form', () => ({
       fieldState: {},
     }),
 }));
-
-import { FeatureFlagForm } from './FeatureFlagForm';
 
 describe('FeatureFlagForm', () => {
   beforeEach(() => {

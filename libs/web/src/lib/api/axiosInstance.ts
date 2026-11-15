@@ -10,7 +10,7 @@ export const errorInterceptor = (error: unknown) => {
 export const createAxiosInstance = () => {
   const instance = Axios.create({ baseURL: '/api' });
 
-  instance.interceptors.response.use(_ => _, errorInterceptor);
+  instance.interceptors.response.use((_) => _, errorInterceptor);
 
   return instance;
 };

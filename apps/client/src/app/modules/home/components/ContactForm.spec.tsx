@@ -11,7 +11,6 @@ vi.mock('react-i18next', () => ({
 vi.mock('../hooks/use-contact-form.hook', () => ({
   useContactForm: () => ({
     isValid: true,
-    recaptchaLoaded: { current: false },
     control: undefined,
     onSubmit: mockOnSubmit,
   }),

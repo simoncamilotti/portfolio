@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
+import { CreateResumeDialog } from './CreateResumeDialog';
+
 vi.mock('@portfolio/shared-ui', () => ({
   Dialog: ({ children, open }: any) => (open ? <div data-testid="dialog">{children}</div> : null),
   DialogContent: ({ children }: any) => <div>{children}</div>,
@@ -10,8 +12,6 @@ vi.mock('@portfolio/shared-ui', () => ({
 vi.mock('./CreateResumeForm', () => ({
   CreateResumeForm: () => <div data-testid="create-resume-form" />,
 }));
-
-import { CreateResumeDialog } from './CreateResumeDialog';
 
 describe('CreateResumeDialog', () => {
   const defaultProps = {

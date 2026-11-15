@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 
+import { ResumeItem } from './ResumeItem';
+
 vi.mock('framer-motion', () => ({
   motion: {
     div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
@@ -10,8 +12,6 @@ vi.mock('framer-motion', () => ({
 vi.mock('./ResumeItemMenu', () => ({
   ResumeItemMenu: () => <div data-testid="resume-item-menu" />,
 }));
-
-import { ResumeItem } from './ResumeItem';
 
 const baseResume = {
   id: '1',

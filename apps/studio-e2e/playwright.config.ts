@@ -17,7 +17,7 @@ export default defineConfig({
   },
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'npx nx run studio:preview',
+    command: 'pnpm exec nx run studio:preview',
     url: 'http://localhost:4201',
     reuseExistingServer: true,
     cwd: workspaceRoot,
@@ -30,17 +30,11 @@ export default defineConfig({
         launchOptions: {
           // Disable private network access checks so the mocked Keycloak iframe
           // redirect (localhost:8081 → localhost:4201) is not blocked by Chrome.
-          args: ['--disable-features=PrivateNetworkAccessForIframes,BlockInsecurePrivateNetworkRequests'],
+          args: [
+            '--disable-features=PrivateNetworkAccessForIframes,BlockInsecurePrivateNetworkRequests',
+          ],
         },
       },
-    },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
     },
   ],
 });

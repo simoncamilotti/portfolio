@@ -4,7 +4,7 @@ import { ContactService } from '../services/contact.service';
 import { ContactController } from './contact.controller';
 
 const mockContactService = {
-  sendContactEmail: jest.fn(),
+  sendContactEmail: vi.fn(),
 };
 
 const mockDto = {
@@ -19,7 +19,7 @@ describe('ContactController', () => {
   let controller: ContactController;
 
   beforeEach(async () => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ContactController],

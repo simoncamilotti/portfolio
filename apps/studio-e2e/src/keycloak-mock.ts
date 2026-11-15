@@ -23,7 +23,17 @@ export async function mockKeycloak(page: Page, browserName = 'chromium'): Promis
   const sessionState = 'mock-session-id';
   let capturedNonce: string | null = null;
 
-  await page.route(`${KEYCLOAK_URL}/**`, route => {
+  // /config.js is not versioned (config/studio/config.exemple.js): point the app at this mock.
+  await page.route('**/config.js', (route) =>
+    route.fulfill({
+      contentType: 'text/javascript',
+      body: `window.config = {
+        auth: { realm: '${REALM}', clientId: '${CLIENT_ID}', url: '${KEYCLOAK_URL}' },
+      };`,
+    }),
+  );
+
+  await page.route(`${KEYCLOAK_URL}/**`, (route) => {
     const url = route.request().url();
 
     // 3rd-party cookies check (keycloak-js runs this before anything else)
