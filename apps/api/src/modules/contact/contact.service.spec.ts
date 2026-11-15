@@ -1,5 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { BadRequestException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { MailerService } from '@nestjs-modules/mailer';
 import { of } from 'rxjs';
@@ -18,6 +19,15 @@ const mockHttpService = {
   post: vi.fn(),
 };
 
+const config: Record<string, string> = {
+  RECAPTCHA_SECRET_KEY: 'test-secret',
+  CONTACT_EMAIL_TO: 'contact@example.com',
+};
+
+const mockConfigService = {
+  get: (key: string) => config[key],
+};
+
 const mockMailerService = {
   sendMail: vi.fn().mockResolvedValue(undefined),
 };
@@ -28,31 +38,16 @@ describe('ContactService', () => {
   beforeEach(async () => {
     vi.clearAllMocks();
 
-    process.env.RECAPTCHA_SECRET_KEY = 'test-secret';
-    process.env.SMTP_FROM = 'test@example.com';
-    process.env.CONTACT_EMAIL_TO = 'contact@example.com';
-
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         ContactService,
         { provide: HttpService, useValue: mockHttpService },
         { provide: MailerService, useValue: mockMailerService },
+        { provide: ConfigService, useValue: mockConfigService },
       ],
     }).compile();
 
     service = module.get<ContactService>(ContactService);
-  });
-
-  afterEach(() => {
-    delete process.env.RECAPTCHA_SECRET_KEY;
-    delete process.env.SMTP_FROM;
-    delete process.env.CONTACT_EMAIL_TO;
-  });
-
-  it('should throw BadRequestException when reCAPTCHA secret key is not configured', async () => {
-    delete process.env.RECAPTCHA_SECRET_KEY;
-
-    await expect(service.sendContactEmail(mockDto)).rejects.toThrow(BadRequestException);
   });
 
   it('should throw BadRequestException when reCAPTCHA score is too low', async () => {
@@ -74,7 +69,6 @@ describe('ContactService', () => {
 
     expect(mockMailerService.sendMail).toHaveBeenCalledWith(
       expect.objectContaining({
-        from: 'test@example.com',
         to: 'contact@example.com',
         subject: '[Portfolio] Test subject',
         template: 'contact-template',

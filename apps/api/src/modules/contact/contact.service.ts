@@ -1,8 +1,11 @@
 import { HttpService } from '@nestjs/axios';
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { MailerService } from '@nestjs-modules/mailer';
 import type { ContactRequestDto } from '@repo/contracts/server';
 import { firstValueFrom, map } from 'rxjs';
+
+import type { Env } from '../../config/env.js';
 
 type RecaptchaResponse = {
   success: boolean;
@@ -18,6 +21,7 @@ export class ContactService {
   constructor(
     private readonly _httpService: HttpService,
     private readonly _mailerService: MailerService,
+    private readonly _config: ConfigService<Env, true>,
   ) {}
 
   async sendContactEmail(dto: ContactRequestDto): Promise<void> {
@@ -26,12 +30,7 @@ export class ContactService {
   }
 
   private async _verifyCaptcha(token: string): Promise<void> {
-    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
-
-    if (!secretKey) {
-      throw new BadRequestException('reCAPTCHA is not configured');
-    }
-
+    const secretKey = this._config.get('RECAPTCHA_SECRET_KEY', { infer: true });
     const response = await firstValueFrom(
       this._httpService
         .post<RecaptchaResponse>(
@@ -62,8 +61,7 @@ export class ContactService {
 
     this._mailerService
       .sendMail({
-        from: process.env.SMTP_FROM,
-        to: process.env.CONTACT_EMAIL_TO,
+        to: this._config.get('CONTACT_EMAIL_TO', { infer: true }),
         subject: `[Portfolio] ${dto.subject}`,
         template: 'contact-template',
         context: {

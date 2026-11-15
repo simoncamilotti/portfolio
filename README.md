@@ -66,7 +66,7 @@ pnpm dev
 Always through Nx: `pnpm nx <target> <project>`.
 
 ```bash
-pnpm nx serve api                                   # API: http://localhost:3000
+pnpm nx serve api                                   # API: http://localhost:3000/api, reference at /api/docs
 pnpm nx serve client                                # Client: http://localhost:4200
 pnpm nx serve studio                                # Studio: http://localhost:4201
 
@@ -94,6 +94,19 @@ Versions live in the catalog of `pnpm-workspace.yaml` (`catalogMode: strict`): a
 there, then `"catalog:"` in `package.json`. A version published less than 3 days ago is refused
 (`minimumReleaseAge`). Renovate proposes updates on Monday (`renovate.json`).
 
+## API
+
+- Configuration validated by Zod at startup (`apps/api/src/config/env.ts`, documented in
+  `.env.example`): the API refuses to start with an invalid environment.
+- Every route requires an OIDC access token (`jose`, keys found by discovery of
+  `OIDC_ISSUER_URL`, `aud` checked against `OIDC_AUDIENCE`), unless marked `@Public()`;
+  `@Roles()` reads a top-level `roles` claim, `@CurrentUser()` gives the caller.
+- Errors are RFC 9457 Problem Details (`application/problem+json`).
+- Probes: `/api/health/live` (process) and `/api/health/ready` (database).
+- helmet, CORS (`CORS_ORIGINS`), rate limiting (100 requests per minute and client).
+- OpenTelemetry traces and metrics over OTLP when `OTEL_EXPORTER_OTLP_ENDPOINT` is set.
+- API reference (Scalar) at `/api/docs`, outside production only.
+
 ## Git hooks
 
 Installed by `pnpm install` ([lefthook](lefthook.yml)):
@@ -118,7 +131,8 @@ Installed by `pnpm install` ([lefthook](lefthook.yml)):
 
 `docker-compose.yml`: PostgreSQL 17 (`5433`), Keycloak 26 (`8081`, stored in PostgreSQL, realm
 imported from `docker/keycloak/realm.json`, console `admin` / `admin`), Mailpit (`1025`, UI `8025`).
-Users of the realm: `admin` (role `ADMIN`), `user` (role `USER`), `test-e2e`.
+Users of the realm: `admin` (role `ADMIN`), `user` (role `USER`), `test-e2e`. The
+`portfolio-client` client adds its own audience and a `roles` claim to the access tokens.
 
 Moving from the former setup (Keycloak 23 on an H2 file): rename `DB_USER`, `DB_PASSWORD`,
 `DB_NAME` and `DB_PORT` to `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` and `POSTGRES_PORT`
@@ -129,3 +143,6 @@ docker compose up -d postgres
 docker compose exec postgres psql -U postgres -c 'CREATE DATABASE keycloak' -c 'CREATE DATABASE portfolio_e2e'
 docker compose up -d --wait
 ```
+
+Keycloak imports the realm only when it does not exist yet: after a change to
+`docker/keycloak/realm.json`, delete the `portfolio` realm in the console and restart Keycloak.

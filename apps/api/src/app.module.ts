@@ -1,40 +1,52 @@
-import { Module, RequestMethod } from '@nestjs/common';
-import { APP_GUARD } from '@nestjs/core';
-import { LoggerModule, type Params } from 'nestjs-pino';
-import type { Options } from 'pino-http';
+import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { APP_FILTER, APP_GUARD } from '@nestjs/core';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { LoggerModule } from 'nestjs-pino';
 
+import { AuthGuard } from './common/auth/auth.guard.js';
 import { AuthModule } from './common/auth/auth.module.js';
-import { JwtAuthGuard } from './common/auth/jwt-auth.guard.js';
 import { DatabaseModule } from './common/database/database.module.js';
+import { ProblemDetailsFilter } from './common/filters/problem-details.filter.js';
+import { type Env, validateEnv } from './config/env.js';
+import { loggerParams } from './config/logger.js';
 import { ContactModule } from './modules/contact/contact.module.js';
 import { FeatureFlagModule } from './modules/feature-flag/feature-flag.module.js';
 import { HealthModule } from './modules/health/health.module.js';
 import { ProjectModule } from './modules/project/project.module.js';
 import { ResumeModule } from './modules/resume/resume.module.js';
-
-const pinoOptions: Params = {
-  forRoutes: [{ method: RequestMethod.ALL, path: '*splat' }],
-  pinoHttp: {
-    level: process.env['NODE_ENV'] !== 'production' ? 'debug' : 'info',
-    redact: ['req.headers.authorization', 'req.headers.cookie'],
-    autoLogging: {
-      ignore: (req): boolean => ['/health'].some((publicPath) => req.url === publicPath),
-    },
-    transport: process.env['NODE_ENV'] !== 'production' ? { target: 'pino-pretty' } : undefined,
-  } as Options,
-};
+import { UsersModule } from './modules/users/users.module.js';
 
 @Module({
   imports: [
-    LoggerModule.forRoot(pinoOptions),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      // Local development reads the .env at the repository root; containers get real variables.
+      envFilePath: ['.env', '../../.env'],
+      validate: validateEnv,
+    }),
+    LoggerModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService<Env, true>) =>
+        loggerParams({
+          NODE_ENV: config.get('NODE_ENV', { infer: true }),
+          LOG_LEVEL: config.get('LOG_LEVEL', { infer: true }),
+        }),
+    }),
+    ThrottlerModule.forRoot([{ ttl: 60_000, limit: 100 }]),
     DatabaseModule,
     AuthModule,
     HealthModule,
+    UsersModule,
     ContactModule,
     FeatureFlagModule,
     ProjectModule,
     ResumeModule,
   ],
-  providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],
+  providers: [
+    { provide: APP_FILTER, useClass: ProblemDetailsFilter },
+    { provide: APP_GUARD, useClass: ThrottlerGuard },
+    { provide: APP_GUARD, useClass: AuthGuard },
+  ],
 })
 export class AppModule {}
