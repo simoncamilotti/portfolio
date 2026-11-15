@@ -1,58 +1,35 @@
-import type { INestApplication } from '@nestjs/common';
-import { Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
-import { Logger as PinoLogger } from 'nestjs-pino';
+import type { NextFunction, Request, Response } from 'express';
+import helmet from 'helmet';
+import { Logger } from 'nestjs-pino';
 import { ZodValidationPipe } from 'nestjs-zod';
 
 import { AppModule } from './app.module.js';
+import type { Env } from './config/env.js';
+import { API_DOCS_PATH, setUpApiDocs } from './openapi.js';
 
-const DEFAULT_TIMEZONE = 'Etc/UTC';
-const globalPrefix = 'api';
+const app = await NestFactory.create(AppModule, { bufferLogs: true });
+app.useLogger(app.get(Logger));
 
-async function createApp(): Promise<INestApplication> {
-  if (process.env.TZ !== DEFAULT_TIMEZONE) {
-    throw new Error(
-      `Invalid timezone. Should be defined to ${DEFAULT_TIMEZONE}, got: ${process.env.TZ}`,
-    );
-  }
+const config = app.get<ConfigService<Env, true>>(ConfigService);
+app.setGlobalPrefix('api');
+app.useGlobalPipes(new ZodValidationPipe());
 
-  const app = await NestFactory.create(AppModule, {
-    bufferLogs: true,
-  });
+// The Scalar UI loads its script from a CDN: relax the content security policy on the docs only.
+const secureHeaders = helmet();
+const docsHeaders = helmet({ contentSecurityPolicy: false });
+app.use((request: Request, response: Response, next: NextFunction) =>
+  request.path.startsWith(API_DOCS_PATH)
+    ? docsHeaders(request, response, next)
+    : secureHeaders(request, response, next),
+);
+app.enableCors({ origin: config.get('CORS_ORIGINS', { infer: true }), credentials: true });
+app.enableShutdownHooks();
 
-  await setupApp(app);
-
-  return app;
+// API reference: development only, the API stays opaque in production.
+if (config.get('NODE_ENV', { infer: true }) !== 'production') {
+  setUpApiDocs(app);
 }
 
-export const setupApp = async (app: INestApplication): Promise<void> => {
-  app.enableCors({
-    origin: ['https://cv.camilotti.fr', 'https://studio.camilotti.fr'],
-  });
-  app.setGlobalPrefix(globalPrefix, { exclude: ['health'] });
-  app.useGlobalPipes(new ZodValidationPipe());
-
-  setupLogger(app);
-};
-
-async function main(): Promise<void> {
-  const app = await createApp();
-  // when running jest integration tests we can get the error "listen EADDRINUSE: address already in use :::XXXX" even when running in band.
-  // this looks to be happening when jest switch to the next test suite. A small hack here is to assign the port to 0 in these cases,
-  // where 0 means "assign me a random port that is available"
-  const port = process.env.NODE_ENV === 'test' ? 0 : (process.env.PORT ?? 3000);
-  await app.listen(port);
-
-  Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
-}
-
-const setupLogger = (app: INestApplication): void => {
-  if (process.env.NODE_ENV === 'test') {
-    app.useLogger(false);
-    return;
-  }
-
-  app.useLogger(app.get(PinoLogger));
-};
-
-main();
+await app.listen(config.get('PORT', { infer: true }));
