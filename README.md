@@ -26,12 +26,15 @@ apps/
   studio-e2e/    → E2E tests of the studio (Playwright, mocked API and Keycloak)
 
 libs/
-  api/core/      → Global NestJS module (Prisma, Health, Logger, Auth)
-  shared-models/ → Shared DTOs and Zod schemas
-  shared-ui/     → Shared React components (PageLayout, Footer, Braces, brand icons)
-  web/           → Shared web code (API client)
-  i18n/          → Translations (fr, en)
+  shared/contracts/ → @repo/contracts: Zod schemas, nestjs-zod DTOs (`@repo/contracts/server`)
+  web/ui/           → @repo/ui: shared React components (PageLayout, Footer, Braces, brand icons)
+  web/i18n/         → @repo/i18n: translations (fr, en)
+  web/query/        → @repo/query: React Query provider, axios instance (`@repo/query/api`)
 ```
+
+Every project is a pnpm package (`package.json`, Nx configuration included). The API code is
+organised by domain in `apps/api/src/modules/<domain>/`; authentication and database live in
+`apps/api/src/common/`. ESM everywhere: relative imports end in `.js`.
 
 ## Prerequisites
 
@@ -80,10 +83,10 @@ pnpm format                                         # Prettier
 ### Database
 
 ```bash
-pnpm prisma:generate         # Generate the Prisma client (also run by Nx before build, test, typecheck)
-pnpm prisma:migrate:dev      # Create or apply migrations (dev)
-pnpm prisma:migrate:deploy   # Apply migrations (prod)
-pnpm prisma:studio           # Database GUI
+pnpm nx prisma-generate api   # Prisma client in apps/api/src/generated (also run before build, test, typecheck)
+pnpm nx migrate-dev api       # Create or apply migrations (dev), schema in apps/api/prisma/
+pnpm nx migrate-deploy api    # Apply migrations (prod)
+pnpm nx studio api            # Database GUI
 ```
 
 ### Dependencies
@@ -98,7 +101,7 @@ Installed by `pnpm install` ([lefthook](lefthook.yml)):
 
 | Moment     | Check                                                              |
 | ---------- | ------------------------------------------------------------------ |
-| pre-commit | Prettier and ESLint on staged files; gitleaks if installed         |
+| pre-commit | ESLint then Prettier on staged files; gitleaks if installed        |
 | commit-msg | commitlint (Conventional Commits)                                  |
 | pre-push   | No push to `main`; `typecheck` and `test` of the affected projects |
 
