@@ -7,9 +7,8 @@ vi.mock('@repo/api-client', () => ({
   useResumeFindOne: vi.fn().mockReturnValue({ data: undefined }),
 }));
 
-vi.mock('react-router', () => ({
+vi.mock('@tanstack/react-router', () => ({
   useParams: vi.fn().mockReturnValue({ resumeId: '42' }),
-  generatePath: vi.fn((path: string) => path),
 }));
 
 vi.mock('../modules/layout/page-breadcrumb.js', () => ({

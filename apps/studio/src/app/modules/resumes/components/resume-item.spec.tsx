@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router';
 
 import { ResumeItem } from './resume-item.js';
 
@@ -24,11 +23,7 @@ const baseResume = {
 };
 
 const renderResumeItem = (resume = baseResume, resumeIndex = 0) =>
-  render(
-    <MemoryRouter>
-      <ResumeItem resume={resume as any} resumeIndex={resumeIndex} />
-    </MemoryRouter>,
-  );
+  render(<ResumeItem resume={resume as any} resumeIndex={resumeIndex} />);
 
 describe('ResumeItem', () => {
   it('should render the resume title', () => {

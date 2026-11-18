@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router';
 
 import { ResumeList } from './resume-list.js';
 
@@ -52,12 +51,7 @@ const mockResumes = [
 ];
 
 describe('ResumeList', () => {
-  const renderList = (resumes = mockResumes) =>
-    render(
-      <MemoryRouter>
-        <ResumeList resumes={resumes} />
-      </MemoryRouter>,
-    );
+  const renderList = (resumes = mockResumes) => render(<ResumeList resumes={resumes} />);
 
   it('should render the resume title', () => {
     renderList();

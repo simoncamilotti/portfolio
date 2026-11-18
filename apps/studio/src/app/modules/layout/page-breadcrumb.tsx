@@ -1,9 +1,9 @@
 import { ChevronRight } from 'lucide-react';
 import type { FunctionComponent } from 'react';
-import type { To } from 'react-router';
-import { Link } from 'react-router';
+import type { LinkProps } from '@tanstack/react-router';
+import { Link } from '@tanstack/react-router';
 
-type BreadcrumbItemProps = { title: string; to?: To };
+type BreadcrumbItemProps = { title: string; to?: LinkProps['to'] };
 export type BreadcrumbItemsProps = BreadcrumbItemProps[];
 
 const BreadcrumbItem: FunctionComponent<{ breadcrumbItem: BreadcrumbItemProps }> = ({

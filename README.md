@@ -4,13 +4,13 @@ Personal portfolio and SaaS CV management tool — an Nx monorepo with a NestJS 
 
 ## Technical Stack
 
-| Layer        | Technology                         |
-| :----------- | :--------------------------------- |
-| **Monorepo** | Nx 23, pnpm workspaces (catalog)   |
-| **Backend**  | NestJS 12, Prisma 7, PostgreSQL 17 |
-| **Frontend** | React 19, TailwindCSS              |
-| **Auth**     | OIDC (Keycloak), oidc-client-ts    |
-| **Tests**    | Vitest, Playwright                 |
+| Layer        | Technology                             |
+| :----------- | :------------------------------------- |
+| **Monorepo** | Nx 23, pnpm workspaces (catalog)       |
+| **Backend**  | NestJS 12, Prisma 7, PostgreSQL 17     |
+| **Frontend** | React 19, TanStack Router, TailwindCSS |
+| **Auth**     | OIDC (Keycloak), oidc-client-ts        |
+| **Tests**    | Vitest, Playwright                     |
 
 Being aligned on [monorepo-starter](https://github.com/simoncamilotti/monorepo-starter) (#55).
 
@@ -127,6 +127,9 @@ there, then `"catalog:"` in `package.json`. A version published less than 3 days
   generate it from the `WEB_*` variables when the container starts (`docker-entrypoint.sh`,
   `config.js.template`), so one image serves every environment; in development the Vite servers
   serve it from the same variables of `.env`.
+- Routing: TanStack Router, one file per route in `src/routes/` (`route-tree.gen.ts` is generated
+  by the Vite plugin and committed, so that `typecheck` sees it). In the studio, the routes under
+  `_authenticated` require a session.
 - The studio signs in with oidc-client-ts (authorization code with PKCE, any OIDC provider). Every
   page requires a session; a 401 from the API leads to `/forbidden`, which offers to sign in again.
 

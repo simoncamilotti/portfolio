@@ -13,7 +13,7 @@
     "runtime-config.plugin.ts",
     "src/**/*.spec.ts",
     "src/**/*.spec.tsx",
-    "src/test-setup.ts",
+    "src/test-setup.tsx",
     "types/**/*.d.ts"
   ],
   "references": [

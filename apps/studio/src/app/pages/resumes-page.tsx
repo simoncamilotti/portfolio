@@ -2,7 +2,6 @@ import { useResumeFindAll } from '@repo/api-client';
 import type { FunctionComponent } from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { generatePath } from 'react-router';
 
 import type { BreadcrumbItemsProps } from '../modules/layout/page-breadcrumb.js';
 import { PageBreadcrumb } from '../modules/layout/page-breadcrumb.js';
@@ -17,7 +16,7 @@ export const ResumesPage: FunctionComponent = () => {
   const breadcrumbItems: BreadcrumbItemsProps = [
     {
       title: t(RouteNames.HOME),
-      to: generatePath(RoutePaths.HOME),
+      to: RoutePaths.HOME,
     },
     {
       title: t(RouteNames.RESUMES),

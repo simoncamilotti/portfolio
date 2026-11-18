@@ -18,6 +18,7 @@
     "@repo/i18n": "workspace:*",
     "@repo/ui": "workspace:*",
     "@tanstack/react-query": "catalog:",
+    "@tanstack/react-router": "catalog:",
     "ag-grid-community": "catalog:",
     "ag-grid-react": "catalog:",
     "framer-motion": "catalog:",
@@ -29,10 +30,10 @@
     "react-hook-form": "catalog:",
     "react-i18next": "catalog:",
     "react-oidc-context": "catalog:",
-    "react-router": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
+    "@tanstack/router-plugin": "catalog:",
     "@testing-library/dom": "catalog:",
     "@testing-library/react": "catalog:",
     "@types/react": "catalog:",

@@ -4,3 +4,4 @@
 /.nx/workspace-data
 .nx/self-healing
 pnpm-lock.yaml
+apps/*/src/route-tree.gen.ts

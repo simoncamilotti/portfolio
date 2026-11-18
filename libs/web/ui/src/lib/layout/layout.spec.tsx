@@ -2,10 +2,6 @@ import { render, screen } from '@testing-library/react';
 
 import { Layout } from './layout.js';
 
-vi.mock('react-router', () => ({
-  Outlet: () => <div data-testid="outlet" />,
-}));
-
 vi.mock('./footer.js', () => ({
   Footer: () => <footer data-testid="footer" />,
 }));
@@ -21,10 +17,14 @@ describe('Layout', () => {
     expect(screen.getByTestId('navbar')).toBeDefined();
   });
 
-  it('should render the Outlet', () => {
-    render(<Layout navBar={<nav data-testid="navbar" />} />);
+  it('should render the page', () => {
+    render(
+      <Layout navBar={<nav data-testid="navbar" />}>
+        <div data-testid="page" />
+      </Layout>,
+    );
 
-    expect(screen.getByTestId('outlet')).toBeDefined();
+    expect(screen.getByTestId('page')).toBeDefined();
   });
 
   it('should render the Footer', () => {

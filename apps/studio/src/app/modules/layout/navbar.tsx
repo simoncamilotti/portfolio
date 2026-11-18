@@ -2,7 +2,7 @@ import { Braces, LanguageSwitcher } from '@repo/ui';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from 'react-oidc-context';
-import { generatePath, Link } from 'react-router';
+import { Link } from '@tanstack/react-router';
 
 import { RouteNames, RoutePaths } from '../../routes/paths.const.js';
 
@@ -13,7 +13,7 @@ export const Navbar: FunctionComponent = () => {
   return (
     <nav className="fixed top-0 w-full z-50 border-b border-border/50 glass-nav no-print">
       <div className="max-w-7xl mx-auto h-14 flex items-center justify-between">
-        <Link to={generatePath(RoutePaths.HOME)}>
+        <Link to={RoutePaths.HOME}>
           <span className="text-sm font-semibold tracking-tight text-foreground">
             <Braces />
           </span>
@@ -21,28 +21,28 @@ export const Navbar: FunctionComponent = () => {
 
         <div className="flex items-center gap-6">
           <Link
-            to={generatePath(RoutePaths.HOME)}
+            to={RoutePaths.HOME}
             className="text-[13px] text-muted-foreground hover:text-foreground transition-colors"
           >
             {t(RouteNames.HOME)}
           </Link>
 
           <Link
-            to={generatePath(RoutePaths.RESUMES)}
+            to={RoutePaths.RESUMES}
             className="text-[13px] text-muted-foreground hover:text-foreground transition-colors"
           >
             {t(RouteNames.RESUMES)}
           </Link>
 
           <Link
-            to={generatePath(RoutePaths.PROJECTS)}
+            to={RoutePaths.PROJECTS}
             className="text-[13px] text-muted-foreground hover:text-foreground transition-colors"
           >
             {t(RouteNames.PROJECTS)}
           </Link>
 
           <Link
-            to={generatePath(RoutePaths.SETTINGS)}
+            to={RoutePaths.SETTINGS}
             className="text-[13px] text-muted-foreground hover:text-foreground transition-colors"
           >
             {t(RouteNames.SETTINGS)}

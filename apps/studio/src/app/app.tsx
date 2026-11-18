@@ -1,11 +1,11 @@
 import { QueryClientProvider } from '@tanstack/react-query';
+import { RouterProvider } from '@tanstack/react-router';
 import type { FunctionComponent } from 'react';
 import React, { useState } from 'react';
-import { useAuth } from 'react-oidc-context';
-import { createBrowserRouter, RouterProvider } from 'react-router';
+import { type AuthContextProps, useAuth } from 'react-oidc-context';
 
+import { createAppRouter } from '../router.js';
 import { createQueryClient } from './modules/providers/query-client.js';
-import { routes } from './routes/routes.js';
 
 const queryClient = createQueryClient();
 
@@ -17,17 +17,17 @@ export const App: FunctionComponent = () => {
   if (auth.isLoading) {
     return null;
   }
-  return <AppRouter />;
+  return <AppRouter auth={auth} />;
 };
 
-const AppRouter: FunctionComponent = () => {
+const AppRouter: FunctionComponent<{ auth: AuthContextProps }> = ({ auth }) => {
   // Created once the sign-in callback has restored the requested URL, so it starts there.
-  const [router] = useState(() => createBrowserRouter(routes));
+  const [router] = useState(() => createAppRouter(queryClient));
 
   return (
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <RouterProvider router={router} context={{ auth }} />
       </QueryClientProvider>
     </React.StrictMode>
   );

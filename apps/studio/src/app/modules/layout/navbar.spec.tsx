@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router';
 
 import { Navbar } from './navbar.js';
 
@@ -8,12 +7,7 @@ vi.mock('react-oidc-context', () => ({
 }));
 
 describe('Navbar', () => {
-  const renderNavbar = () =>
-    render(
-      <MemoryRouter>
-        <Navbar />
-      </MemoryRouter>,
-    );
+  const renderNavbar = () => render(<Navbar />);
 
   it('should render a link to dashboard', () => {
     renderNavbar();
