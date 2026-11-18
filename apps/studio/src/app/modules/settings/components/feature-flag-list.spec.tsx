@@ -10,12 +10,8 @@ const mockFlags = [
 const mockMutate = vi.fn();
 const mockUseQuery = vi.fn();
 
-vi.mock('@tanstack/react-query', () => ({
-  useQuery: (...args: unknown[]) => mockUseQuery(...args),
-  useQueryClient: () => ({
-    setQueryData: vi.fn(),
-    invalidateQueries: vi.fn(),
-  }),
+vi.mock('@repo/api-client', () => ({
+  useFeatureFlagFindAll: (...args: unknown[]) => mockUseQuery(...args),
 }));
 
 vi.mock('react-i18next', () => ({

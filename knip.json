@@ -29,6 +29,10 @@
     "apps/studio-e2e": {
       "entry": ["playwright.config.ts", "src/**/*.ts"]
     },
+    "libs/shared/api-client": {
+      "entry": ["scripts/index-mocks.mjs"],
+      "ignoreDependencies": ["@tanstack/react-query", "@faker-js/faker", "msw"]
+    },
     "apps/api-e2e": {
       "entry": ["vitest.e2e.config.ts", "src/**/*.ts"]
     }

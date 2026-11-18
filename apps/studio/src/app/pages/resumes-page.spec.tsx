@@ -2,8 +2,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import { ResumesPage } from './resumes-page.js';
 
-vi.mock('@tanstack/react-query', () => ({
-  useQuery: vi.fn().mockReturnValue({
+vi.mock('@repo/api-client', () => ({
+  useResumeFindAll: vi.fn().mockReturnValue({
     data: [
       {
         id: '1',

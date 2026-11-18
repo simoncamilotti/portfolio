@@ -4,13 +4,13 @@
   "files": [],
   "references": [
     {
+      "path": "./libs/shared/api-client"
+    },
+    {
       "path": "./libs/shared/contracts"
     },
     {
       "path": "./libs/web/i18n"
-    },
-    {
-      "path": "./libs/web/query"
     },
     {
       "path": "./libs/web/ui"

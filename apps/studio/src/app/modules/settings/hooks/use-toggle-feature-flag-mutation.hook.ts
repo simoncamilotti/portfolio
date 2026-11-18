@@ -1,22 +1,21 @@
+import { featureFlagUpdate, getFeatureFlagFindAllQueryKey } from '@repo/api-client';
 import type { FeatureFlagDto } from '@repo/contracts';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { featureFlagsKey } from '../feature-flags.key.js';
-import { FeatureFlagsService } from '../feature-flags.service.js';
-
 export const useToggleFeatureFlagMutation = () => {
   const queryClient = useQueryClient();
+  const queryKey = getFeatureFlagFindAllQueryKey();
 
   const toggleFeatureFlagMutation = useMutation({
     mutationFn: ({ key, enabled }: { key: string; enabled: boolean }) =>
-      FeatureFlagsService.update(key, enabled),
+      featureFlagUpdate(key, { enabled }),
     onMutate: ({ key, enabled }) => {
-      queryClient.setQueryData<FeatureFlagDto[]>(featureFlagsKey.getAll, (data) =>
+      queryClient.setQueryData<FeatureFlagDto[]>(queryKey, (data) =>
         data?.map((f) => (f.key === key ? { ...f, enabled } : f)),
       );
     },
     onError: () => {
-      queryClient.invalidateQueries({ queryKey: featureFlagsKey.getAll });
+      queryClient.invalidateQueries({ queryKey });
     },
   });
 

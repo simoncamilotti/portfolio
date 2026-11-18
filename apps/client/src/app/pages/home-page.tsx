@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useProjectFindAll } from '@repo/api-client';
 import type { FunctionComponent } from 'react';
 
 import { useFeatureFlags } from '../modules/feature-flags/hooks/use-feature-flags.hook.js';
@@ -6,14 +6,9 @@ import { ContactSection } from '../modules/home/components/contact-section.js';
 import { HeroSection } from '../modules/home/components/hero-section.js';
 import { ProjectsSection } from '../modules/home/components/project-section.js';
 import { PublicResume } from '../modules/home/components/public-resume.js';
-import { projectsKey } from '../modules/projects/projects.key.js';
-import { ProjectsService } from '../modules/projects/projects.service.js';
 
 export const HomePage: FunctionComponent = () => {
-  const { data: projects } = useQuery({
-    queryKey: projectsKey.getAllProjects,
-    queryFn: ProjectsService.getAllProjects,
-  });
+  const { data: projects } = useProjectFindAll();
 
   const { isEnabled } = useFeatureFlags();
   const showProjects = isEnabled('projects') && projects != null && projects.length > 0;

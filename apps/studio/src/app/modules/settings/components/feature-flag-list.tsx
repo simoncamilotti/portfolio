@@ -1,11 +1,9 @@
+import { useFeatureFlagFindAll } from '@repo/api-client';
 import type { FeatureFlagDto } from '@repo/contracts';
 import { toast } from '@repo/ui';
-import { useQuery } from '@tanstack/react-query';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { featureFlagsKey } from '../feature-flags.key.js';
-import { FeatureFlagsService } from '../feature-flags.service.js';
 import { useToggleFeatureFlagMutation } from '../hooks/use-toggle-feature-flag-mutation.hook.js';
 import { FeatureFlagForm } from './feature-flag-form.js';
 import { FeatureFlagItem } from './feature-flag-item.js';
@@ -14,10 +12,7 @@ import { FeatureFlagListSkeleton } from './feature-flag-list-skeleton.js';
 export const FeatureFlagList: FunctionComponent = () => {
   const { t } = useTranslation('studio');
 
-  const { data: flags, isPending } = useQuery({
-    queryKey: featureFlagsKey.getAll,
-    queryFn: FeatureFlagsService.getAll,
-  });
+  const { data: flags, isPending } = useFeatureFlagFindAll();
 
   const { toggleFeatureFlagMutation } = useToggleFeatureFlagMutation();
 

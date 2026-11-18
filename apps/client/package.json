@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@hookform/resolvers": "catalog:",
+    "@repo/api-client": "workspace:*",
     "@repo/contracts": "workspace:*",
     "@repo/i18n": "workspace:*",
-    "@repo/query": "workspace:*",
     "@repo/ui": "workspace:*",
     "@tanstack/react-query": "catalog:",
     "framer-motion": "catalog:",
@@ -35,6 +35,7 @@
     "@vitejs/plugin-react": "catalog:",
     "autoprefixer": "catalog:",
     "jsdom": "catalog:",
+    "msw": "catalog:",
     "postcss": "catalog:",
     "tailwindcss": "catalog:",
     "vite": "catalog:",

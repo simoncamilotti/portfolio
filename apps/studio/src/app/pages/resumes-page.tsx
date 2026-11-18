@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useResumeFindAll } from '@repo/api-client';
 import type { FunctionComponent } from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -9,8 +9,6 @@ import { PageBreadcrumb } from '../modules/layout/page-breadcrumb.js';
 import { CreateResumeDialog } from '../modules/resumes/components/create-resume-dialog.js';
 import { ResumeHeader } from '../modules/resumes/components/resume-header.js';
 import { ResumeList } from '../modules/resumes/components/resume-list.js';
-import { resumesKey } from '../modules/resumes/resumes.key.js';
-import { ResumesService } from '../modules/resumes/resumes.service.js';
 import { RouteNames, RoutePaths } from '../routes/paths.const.js';
 
 export const ResumesPage: FunctionComponent = () => {
@@ -26,10 +24,7 @@ export const ResumesPage: FunctionComponent = () => {
     },
   ];
 
-  const { data: resumes, isPending } = useQuery({
-    queryKey: resumesKey.getAllResumes,
-    queryFn: ResumesService.getAllResumes,
-  });
+  const { data: resumes, isPending } = useResumeFindAll();
 
   const orderedResumes = [...(resumes ?? [])].sort((e1, e2) =>
     e2.updatedAt.localeCompare(e1.updatedAt),

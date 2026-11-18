@@ -41,6 +41,24 @@
           "prisma-generate"
         ]
       },
+      "openapi": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "node dist/generate-openapi.js openapi.json",
+          "cwd": "{projectRoot}"
+        },
+        "cache": true,
+        "dependsOn": [
+          "build"
+        ],
+        "inputs": [
+          "production",
+          "^production"
+        ],
+        "outputs": [
+          "{projectRoot}/openapi.json"
+        ]
+      },
       "prisma-generate": {
         "executor": "nx:run-commands",
         "options": {

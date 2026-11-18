@@ -1,24 +1,22 @@
+import { getResumeFindAllQueryKey, resumeRemove } from '@repo/api-client';
+import type { ResumeDto } from '@repo/contracts';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-
-import { resumesKey } from '../resumes.key.js';
-import { ResumesService } from '../resumes.service.js';
 
 export const useDeleteResumeById = (resumeIdToDelete: string) => {
   const queryClient = useQueryClient();
+  const queryKey = getResumeFindAllQueryKey();
 
   const deleteResumeByIdMutation = useMutation({
-    mutationFn: () => ResumesService.deleteResumeById(resumeIdToDelete),
-    ...{
-      onMutate: () => {
-        queryClient.setQueryData<any[]>(resumesKey.getAllResumes, (data) =>
-          data?.filter(({ id: resumeIdToKeep }) => resumeIdToKeep !== resumeIdToDelete),
-        );
-      },
-      onSuccess: () => queryClient.invalidateQueries({ queryKey: resumesKey.getAllResumes }),
-      onError: async (error) => {
-        queryClient.invalidateQueries({ queryKey: resumesKey.getAllResumes });
-        throw error;
-      },
+    mutationFn: () => resumeRemove(resumeIdToDelete),
+    onMutate: () => {
+      queryClient.setQueryData<ResumeDto[]>(queryKey, (data) =>
+        data?.filter(({ id: resumeIdToKeep }) => resumeIdToKeep !== resumeIdToDelete),
+      );
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey }),
+    onError: async (error) => {
+      queryClient.invalidateQueries({ queryKey });
+      throw error;
     },
   });
 
