@@ -1,16 +1,14 @@
-import type { ProjectDto } from '@repo/contracts';
+import { getProjectFindAllQueryKey, projectCreate } from '@repo/api-client';
+import type { CreateProjectRequestDto, ProjectDto } from '@repo/contracts';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-
-import { projectsKey } from '../projects.key.js';
-import { ProjectsService } from '../projects.service.js';
 
 export const useCreateProjectMutation = () => {
   const queryClient = useQueryClient();
 
   const createProjectMutation = useMutation({
-    mutationFn: ProjectsService.createProject,
+    mutationFn: (project: CreateProjectRequestDto) => projectCreate(project),
     onSuccess: (createdProject: ProjectDto) => {
-      queryClient.setQueryData<ProjectDto[]>(projectsKey.getAllProjects, (projects) => [
+      queryClient.setQueryData<ProjectDto[]>(getProjectFindAllQueryKey(), (projects) => [
         createdProject,
         ...(projects ?? []),
       ]);

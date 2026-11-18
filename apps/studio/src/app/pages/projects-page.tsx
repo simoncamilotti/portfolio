@@ -1,5 +1,5 @@
+import { useProjectFindAll } from '@repo/api-client';
 import type { ProjectDto } from '@repo/contracts';
-import { useQuery } from '@tanstack/react-query';
 import type { FunctionComponent } from 'react';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -11,8 +11,6 @@ import { DeleteProjectDialog } from '../modules/projects/components/delete-proje
 import { ProjectFormDialog } from '../modules/projects/components/project-form-dialog.js';
 import { ProjectsGrid } from '../modules/projects/components/projects-grid.js';
 import { ProjectsHeader } from '../modules/projects/components/projects-header.js';
-import { projectsKey } from '../modules/projects/projects.key.js';
-import { ProjectsService } from '../modules/projects/projects.service.js';
 import { RouteNames, RoutePaths } from '../routes/paths.const.js';
 
 export const ProjectsPage: FunctionComponent = () => {
@@ -28,10 +26,7 @@ export const ProjectsPage: FunctionComponent = () => {
     },
   ];
 
-  const { data: projects, isPending } = useQuery({
-    queryKey: projectsKey.getAllProjects,
-    queryFn: ProjectsService.getAllProjects,
-  });
+  const { data: projects, isPending } = useProjectFindAll();
 
   const [formDialogOpen, setFormDialogOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<ProjectDto | undefined>();

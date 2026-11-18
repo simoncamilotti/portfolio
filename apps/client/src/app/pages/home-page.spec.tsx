@@ -4,8 +4,8 @@ import { HomePage } from './home-page.js';
 
 const mockIsEnabled = vi.fn();
 
-vi.mock('@tanstack/react-query', () => ({
-  useQuery: vi.fn().mockReturnValue({ data: undefined }),
+vi.mock('@repo/api-client', () => ({
+  useProjectFindAll: vi.fn().mockReturnValue({ data: undefined }),
 }));
 
 vi.mock('../modules/feature-flags/hooks/use-feature-flags.hook.js', () => ({

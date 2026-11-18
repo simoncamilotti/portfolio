@@ -1,11 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
+import { useResumeFindOne } from '@repo/api-client';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, useParams } from 'react-router';
 
 import { type BreadcrumbItemsProps, PageBreadcrumb } from '../modules/layout/page-breadcrumb.js';
-import { resumesKey } from '../modules/resumes/resumes.key.js';
-import { ResumesService } from '../modules/resumes/resumes.service.js';
 import type { RoutePathParams } from '../routes/paths.const.js';
 import { RouteNames, RoutePaths } from '../routes/paths.const.js';
 
@@ -15,10 +13,7 @@ export const ResumePage: FunctionComponent = () => {
     resumeId: string;
   };
 
-  const { data: resume } = useQuery({
-    queryKey: resumesKey.getResumeById(resumeId),
-    queryFn: () => ResumesService.getResumeById(resumeId),
-  });
+  const { data: resume } = useResumeFindOne(resumeId);
 
   const breadcrumbItems: BreadcrumbItemsProps = [
     {

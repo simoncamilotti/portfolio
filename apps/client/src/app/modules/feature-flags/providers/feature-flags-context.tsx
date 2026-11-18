@@ -1,7 +1,6 @@
+import { useFeatureFlagFindAll } from '@repo/api-client';
 import type { FunctionComponent, ReactNode } from 'react';
 import { createContext, useMemo } from 'react';
-
-import { useFeatureFlagsQuery } from '../hooks/use-feature-flags-query.hook.js';
 
 export type FeatureFlagsContextValue = {
   isEnabled: (key: string) => boolean;
@@ -14,7 +13,7 @@ export const FeatureFlagsContext = createContext<FeatureFlagsContextValue>({
 });
 
 export const FeatureFlagsProvider: FunctionComponent<{ children: ReactNode }> = ({ children }) => {
-  const { data: flags, isPending } = useFeatureFlagsQuery();
+  const { data: flags, isPending } = useFeatureFlagFindAll();
 
   const value = useMemo<FeatureFlagsContextValue>(() => {
     const map: Record<string, boolean> = {};

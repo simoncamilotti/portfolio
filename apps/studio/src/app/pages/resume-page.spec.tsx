@@ -1,11 +1,10 @@
+import { useResumeFindOne } from '@repo/api-client';
 import { render, screen } from '@testing-library/react';
-
-import { useQuery } from '@tanstack/react-query';
 
 import { ResumePage } from './resume-page.js';
 
-vi.mock('@tanstack/react-query', () => ({
-  useQuery: vi.fn().mockReturnValue({ data: undefined }),
+vi.mock('@repo/api-client', () => ({
+  useResumeFindOne: vi.fn().mockReturnValue({ data: undefined }),
 }));
 
 vi.mock('react-router', () => ({
@@ -29,7 +28,7 @@ vi.mock('../modules/layout/page-breadcrumb.js', () => ({
   ),
 }));
 
-const mockedUseQuery = vi.mocked(useQuery);
+const mockedUseQuery = vi.mocked(useResumeFindOne);
 
 describe('ResumePage', () => {
   beforeEach(() => {

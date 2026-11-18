@@ -9,11 +9,13 @@ const baseProjectSchema = z.object({
   imageUrl: z.url().optional(),
 });
 
-export const projectDtoSchema = baseProjectSchema.extend({ id: z.uuid() });
+export const projectDtoSchema = baseProjectSchema.extend({ id: z.uuid() }).meta({ id: 'Project' });
 
-export const createProjectRequestDtoSchema = baseProjectSchema;
+export const createProjectRequestDtoSchema = baseProjectSchema.meta({ id: 'ProjectCreate' });
 
-export const updateProjectRequestDtoSchema = baseProjectSchema.partial();
+export const updateProjectRequestDtoSchema = baseProjectSchema
+  .partial()
+  .meta({ id: 'ProjectUpdate' });
 
 export type ProjectDto = z.infer<typeof projectDtoSchema>;
 export type CreateProjectRequestDto = z.infer<typeof createProjectRequestDtoSchema>;

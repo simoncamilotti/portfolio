@@ -1,12 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useContactSendMessage } from '@repo/api-client';
 import { contactRequestDtoSchema } from '@repo/contracts';
 import type { BaseSyntheticEvent } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
 import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
-
-import { useContactFormMutation } from './use-contact-form-mutation.hook.js';
 
 const contactFormSchema = contactRequestDtoSchema.omit({ captchaToken: true });
 export type ContactFormValues = z.infer<typeof contactFormSchema>;
@@ -41,7 +40,7 @@ export const useContactForm = ({ recaptchaSiteKey, setStatus }: UseContactFormPr
     mode: 'onTouched',
   });
 
-  const { sendContactMutation } = useContactFormMutation();
+  const sendContactMutation = useContactSendMessage();
 
   const onSubmit = async (data: ContactFormValues): Promise<void> => {
     setStatus('loading');
@@ -53,7 +52,7 @@ export const useContactForm = ({ recaptchaSiteKey, setStatus }: UseContactFormPr
         captchaToken = await window.grecaptcha.execute(recaptchaSiteKey, { action: 'contact' });
       }
 
-      await sendContactMutation.mutateAsync({ ...data, captchaToken });
+      await sendContactMutation.mutateAsync({ data: { ...data, captchaToken } });
 
       setStatus('success');
       reset();

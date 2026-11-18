@@ -1,22 +1,21 @@
+import { getProjectFindAllQueryKey, projectRemove } from '@repo/api-client';
 import type { ProjectDto } from '@repo/contracts';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { projectsKey } from '../projects.key.js';
-import { ProjectsService } from '../projects.service.js';
-
 export const useDeleteProjectMutation = (projectIdToDelete: string) => {
   const queryClient = useQueryClient();
+  const queryKey = getProjectFindAllQueryKey();
 
   const deleteProjectMutation = useMutation({
-    mutationFn: () => ProjectsService.deleteProject(projectIdToDelete),
+    mutationFn: () => projectRemove(projectIdToDelete),
     onMutate: () => {
-      queryClient.setQueryData<ProjectDto[]>(projectsKey.getAllProjects, (data) =>
+      queryClient.setQueryData<ProjectDto[]>(queryKey, (data) =>
         data?.filter(({ id }) => id !== projectIdToDelete),
       );
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: projectsKey.getAllProjects }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey }),
     onError: async (error) => {
-      queryClient.invalidateQueries({ queryKey: projectsKey.getAllProjects });
+      queryClient.invalidateQueries({ queryKey });
       throw error;
     },
   });
