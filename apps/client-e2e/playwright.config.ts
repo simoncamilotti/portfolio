@@ -33,5 +33,12 @@ export default defineConfig({
     cwd: '../client',
     url: webUrl,
     reuseExistingServer: !ci,
+    // Served as /config.js by the runtime-config plugin of the client: no reCAPTCHA, no analytics.
+    env: {
+      WEB_API_URL: webUrl,
+      WEB_RECAPTCHA_SITE_KEY: '',
+      WEB_UMAMI_SRC: '',
+      WEB_UMAMI_WEBSITE_ID: '',
+    },
   },
 });

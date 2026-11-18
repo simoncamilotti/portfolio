@@ -3,6 +3,7 @@ import type { Dispatch, FunctionComponent, SetStateAction } from 'react';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
+import { getConfig } from '../../../../config/config.js';
 import { type FormStatus, useContactForm } from '../hooks/use-contact-form.hook.js';
 
 type ContactFormProps = {
@@ -12,7 +13,7 @@ type ContactFormProps = {
 
 export const ContactForm: FunctionComponent<ContactFormProps> = ({ status, setStatus }) => {
   const { t } = useTranslation('client');
-  const recaptchaSiteKey = window.config.captcha.siteKey;
+  const { recaptchaSiteKey } = getConfig();
 
   const { isValid, control, onSubmit } = useContactForm({
     recaptchaSiteKey,

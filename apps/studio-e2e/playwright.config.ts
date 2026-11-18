@@ -1,7 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 
-// UI integration tests: the production build of the studio, with the API and Keycloak (api-mock.ts, keycloak-mock.ts) mocked by the tests
-// themselves.
+import { OIDC_AUTHORITY, OIDC_CLIENT_ID } from './src/oidc-mock.js';
+
+// UI integration tests: the production build of the studio, with the API and the identity provider
+// mocked by the tests themselves (api-mock.ts, oidc-mock.ts).
 const webUrl = 'http://localhost:4201';
 const ci = Boolean(process.env['CI']);
 
@@ -25,7 +27,7 @@ export default defineConfig({
       use: {
         ...devices['Desktop Chrome'],
         launchOptions: {
-          // Disable private network access checks so the mocked Keycloak iframe
+          // Disable private network access checks so the mocked identity provider
           // redirect (localhost:8081 → localhost:4201) is not blocked by Chrome.
           args: [
             '--disable-features=PrivateNetworkAccessForIframes,BlockInsecurePrivateNetworkRequests',
@@ -40,5 +42,11 @@ export default defineConfig({
     cwd: '../studio',
     url: webUrl,
     reuseExistingServer: !ci,
+    // Served as /config.js by the runtime-config plugin of the studio.
+    env: {
+      WEB_API_URL: webUrl,
+      WEB_OIDC_AUTHORITY: OIDC_AUTHORITY,
+      WEB_OIDC_CLIENT_ID: OIDC_CLIENT_ID,
+    },
   },
 });

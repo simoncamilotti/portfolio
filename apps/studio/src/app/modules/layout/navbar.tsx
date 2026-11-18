@@ -1,13 +1,14 @@
 import { Braces, LanguageSwitcher } from '@repo/ui';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from 'react-oidc-context';
 import { generatePath, Link } from 'react-router';
 
 import { RouteNames, RoutePaths } from '../../routes/paths.const.js';
-import { logout } from '../auth/auth.js';
 
 export const Navbar: FunctionComponent = () => {
   const { t } = useTranslation('studio');
+  const auth = useAuth();
 
   return (
     <nav className="fixed top-0 w-full z-50 border-b border-border/50 glass-nav no-print">
@@ -50,7 +51,7 @@ export const Navbar: FunctionComponent = () => {
           <LanguageSwitcher />
 
           <button
-            onClick={() => logout()}
+            onClick={() => void auth.signoutRedirect()}
             className="text-[13px] px-3 py-1.5 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-medium"
           >
             {t('nav.logout')}
