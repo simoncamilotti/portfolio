@@ -1,3 +1,4 @@
+import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import react from '@vitejs/plugin-react';
 import { defaultClientConditions } from 'vite';
 import { defineConfig } from 'vitest/config';
@@ -16,7 +17,16 @@ export default defineConfig({
     host: 'localhost',
   },
   preview: { port: 4200, host: 'localhost' },
-  plugins: [react(), runtimeConfig()],
+  plugins: [
+    tanstackRouter({
+      target: 'react',
+      autoCodeSplitting: true,
+      routesDirectory: './src/routes',
+      generatedRouteTree: './src/route-tree.gen.ts',
+    }),
+    react(),
+    runtimeConfig(),
+  ],
   build: {
     outDir: './dist',
     emptyOutDir: true,
@@ -26,7 +36,7 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     include: ['src/**/*.{spec,test}.{ts,tsx}'],
-    setupFiles: ['src/test-setup.ts'],
+    setupFiles: ['src/test-setup.tsx'],
     coverage: {
       provider: 'v8',
       reportsDirectory: './test-output/coverage',

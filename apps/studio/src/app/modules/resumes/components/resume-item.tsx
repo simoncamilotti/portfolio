@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Download, Eye, Globe, Link as LinkIcon } from 'lucide-react';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { generatePath, Link } from 'react-router';
+import { Link } from '@tanstack/react-router';
 
 import { RoutePaths } from '../../../routes/paths.const.js';
 import { ResumeItemMenu } from './resume-item-menu.js';
@@ -31,10 +31,7 @@ export const ResumeItem: FunctionComponent<ResumeItemProps> = ({ resume, resumeI
       transition={{ delay: resumeIndex * 0.05 }}
       className="group flex items-center justify-between p-4 rounded-xl border border-border/50 bg-card hover:bg-surface-hover hover:border-primary/10 transition-all"
     >
-      <Link
-        to={generatePath(RoutePaths.RESUME, { resumeId: resume.id })}
-        className="flex-1 min-w-0"
-      >
+      <Link to={RoutePaths.RESUME} params={{ resumeId: resume.id }} className="flex-1 min-w-0">
         <div className="flex items-center gap-3">
           <h3 className="text-sm font-medium text-foreground truncate">{resume.title}</h3>
           {resume.isPublic && (

@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router';
 
 import { Navbar } from './navbar.js';
 
@@ -10,12 +9,7 @@ vi.mock('../feature-flags/hooks/use-feature-flags.hook.js', () => ({
 }));
 
 describe('Navbar', () => {
-  const renderNavbar = () =>
-    render(
-      <MemoryRouter>
-        <Navbar />
-      </MemoryRouter>,
-    );
+  const renderNavbar = () => render(<Navbar />);
 
   beforeEach(() => {
     mockIsEnabled.mockReturnValue(false);

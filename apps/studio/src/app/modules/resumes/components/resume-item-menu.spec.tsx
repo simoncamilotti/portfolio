@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router';
 
 import { ResumeItemMenu } from './resume-item-menu.js';
 
@@ -43,12 +42,7 @@ const resume = {
 };
 
 describe('ResumeItemMenu', () => {
-  const renderMenu = (props = resume) =>
-    render(
-      <MemoryRouter>
-        <ResumeItemMenu resume={props} />
-      </MemoryRouter>,
-    );
+  const renderMenu = (props = resume) => render(<ResumeItemMenu resume={props} />);
 
   it('should render the trigger button', () => {
     renderMenu();

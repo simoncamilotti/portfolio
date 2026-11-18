@@ -1,7 +1,7 @@
 import { Braces, LanguageSwitcher } from '@repo/ui';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { generatePath, Link } from 'react-router';
+import { Link } from '@tanstack/react-router';
 
 import { RouteAnchors, RoutePaths } from '../../routes/paths.const.js';
 import { useFeatureFlags } from '../feature-flags/hooks/use-feature-flags.hook.js';
@@ -13,7 +13,7 @@ export const Navbar: FunctionComponent = () => {
   return (
     <nav className="fixed top-0 w-full z-50 border-b border-border/50 glass-nav no-print">
       <div className="max-w-7xl mx-auto h-14 flex items-center justify-between">
-        <Link to={generatePath(RoutePaths.HOME)}>
+        <Link to={RoutePaths.HOME}>
           <span className="text-sm font-semibold tracking-tight text-foreground">
             <Braces />
           </span>

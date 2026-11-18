@@ -16,11 +16,11 @@
       "ignoreDependencies": ["pino-pretty", "handlebars", "nodemailer"]
     },
     "apps/client": {
-      "entry": ["src/main.tsx", "src/styles.css"],
+      "entry": ["src/main.tsx", "src/styles.css", "src/routes/**/*.tsx"],
       "ignore": ["types/window.d.ts"]
     },
     "apps/studio": {
-      "entry": ["src/main.tsx", "src/styles.css"],
+      "entry": ["src/main.tsx", "src/styles.css", "src/routes/**/*.tsx"],
       "ignore": ["src/app/modules/ui/**"]
     },
     "apps/client-e2e": {
@@ -37,7 +37,7 @@
       "entry": ["vitest.e2e.config.ts", "src/**/*.ts"]
     }
   },
-  "ignore": ["apps/api/src/generated/**"],
+  "ignore": ["apps/api/src/generated/**", "apps/*/src/route-tree.gen.ts"],
   "rules": {
     "duplicates": "off"
   }

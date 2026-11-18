@@ -3,7 +3,6 @@ import type { ProjectDto } from '@repo/contracts';
 import type { FunctionComponent } from 'react';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { generatePath } from 'react-router';
 
 import type { BreadcrumbItemsProps } from '../modules/layout/page-breadcrumb.js';
 import { PageBreadcrumb } from '../modules/layout/page-breadcrumb.js';
@@ -19,7 +18,7 @@ export const ProjectsPage: FunctionComponent = () => {
   const breadcrumbItems: BreadcrumbItemsProps = [
     {
       title: t(RouteNames.HOME),
-      to: generatePath(RoutePaths.HOME),
+      to: RoutePaths.HOME,
     },
     {
       title: t(RouteNames.PROJECTS),

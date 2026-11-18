@@ -1,11 +1,7 @@
-export const RoutePathParams = {
-  RESUME_ID: 'resumeId',
-} as const;
-
 export const RoutePaths = {
   HOME: '/',
   RESUMES: '/resumes',
-  RESUME: `/resumes/:${RoutePathParams.RESUME_ID}`,
+  RESUME: '/resumes/$resumeId',
   PROJECTS: '/projects',
   SETTINGS: '/settings',
   ERROR_FORBIDDEN: '/forbidden',

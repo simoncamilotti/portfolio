@@ -25,7 +25,6 @@
     "i18next": "catalog:",
     "lucide-react": "catalog:",
     "react-i18next": "catalog:",
-    "react-router": "catalog:",
     "sonner": "catalog:",
     "tailwind-merge": "catalog:"
   },
