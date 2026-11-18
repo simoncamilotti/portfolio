@@ -2,8 +2,9 @@ import { Layout } from '@repo/ui';
 import type { RouteObject } from 'react-router';
 import { redirect } from 'react-router';
 
-import { isAuthenticated, login } from '../modules/auth/auth.js';
+import { RequireAuth } from '../../auth/require-auth.js';
 import { Navbar } from '../modules/layout/navbar.js';
+import { ForbiddenPage } from '../pages/forbidden-page.js';
 import { HomePage } from '../pages/home-page.js';
 import { ProjectsPage } from '../pages/projects-page.js';
 import { ResumePage } from '../pages/resume-page.js';
@@ -13,15 +14,11 @@ import { RoutePaths } from './paths.const.js';
 
 export const routes: RouteObject[] = [
   {
-    element: <Layout navBar={<Navbar />} />,
-    hydrateFallbackElement: <div>Loading...</div>,
-    loader: async ({ request }) => {
-      if (!isAuthenticated()) {
-        await login(request.url);
-      }
-
-      return null;
-    },
+    element: (
+      <RequireAuth>
+        <Layout navBar={<Navbar />} />
+      </RequireAuth>
+    ),
     children: [
       {
         path: RoutePaths.HOME,
@@ -44,6 +41,12 @@ export const routes: RouteObject[] = [
         element: <SettingsPage />,
       },
     ],
+  },
+  // Outside the authenticated layout: its gate would send a refused user straight back to the
+  // identity provider, in a loop, instead of showing why.
+  {
+    path: RoutePaths.ERROR_FORBIDDEN,
+    element: <ForbiddenPage />,
   },
   {
     path: '*',

@@ -25,10 +25,6 @@ vi.mock('react-hook-form', () => ({
 }));
 
 describe('ContactForm', () => {
-  beforeAll(() => {
-    window.config = { captcha: { siteKey: '' } };
-  });
-
   beforeEach(() => {
     vi.clearAllMocks();
   });

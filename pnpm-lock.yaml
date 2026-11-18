@@ -374,9 +374,6 @@ catalogs:
     jsdom:
       specifier: 30.1.0
       version: 30.1.0
-    keycloak-js:
-      specifier: 26.2.3
-      version: 26.2.3
     knip:
       specifier: 6.37.0
       version: 6.37.0
@@ -398,6 +395,9 @@ catalogs:
     nx:
       specifier: 23.2.1
       version: 23.2.1
+    oidc-client-ts:
+      specifier: 3.5.0
+      version: 3.5.0
     orval:
       specifier: 8.35.0
       version: 8.35.0
@@ -431,6 +431,9 @@ catalogs:
     react-i18next:
       specifier: 17.0.14
       version: 17.0.14
+    react-oidc-context:
+      specifier: 3.3.1
+      version: 3.3.1
     react-router:
       specifier: 7.18.4
       version: 7.18.4
@@ -837,12 +840,12 @@ importers:
       i18next:
         specifier: 'catalog:'
         version: 26.4.2(typescript@6.0.3)
-      keycloak-js:
-        specifier: 'catalog:'
-        version: 26.2.3
       lucide-react:
         specifier: 'catalog:'
         version: 1.47.0(react@19.3.0)
+      oidc-client-ts:
+        specifier: 'catalog:'
+        version: 3.5.0
       react:
         specifier: 'catalog:'
         version: 19.3.0
@@ -855,6 +858,9 @@ importers:
       react-i18next:
         specifier: 'catalog:'
         version: 17.0.14(i18next@26.4.2(typescript@6.0.3))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
+      react-oidc-context:
+        specifier: 'catalog:'
+        version: 3.3.1(oidc-client-ts@3.5.0)(react@19.3.0)
       react-router:
         specifier: 'catalog:'
         version: 7.18.4(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -8267,8 +8273,9 @@ packages:
     engines: {node: '>=10.0.0'}
     hasBin: true
 
-  keycloak-js@26.2.3:
-    resolution: {integrity: sha512-widjzw/9T6bHRgEp6H/Se3NCCarU7u5CwFKBcwtu7xfA1IfdZb+7Q7/KGusAnBo34Vtls8Oz9vzSqkQvQ7+b4Q==}
+  jwt-decode@4.0.0:
+    resolution: {integrity: sha512-+KJGIyHgkGuIq3IEBNftfhW/LfWhXUIY6OmyVWjliu5KH1y0fw7VQ8YndE2O4qZdMSd9SqbnC8GOcZEy0Om7sA==}
+    engines: {node: '>=18'}
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
@@ -9118,6 +9125,10 @@ packages:
   ohash@2.0.12:
     resolution: {integrity: sha512-65S/5gk9YSsaRjcyf7Nfa6h/d3E8/1gslpXfI4W7Dxn/oap8IKRuNT5VXkLQ1YFKIEg4apRY4Pj6aiwFzrDdmw==}
 
+  oidc-client-ts@3.5.0:
+    resolution: {integrity: sha512-l2q8l9CTCTOlbX+AnK4p3M+4CEpKpyQhle6blQkdFhm0IsBqsxm15bYaSa11G7pWdsYr6epdsRZxJpCyCRbT8A==}
+    engines: {node: '>=18'}
+
   on-exit-leak-free@2.1.2:
     resolution: {integrity: sha512-0eJJY6hXLGf1udHwfNftBqH+g73EU4B504nZeKpz1sYRKafAghwxEJunB2O7rDZkL4PGfsMVnTXZ2EjibbqcsA==}
     engines: {node: '>=14.0.0'}
@@ -9890,6 +9901,13 @@ packages:
 
   react-is@19.3.1:
     resolution: {integrity: sha512-RRieF6IyxQBkcK6pP8xOHprLTPW6QjRkbGdImtqNme+/hYVwCZkLQLdlZGOhUqXwkS9IEynaGvPJtv6XB/cz0Q==}
+
+  react-oidc-context@3.3.1:
+    resolution: {integrity: sha512-/Azvm9W4DhhOtSDBE73kFInh1b6zZRRfILKbgmk2syExMF0PCYJOn/dGdOOi2BFX8x0rCeUe45NXHU+/+xDcrQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      oidc-client-ts: ^3.1.0
+      react: '>=16.14.0'
 
   react-remove-scroll-bar@2.3.8:
     resolution: {integrity: sha512-9r+yi9+mgU33AKcj6IbT9oRCO78WriSj6t/cF8DWBZJ9aOGPOTEDvdUDz1FwKim7QXWwmHqtdHnRJfhAxEG46Q==}
@@ -20148,7 +20166,7 @@ snapshots:
       - encoding
     optional: true
 
-  keycloak-js@26.2.3: {}
+  jwt-decode@4.0.0: {}
 
   keyv@4.5.4:
     dependencies:
@@ -21304,6 +21322,10 @@ snapshots:
 
   ohash@2.0.12: {}
 
+  oidc-client-ts@3.5.0:
+    dependencies:
+      jwt-decode: 4.0.0
+
   on-exit-leak-free@2.1.2: {}
 
   on-finished@2.4.2:
@@ -22261,6 +22283,11 @@ snapshots:
   react-is@18.3.1: {}
 
   react-is@19.3.1: {}
+
+  react-oidc-context@3.3.1(oidc-client-ts@3.5.0)(react@19.3.0):
+    dependencies:
+      oidc-client-ts: 3.5.0
+      react: 19.3.0
 
   react-remove-scroll-bar@2.3.8(@types/react@19.3.0)(react@19.3.0):
     dependencies:

@@ -98,5 +98,10 @@
     "created": "Flag \"{{key}}\" created",
     "createError": "Error creating flag",
     "alreadyExists": "This flag already exists"
+  },
+  "forbidden": {
+    "title": "Access denied",
+    "description": "The API refused your session. Sign in again to retry.",
+    "retry": "Sign in again"
   }
 }

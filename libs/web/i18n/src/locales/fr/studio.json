@@ -98,5 +98,10 @@
     "created": "Flag \"{{key}}\" créé",
     "createError": "Erreur lors de la création du flag",
     "alreadyExists": "Ce flag existe déjà"
+  },
+  "forbidden": {
+    "title": "Accès refusé",
+    "description": "L'API a refusé votre session. Reconnectez-vous pour réessayer.",
+    "retry": "Se reconnecter"
   }
 }

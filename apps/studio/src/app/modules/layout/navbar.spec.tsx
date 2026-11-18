@@ -3,8 +3,8 @@ import { MemoryRouter } from 'react-router';
 
 import { Navbar } from './navbar.js';
 
-vi.mock('../auth/auth.js', () => ({
-  logout: vi.fn(),
+vi.mock('react-oidc-context', () => ({
+  useAuth: () => ({ signoutRedirect: vi.fn() }),
 }));
 
 describe('Navbar', () => {

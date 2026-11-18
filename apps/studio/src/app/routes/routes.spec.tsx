@@ -1,8 +1,7 @@
 import { routes } from './routes.js';
 
-vi.mock('../modules/auth/auth.js', () => ({
-  isAuthenticated: vi.fn(),
-  login: vi.fn(),
+vi.mock('react-oidc-context', () => ({
+  useAuth: vi.fn(),
 }));
 
 describe('routes', () => {
@@ -10,8 +9,8 @@ describe('routes', () => {
     expect(routes[0]!.element).toBeDefined();
   });
 
-  it('should have a loader on the root route for auth', () => {
-    expect(routes[0]!.loader).toBeDefined();
+  it('should define the forbidden route outside the authenticated layout', () => {
+    expect(routes.find((r) => r.path === '/forbidden')?.element).toBeDefined();
   });
 
   it('should define the home route as a child', () => {

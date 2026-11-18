@@ -1,0 +1,10 @@
+// Runtime configuration: generated when the container starts, so one image serves every
+// environment. Validated by `src/config/config.ts`.
+window.__APP_CONFIG__ = {
+  apiUrl: '${WEB_API_URL}',
+  recaptchaSiteKey: '${WEB_RECAPTCHA_SITE_KEY}',
+  umami: {
+    src: '${WEB_UMAMI_SRC}',
+    websiteId: '${WEB_UMAMI_WEBSITE_ID}',
+  },
+};

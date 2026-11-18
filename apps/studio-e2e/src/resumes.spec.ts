@@ -1,10 +1,10 @@
 import { expect, test } from '@playwright/test';
 
 import { mockApi } from './api-mock.js';
-import { mockKeycloak } from './keycloak-mock.js';
+import { mockOidc } from './oidc-mock.js';
 
-test.beforeEach(async ({ page, browserName }) => {
-  await mockKeycloak(page, browserName);
+test.beforeEach(async ({ page }) => {
+  await mockOidc(page);
   await mockApi(page);
 });
 

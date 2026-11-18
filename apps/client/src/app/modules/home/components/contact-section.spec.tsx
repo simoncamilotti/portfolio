@@ -18,9 +18,6 @@ const renderWithProviders = (ui: ReactElement) =>
   render(<QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>);
 
 describe('ContactSection', () => {
-  beforeAll(() => {
-    window.config = { captcha: { siteKey: 'test-site-key' } };
-  });
   it('should render the Contact heading', () => {
     renderWithProviders(<ContactSection />);
 
