@@ -32,6 +32,9 @@
     },
     {
       "path": "./apps/studio-e2e"
+    },
+    {
+      "path": "./tools/workspace-plugin"
     }
   ],
   "compilerOptions": {}
