@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "WorkspacePluginInit",
+  "title": "Initialize a project from the starter",
+  "description": "Removes what belongs to the starter only and names the project everywhere (ADR 0012 of the starter).",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Project name: lowercase letters, digits and single dashes, 40 characters at most.",
+      "x-prompt": "Project name (kebab-case)?"
+    },
+    "description": {
+      "type": "string",
+      "description": "One-sentence description, in French.",
+      "x-prompt": "Description (one sentence, in French)?"
+    }
+  },
+  "required": ["name", "description"]
+}

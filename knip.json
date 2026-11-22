@@ -8,7 +8,8 @@
         "eslint-plugin-jsx-a11y",
         "eslint-plugin-react",
         "eslint-plugin-react-hooks",
-        "typescript-eslint"
+        "typescript-eslint",
+        "@repo/workspace-plugin"
       ]
     },
     "apps/api": {
@@ -35,6 +36,9 @@
     },
     "apps/api-e2e": {
       "entry": ["vitest.e2e.config.ts", "src/**/*.ts"]
+    },
+    "tools/workspace-plugin": {
+      "entry": ["src/generators/*/*.ts"]
     }
   },
   "ignore": ["apps/api/src/generated/**", "apps/*/src/route-tree.gen.ts"],
