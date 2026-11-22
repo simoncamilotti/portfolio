@@ -1,3 +1,4 @@
+import { cloneElement } from 'react';
 import { render, screen } from '@testing-library/react';
 
 import { ResumeItemMenu } from './resume-item-menu.js';
@@ -18,15 +19,19 @@ vi.mock('../hooks/use-set-resume-is-public.hook.js', () => ({
   }),
 }));
 
-vi.mock('../../ui/dropdown-menu.js', () => ({
+vi.mock('@repo/ui/components/dropdown-menu', () => ({
   DropdownMenu: ({ children }: any) => <div>{children}</div>,
   DropdownMenuTrigger: ({ children }: any) => <button>{children}</button>,
   DropdownMenuContent: ({ children }: any) => <div>{children}</div>,
-  DropdownMenuItem: ({ children, onClick }: any) => (
-    <div role="menuitem" onClick={onClick}>
-      {children}
-    </div>
-  ),
+  // Base UI renders the item as its `render` element when one is given (a router link).
+  DropdownMenuItem: ({ children, onClick, render }: any) =>
+    render ? (
+      cloneElement(render, { role: 'menuitem', onClick }, children)
+    ) : (
+      <div role="menuitem" onClick={onClick}>
+        {children}
+      </div>
+    ),
   DropdownMenuSeparator: () => <hr />,
 }));
 

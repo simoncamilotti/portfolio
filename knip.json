@@ -18,11 +18,12 @@
     },
     "apps/client": {
       "entry": ["src/main.tsx", "src/styles.css", "src/routes/**/*.tsx"],
-      "ignore": ["types/window.d.ts"]
+      "ignore": ["types/window.d.ts"],
+      "ignoreDependencies": ["tailwindcss"]
     },
     "apps/studio": {
       "entry": ["src/main.tsx", "src/styles.css", "src/routes/**/*.tsx"],
-      "ignore": ["src/app/modules/ui/**"]
+      "ignoreDependencies": ["tailwindcss"]
     },
     "apps/client-e2e": {
       "entry": ["playwright.config.ts", "src/**/*.ts"]
@@ -39,6 +40,9 @@
     },
     "tools/workspace-plugin": {
       "entry": ["src/generators/*/*.ts"]
+    },
+    "libs/web/ui": {
+      "entry": ["src/components/*.tsx", "src/lib/*.ts"]
     }
   },
   "ignore": ["apps/api/src/generated/**", "apps/*/src/route-tree.gen.ts"],

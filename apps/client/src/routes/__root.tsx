@@ -1,4 +1,4 @@
-import { Layout } from '@repo/ui';
+import { Layout } from '@repo/ui/components/layout';
 import { createRootRoute, Navigate, Outlet } from '@tanstack/react-router';
 
 import { Navbar } from '../app/modules/layout/navbar.js';

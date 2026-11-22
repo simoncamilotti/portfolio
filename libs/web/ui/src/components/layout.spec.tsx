@@ -6,7 +6,7 @@ vi.mock('./footer.js', () => ({
   Footer: () => <footer data-testid="footer" />,
 }));
 
-vi.mock('../ui/sonner.js', () => ({
+vi.mock('./sonner.js', () => ({
   Toaster: () => <div data-testid="toaster" />,
 }));
 

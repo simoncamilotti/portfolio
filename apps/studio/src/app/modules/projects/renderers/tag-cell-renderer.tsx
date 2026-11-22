@@ -7,7 +7,7 @@ export const TagsCellRenderer = (params: ICellRendererParams<ProjectDto>) => {
   return (
     <div className="flex flex-wrap gap-1 items-center h-full">
       {tags.map((tag: string) => (
-        <span key={tag} className="px-2 py-2 text-xs/3 rounded bg-muted text-muted-foreground">
+        <span key={tag} className="px-2 py-2 text-xs/3 rounded-sm bg-muted text-muted-foreground">
           {tag}
         </span>
       ))}

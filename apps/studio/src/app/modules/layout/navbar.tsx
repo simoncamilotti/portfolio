@@ -1,4 +1,5 @@
-import { Braces, LanguageSwitcher } from '@repo/ui';
+import { Braces } from '@repo/ui/components/braces';
+import { LanguageSwitcher } from '@repo/ui/components/language-switcher';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from 'react-oidc-context';

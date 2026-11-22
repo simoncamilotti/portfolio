@@ -1,18 +1,18 @@
 import type { ResumeDto } from '@repo/contracts';
-import { toast } from '@repo/ui';
+import { toast } from 'sonner';
 import { ExternalLink, Globe, Link as LinkIcon, MoreHorizontal, Trash2 } from 'lucide-react';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from '@tanstack/react-router';
 
-import { RoutePaths } from '../../../routes/paths.const.js';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '../../ui/dropdown-menu.js';
+} from '@repo/ui/components/dropdown-menu';
+import { RoutePaths } from '../../../routes/paths.const.js';
 import { useDeleteResumeById } from '../hooks/use-delete-resume-by-id-mutation.hook.js';
 import { useSetResumeIsPublic } from '../hooks/use-set-resume-is-public.hook.js';
 
@@ -57,14 +57,11 @@ export const ResumeItemMenu: FunctionComponent<ResumeItemMenuProps> = ({ resume 
         <MoreHorizontal className="w-4 h-4 text-muted-foreground" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
-        <DropdownMenuItem asChild>
-          <Link
-            to={RoutePaths.RESUME}
-            params={{ resumeId: resume.id }}
-            className="flex items-center gap-2"
-          >
-            <ExternalLink className="w-3.5 h-3.5" /> {t('resume.menu.open')}
-          </Link>
+        <DropdownMenuItem
+          render={<Link to={RoutePaths.RESUME} params={{ resumeId: resume.id }} />}
+          className="flex items-center gap-2"
+        >
+          <ExternalLink className="w-3.5 h-3.5" /> {t('resume.menu.open')}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => handleSetPublic()} className="flex items-center gap-2">
           <Globe className="w-3.5 h-3.5" /> {t('resume.menu.setPublic')}
@@ -78,8 +75,9 @@ export const ResumeItemMenu: FunctionComponent<ResumeItemMenuProps> = ({ resume 
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
+          variant="destructive"
           onClick={() => handleDelete()}
-          className="flex items-center gap-2 text-destructive focus:text-destructive"
+          className="flex items-center gap-2"
         >
           <Trash2 className="w-3.5 h-3.5" /> {t('resume.menu.delete')}
         </DropdownMenuItem>

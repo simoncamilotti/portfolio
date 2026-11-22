@@ -34,7 +34,7 @@ export const ContactForm: FunctionComponent<ContactFormProps> = ({ status, setSt
                   {...field}
                   required
                   placeholder={t('contact.form.name')}
-                  className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
+                  className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-hidden focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
                 />
                 {fieldState.error && (
                   <p className="text-xs text-destructive mt-1">{fieldState.error.message}</p>
@@ -54,7 +54,7 @@ export const ContactForm: FunctionComponent<ContactFormProps> = ({ status, setSt
                   {...field}
                   required
                   placeholder={t('contact.form.email')}
-                  className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
+                  className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-hidden focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
                 />
                 {fieldState.error && (
                   <p className="text-xs text-destructive mt-1">{fieldState.error.message}</p>
@@ -76,7 +76,7 @@ export const ContactForm: FunctionComponent<ContactFormProps> = ({ status, setSt
                   {...field}
                   required
                   placeholder={t('contact.form.subject')}
-                  className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
+                  className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-hidden focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
                 />
                 {fieldState.error && (
                   <p className="text-xs text-destructive mt-1">{fieldState.error.message}</p>
@@ -97,7 +97,7 @@ export const ContactForm: FunctionComponent<ContactFormProps> = ({ status, setSt
                 rows={5}
                 {...field}
                 required
-                className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground resize-none"
+                className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-hidden focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground resize-none"
               />
               {fieldState.error && (
                 <p className="text-xs text-destructive mt-1">{fieldState.error.message}</p>

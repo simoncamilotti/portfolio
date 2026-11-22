@@ -5,11 +5,24 @@
   "type": "module",
   "exports": {
     "./package.json": "./package.json",
-    ".": {
-      "@repo/source": "./src/index.ts",
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "default": "./dist/index.js"
+    "./globals.css": "./src/styles/globals.css",
+    "./components/*": {
+      "@repo/source": "./src/components/*.tsx",
+      "types": "./dist/components/*.d.ts",
+      "import": "./dist/components/*.js",
+      "default": "./dist/components/*.js"
+    },
+    "./hooks/*": {
+      "@repo/source": "./src/hooks/*.ts",
+      "types": "./dist/hooks/*.d.ts",
+      "import": "./dist/hooks/*.js",
+      "default": "./dist/hooks/*.js"
+    },
+    "./lib/*": {
+      "@repo/source": "./src/lib/*.ts",
+      "types": "./dist/lib/*.d.ts",
+      "import": "./dist/lib/*.js",
+      "default": "./dist/lib/*.js"
     }
   },
   "nx": {
@@ -19,14 +32,17 @@
     ]
   },
   "dependencies": {
-    "@radix-ui/react-dialog": "catalog:",
+    "@base-ui/react": "catalog:",
+    "@fontsource-variable/inter": "catalog:",
     "@repo/i18n": "workspace:*",
-    "clsx": "catalog:",
+    "class-variance-authority": "catalog:",
+    "cn": "catalog:",
     "i18next": "catalog:",
     "lucide-react": "catalog:",
     "react-i18next": "catalog:",
+    "shadcn": "catalog:",
     "sonner": "catalog:",
-    "tailwind-merge": "catalog:"
+    "tw-animate-css": "catalog:"
   },
   "peerDependencies": {
     "react": "catalog:",
@@ -39,6 +55,7 @@
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "catalog:",
     "jsdom": "catalog:",
+    "tailwindcss": "catalog:",
     "vitest": "catalog:"
   }
 }

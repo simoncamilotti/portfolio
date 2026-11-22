@@ -1,6 +1,6 @@
 import { useFeatureFlagFindAll } from '@repo/api-client';
 import type { FeatureFlagDto } from '@repo/contracts';
-import { toast } from '@repo/ui';
+import { toast } from 'sonner';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 
