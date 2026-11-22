@@ -2,31 +2,43 @@ import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
-import enClient from '../locales/en/client.json';
-import enCommon from '../locales/en/common.json';
-import enStudio from '../locales/en/studio.json';
-import frClient from '../locales/fr/client.json';
-import frCommon from '../locales/fr/common.json';
-import frStudio from '../locales/fr/studio.json';
+import { client as enClient } from '../locales/en/client.js';
+import { common as enCommon } from '../locales/en/common.js';
+import { studio as enStudio } from '../locales/en/studio.js';
+import { client, type ClientTranslations } from '../locales/fr/client.js';
+import { common, type CommonTranslations } from '../locales/fr/common.js';
+import { studio, type StudioTranslations } from '../locales/fr/studio.js';
 
-const resources = {
-  fr: { common: frCommon, client: frClient, studio: frStudio },
-  en: { common: enCommon, client: enClient, studio: enStudio },
-};
+const LANGUAGES = ['fr', 'en'] as const;
 
-i18n
+declare module 'i18next' {
+  interface CustomTypeOptions {
+    defaultNS: 'common';
+    // Typed keys: `t('footer.copyright')` compiles, a misspelt key does not.
+    resources: {
+      common: CommonTranslations;
+      client: ClientTranslations;
+      studio: StudioTranslations;
+    };
+  }
+}
+
+await i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    resources,
+    resources: {
+      fr: { common, client, studio },
+      en: { common: enCommon, client: enClient, studio: enStudio },
+    },
+    supportedLngs: LANGUAGES,
     fallbackLng: 'fr',
-    supportedLngs: ['fr', 'en'],
     defaultNS: 'common',
-    interpolation: {
-      escapeValue: false,
-    },
-    detection: {
-      order: ['localStorage', 'navigator'],
-      caches: ['localStorage'],
-    },
+    interpolation: { escapeValue: false },
+    detection: { order: ['localStorage', 'navigator'], caches: ['localStorage'] },
   });
+
+document.documentElement.lang = i18n.resolvedLanguage ?? 'fr';
+i18n.on('languageChanged', (language) => {
+  document.documentElement.lang = language;
+});
