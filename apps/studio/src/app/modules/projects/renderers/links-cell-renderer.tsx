@@ -1,6 +1,6 @@
 import type { ProjectDto } from '@repo/contracts';
 import type { ICellRendererParams } from 'ag-grid-community';
-import { Github } from '@repo/ui';
+import { Github } from '@repo/ui/components/brand-icons';
 import { ExternalLink } from 'lucide-react';
 
 export const LinksCellRenderer = (params: ICellRendererParams<ProjectDto>) => {

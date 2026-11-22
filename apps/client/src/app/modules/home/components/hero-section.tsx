@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Github, Linkedin } from '@repo/ui';
+import { Github, Linkedin } from '@repo/ui/components/brand-icons';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';

@@ -1,5 +1,11 @@
 import type { ProjectDto } from '@repo/contracts';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@repo/ui';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@repo/ui/components/dialog';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 

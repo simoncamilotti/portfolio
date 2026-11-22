@@ -1,6 +1,6 @@
 import type { FunctionComponent, PropsWithChildren, ReactNode } from 'react';
 
-import { Toaster } from '../ui/sonner.js';
+import { Toaster } from './sonner.js';
 import { Footer } from './footer.js';
 type LayoutProps = {
   navBar: ReactNode;

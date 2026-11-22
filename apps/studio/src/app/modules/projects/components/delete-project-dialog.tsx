@@ -6,8 +6,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  toast,
-} from '@repo/ui';
+} from '@repo/ui/components/dialog';
+import { toast } from 'sonner';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 

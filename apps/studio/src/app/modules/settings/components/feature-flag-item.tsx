@@ -25,7 +25,7 @@ export const FeatureFlagItem: FunctionComponent<FeatureFlagItemProps> = ({
         role="switch"
         aria-checked={flag.enabled}
         onClick={() => handleToggle(flag)}
-        className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+        className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring ${
           flag.enabled ? 'bg-primary' : 'bg-input'
         }`}
       >

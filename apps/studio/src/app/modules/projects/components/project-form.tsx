@@ -31,7 +31,7 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = ({
               {...field}
               placeholder={t('projects.form.titlePlaceholder')}
               required
-              className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
+              className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-hidden focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
               autoFocus
             />
           )}
@@ -49,7 +49,7 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = ({
               {...field}
               placeholder={t('projects.form.descriptionPlaceholder')}
               rows={3}
-              className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground resize-none"
+              className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-hidden focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground resize-none"
             />
           )}
         />
@@ -63,7 +63,7 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = ({
             <input
               {...field}
               placeholder={t('projects.form.tagsPlaceholder')}
-              className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
+              className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-hidden focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
             />
           )}
         />
@@ -79,7 +79,7 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = ({
               {...field}
               placeholder="https://github.com/..."
               type="url"
-              className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
+              className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-hidden focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
             />
           )}
         />
@@ -94,7 +94,7 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = ({
               {...field}
               placeholder="https://mon-projet.com"
               type="url"
-              className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
+              className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-hidden focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
             />
           )}
         />

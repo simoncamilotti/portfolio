@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 
 import { CreateResumeDialog } from './create-resume-dialog.js';
 
-vi.mock('@repo/ui', () => ({
+vi.mock('@repo/ui/components/dialog', () => ({
   Dialog: ({ children, open }: any) => (open ? <div data-testid="dialog">{children}</div> : null),
   DialogContent: ({ children }: any) => <div>{children}</div>,
   DialogHeader: ({ children }: any) => <div>{children}</div>,
