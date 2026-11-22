@@ -1,0 +1,172 @@
+export const client = {
+  nav: {
+    projects: 'Projets',
+    resume: 'CV',
+    contact: 'Contact',
+  },
+  hero: {
+    available: 'Disponible',
+    title: 'Software Engineer',
+    subtitle: '& créateur de produits.',
+    description:
+      "Je conçois et développe des applications web performantes avec une obsession pour l'expérience utilisateur et le code propre.",
+    cta: 'Voir mon CV',
+  },
+  contact: {
+    title: 'Contact',
+    description: "Une question, une proposition ? N'hésitez pas à me contacter.",
+    success: {
+      title: 'Message envoyé avec succès !',
+      description: 'Merci pour votre message. Je vous répondrai dans les plus brefs délais.',
+      another: 'Envoyer un autre message',
+    },
+    form: {
+      name: 'Votre nom',
+      email: 'Votre email',
+      subject: 'Sujet',
+      message: 'Votre message',
+      submit: 'Envoyer',
+    },
+    error: 'Une erreur est survenue. Veuillez réessayer plus tard.',
+  },
+  projects: {
+    title: 'Projets',
+  },
+  resume: {
+    title: 'Curriculum Vitae',
+  },
+  cv: {
+    downloadPdf: 'PDF',
+    jobTitle: 'Développeur Full Stack Senior',
+    bio: "Développeur passionné avec plus de 10 ans d'expérience, j'ai progressé du frontend vers la conception de systèmes complets et scalables. Référent technique sur des projets critiques pour de grands groupes financiers (BNP, CM-CIC). Je suis à la recherche d'un projet ambitieux.",
+    sections: {
+      contact: 'Contact',
+      languages: 'Langues',
+      skills: 'Compétences',
+      experience: 'Expériences',
+      education: 'Formation',
+      interests: "Centres d'intérêt",
+    },
+    languages: ['Français : natif', 'Anglais : professionnel'],
+    location: 'Herbeys (38)',
+    skills: [
+      {
+        label: 'Frontend',
+        value: 'React, Angular, TypeScript',
+      },
+      {
+        label: 'Backend',
+        value: '.NET C#, NestJS, Node.js, PHP, Python',
+      },
+      {
+        label: 'DevOps',
+        value: 'Kubernetes, ArgoCD, Docker, GitLab CI/CD',
+      },
+      {
+        label: 'Données',
+        value: 'PostgreSQL, MySQL, Oracle, Prisma',
+      },
+      {
+        label: 'Méthodo',
+        value: 'Clean Archi, SOLID, Agile / Scrum, Vibe coding (Claude code)',
+      },
+    ],
+    experiences: [
+      {
+        role: 'Full Stack Senior',
+        company: 'Raise Partner',
+        location: 'Grenoble',
+        period: '2020 - 2025',
+        summary:
+          'Deux produits SaaS en finance de marché pour BNP Cardif et CM-CIC / BNP Wealth Management, en full agilité (Scrum).',
+        tasks: [
+          "Référent technique sur la solution Cardif (BNP) : conception d'architecture, arbitrages technologiques, relation client & partenaires",
+          'Conception des fondations du projet CM-CIC / BNP Wealth Management (React + NestJS, architecture multi-modules)',
+          'Réduction des temps de chargement de 80 % : mise en cache et pré-calcul en amont des sessions de travail',
+          'Pipeline de livraison automatisé (CI/CD GitLab, déploiement on-premise) et Infrastructure as Code (K8s, ArgoCD, Traefik, Docker)',
+          "Accompagnement de l'onboarding et de la montée en compétences des nouveaux entrants, assurant une intégration rapide et efficace dans l'équipe",
+        ],
+        stack: [
+          'Angular',
+          'React',
+          '.NET C#',
+          'NestJS',
+          'Entity Framework',
+          'PostgreSQL',
+          'Oracle',
+          'Kubernetes',
+          'ArgoCD',
+          'Docker',
+        ],
+      },
+      {
+        role: 'Développeur Web',
+        company: 'Homesend (Mastercard)',
+        location: 'Meylan',
+        period: '2020',
+        tasks: [
+          "Réécriture d'une application Angular, puis conception d'un générateur d'applications en CLI : à partir d'un fichier RAML annoté, génération automatique de pages (tables, formulaires) sur un même socle",
+        ],
+        stack: ['Angular', 'NestJS (nest-commander)', 'RAML'],
+      },
+      {
+        role: 'Développeur Full Stack',
+        company: 'La Bonne Agence',
+        location: 'Grenoble',
+        period: '2019',
+        tasks: [
+          "Participation à la réécriture complète d'une application de consolidation des chiffres de vente par zone géographique et business unit pour Schneider Electric, améliorant la performance et la fiabilité des données",
+        ],
+        stack: ['Symfony (PHP)', 'Angular', 'MariaDB', 'Docker'],
+      },
+      {
+        role: 'Développeur Web',
+        company: 'Sopra Steria',
+        location: 'Grenoble',
+        period: '2016 - 2018',
+        tasks: [
+          "Monitoring de la santé d'installations électriques pour la direction technique générale d'EDF (réécriture de la moitié de l'application)",
+          'Data-visualisation de données de capteurs de centrales nucléaires (AngularJS, Java Spring Boot, cluster Hadoop)',
+          'Application de génération de rapports réglementaires : conception BDD, rédaction des spécifications et implémentation des fonctionnalités',
+        ],
+        stack: ['PHP / Zend', 'AngularJS', 'Java Spring', 'MySQL', 'PostgreSQL', 'Hadoop'],
+      },
+      {
+        role: 'Développeur Junior',
+        company: 'Symetrix',
+        location: 'Grenoble',
+        period: '2012 - 2016',
+        tasks: [
+          "Conception de plateformes de formation et développement d'activités pédagogiques interactives",
+        ],
+        stack: ['Moodle', 'AngularJS'],
+      },
+    ],
+    education: [
+      {
+        title: 'Formation algorithmique',
+        school: 'Université Joseph Fourier',
+        year: '2015',
+      },
+      {
+        title: 'Initiation à la POO',
+        school: 'EPFL, Lausanne',
+        year: '2014',
+      },
+      {
+        title: 'BTS Communication & Industries Graphiques',
+        school: 'Grenoble',
+        year: '2005',
+      },
+    ],
+    interests: [
+      {
+        title: 'Informatique & domotique',
+        description: 'Home lab Proxmox, Home Assistant',
+      },
+    ],
+  },
+};
+
+/** Shape of the `client` namespace: French is the reference, English must match it. */
+export type ClientTranslations = typeof client;

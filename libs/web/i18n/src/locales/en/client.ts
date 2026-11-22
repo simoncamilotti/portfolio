@@ -1,0 +1,169 @@
+import type { ClientTranslations } from '../fr/client.js';
+
+export const client: ClientTranslations = {
+  nav: {
+    projects: 'Projects',
+    resume: 'Resume',
+    contact: 'Contact',
+  },
+  hero: {
+    available: 'Available',
+    title: 'Software Engineer',
+    subtitle: '& product creator.',
+    description:
+      'I design and develop high-performance web applications with an obsession for user experience and clean code.',
+    cta: 'View my resume',
+  },
+  contact: {
+    title: 'Contact',
+    description: "A question, a proposal? Don't hesitate to reach out.",
+    success: {
+      title: 'Message sent successfully!',
+      description: 'Thank you for your message. I will get back to you as soon as possible.',
+      another: 'Send another message',
+    },
+    form: {
+      name: 'Your name',
+      email: 'Your email',
+      subject: 'Subject',
+      message: 'Your message',
+      submit: 'Send',
+    },
+    error: 'An error occurred. Please try again later.',
+  },
+  projects: {
+    title: 'Projects',
+  },
+  resume: {
+    title: 'Resume',
+  },
+  cv: {
+    downloadPdf: 'PDF',
+    jobTitle: 'Senior Full Stack Developer',
+    bio: 'Passionate developer with over 10 years of experience, I moved from frontend work to designing complete, scalable systems. Technical lead on critical projects for major financial groups (BNP, CM-CIC). I am looking for an ambitious project.',
+    sections: {
+      contact: 'Contact',
+      languages: 'Languages',
+      skills: 'Skills',
+      experience: 'Experience',
+      education: 'Education',
+      interests: 'Interests',
+    },
+    languages: ['French: native', 'English: professional'],
+    location: 'Herbeys (38), France',
+    skills: [
+      {
+        label: 'Frontend',
+        value: 'React, Angular, TypeScript',
+      },
+      {
+        label: 'Backend',
+        value: '.NET C#, NestJS, Node.js, PHP, Python',
+      },
+      {
+        label: 'DevOps',
+        value: 'Kubernetes, ArgoCD, Docker, GitLab CI/CD',
+      },
+      {
+        label: 'Data',
+        value: 'PostgreSQL, MySQL, Oracle, Prisma',
+      },
+      {
+        label: 'Methods',
+        value: 'Clean Architecture, SOLID, Agile / Scrum, Vibe coding (Claude code)',
+      },
+    ],
+    experiences: [
+      {
+        role: 'Senior Full Stack Developer',
+        company: 'Raise Partner',
+        location: 'Grenoble',
+        period: '2020 - 2025',
+        summary:
+          'Two market-finance SaaS products for BNP Cardif and CM-CIC / BNP Wealth Management, in a fully agile setup (Scrum).',
+        tasks: [
+          'Technical lead on the Cardif (BNP) solution: architecture design, technology trade-offs, client & partner relations',
+          'Designed the foundations of the CM-CIC / BNP Wealth Management project (React + NestJS, multi-module architecture)',
+          '80% reduction in loading times: caching and pre-computation ahead of working sessions',
+          'Automated delivery pipeline (GitLab CI/CD, on-premise deployment) and Infrastructure as Code (K8s, ArgoCD, Traefik, Docker)',
+          'Supported the onboarding and skill development of new joiners, ensuring fast and effective integration into the team',
+        ],
+        stack: [
+          'Angular',
+          'React',
+          '.NET C#',
+          'NestJS',
+          'Entity Framework',
+          'PostgreSQL',
+          'Oracle',
+          'Kubernetes',
+          'ArgoCD',
+          'Docker',
+        ],
+      },
+      {
+        role: 'Web Developer',
+        company: 'Homesend (Mastercard)',
+        location: 'Meylan',
+        period: '2020',
+        tasks: [
+          'Rewrote an Angular application, then designed a CLI application generator: from an annotated RAML file, pages (tables, forms) are generated automatically on a shared foundation',
+        ],
+        stack: ['Angular', 'NestJS (nest-commander)', 'RAML'],
+      },
+      {
+        role: 'Full Stack Developer',
+        company: 'La Bonne Agence',
+        location: 'Grenoble',
+        period: '2019',
+        tasks: [
+          'Took part in the complete rewrite of a sales figures consolidation application by geographic area and business unit for Schneider Electric, improving performance and data reliability',
+        ],
+        stack: ['Symfony (PHP)', 'Angular', 'MariaDB', 'Docker'],
+      },
+      {
+        role: 'Web Developer',
+        company: 'Sopra Steria',
+        location: 'Grenoble',
+        period: '2016 - 2018',
+        tasks: [
+          "Health monitoring of electrical installations for EDF's general technical department (rewrote half of the application)",
+          'Data visualisation of nuclear plant sensor data (AngularJS, Java Spring Boot, Hadoop cluster)',
+          'Regulatory report generation application: database design, specification writing and feature implementation',
+        ],
+        stack: ['PHP / Zend', 'AngularJS', 'Java Spring', 'MySQL', 'PostgreSQL', 'Hadoop'],
+      },
+      {
+        role: 'Junior Developer',
+        company: 'Symetrix',
+        location: 'Grenoble',
+        period: '2012 - 2016',
+        tasks: ['Designed training platforms and developed interactive learning activities'],
+        stack: ['Moodle', 'AngularJS'],
+      },
+    ],
+    education: [
+      {
+        title: 'Algorithmics training',
+        school: 'Université Joseph Fourier',
+        year: '2015',
+      },
+      {
+        title: 'Introduction to OOP',
+        school: 'EPFL, Lausanne',
+        year: '2014',
+      },
+      {
+        title: 'BTS in Communication & Graphic Industries',
+        school: 'Grenoble',
+        year: '2005',
+      },
+    ],
+    interests: [
+      {
+        title: 'IT & home automation',
+        description: 'Proxmox home lab, Home Assistant',
+      },
+    ],
+  },
+};
