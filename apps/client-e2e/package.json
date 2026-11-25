@@ -10,7 +10,8 @@
       "platform:node"
     ],
     "implicitDependencies": [
-      "client"
+      "client",
+      "api"
     ],
     "targets": {
       "e2e": {
@@ -21,7 +22,8 @@
         },
         "dependsOn": [
           "^build",
-          "client:build"
+          "client:build",
+          "api:build"
         ],
         "parallelism": false
       }
@@ -29,6 +31,7 @@
   },
   "devDependencies": {
     "@playwright/test": "catalog:",
+    "@repo/e2e-support": "workspace:*",
     "@types/node": "catalog:",
     "eslint-plugin-playwright": "catalog:"
   }
