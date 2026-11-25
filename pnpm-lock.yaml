@@ -801,6 +801,9 @@ importers:
       '@playwright/test':
         specifier: 'catalog:'
         version: 1.63.0
+      '@repo/e2e-support':
+        specifier: workspace:*
+        version: link:../../libs/api/e2e-support
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.6
@@ -913,6 +916,9 @@ importers:
       '@playwright/test':
         specifier: 'catalog:'
         version: 1.63.0
+      '@repo/e2e-support':
+        specifier: workspace:*
+        version: link:../../libs/api/e2e-support
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.6
