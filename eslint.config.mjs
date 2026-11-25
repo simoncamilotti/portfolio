@@ -11,6 +11,7 @@ export default [
       '**/out-tsc',
       '**/coverage',
       '**/vite.config.*.timestamp*',
+      'starter/**',
       '**/src/generated/**',
     ],
   },
