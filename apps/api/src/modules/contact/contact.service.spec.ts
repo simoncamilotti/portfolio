@@ -21,6 +21,7 @@ const mockHttpService = {
 
 const config: Record<string, string> = {
   RECAPTCHA_SECRET_KEY: 'test-secret',
+  RECAPTCHA_VERIFY_URL: 'https://www.google.com/recaptcha/api/siteverify',
   CONTACT_EMAIL_TO: 'contact@example.com',
 };
 

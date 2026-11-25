@@ -31,7 +31,6 @@ catalog:
   '@nx/eslint': 23.2.1
   '@nx/eslint-plugin': 23.2.1
   '@nx/js': 23.2.1
-  '@nx/node': 23.2.1
   '@nx/vite': 23.2.1
   '@nx/vitest': 23.2.1
   '@opentelemetry/exporter-metrics-otlp-http': 0.301.1
@@ -67,7 +66,6 @@ catalog:
   '@vitest/coverage-v8': 4.1.11
   ag-grid-community: 35.1.0
   ag-grid-react: 35.1.0
-  axios: 1.20.0
   class-variance-authority: 0.7.1
   cn: 0.3.0
   eslint: 9.39.5
