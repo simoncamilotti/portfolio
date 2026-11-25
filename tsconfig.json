@@ -16,6 +16,9 @@
       "path": "./libs/web/ui"
     },
     {
+      "path": "./libs/api/e2e-support"
+    },
+    {
       "path": "./apps/api"
     },
     {

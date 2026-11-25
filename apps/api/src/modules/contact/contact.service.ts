@@ -31,10 +31,11 @@ export class ContactService {
 
   private async _verifyCaptcha(token: string): Promise<void> {
     const secretKey = this._config.get('RECAPTCHA_SECRET_KEY', { infer: true });
+    const verifyUrl = this._config.get('RECAPTCHA_VERIFY_URL', { infer: true });
     const response = await firstValueFrom(
       this._httpService
         .post<RecaptchaResponse>(
-          'https://www.google.com/recaptcha/api/siteverify',
+          verifyUrl,
           new URLSearchParams({ secret: secretKey, response: token }),
           { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } },
         )

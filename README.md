@@ -21,7 +21,7 @@ apps/
   api/           → NestJS API (port 3000, prefix /api)
   client/        → React client — public portfolio (port 4200)
   studio/        → React client — CV management admin app (port 4201)
-  api-e2e/       → E2E tests of the API (Vitest, local only: needs Postgres and Keycloak)
+  api-e2e/       → E2E tests of the API (Vitest: production build, real database, fake OIDC issuer)
   client-e2e/    → E2E tests of the client (Playwright, mocked API)
   studio-e2e/    → E2E tests of the studio (Playwright, mocked API and identity provider)
 
@@ -30,6 +30,10 @@ libs/
   shared/contracts/  → @repo/contracts: Zod schemas shared by the API and the applications
   web/ui/            → @repo/ui: shared React components (PageLayout, Footer, Braces, brand icons)
   web/i18n/          → @repo/i18n: translations (fr, en)
+  api/e2e-support/   → @repo/e2e-support: e2e stack (API build, fake OIDC issuer, Mailpit, unique test data)
+
+tools/
+  workspace-plugin/  → @repo/workspace-plugin: Nx generators (lib, api-module)
 ```
 
 Every project is a pnpm package (`package.json`, Nx configuration included). The API code is
@@ -71,7 +75,7 @@ pnpm nx serve studio                                # Studio: http://localhost:4
 pnpm nx run-many -t lint typecheck test build e2e   # Everything the CI checks
 pnpm nx affected -t lint typecheck test             # Only what the branch changed
 pnpm nx e2e client-e2e --ui                         # Playwright UI mode
-pnpm nx e2e-local api-e2e                           # API e2e: needs Postgres and Keycloak
+pnpm nx e2e api-e2e                                 # API e2e: production build, Postgres and Mailpit
 
 pnpm knip                                           # Unused files, exports and dependencies
 pnpm format                                         # Prettier
@@ -158,7 +162,8 @@ Installed by `pnpm install` ([lefthook](lefthook.yml)):
 [shared-workflows](https://github.com/simoncamilotti/shared-workflows) (`@v1`):
 
 - `ci`: lint, typecheck, test and build of the affected projects, knip and gitleaks;
-- `e2e`: Playwright suites of the client and the studio;
+- `e2e`: the API suite and the Playwright suites of the client and the studio, with PostgreSQL and
+  Mailpit services;
 - `docker`: builds the `api`, `client` and `studio` images; on `main` they are deployed to dev, on a
   GitHub Release to prod, through the GitOps repository (`GITOPS_DEPLOY` repository variable).
 

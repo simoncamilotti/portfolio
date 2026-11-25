@@ -34,6 +34,8 @@ const envSchema = z
     /** Recipient of the contact form messages. */
     CONTACT_EMAIL_TO: z.string().min(1),
     RECAPTCHA_SECRET_KEY: z.string().min(1),
+    /** reCAPTCHA verification endpoint: Google's; a fake one in e2e (docs/adr/0003). */
+    RECAPTCHA_VERIFY_URL: z.url().default('https://www.google.com/recaptcha/api/siteverify'),
   })
   .refine((env) => env.NODE_ENV !== 'production' || env.CORS_ORIGINS.length > 0, {
     message: 'CORS_ORIGINS is required in production: without it the browser cannot call the API',
