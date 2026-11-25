@@ -1,12 +1,16 @@
 {
   "name": "portfolio",
   "version": "0.0.0",
+  "description": "Portfolio de Simon Camilotti : site public et administration des CV et des projets",
   "private": true,
   "license": "MIT",
   "type": "module",
   "packageManager": "pnpm@12.18.0",
   "engines": {
     "node": ">=24.22.1 <25"
+  },
+  "starter": {
+    "version": "1.0.2"
   },
   "scripts": {
     "prepare": "if [ -d .git ] && [ -z \"${CI:-}\" ]; then lefthook install; fi",
