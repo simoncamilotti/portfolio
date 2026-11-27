@@ -29,17 +29,18 @@ formulaire de contact ([0003](0003-contact-form.md)). Restent les écarts d'outi
 
 Le projet garde les écarts suivants.
 
-| Écart                                                        | Raison                                                                                       | Sortie                                 |
-| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------- | -------------------------------------- |
-| `lefthook.yml` : ESLint puis Prettier, en séquence (`piped`) | Un `eslint --fix` lancé après Prettier pouvait laisser un fichier mal formaté                | Repris par le starter en v1.0.4        |
-| `.nvmrc` à `24.22.1` (au lieu de `24`)                       | Version exacte, la même en local, en CI et dans les images                                   | Repris par le starter en v1.0.4        |
-| `renovate.json` : `"mode": "full"`                           | L'organisation est en _Scan Only_ dans Mend : sans ce réglage, Renovate n'ouvre aucune PR    | Repris par le starter en v1.0.4        |
-| `.github/workflows/main.yml` : `node_version: '24.22.1'`     | Même version que `.nvmrc`                                                                    | À revoir au report de la v1.0.4        |
-| `apps/api/Dockerfile` : image `node:24.22.1-alpine`          | Même version que `.nvmrc`                                                                    | Repris par le starter en v1.0.4        |
-| `apps/api/Dockerfile` : `TZ=Etc/UTC`                         | L'API du portfolio refuse de démarrer sans (`src/config/env.ts`) : dates stockées en UTC     | Permanent                              |
-| `.gitleaksignore`                                            | Six faux positifs dans l'historique (identifiants factices de Keycloak dans d'anciens tests) | Permanent : l'historique ne change pas |
-| `apps/api/entrypoint.sh` : migrations au démarrage de l'API  | L'infra du portfolio n'a pas de Job de migration                                             | Temporaire : #77                       |
-| `CLAUDE.md` non versionné                                    | Ignoré par la configuration git globale du mainteneur ; `AGENTS.md` porte les instructions   | Permanent                              |
+| Écart                                                                  | Raison                                                                                                                   | Sortie                                 |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------- |
+| `lefthook.yml` : ESLint puis Prettier, en séquence (`piped`)           | Un `eslint --fix` lancé après Prettier pouvait laisser un fichier mal formaté                                            | Repris par le starter en v1.0.4        |
+| `.nvmrc` à `24.22.1` (au lieu de `24`)                                 | Version exacte, la même en local, en CI et dans les images                                                               | Repris par le starter en v1.0.4        |
+| `renovate.json` : `"mode": "full"`                                     | L'organisation est en _Scan Only_ dans Mend : sans ce réglage, Renovate n'ouvre aucune PR                                | Repris par le starter en v1.0.4        |
+| `.github/workflows/main.yml` : `node_version: '24.22.1'`               | Même version que `.nvmrc`                                                                                                | À revoir au report de la v1.0.4        |
+| `apps/api/Dockerfile` : image `node:24.22.1-alpine`                    | Même version que `.nvmrc`                                                                                                | Repris par le starter en v1.0.4        |
+| `apps/api/Dockerfile` : `TZ=Etc/UTC`                                   | L'API du portfolio refuse de démarrer sans (`src/config/env.ts`) : dates stockées en UTC                                 | Permanent                              |
+| Dockerfiles : `pnpm install --prefer-offline` (au lieu de `--offline`) | Avec pnpm 12.18, la vérification `minimumReleaseAge` a besoin des métadonnées du registre, que `pnpm fetch` ne garde pas | À revoir au report du starter          |
+| `.gitleaksignore`                                                      | Six faux positifs dans l'historique (identifiants factices de Keycloak dans d'anciens tests)                             | Permanent : l'historique ne change pas |
+| `apps/api/entrypoint.sh` : migrations au démarrage de l'API            | L'infra du portfolio n'a pas de Job de migration                                                                         | Temporaire : #77                       |
+| `CLAUDE.md` non versionné                                              | Ignoré par la configuration git globale du mainteneur ; `AGENTS.md` porte les instructions                               | Permanent                              |
 
 ## Conséquences
 
