@@ -12,7 +12,9 @@ RUN corepack enable
 COPY pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm fetch
 COPY . .
-RUN pnpm install --offline --frozen-lockfile
+# Not --offline: the supply-chain check (minimumReleaseAge) needs the registry metadata of every
+# lockfile entry, which `pnpm fetch` does not keep; packages still come from the fetched store.
+RUN pnpm install --prefer-offline --frozen-lockfile
 RUN pnpm exec nx build studio
 
 FROM ${NGINX_IMAGE} AS runtime
