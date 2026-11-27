@@ -24,7 +24,7 @@ S'écarter d'un choix du starter se consigne dans un ADR.
 - [0001 — Thème du portfolio : sombre, indigo, Inter](adr/0001-portfolio-theme.md)
 - [0002 — Deux applications web : `client` et `studio`](adr/0002-two-web-applications.md)
 - [0003 — Formulaire de contact : SMTP et reCAPTCHA](adr/0003-contact-form.md)
-- [0004 — Écarts d'outillage avec le starter v1.0.2](adr/0004-tooling-deviations.md)
+- [0004 — Écarts d'outillage avec le starter](adr/0004-tooling-deviations.md)
 
 ## Specs
 

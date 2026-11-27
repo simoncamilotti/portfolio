@@ -70,7 +70,11 @@ Chaque modèle pose son label `type: …`.
 - Versions centralisées dans le catalogue de [`pnpm-workspace.yaml`](pnpm-workspace.yaml) :
   un `package.json` référence `catalog:`.
 - Une version n'est installable que 3 jours après sa publication (`minimumReleaseAge`).
-- Renovate propose les mises à jour le lundi matin ; correctifs et mineures sont fusionnés
+- La version de pnpm (`packageManager` dans `package.json`) ne change que par Renovate, qui
+  applique le même délai. Fixée à la main sur une version trop récente, elle bloque toute
+  commande pnpm, hooks compris (`ERR_PNPM_NO_MATURE_MATCHING_VERSION`). Contournement
+  ponctuel qui garde les hooks actifs : `npm_config_manage_package_manager_versions=false`.
+- Renovate propose les mises à jour le lundi ; correctifs et mineures sont fusionnés
   automatiquement après une CI verte, les majeures sont relues.
 
 ## Releases

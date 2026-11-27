@@ -1,4 +1,4 @@
-# 0004 — Écarts d'outillage avec le starter v1.0.2
+# 0004 — Écarts d'outillage avec le starter
 
 - **Statut** : Accepté
 - **Date** : 2026-11-25
@@ -31,11 +31,6 @@ Le projet garde les écarts suivants.
 
 | Écart                                                                  | Raison                                                                                                                   | Sortie                                 |
 | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------- |
-| `lefthook.yml` : ESLint puis Prettier, en séquence (`piped`)           | Un `eslint --fix` lancé après Prettier pouvait laisser un fichier mal formaté                                            | Repris par le starter en v1.0.4        |
-| `.nvmrc` à `24.22.1` (au lieu de `24`)                                 | Version exacte, la même en local, en CI et dans les images                                                               | Repris par le starter en v1.0.4        |
-| `renovate.json` : `"mode": "full"`                                     | L'organisation est en _Scan Only_ dans Mend : sans ce réglage, Renovate n'ouvre aucune PR                                | Repris par le starter en v1.0.4        |
-| `.github/workflows/main.yml` : `node_version: '24.22.1'`               | Même version que `.nvmrc`                                                                                                | À revoir au report de la v1.0.4        |
-| `apps/api/Dockerfile` : image `node:24.22.1-alpine`                    | Même version que `.nvmrc`                                                                                                | Repris par le starter en v1.0.4        |
 | `apps/api/Dockerfile` : `TZ=Etc/UTC`                                   | L'API du portfolio refuse de démarrer sans (`src/config/env.ts`) : dates stockées en UTC                                 | Permanent                              |
 | Dockerfiles : `pnpm install --prefer-offline` (au lieu de `--offline`) | Avec pnpm 12.18, la vérification `minimumReleaseAge` a besoin des métadonnées du registre, que `pnpm fetch` ne garde pas | À revoir au report du starter          |
 | `.gitleaksignore`                                                      | Six faux positifs dans l'historique (identifiants factices de Keycloak dans d'anciens tests)                             | Permanent : l'historique ne change pas |
@@ -43,8 +38,10 @@ Le projet garde les écarts suivants.
 
 ## Conséquences
 
-- Le report de la v1.0.4 ([guide](../guides/update-from-starter.md)) retire les trois premiers
-  écarts : garder la version du starter en cas de conflit, puis mettre ce tableau à jour.
+- Le report de la v1.0.4 ([guide](../guides/update-from-starter.md)) a retiré cinq écarts,
+  repris par le starter ou alignés sur lui : l'ordre des hooks de `lefthook.yml`, `.nvmrc` et
+  l'image Node à `24.22.1`, `"mode": "full"` dans `renovate.json`, et le `node_version` de la
+  CI (le starter laisse la valeur par défaut des workflows partagés, `24`).
 - Les migrations au démarrage de l'API, un temps gardées faute de Job dans l'infra, ont été
   retirées par #77 : un Job Kubernetes les applique, comme dans le starter
   ([runbook](../runbooks/database-migrations.md)).
