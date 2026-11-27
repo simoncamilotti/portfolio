@@ -77,8 +77,8 @@ prochain build, et TypeScript signale les usages à adapter.
 | Sécurité        | helmet, CORS limité à `CORS_ORIGINS`, limitation de débit (100 requêtes par minute et client)       |
 | Documentation   | `/api/docs` (Scalar) hors production                                                                |
 
-Les migrations sont appliquées au démarrage du conteneur de l'API, un écart temporaire avec le
-starter ([ADR 0004](adr/0004-tooling-deviations.md), [runbook](runbooks/database-migrations.md)).
+Les migrations sont appliquées par un Job Kubernetes avant le déploiement de l'API, jamais à son
+démarrage ([runbook](runbooks/database-migrations.md)).
 
 ## Applications web
 

@@ -18,7 +18,7 @@ formulaire de contact ([0003](0003-contact-form.md)). Restent les écarts d'outi
 - ✅ Aucun écart.
 - ❌ Défait des réglages que le starter a lui-même adoptés depuis (v1.0.4).
 - ❌ Les migrations au démarrage ne s'enlèvent pas sans un Job dans le dépôt GitOps : c'est un
-  changement de déploiement, hors du périmètre de #55.
+  changement de déploiement, hors du périmètre de #55 (fait depuis par #77).
 
 ### Option B — Garder les écarts, chacun avec sa raison
 
@@ -39,13 +39,12 @@ Le projet garde les écarts suivants.
 | `apps/api/Dockerfile` : `TZ=Etc/UTC`                                   | L'API du portfolio refuse de démarrer sans (`src/config/env.ts`) : dates stockées en UTC                                 | Permanent                              |
 | Dockerfiles : `pnpm install --prefer-offline` (au lieu de `--offline`) | Avec pnpm 12.18, la vérification `minimumReleaseAge` a besoin des métadonnées du registre, que `pnpm fetch` ne garde pas | À revoir au report du starter          |
 | `.gitleaksignore`                                                      | Six faux positifs dans l'historique (identifiants factices de Keycloak dans d'anciens tests)                             | Permanent : l'historique ne change pas |
-| `apps/api/entrypoint.sh` : migrations au démarrage de l'API            | L'infra du portfolio n'a pas de Job de migration                                                                         | Temporaire : #77                       |
 | `CLAUDE.md` non versionné                                              | Ignoré par la configuration git globale du mainteneur ; `AGENTS.md` porte les instructions                               | Permanent                              |
 
 ## Conséquences
 
 - Le report de la v1.0.4 ([guide](../guides/update-from-starter.md)) retire les trois premiers
   écarts : garder la version du starter en cas de conflit, puis mettre ce tableau à jour.
-- Tant que #77 n'est pas fait, une migration qui échoue empêche l'API de démarrer
-  ([runbook](../runbooks/database-migrations.md)). L'API n'a qu'une réplique : la migration ne
-  s'exécute pas en double.
+- Les migrations au démarrage de l'API, un temps gardées faute de Job dans l'infra, ont été
+  retirées par #77 : un Job Kubernetes les applique, comme dans le starter
+  ([runbook](../runbooks/database-migrations.md)).

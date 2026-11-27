@@ -35,15 +35,13 @@ une colonne, procéder en deux versions :
 
 ## Appliquer
 
-| Environnement | Comment                                                                                                 |
-| ------------- | ------------------------------------------------------------------------------------------------------- |
-| Local         | `pnpm dev` applique les migrations en attente (`api:migrate-deploy`)                                    |
-| e2e           | La préparation des tests applique les migrations sur `E2E_DATABASE_URL`                                 |
-| dev, prod     | Au démarrage du conteneur de l'API : `apps/api/entrypoint.sh` lance `prisma migrate deploy`, puis l'API |
+| Environnement | Comment                                                                                                                                                                                     |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Local         | `pnpm dev` applique les migrations en attente (`api:migrate-deploy`)                                                                                                                        |
+| e2e           | La préparation des tests applique les migrations sur `E2E_DATABASE_URL`                                                                                                                     |
+| dev, prod     | Job Kubernetes lancé par ArgoCD après la base et avant l'API (hook `Sync`, vagues de synchronisation), avec la commande de migration de l'image : `node_modules/.bin/prisma migrate deploy` |
 
-Écart temporaire avec le starter, où un Job Kubernetes applique les migrations avant l'API et
-où l'API ne migre jamais à son démarrage ([ADR 0004](../adr/0004-tooling-deviations.md),
-passage au Job : #77).
+L'API n'applique jamais de migration à son démarrage.
 
 ## Remettre à zéro la base locale
 
@@ -55,15 +53,11 @@ Supprime toutes les données locales, réapplique les migrations.
 
 ## Si une migration échoue en dev ou en prod
 
-Le conteneur de la nouvelle API s'arrête avant de démarrer et le pod redémarre en boucle
-(`CrashLoopBackOff`). Tant que le nouveau pod n'est pas prêt, l'ancien continue de servir.
+Le Job échoue et ArgoCD n'applique pas la nouvelle version : l'ancienne API continue de tourner.
 
-1. Lire les logs du pod de l'API dans ArgoCD : la sortie de `prisma migrate deploy` précède
-   l'erreur.
+1. Lire les logs du Job dans ArgoCD.
 2. Corriger la base à la main si la migration s'est arrêtée à mi-chemin (PostgreSQL exécute
    chaque migration dans une transaction, ce cas reste rare).
 3. Marquer l'état de la migration si besoin :
-   `node_modules/.bin/prisma migrate resolve --rolled-back <migration>`, depuis un pod de l'image
-   de l'API dont la commande remplace l'entrypoint (`kubectl run … --command -- sh`), sinon
-   l'entrypoint relance la migration.
+   `prisma migrate resolve --rolled-back <migration>` depuis un pod de l'image de l'API.
 4. Livrer une correction par une nouvelle migration.
