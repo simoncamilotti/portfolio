@@ -146,8 +146,8 @@ répond aussi à la vérification reCAPTCHA.
 
 ## Starter
 
-Projet issu de [monorepo-starter](https://github.com/simoncamilotti/monorepo-starter) **v1.0.2**.
+Projet issu de [monorepo-starter](https://github.com/simoncamilotti/monorepo-starter) **v1.0.4**.
 Les choix de socle sont justifiés dans les
-[ADR du starter](https://github.com/simoncamilotti/monorepo-starter/tree/v1.0.2/starter/adr).
+[ADR du starter](https://github.com/simoncamilotti/monorepo-starter/tree/v1.0.4/starter/adr).
 Les décisions propres au projet, et ses écarts au starter, sont dans [adr/](adr/).
 Reporter une nouvelle version : [guide](guides/update-from-starter.md).

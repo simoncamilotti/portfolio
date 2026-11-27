@@ -57,6 +57,21 @@ Automatique à chaque fusion dans `main` :
 Numérotation : majeure pour un changement incompatible (API publique, données), mineure pour
 une fonctionnalité, correctif sinon.
 
+## Changer la configuration
+
+Les manifestes de `apps/portfolio/base` servent aux deux environnements, et la prod tourne sur
+la dernière release pendant que dev suit `main`. Une modification de la base atteint donc la
+prod tout de suite, avec son ancienne image. Pour renommer ou supprimer une variable dont l'API
+a besoin, procéder en deux temps, comme pour une [migration](database-migrations.md#changements-incompatibles) :
+
+1. ajouter la nouvelle variable à côté de l'ancienne, dans une PR GitOps fusionnée **avant** la
+   PR du projet qui la lit ;
+2. une fois la release qui la lit déployée en prod, retirer l'ancienne variable.
+
+Une nouvelle variable obligatoire suit le même ordre : la PR GitOps d'abord. Seule une valeur
+qui diffère vraiment entre les environnements va dans un patch de l'overlay (`overlays/dev`
+ou `overlays/prod`), jamais une valeur qui attend une release.
+
 ## Vérifier
 
 - `GET /api/health/ready` répond `200`.
@@ -68,5 +83,7 @@ une fonctionnalité, correctif sinon.
 
 - **Prod** : dans le dépôt GitOps, annuler le commit `deploy(prod): …` (`git revert`), ou
   remettre le tag de la version précédente dans `overlays/prod`. ArgoCD redéploie l'ancienne image.
+- La base GitOps doit toujours convenir à la version précédente : c'est ce que garantit le
+  changement de configuration en deux temps.
 - Une migration déjà appliquée n'est **pas** annulée : l'ancienne version doit rester
   compatible avec le nouveau schéma ([migrations](database-migrations.md#changements-incompatibles)).
