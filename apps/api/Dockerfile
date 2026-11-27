@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1
 # API image. Build context: the repository root.
-# The entrypoint applies the migrations (`prisma migrate deploy`), then starts the API.
+#   Start the API:        (default command)
+#   Apply the migrations: node_modules/.bin/prisma migrate deploy   (run by a Kubernetes Job, never at startup)
 ARG NODE_IMAGE=node:24.22.1-alpine@sha256:06d7adf3e0ef61a13f1d28682726366f97a15aa1888c934d3ecec86c33918b53
 
 FROM ${NODE_IMAGE} AS build
@@ -26,4 +27,4 @@ WORKDIR /app
 COPY --from=build --chown=node:node /out ./
 USER node
 EXPOSE 3000
-ENTRYPOINT ["./entrypoint.sh"]
+CMD ["node", "--import", "./dist/instrumentation.js", "dist/main.js"]

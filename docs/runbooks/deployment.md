@@ -38,8 +38,8 @@ Automatique à chaque fusion dans `main` :
 1. la CI construit les images `ghcr.io/simoncamilotti/portfolio/api`, `…/client` et
    `…/studio`, taguées `main-<run>` ;
 2. elle modifie `apps/portfolio/overlays/dev` dans le dépôt GitOps et pousse ;
-3. ArgoCD déploie ; l'API applique les migrations à son démarrage
-   ([runbook](database-migrations.md)) ; un message part sur Slack.
+3. ArgoCD déploie : un Job applique les migrations, puis l'API, le client et le studio sont
+   mis à jour ([runbook](database-migrations.md)) ; un message part sur Slack.
 
 ## Prod
 
@@ -51,27 +51,17 @@ Automatique à chaque fusion dans `main` :
    ```
 
 3. La CI construit les images taguées `1.2.0` et met à jour l'overlay `prod`.
-4. Suivre la synchronisation dans ArgoCD ; un message part sur Slack.
+4. Suivre la synchronisation dans ArgoCD : le Job de migration, puis les applications ; un
+   message part sur Slack.
 
 Numérotation : majeure pour un changement incompatible (API publique, données), mineure pour
 une fonctionnalité, correctif sinon.
 
-### Première release après l'alignement sur le starter
-
-La prod tourne encore une version 1.1.x, antérieure à l'alignement. Avec la release suivante,
-dans le dépôt GitOps (`apps/portfolio/`) :
-
-- **Configuration des applications** : les images 1.1.x lisent `config.js` dans des ConfigMaps
-  (`overlays/prod/configmap.yaml`, `patch-config-mount.yaml`). Les nouvelles le génèrent à partir
-  des variables `WEB_*` : les déclarer dans l'overlay `prod`, comme en dev, puis retirer les
-  ConfigMaps et le patch.
-- **API** : retirer `KEYCLOAK_ISSUER_URL` et `KEYCLOAK_CLIENT_ID` de `base/api.yaml`, remplacées
-  par `OIDC_ISSUER_URL` et `OIDC_AUDIENCE`.
-
 ## Vérifier
 
 - `GET /api/health/ready` répond `200`.
-- Les pods de l'API, du client et du studio sont `Ready` dans ArgoCD.
+- Le Job `portfolio-migrate` a réussi ; les pods de l'API, du client et du studio sont `Ready`
+  dans ArgoCD.
 - Le site public affiche le CV ; le studio redirige vers Keycloak puis affiche les CV.
 
 ## Revenir en arrière
